@@ -7,22 +7,22 @@ import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multiset;
 
 public class DataObject {
 
-	private HashMultimap<String, Object> data;
+	private LinkedHashMultimap<String, Object> data;
 
 	/**
 	 * @param data
 	 */
-	public DataObject(HashMultimap<String, Object> data) {
+	public DataObject(LinkedHashMultimap<String, Object> data) {
 		this.data = data;
 	}
 
 	public DataObject() {
-		data = HashMultimap.create();
+		data = LinkedHashMultimap.create();
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class DataObject {
 					// if there's the selection of the n-th element
 					if (attribute != null) {
 						if (attribute.getInt() > 0) {
-							if (attribute.getInt() == i) { // only the i-th would be putted in the map TODO ma nelle hashmap non c'è un ordine!
+							if (attribute.getInt() == i) { // only the i-th would be putted in the map
 								subMap.put(property, next);
 								return subMap;
 							}
@@ -177,7 +177,7 @@ public class DataObject {
 		return data.containsEntry(key, value);
 	}
 
-	public HashMultimap<String, Object> getData() {
+	public LinkedHashMultimap<String, Object> getData() {
 		return data;
 	}
 
