@@ -121,10 +121,10 @@ public class XptSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XptPackage.ATTR:
+      case XptPackage.ATTRIBUTE:
       {
-        Attr attr = (Attr)theEObject;
-        T result = caseAttr(attr);
+        Attribute attribute = (Attribute)theEObject;
+        T result = caseAttribute(attribute);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -252,17 +252,17 @@ public class XptSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Attr</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Attr</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAttr(Attr object)
+  public T caseAttribute(Attribute object)
   {
     return null;
   }

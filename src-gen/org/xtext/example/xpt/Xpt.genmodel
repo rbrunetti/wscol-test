@@ -36,12 +36,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Step/attribute"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Step/placeholder"/>
     </genClasses>
-    <genClasses ecoreClass="Xpt.ecore#//Attr">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/property"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/op"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/intValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/strValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/int"/>
+    <genClasses ecoreClass="Xpt.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/op"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/intValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/strValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/int"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Constant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/int"/>

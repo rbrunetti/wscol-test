@@ -23,9 +23,9 @@ Query:
 	'(' steps+=Step+ ')' | steps+=Step+;
 
 Step:
-	'/' name=ID ('[' attribute=Attr ']')? | placeholder=Variable;
+	'/' name=ID ('[' attribute=Attribute ']')? | placeholder=Variable;
 
-Attr:
+Attribute:
 	property=ID (op=Rop intValue=NUMBER | op=StringRop strValue=STRING) | int=NUMBER;
 	
 StringRop:

@@ -325,14 +325,14 @@ public interface XptPackage extends EPackage
   int STEP_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AttrImpl <em>Attr</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AttributeImpl <em>Attribute</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.xpt.xpt.impl.AttrImpl
-   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAttr()
+   * @see org.xtext.example.xpt.xpt.impl.AttributeImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAttribute()
    * @generated
    */
-  int ATTR = 7;
+  int ATTRIBUTE = 7;
 
   /**
    * The feature id for the '<em><b>Property</b></em>' attribute.
@@ -341,7 +341,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTR__PROPERTY = 0;
+  int ATTRIBUTE__PROPERTY = 0;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -350,7 +350,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTR__OP = 1;
+  int ATTRIBUTE__OP = 1;
 
   /**
    * The feature id for the '<em><b>Int Value</b></em>' attribute.
@@ -359,7 +359,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTR__INT_VALUE = 2;
+  int ATTRIBUTE__INT_VALUE = 2;
 
   /**
    * The feature id for the '<em><b>Str Value</b></em>' attribute.
@@ -368,7 +368,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTR__STR_VALUE = 3;
+  int ATTRIBUTE__STR_VALUE = 3;
 
   /**
    * The feature id for the '<em><b>Int</b></em>' attribute.
@@ -377,16 +377,16 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTR__INT = 4;
+  int ATTRIBUTE__INT = 4;
 
   /**
-   * The number of structural features of the '<em>Attr</em>' class.
+   * The number of structural features of the '<em>Attribute</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTR_FEATURE_COUNT = 5;
+  int ATTRIBUTE_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.
@@ -662,69 +662,69 @@ public interface XptPackage extends EPackage
   EAttribute getStep_Placeholder();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Attr <em>Attr</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Attribute <em>Attribute</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Attr</em>'.
-   * @see org.xtext.example.xpt.xpt.Attr
+   * @return the meta object for class '<em>Attribute</em>'.
+   * @see org.xtext.example.xpt.xpt.Attribute
    * @generated
    */
-  EClass getAttr();
+  EClass getAttribute();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attr#getProperty <em>Property</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getProperty <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Property</em>'.
-   * @see org.xtext.example.xpt.xpt.Attr#getProperty()
-   * @see #getAttr()
+   * @see org.xtext.example.xpt.xpt.Attribute#getProperty()
+   * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttr_Property();
+  EAttribute getAttribute_Property();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attr#getOp <em>Op</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getOp <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Op</em>'.
-   * @see org.xtext.example.xpt.xpt.Attr#getOp()
-   * @see #getAttr()
+   * @see org.xtext.example.xpt.xpt.Attribute#getOp()
+   * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttr_Op();
+  EAttribute getAttribute_Op();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attr#getIntValue <em>Int Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getIntValue <em>Int Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Int Value</em>'.
-   * @see org.xtext.example.xpt.xpt.Attr#getIntValue()
-   * @see #getAttr()
+   * @see org.xtext.example.xpt.xpt.Attribute#getIntValue()
+   * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttr_IntValue();
+  EAttribute getAttribute_IntValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attr#getStrValue <em>Str Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getStrValue <em>Str Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Str Value</em>'.
-   * @see org.xtext.example.xpt.xpt.Attr#getStrValue()
-   * @see #getAttr()
+   * @see org.xtext.example.xpt.xpt.Attribute#getStrValue()
+   * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttr_StrValue();
+  EAttribute getAttribute_StrValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attr#getInt <em>Int</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getInt <em>Int</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Int</em>'.
-   * @see org.xtext.example.xpt.xpt.Attr#getInt()
-   * @see #getAttr()
+   * @see org.xtext.example.xpt.xpt.Attribute#getInt()
+   * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttr_Int();
+  EAttribute getAttribute_Int();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
@@ -972,14 +972,14 @@ public interface XptPackage extends EPackage
     EAttribute STEP__PLACEHOLDER = eINSTANCE.getStep_Placeholder();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AttrImpl <em>Attr</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AttributeImpl <em>Attribute</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.xpt.xpt.impl.AttrImpl
-     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAttr()
+     * @see org.xtext.example.xpt.xpt.impl.AttributeImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAttribute()
      * @generated
      */
-    EClass ATTR = eINSTANCE.getAttr();
+    EClass ATTRIBUTE = eINSTANCE.getAttribute();
 
     /**
      * The meta object literal for the '<em><b>Property</b></em>' attribute feature.
@@ -987,7 +987,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTR__PROPERTY = eINSTANCE.getAttr_Property();
+    EAttribute ATTRIBUTE__PROPERTY = eINSTANCE.getAttribute_Property();
 
     /**
      * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
@@ -995,7 +995,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTR__OP = eINSTANCE.getAttr_Op();
+    EAttribute ATTRIBUTE__OP = eINSTANCE.getAttribute_Op();
 
     /**
      * The meta object literal for the '<em><b>Int Value</b></em>' attribute feature.
@@ -1003,7 +1003,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTR__INT_VALUE = eINSTANCE.getAttr_IntValue();
+    EAttribute ATTRIBUTE__INT_VALUE = eINSTANCE.getAttribute_IntValue();
 
     /**
      * The meta object literal for the '<em><b>Str Value</b></em>' attribute feature.
@@ -1011,7 +1011,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTR__STR_VALUE = eINSTANCE.getAttr_StrValue();
+    EAttribute ATTRIBUTE__STR_VALUE = eINSTANCE.getAttribute_StrValue();
 
     /**
      * The meta object literal for the '<em><b>Int</b></em>' attribute feature.
@@ -1019,7 +1019,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTR__INT = eINSTANCE.getAttr_Int();
+    EAttribute ATTRIBUTE__INT = eINSTANCE.getAttribute_Int();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.

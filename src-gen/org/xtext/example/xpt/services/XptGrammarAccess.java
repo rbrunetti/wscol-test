@@ -261,19 +261,19 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
 		private final Keyword cLeftSquareBracketKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
 		private final Assignment cAttributeAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
-		private final RuleCall cAttributeAttrParserRuleCall_0_2_1_0 = (RuleCall)cAttributeAssignment_0_2_1.eContents().get(0);
+		private final RuleCall cAttributeAttributeParserRuleCall_0_2_1_0 = (RuleCall)cAttributeAssignment_0_2_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_0_2_2 = (Keyword)cGroup_0_2.eContents().get(2);
 		private final Assignment cPlaceholderAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cPlaceholderVariableParserRuleCall_1_0 = (RuleCall)cPlaceholderAssignment_1.eContents().get(0);
 		
 		//Step:
-		//	"/" name=ID ("[" attribute=Attr "]")? | placeholder=Variable;
+		//	"/" name=ID ("[" attribute=Attribute "]")? | placeholder=Variable;
 		public ParserRule getRule() { return rule; }
 
-		//"/" name=ID ("[" attribute=Attr "]")? | placeholder=Variable
+		//"/" name=ID ("[" attribute=Attribute "]")? | placeholder=Variable
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"/" name=ID ("[" attribute=Attr "]")?
+		//"/" name=ID ("[" attribute=Attribute "]")?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"/"
@@ -285,17 +285,17 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
 
-		//("[" attribute=Attr "]")?
+		//("[" attribute=Attribute "]")?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//"["
 		public Keyword getLeftSquareBracketKeyword_0_2_0() { return cLeftSquareBracketKeyword_0_2_0; }
 
-		//attribute=Attr
+		//attribute=Attribute
 		public Assignment getAttributeAssignment_0_2_1() { return cAttributeAssignment_0_2_1; }
 
-		//Attr
-		public RuleCall getAttributeAttrParserRuleCall_0_2_1_0() { return cAttributeAttrParserRuleCall_0_2_1_0; }
+		//Attribute
+		public RuleCall getAttributeAttributeParserRuleCall_0_2_1_0() { return cAttributeAttributeParserRuleCall_0_2_1_0; }
 
 		//"]"
 		public Keyword getRightSquareBracketKeyword_0_2_2() { return cRightSquareBracketKeyword_0_2_2; }
@@ -307,8 +307,8 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getPlaceholderVariableParserRuleCall_1_0() { return cPlaceholderVariableParserRuleCall_1_0; }
 	}
 
-	public class AttrElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attr");
+	public class AttributeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Assignment cPropertyAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -327,7 +327,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cIntAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cIntNUMBERTerminalRuleCall_1_0 = (RuleCall)cIntAssignment_1.eContents().get(0);
 		
-		//Attr:
+		//Attribute:
 		//	property=ID (op=Rop intValue=NUMBER | op=StringRop strValue=STRING) | int=NUMBER;
 		public ParserRule getRule() { return rule; }
 
@@ -523,7 +523,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	private AssertionElements pAssertion;
 	private QueryElements pQuery;
 	private StepElements pStep;
-	private AttrElements pAttr;
+	private AttributeElements pAttribute;
 	private StringRopElements pStringRop;
 	private RopElements pRop;
 	private FunctionElements pFunction;
@@ -632,7 +632,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Step:
-	//	"/" name=ID ("[" attribute=Attr "]")? | placeholder=Variable;
+	//	"/" name=ID ("[" attribute=Attribute "]")? | placeholder=Variable;
 	public StepElements getStepAccess() {
 		return (pStep != null) ? pStep : (pStep = new StepElements());
 	}
@@ -641,14 +641,14 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getStepAccess().getRule();
 	}
 
-	//Attr:
+	//Attribute:
 	//	property=ID (op=Rop intValue=NUMBER | op=StringRop strValue=STRING) | int=NUMBER;
-	public AttrElements getAttrAccess() {
-		return (pAttr != null) ? pAttr : (pAttr = new AttrElements());
+	public AttributeElements getAttributeAccess() {
+		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}
 	
-	public ParserRule getAttrRule() {
-		return getAttrAccess().getRule();
+	public ParserRule getAttributeRule() {
+		return getAttributeAccess().getRule();
 	}
 
 	//StringRop:
@@ -707,6 +707,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return (tNUMBER != null) ? tNUMBER : (tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER"));
 	} 
 
+	//// override della regola di default
 	//terminal INT returns ecore::EInt:
 	//	"this one has been deactivated";
 	public TerminalRule getINTRule() {

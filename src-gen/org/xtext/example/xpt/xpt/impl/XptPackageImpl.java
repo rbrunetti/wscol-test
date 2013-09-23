@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionSet;
-import org.xtext.example.xpt.xpt.Attr;
+import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
@@ -83,7 +83,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass attrEClass = null;
+  private EClass attributeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -380,9 +380,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAttr()
+  public EClass getAttribute()
   {
-    return attrEClass;
+    return attributeEClass;
   }
 
   /**
@@ -390,9 +390,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttr_Property()
+  public EAttribute getAttribute_Property()
   {
-    return (EAttribute)attrEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -400,9 +400,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttr_Op()
+  public EAttribute getAttribute_Op()
   {
-    return (EAttribute)attrEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -410,9 +410,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttr_IntValue()
+  public EAttribute getAttribute_IntValue()
   {
-    return (EAttribute)attrEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -420,9 +420,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttr_StrValue()
+  public EAttribute getAttribute_StrValue()
   {
-    return (EAttribute)attrEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -430,9 +430,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttr_Int()
+  public EAttribute getAttribute_Int()
   {
-    return (EAttribute)attrEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -524,12 +524,12 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     createEReference(stepEClass, STEP__ATTRIBUTE);
     createEAttribute(stepEClass, STEP__PLACEHOLDER);
 
-    attrEClass = createEClass(ATTR);
-    createEAttribute(attrEClass, ATTR__PROPERTY);
-    createEAttribute(attrEClass, ATTR__OP);
-    createEAttribute(attrEClass, ATTR__INT_VALUE);
-    createEAttribute(attrEClass, ATTR__STR_VALUE);
-    createEAttribute(attrEClass, ATTR__INT);
+    attributeEClass = createEClass(ATTRIBUTE);
+    createEAttribute(attributeEClass, ATTRIBUTE__PROPERTY);
+    createEAttribute(attributeEClass, ATTRIBUTE__OP);
+    createEAttribute(attributeEClass, ATTRIBUTE__INT_VALUE);
+    createEAttribute(attributeEClass, ATTRIBUTE__STR_VALUE);
+    createEAttribute(attributeEClass, ATTRIBUTE__INT);
 
     constantEClass = createEClass(CONSTANT);
     createEAttribute(constantEClass, CONSTANT__INT);
@@ -593,15 +593,15 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStep_Attribute(), this.getAttr(), null, "attribute", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStep_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStep_Placeholder(), ecorePackage.getEString(), "placeholder", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(attrEClass, Attr.class, "Attr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAttr_Property(), ecorePackage.getEString(), "property", null, 0, 1, Attr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttr_Op(), ecorePackage.getEString(), "op", null, 0, 1, Attr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttr_IntValue(), ecorePackage.getEDouble(), "intValue", null, 0, 1, Attr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttr_StrValue(), ecorePackage.getEString(), "strValue", null, 0, 1, Attr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttr_Int(), ecorePackage.getEDouble(), "int", null, 0, 1, Attr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAttribute_Property(), ecorePackage.getEString(), "property", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribute_Op(), ecorePackage.getEString(), "op", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribute_IntValue(), ecorePackage.getEDouble(), "intValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribute_StrValue(), ecorePackage.getEString(), "strValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribute_Int(), ecorePackage.getEDouble(), "int", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getConstant_Int(), ecorePackage.getEDouble(), "int", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

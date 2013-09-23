@@ -71,7 +71,7 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.ASSERTION: return createAssertion();
       case XptPackage.QUERY: return createQuery();
       case XptPackage.STEP: return createStep();
-      case XptPackage.ATTR: return createAttr();
+      case XptPackage.ATTRIBUTE: return createAttribute();
       case XptPackage.CONSTANT: return createConstant();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -160,10 +160,10 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attr createAttr()
+  public Attribute createAttribute()
   {
-    AttrImpl attr = new AttrImpl();
-    return attr;
+    AttributeImpl attribute = new AttributeImpl();
+    return attribute;
   }
 
   /**

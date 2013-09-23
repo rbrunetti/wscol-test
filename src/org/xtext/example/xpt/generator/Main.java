@@ -5,7 +5,10 @@ package org.xtext.example.xpt.generator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,12 +32,17 @@ import org.eclipse.xtext.validation.Issue;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xtext.example.xpt.generator.dataobject.DataObject;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionSet;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
+import org.xtext.example.xpt.xpt.Query;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -46,11 +54,12 @@ public class Main {
 
 	@Inject
 	private IResourceValidator validator;
-	
+
 	private static String xmlFilePath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book.xml";
 	private static String queriesPath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/queries.xpt";
 
-	private static Map<String, Object> variables = new HashMap<String, Object>();
+	private static DataObject variables = new DataObject();
+	private static DataObject input = new DataObject();
 
 	public static void main(String[] args) {
 		Injector injector = new org.xtext.example.xpt.XptStandaloneSetupGenerated().createInjectorAndDoEMFRegistration();
@@ -60,6 +69,40 @@ public class Main {
 		String string = f.toURI().toString();
 
 		main.runGenerator(string);
+	}
+
+	private DataObject hashMapTest() { //Query query) {
+		DataObject data = new DataObject();
+		DataObject books = new DataObject();
+		DataObject book1 = new DataObject();
+		DataObject book2 = new DataObject();
+
+		book1.put("title", "Snow Crash");
+		book1.put("year", (double)2000);
+		book1.put("author", "Neal Stephenson");
+		book1.put("publisher", "Spectra");
+		book1.put("isbn", "0553380958");
+		book1.put("price", (double)15.0);		
+		books.put("book", book1);
+
+		book2.put("title", "Burning Tower");
+		book2.put("year", (double)2005);
+		book2.put("author", "Larry Niven");
+		book2.put("author", "Jerry Pournelle");
+		book2.put("publisher", "Pocket");
+		book2.put("isbn", "0743416910");
+		book2.put("price", (double)5.99);
+		books.put("book", book2);
+		
+		books.put("book", (double)5);
+
+		data.put("inventory", books);
+//		DataObject result = data.evaluate(query);
+//		for(String k:result.keySet()){
+//			System.out.println(k + " " + result.get(k));
+//		}
+		return data;
+
 	}
 
 	protected void runGenerator(String string) {
@@ -81,21 +124,25 @@ public class Main {
 		Model model = (Model) resource.getContents().get(0);
 		EObjectContainmentEList<Declaration> declarations = (EObjectContainmentEList<Declaration>) model.getDeclarations();
 		AssertionSet assertionSet = model.getQuerySet();
+		input = hashMapTest();
 
 		if (assertionSet.eContents().isEmpty()) {
 			System.out.println("No assertions. Execution halted.");
 			return;
 		}
 
-		System.out.println(declarations.size() + " variable declarated.");
-		System.out.println(assertionSet.getAssertions().size() + " assertions has been found.");
-		System.out.println();
+//		hashMapTest(declarations.get(0).getAssert().getQuery());
 
-		// get variables declaration and sets the hashmap
-		setVariable(declarations);
-
-		// verify the assertions
-		verifyAssertions(assertionSet);
+		 System.out.println(declarations.size() + " variable declarated.");
+		 System.out.println(assertionSet.getAssertions().size() +
+		 " assertions has been found.");
+		 System.out.println();
+		
+		 // get variables declaration and sets the hashmap
+		 setVariable(declarations);
+		
+		 // verify the assertions
+		 verifyAssertions(assertionSet);
 
 	}
 
@@ -109,9 +156,15 @@ public class Main {
 		String op, condition;
 		for (AssertionForm af : assertionSet.getAssertions()) {
 			laObj = doQueries(af.getLeftAssert());
+			if(laObj instanceof DataObject){
+				laObj = ((DataObject)laObj).getData().values().iterator().next();
+			}
 			raObj = doQueries(af.getRightAssert());
+			if(raObj instanceof DataObject){
+				raObj = ((DataObject)raObj).getData().values().iterator().next();
+			}
 			op = af.getOp(); // get Op for using it for the comparisons
-			condition = af.assertionFormConstruction(variables);
+			condition = "@#*+-";//af.assertionFormConstruction(variables);
 
 			// if the assertion's query has a numeric result
 			if (laObj instanceof Double && raObj instanceof Double) {
@@ -164,7 +217,7 @@ public class Main {
 					}
 					break;
 				}
-			} else if(laObj instanceof String && raObj instanceof String){
+			} else if (laObj instanceof String && raObj instanceof String) {
 				String la = (String) laObj;
 				String ra = (String) raObj;
 				switch (op) {
@@ -201,22 +254,27 @@ public class Main {
 			result = ((assertion.getConstant().getString() == null) ? assertion.getConstant().getInt() : assertion.getConstant().getString());
 			return result;
 		}
-		String query = assertion.getQuery().queryConstruction(variables);
-		NodeList results = getXMLResults(xmlFilePath, query);
-		result = results.item(0).getTextContent(); //TODO sto trattando un solo valore! Non considera variabili multivalore
+//		String query = assertion.getQuery().queryConstruction(variables);
+//		NodeList results = getXMLResults(xmlFilePath, query);
+//		result = results.item(0).getTextContent(); // TODO sto trattando un solo valore! Non considera variabili multivalore
+		if(assertion.getQuery().getSteps().get(0).getPlaceholder() != null){
+			
+		}
+		Query query;
+		result = input.evaluate(assertion.getQuery());
 		if (assertion.getFunction() != null) {
 			switch (assertion.getFunction()) {
-				case "uppercase":
-					result = ((String) result).toUpperCase();
-					break;
-				case "length":
-					result = (double) ((String) result).length();
-					break;
-				default:
-					break;
+			case "uppercase":
+				result = ((String) result).toUpperCase();
+				break;
+			case "length":
+				result = (double) ((String) result).length();
+				break;
+			default:
+				break;
 			}
-		} else if (isNumeric((String) result)) { // check if the result is numeric and converts it to an integer
-			result = Double.parseDouble((String) result);
+		} else if (((DataObject)result).getData().values().iterator().next() instanceof Double) { // check if the result is numeric and converts it to an integer
+			result = (double) ((DataObject)result).getData().values().iterator().next();
 		}
 		return result;
 	}
@@ -229,36 +287,36 @@ public class Main {
 			if (d.getAssert().getConstant() != null) {
 				variables.put(d.getVar(), d.getAssert().getConstant());
 			} else {
-				variables.put(d.getVar(), d.getAssert().getQuery().queryConstruction(variables));
+				variables.put(d.getVar(), d.getAssert().getQuery());
 			}
 		}
 		return;
 	}
 
-	/**
-	 * Make the evaluation of XPath queries
-	 */
-	private static NodeList getXMLResults(String filePath, String xpathQuery) {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder;
-		try {
-			builder = factory.newDocumentBuilder();
-			Document doc = builder.parse(new File(filePath));
-			doc.getDocumentElement().normalize();
-			XPathFactory xPathfactory = XPathFactory.newInstance();
-			XPath xpath = xPathfactory.newXPath();
-			XPathExpression expr = xpath.compile(xpathQuery);
-			NodeList nl = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-			return nl;
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e2) {
-			e2.printStackTrace();
-		} catch (SAXException | IOException e1) {
-			e1.printStackTrace();
-		}
-		return null;
-	}
+//	/**
+//	 * Make the evaluation of XPath queries
+//	 */
+//	private static NodeList getXMLResults(String filePath, String xpathQuery) {
+//		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//		DocumentBuilder builder;
+//		try {
+//			builder = factory.newDocumentBuilder();
+//			Document doc = builder.parse(new File(filePath));
+//			doc.getDocumentElement().normalize();
+//			XPathFactory xPathfactory = XPathFactory.newInstance();
+//			XPath xpath = xPathfactory.newXPath();
+//			XPathExpression expr = xpath.compile(xpathQuery);
+//			NodeList nl = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+//			return nl;
+//		} catch (XPathExpressionException e) {
+//			e.printStackTrace();
+//		} catch (ParserConfigurationException e2) {
+//			e2.printStackTrace();
+//		} catch (SAXException | IOException e1) {
+//			e1.printStackTrace();
+//		}
+//		return null;
+//	}
 
 	/**
 	 * Check if a string is a number
@@ -276,39 +334,39 @@ public class Main {
 		return true;
 	}
 
-//	/**
-//	 * Translate to a string an XPath query
-//	 */
-//	private String genQuery(Query query) {
-//		String res = "";
-//		Attr attribute = null;
-//		for (int i = 0; i < query.getSteps().size(); i++) {
-//			if (query.getSteps().get(i).getPlaceholder() != null) {
-//				res = (String) variables.get(query.getSteps().get(i).getPlaceholder());
-//			} else {
-//				res += '/' + query.getSteps().get(i).getName();
-//				attribute = query.getSteps().get(i).getAttribute();
-//				if (attribute != null) {
-//					String property = attribute.getProperty();
-//					String operation = attribute.getOp();
-//					double value = attribute.getInt();
-//					double intValue = attribute.getIntValue();
-//					res += '[';
-//					if (property != null && operation != null) {
-//						res += property + operation;
-//						if (attribute.getStrValue() != null) {
-//							res += '"' + attribute.getStrValue() + '"' + ']';
-//						} else {
-//							res += String.valueOf(intValue) + ']';
-//						}
-//					} else {
-//						res += String.valueOf(value) + ']';
-//					}
-//				}
-//			}
-//		}
-//		return res;
-//	}
+	// /**
+	// * Translate to a string an XPath query
+	// */
+	// private String genQuery(Query query) {
+	// String res = "";
+	// Attr attribute = null;
+	// for (int i = 0; i < query.getSteps().size(); i++) {
+	// if (query.getSteps().get(i).getPlaceholder() != null) {
+	// res = (String) variables.get(query.getSteps().get(i).getPlaceholder());
+	// } else {
+	// res += '/' + query.getSteps().get(i).getName();
+	// attribute = query.getSteps().get(i).getAttribute();
+	// if (attribute != null) {
+	// String property = attribute.getProperty();
+	// String operation = attribute.getOp();
+	// double value = attribute.getInt();
+	// double intValue = attribute.getIntValue();
+	// res += '[';
+	// if (property != null && operation != null) {
+	// res += property + operation;
+	// if (attribute.getStrValue() != null) {
+	// res += '"' + attribute.getStrValue() + '"' + ']';
+	// } else {
+	// res += String.valueOf(intValue) + ']';
+	// }
+	// } else {
+	// res += String.valueOf(value) + ']';
+	// }
+	// }
+	// }
+	// }
+	// return res;
+	// }
 
 	/**
 	 * Translate to a string an XPath query, including the eventual associated

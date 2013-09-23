@@ -110,9 +110,9 @@ public class XptAdapterFactory extends AdapterFactoryImpl
         return createStepAdapter();
       }
       @Override
-      public Adapter caseAttr(Attr object)
+      public Adapter caseAttribute(Attribute object)
       {
-        return createAttrAdapter();
+        return createAttributeAdapter();
       }
       @Override
       public Adapter caseConstant(Constant object)
@@ -247,16 +247,16 @@ public class XptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Attr <em>Attr</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Attribute <em>Attribute</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.xpt.xpt.Attr
+   * @see org.xtext.example.xpt.xpt.Attribute
    * @generated
    */
-  public Adapter createAttrAdapter()
+  public Adapter createAttributeAdapter()
   {
     return null;
   }

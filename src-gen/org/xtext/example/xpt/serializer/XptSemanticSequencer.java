@@ -17,7 +17,7 @@ import org.xtext.example.xpt.services.XptGrammarAccess;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionSet;
-import org.xtext.example.xpt.xpt.Attr;
+import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
@@ -51,9 +51,9 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
-			case XptPackage.ATTR:
-				if(context == grammarAccess.getAttrRule()) {
-					sequence_Attr(context, (Attr) semanticObject); 
+			case XptPackage.ATTRIBUTE:
+				if(context == grammarAccess.getAttributeRule()) {
+					sequence_Attribute(context, (Attribute) semanticObject); 
 					return; 
 				}
 				else break;
@@ -135,7 +135,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     ((property=ID ((op=Rop intValue=NUMBER) | (op=StringRop strValue=STRING))) | int=NUMBER)
 	 */
-	protected void sequence_Attr(EObject context, Attr semanticObject) {
+	protected void sequence_Attribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -188,7 +188,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((name=ID attribute=Attr?) | placeholder=Variable)
+	 *     ((name=ID attribute=Attribute?) | placeholder=Variable)
 	 */
 	protected void sequence_Step(EObject context, Step semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

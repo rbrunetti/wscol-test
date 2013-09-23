@@ -2,14 +2,15 @@
  */
 package org.xtext.example.xpt.xpt.impl;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.XptPackage;
@@ -331,10 +332,5 @@ public class AssertionFormImpl extends MinimalEObjectImpl.Container implements A
     result.append(')');
     return result.toString();
   }
-
-	@Override
-	public String assertionFormConstruction(Map<String, Object> variables) {
-		return getLeftAssert().assertionConstruction(variables) + " " + getOp() + " " + getRightAssert().assertionConstruction(variables);
-	}
 
 } //AssertionFormImpl

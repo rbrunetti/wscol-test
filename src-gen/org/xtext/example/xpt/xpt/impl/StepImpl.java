@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.xtext.example.xpt.xpt.Attr;
+import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.XptPackage;
 
@@ -60,7 +60,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    * @ordered
    */
-  protected Attr attribute;
+  protected Attribute attribute;
 
   /**
    * The default value of the '{@link #getPlaceholder() <em>Placeholder</em>}' attribute.
@@ -131,7 +131,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attr getAttribute()
+  public Attribute getAttribute()
   {
     return attribute;
   }
@@ -141,9 +141,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAttribute(Attr newAttribute, NotificationChain msgs)
+  public NotificationChain basicSetAttribute(Attribute newAttribute, NotificationChain msgs)
   {
-    Attr oldAttribute = attribute;
+    Attribute oldAttribute = attribute;
     attribute = newAttribute;
     if (eNotificationRequired())
     {
@@ -158,7 +158,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAttribute(Attr newAttribute)
+  public void setAttribute(Attribute newAttribute)
   {
     if (newAttribute != attribute)
     {
@@ -247,7 +247,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
         setName((String)newValue);
         return;
       case XptPackage.STEP__ATTRIBUTE:
-        setAttribute((Attr)newValue);
+        setAttribute((Attribute)newValue);
         return;
       case XptPackage.STEP__PLACEHOLDER:
         setPlaceholder((String)newValue);
@@ -270,7 +270,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
         setName(NAME_EDEFAULT);
         return;
       case XptPackage.STEP__ATTRIBUTE:
-        setAttribute((Attr)null);
+        setAttribute((Attribute)null);
         return;
       case XptPackage.STEP__PLACEHOLDER:
         setPlaceholder(PLACEHOLDER_EDEFAULT);

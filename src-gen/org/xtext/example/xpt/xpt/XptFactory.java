@@ -86,13 +86,13 @@ public interface XptFactory extends EFactory
   Step createStep();
 
   /**
-   * Returns a new object of class '<em>Attr</em>'.
+   * Returns a new object of class '<em>Attribute</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Attr</em>'.
+   * @return a new object of class '<em>Attribute</em>'.
    * @generated
    */
-  Attr createAttr();
+  Attribute createAttribute();
 
   /**
    * Returns a new object of class '<em>Constant</em>'.

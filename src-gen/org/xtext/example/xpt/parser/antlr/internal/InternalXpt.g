@@ -518,9 +518,9 @@ ruleStep returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStepAccess().getAttributeAttrParserRuleCall_0_2_1_0()); 
+	        newCompositeNode(grammarAccess.getStepAccess().getAttributeAttributeParserRuleCall_0_2_1_0()); 
 	    }
-		lv_attribute_3_0=ruleAttr		{
+		lv_attribute_3_0=ruleAttribute		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStepRule());
 	        }
@@ -528,7 +528,7 @@ ruleStep returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_3_0, 
-        		"Attr");
+        		"Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -563,17 +563,17 @@ ruleStep returns [EObject current=null]
 
 
 
-// Entry rule entryRuleAttr
-entryRuleAttr returns [EObject current=null] 
+// Entry rule entryRuleAttribute
+entryRuleAttribute returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getAttrRule()); }
-	 iv_ruleAttr=ruleAttr 
-	 { $current=$iv_ruleAttr.current; } 
+	{ newCompositeNode(grammarAccess.getAttributeRule()); }
+	 iv_ruleAttribute=ruleAttribute 
+	 { $current=$iv_ruleAttribute.current; } 
 	 EOF 
 ;
 
-// Rule Attr
-ruleAttr returns [EObject current=null] 
+// Rule Attribute
+ruleAttribute returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -581,11 +581,11 @@ ruleAttr returns [EObject current=null]
 (
 		lv_property_0_0=RULE_ID
 		{
-			newLeafNode(lv_property_0_0, grammarAccess.getAttrAccess().getPropertyIDTerminalRuleCall_0_0_0()); 
+			newLeafNode(lv_property_0_0, grammarAccess.getAttributeAccess().getPropertyIDTerminalRuleCall_0_0_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAttrRule());
+	            $current = createModelElement(grammarAccess.getAttributeRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -598,11 +598,11 @@ ruleAttr returns [EObject current=null]
 )(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAttrAccess().getOpRopParserRuleCall_0_1_0_0_0()); 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getOpRopParserRuleCall_0_1_0_0_0()); 
 	    }
 		lv_op_1_0=ruleRop		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAttrRule());
+	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
 	        }
        		set(
        			$current, 
@@ -617,11 +617,11 @@ ruleAttr returns [EObject current=null]
 (
 		lv_intValue_2_0=RULE_NUMBER
 		{
-			newLeafNode(lv_intValue_2_0, grammarAccess.getAttrAccess().getIntValueNUMBERTerminalRuleCall_0_1_0_1_0()); 
+			newLeafNode(lv_intValue_2_0, grammarAccess.getAttributeAccess().getIntValueNUMBERTerminalRuleCall_0_1_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAttrRule());
+	            $current = createModelElement(grammarAccess.getAttributeRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -635,11 +635,11 @@ ruleAttr returns [EObject current=null]
     |((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAttrAccess().getOpStringRopParserRuleCall_0_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getOpStringRopParserRuleCall_0_1_1_0_0()); 
 	    }
 		lv_op_3_0=ruleStringRop		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAttrRule());
+	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
 	        }
        		set(
        			$current, 
@@ -654,11 +654,11 @@ ruleAttr returns [EObject current=null]
 (
 		lv_strValue_4_0=RULE_STRING
 		{
-			newLeafNode(lv_strValue_4_0, grammarAccess.getAttrAccess().getStrValueSTRINGTerminalRuleCall_0_1_1_1_0()); 
+			newLeafNode(lv_strValue_4_0, grammarAccess.getAttributeAccess().getStrValueSTRINGTerminalRuleCall_0_1_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAttrRule());
+	            $current = createModelElement(grammarAccess.getAttributeRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -673,11 +673,11 @@ ruleAttr returns [EObject current=null]
 (
 		lv_int_5_0=RULE_NUMBER
 		{
-			newLeafNode(lv_int_5_0, grammarAccess.getAttrAccess().getIntNUMBERTerminalRuleCall_1_0()); 
+			newLeafNode(lv_int_5_0, grammarAccess.getAttributeAccess().getIntNUMBERTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAttrRule());
+	            $current = createModelElement(grammarAccess.getAttributeRule());
 	        }
        		setWithLastConsumed(
        			$current, 

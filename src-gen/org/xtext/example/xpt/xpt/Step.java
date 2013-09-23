@@ -59,12 +59,12 @@ public interface Step extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attribute</em>' containment reference.
-   * @see #setAttribute(Attr)
+   * @see #setAttribute(Attribute)
    * @see org.xtext.example.xpt.xpt.XptPackage#getStep_Attribute()
    * @model containment="true"
    * @generated
    */
-  Attr getAttribute();
+  Attribute getAttribute();
 
   /**
    * Sets the value of the '{@link org.xtext.example.xpt.xpt.Step#getAttribute <em>Attribute</em>}' containment reference.
@@ -74,7 +74,7 @@ public interface Step extends EObject
    * @see #getAttribute()
    * @generated
    */
-  void setAttribute(Attr value);
+  void setAttribute(Attribute value);
 
   /**
    * Returns the value of the '<em><b>Placeholder</b></em>' attribute.

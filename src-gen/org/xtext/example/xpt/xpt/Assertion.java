@@ -2,8 +2,6 @@
  */
 package org.xtext.example.xpt.xpt;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -103,7 +101,5 @@ public interface Assertion extends EObject
    * @generated
    */
   void setConstant(Constant value);
-  
-  String assertionConstruction(Map<String, Object> variables); //TODO necessario??
 
 } // Assertion

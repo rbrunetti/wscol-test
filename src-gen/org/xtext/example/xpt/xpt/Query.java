@@ -2,9 +2,8 @@
  */
 package org.xtext.example.xpt.xpt;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -40,13 +39,5 @@ public interface Query extends EObject
    * @generated
    */
   EList<Step> getSteps();
-  
-  /**
-   * Returns the {@code String} construction of a Query, composing its steps and resolving variables
-   * @param query a query variable
-   * @param variables an hash map containing the declared variables
-   * @return a string translation of a query
-   */
-  String queryConstruction(Map<String, Object> variables);
 
 } // Query

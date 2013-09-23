@@ -2,8 +2,6 @@
  */
 package org.xtext.example.xpt.xpt;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -103,12 +101,5 @@ public interface AssertionForm extends EObject
    * @generated
    */
   void setRightAssert(Assertion value);
-  
-  /**
-   * Construct the {@code String} corresponding to the AssertionForm 
-   * @param variables the hashmap containing the defined variables
-   * @return string representation of the AssertionForm 
-   */
-  String assertionFormConstruction(Map<String, Object> variables);
 
 } // AssertionForm
