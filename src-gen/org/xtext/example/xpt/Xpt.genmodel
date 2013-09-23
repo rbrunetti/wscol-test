@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.xtext.example.xpt/src-gen" editDirectory="/org.xtext.example.xpt.edit/src"
+    editorDirectory="/org.xtext.example.xpt.editor/src" modelPluginID="org.xtext.example.xpt"
+    forceOverwrite="true" modelName="Xpt" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.xtext.example.xpt.edit"
+    editorPluginID="org.xtext.example.xpt.editor" runtimeVersion="2.9">
+  <genPackages prefix="Xpt" basePackage="org.xtext.example.xpt" disposableProviderFactory="true"
+      fileExtensions="xpt" ecorePackage="Xpt.ecore#/">
+    <genClasses ecoreClass="Xpt.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Model/declarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Model/querySet"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Declaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Declaration/var"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Declaration/assert"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//AssertionSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionSet/assertions"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//AssertionForm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionForm/leftAssert"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//AssertionForm/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionForm/rightAssert"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Assertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/query"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Assertion/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/constant"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Query">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Query/steps"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Step">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Step/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Step/attribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Step/placeholder"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Attr">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/op"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/intValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/strValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attr/int"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Constant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/int"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/string"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

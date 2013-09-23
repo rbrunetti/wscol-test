@@ -1,0 +1,50 @@
+grammar org.xtext.example.xpt.Xpt with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate xpt "http://www.xtext.org/example/xpt/Xpt"
+
+Model:
+	declarations+=Declaration*
+	querySet=AssertionSet;
+
+Declaration:
+	'let' var=Variable '=' assert=Assertion ';';
+
+AssertionSet:
+	assertions+=AssertionForm ('&&' assertions+=AssertionForm)* ';'; //da introdurre eventuali altre condizioni (or, not) valutando le priorità
+	
+AssertionForm:
+	leftAssert=Assertion op=Rop rightAssert=Assertion;
+
+Assertion:
+	query=Query ('.' function=Function)? | constant=Constant;
+
+Query:
+	'(' steps+=Step+ ')' | steps+=Step+;
+
+Step:
+	'/' name=ID ('[' attribute=Attr ']')? | placeholder=Variable;
+
+Attr:
+	property=ID (op=Rop intValue=NUMBER | op=StringRop strValue=STRING) | int=NUMBER;
+	
+StringRop:
+	'=' | "!=";
+
+Rop:
+	StringRop | '<' | '<=' | '>' | '>=';
+
+Function:
+	'uppercase' | 'length' | ID;
+
+Constant:
+	{Constant} (int=NUMBER | string=STRING);
+
+Variable:
+	'$' ID;
+
+terminal NUMBER returns ecore::EDouble:
+	('0'..'9')* ('.' ('0'..'9')+)?;
+	
+terminal INT returns ecore::EInt: // override della regola di default
+	'this one has been deactivated';
