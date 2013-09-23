@@ -36,11 +36,11 @@ public class DataObject {
 		DataObject current = new DataObject(data);
 		for (Step s : query.getSteps()) {
 			current = getSubmap(current, s.getName(), s.getAttribute());
-//			if (s.getAttribute() != null) {
-//				if (s.getAttribute().getOp() == null && s.getAttribute().getInt() > 0) {
-//					current = getElement(current, s.getAttribute().getInt());
-//				}
-//			}
+			// if (s.getAttribute() != null) {
+			// if (s.getAttribute().getOp() == null && s.getAttribute().getInt() > 0) {
+			// current = getElement(current, s.getAttribute().getInt());
+			// }
+			// }
 			if (current == null) {
 				return null;
 			}
@@ -49,8 +49,7 @@ public class DataObject {
 	}
 
 	/**
-	 * Search the specified key in the DataObject and return the corresponding
-	 * DataObject value
+	 * Search the specified key in the DataObject and return the corresponding DataObject value
 	 * 
 	 * @param current
 	 *            the DataObject in which the search is done
@@ -66,14 +65,14 @@ public class DataObject {
 			double i = 0;
 			while (iter.hasNext()) {
 				Object next = iter.next();
-				i = i+1;
+				i = i + 1;
 				try {
 					DataObject nextDO = (DataObject) next;
 					if (attribute != null) {
 						DataObject checkedAttribute = getSubMapWithAttribute(nextDO, attribute);
 						if (checkedAttribute != null) {
 							subMap.putAll(checkedAttribute);
-						} else if(attribute.getInt() > 0 && attribute.getInt() == i){
+						} else if (attribute.getInt() > 0 && attribute.getInt() == i) {
 							subMap.putAll(nextDO);
 							return subMap;
 						}
@@ -81,7 +80,7 @@ public class DataObject {
 						subMap.putAll(nextDO); // take the DataObject and all
 												// the sub-attribute
 					}
-				} catch (ClassCastException e) {					
+				} catch (ClassCastException e) {
 					// if there's the selection of the n-th element
 					if (attribute != null) {
 						if (attribute.getInt() > 0) {
@@ -121,46 +120,44 @@ public class DataObject {
 					Set<Object> set = current.get(key);
 					Iterator<Object> iter = set.iterator();
 					while (iter.hasNext()) {
-							switch (op) {
-							case "=":
-								if((double) iter.next() == intValue){
-									return current;								
-								}
-								break;
-							case "!=":
-								if((double) iter.next() != intValue){
-									return current;							
-								}
-								break;
-							case ">":
-								if ((double) iter.next() > intValue) {
-									return current;
-								}
-								break;
-							case ">=":
-								if ((double) iter.next() >= intValue) {
-									return current;
-								}
-								break;
-							case "<":
-								if ((double) iter.next() < intValue) {
-									return current;
-								}
-								break;
-							case "<=":
-								if ((double) iter.next() <= intValue) {
-									return current;
-								}
-								break;
+						switch (op) {
+						case "=":
+							if ((double) iter.next() == intValue) {
+								return current;
 							}
+							break;
+						case "!=":
+							if ((double) iter.next() != intValue) {
+								return current;
+							}
+							break;
+						case ">":
+							if ((double) iter.next() > intValue) {
+								return current;
+							}
+							break;
+						case ">=":
+							if ((double) iter.next() >= intValue) {
+								return current;
+							}
+							break;
+						case "<":
+							if ((double) iter.next() < intValue) {
+								return current;
+							}
+							break;
+						case "<=":
+							if ((double) iter.next() <= intValue) {
+								return current;
+							}
+							break;
 						}
-						return null;
 					}
+					return null;
 				}
 			}
 		}
 		return null; // TODO magari meglio un'eccezione...
-
 	}
 
 	public Set<Object> get(String property) {
