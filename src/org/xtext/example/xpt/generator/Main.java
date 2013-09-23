@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,6 +40,7 @@ import org.xtext.example.xpt.xpt.AssertionSet;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Query;
+import org.xtext.example.xpt.xpt.Step;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterators;
@@ -58,7 +60,7 @@ public class Main {
 	private static String xmlFilePath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book.xml";
 	private static String queriesPath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/queries.xpt";
 
-	private static DataObject variables = new DataObject();
+	private static Map<String, Object> variables = new HashMap<>();
 	private static DataObject input = new DataObject();
 
 	public static void main(String[] args) {
@@ -156,19 +158,12 @@ public class Main {
 		String op, condition;
 		for (AssertionForm af : assertionSet.getAssertions()) {
 			laObj = doQueries(af.getLeftAssert());
-			if(laObj instanceof DataObject){
-				laObj = ((DataObject)laObj).getData().values().iterator().next();
-			}
 			raObj = doQueries(af.getRightAssert());
-			if(raObj instanceof DataObject){
-				raObj = ((DataObject)raObj).getData().values().iterator().next();
-			}
 			op = af.getOp(); // get Op for using it for the comparisons
 			condition = "@#*+-";//af.assertionFormConstruction(variables);
 
 			// if the assertion's query has a numeric result
 			if (laObj instanceof Double && raObj instanceof Double) {
-
 				double la = (Double) laObj;
 				double ra = (Double) raObj;
 				switch (op) {
@@ -218,11 +213,9 @@ public class Main {
 					break;
 				}
 			} else if (laObj instanceof String && raObj instanceof String) {
-				String la = (String) laObj;
-				String ra = (String) raObj;
 				switch (op) {
 				case "=":
-					if (la.equals(ra)) {
+					if (laObj.equals(raObj)) {
 						System.out.println("Assertion '" + condition + "' is verified.");
 					} else {
 						System.out.println("Assertion '" + condition + "' is wrong.");
@@ -230,7 +223,7 @@ public class Main {
 
 					break;
 				case "!=":
-					if (!la.equals(ra)) {
+					if (!laObj.equals(raObj)) {
 						System.out.println("Assertion '" + condition + "' is verified.");
 					} else {
 						System.out.println("Assertion '" + condition + "' is wrong.");
@@ -256,12 +249,23 @@ public class Main {
 		}
 //		String query = assertion.getQuery().queryConstruction(variables);
 //		NodeList results = getXMLResults(xmlFilePath, query);
-//		result = results.item(0).getTextContent(); // TODO sto trattando un solo valore! Non considera variabili multivalore
-		if(assertion.getQuery().getSteps().get(0).getPlaceholder() != null){
-			
+//		result = results.item(0).getTextContent();
+		// TODO sto trattando un solo valore! Non considera variabili multivalore
+		if(assertion.getQuery().getSteps().get(0).getPlaceholder() != null && variables.containsKey(assertion.getQuery().getSteps().get(0).getPlaceholder())){
+			Object value = variables.get(assertion.getQuery().getSteps().get(0).getPlaceholder());
+			try {
+				if(assertion.getQuery().getSteps().size() > 1) {
+					result = ((DataObject)value).evaluate(assertion.getQuery()).getData().values().iterator().next();
+				} else {
+					result = ((DataObject) value).getData().values().iterator().next();
+				}
+			} catch (ClassCastException e){
+				result = value;
+			}
+		} else {
+			result = input.evaluate(assertion.getQuery());
+			result = ((DataObject)result).getData().values().iterator().next();
 		}
-		Query query;
-		result = input.evaluate(assertion.getQuery());
 		if (assertion.getFunction() != null) {
 			switch (assertion.getFunction()) {
 			case "uppercase":
@@ -273,8 +277,6 @@ public class Main {
 			default:
 				break;
 			}
-		} else if (((DataObject)result).getData().values().iterator().next() instanceof Double) { // check if the result is numeric and converts it to an integer
-			result = (double) ((DataObject)result).getData().values().iterator().next();
 		}
 		return result;
 	}
@@ -287,7 +289,8 @@ public class Main {
 			if (d.getAssert().getConstant() != null) {
 				variables.put(d.getVar(), d.getAssert().getConstant());
 			} else {
-				variables.put(d.getVar(), d.getAssert().getQuery());
+				DataObject result = input.evaluate(d.getAssert().getQuery());
+				variables.put(d.getVar(), result);
 			}
 		}
 		return;
@@ -318,21 +321,21 @@ public class Main {
 //		return null;
 //	}
 
-	/**
-	 * Check if a string is a number
-	 * 
-	 * @param str
-	 * @return
-	 */
-	private static boolean isNumeric(String str) {
-		try {
-			@SuppressWarnings("unused")
-			double d = Double.parseDouble(str);
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-		return true;
-	}
+//	/**
+//	 * Check if a string is a number
+//	 * 
+//	 * @param str
+//	 * @return
+//	 */
+//	private static boolean isNumeric(String str) {
+//		try {
+//			@SuppressWarnings("unused")
+//			double d = Double.parseDouble(str);
+//		} catch (NumberFormatException nfe) {
+//			return false;
+//		}
+//		return true;
+//	}
 
 	// /**
 	// * Translate to a string an XPath query

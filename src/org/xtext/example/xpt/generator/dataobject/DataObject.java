@@ -35,14 +35,11 @@ public class DataObject {
 	public DataObject evaluate(Query query) {
 		DataObject current = new DataObject(data);
 		for (Step s : query.getSteps()) {
-			current = getSubmap(current, s.getName(), s.getAttribute());
-			// if (s.getAttribute() != null) {
-			// if (s.getAttribute().getOp() == null && s.getAttribute().getInt() > 0) {
-			// current = getElement(current, s.getAttribute().getInt());
-			// }
-			// }
-			if (current == null) {
-				return null;
+			if(s.getPlaceholder() == null){
+				current = getSubmap(current, s.getName(), s.getAttribute());
+				if (current == null) {
+					return null;
+				}
 			}
 		}
 		return current;

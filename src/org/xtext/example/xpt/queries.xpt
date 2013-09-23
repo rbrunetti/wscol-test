@@ -1,5 +1,5 @@
-let $a = /inventory/book[1]/price;
+let $a = /inventory/book[1];
 let $b = /inventory/book[1]/isbn;
 let $c = /inventory/book[author="Larry Niven"]/publisher;
 let $d = /inventory/book[2]/price;
-0553380959 != $b && $a.length <= $d && $c.uppercase = "POCKET" && /inventory/book[year>2000]/author < 5;
+"0553380959" != $b && $a/price <= $d && $c = "Pocket";
