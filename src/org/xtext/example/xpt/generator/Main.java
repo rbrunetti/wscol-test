@@ -35,9 +35,10 @@ public class Main {
 	@Inject
 	private IResourceValidator validator;
 
-	private static String xmlFilePath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book.xml";
-	private static String xmlFilePath2 = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book2.xml";
 	private static String queriesPath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/queries.xpt";
+	private static String xmlFilePath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book.xml";
+	@SuppressWarnings("unused")
+	private static String xmlFilePath2 = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book2.xml";
 
 	private static Map<String, Object> variables = new HashMap<>();
 	private static DataObject input = new DataObject();
@@ -52,6 +53,7 @@ public class Main {
 		main.runGenerator(string);
 	}
 
+	@SuppressWarnings("unused")
 	private DataObject hashMapTest() {
 		DataObject data = new DataObject();
 		DataObject books = new DataObject();
@@ -105,7 +107,6 @@ public class Main {
 		
 		input = new DataObject(xmlFilePath);
 //		input = hashMapTest();
-		DataObject pippo = new DataObject(xmlFilePath2);
 
 		if (assertionSet.eContents().isEmpty()) {
 			System.out.println("No assertions. Execution halted.");
@@ -130,13 +131,15 @@ public class Main {
 	 * @param assertionSet
 	 */
 	private void verifyAssertions(AssertionSet assertionSet) {
+		System.out.println();
+		System.out.println("################ ASSERTIONS ################");
 		Object laObj, raObj;
 		String op, condition;
 		for (AssertionForm af : assertionSet.getAssertions()) {
 			laObj = doQueries(af.getLeftAssert());
 			raObj = doQueries(af.getRightAssert());
 			op = af.getOp(); // get Op for using it for the comparisons
-			condition = "@#*+-";//af.assertionFormConstruction(variables);
+			condition = Helper.assertionFormToString(af);//af.assertionFormConstruction(variables);//TODO
 
 			// if the assertion's query has a numeric result
 			if (laObj instanceof Double && raObj instanceof Double) {
@@ -258,6 +261,8 @@ public class Main {
 	 * Set the declarations and puts these in a map of variables
 	 */
 	private void setVariable(EObjectContainmentEList<Declaration> declarations) {
+		System.out.println();
+		System.out.println("############### DECLARATIONS ###############");
 		for (Declaration d : declarations) {
 			if (d.getAssert().getConstant() != null) {
 				variables.put(d.getVar(), d.getAssert().getConstant());
@@ -265,6 +270,7 @@ public class Main {
 				DataObject result = input.evaluate(d.getAssert().getQuery());
 				variables.put(d.getVar(), result);
 			}
+			System.out.println(d.getVar() + " = " + Helper.assertionToString(d.getAssert()));
 		}
 		return;
 	}
