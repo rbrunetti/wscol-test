@@ -4,23 +4,9 @@
 package org.xtext.example.xpt.generator;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,21 +16,13 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import org.xtext.example.xpt.generator.dataobject.DataObject;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionSet;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
-import org.xtext.example.xpt.xpt.Query;
-import org.xtext.example.xpt.xpt.Step;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -58,6 +36,7 @@ public class Main {
 	private IResourceValidator validator;
 
 	private static String xmlFilePath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book.xml";
+	private static String xmlFilePath2 = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/book2.xml";
 	private static String queriesPath = "/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/src/org/xtext/example/xpt/queries.xpt";
 
 	private static Map<String, Object> variables = new HashMap<>();
@@ -73,7 +52,7 @@ public class Main {
 		main.runGenerator(string);
 	}
 
-	private DataObject hashMapTest() { //Query query) {
+	private DataObject hashMapTest() {
 		DataObject data = new DataObject();
 		DataObject books = new DataObject();
 		DataObject book1 = new DataObject();
@@ -99,10 +78,7 @@ public class Main {
 		books.put("book", (double)5);
 
 		data.put("inventory", books);
-//		DataObject result = data.evaluate(query);
-//		for(String k:result.keySet()){
-//			System.out.println(k + " " + result.get(k));
-//		}
+		
 		return data;
 
 	}
@@ -126,18 +102,18 @@ public class Main {
 		Model model = (Model) resource.getContents().get(0);
 		EObjectContainmentEList<Declaration> declarations = (EObjectContainmentEList<Declaration>) model.getDeclarations();
 		AssertionSet assertionSet = model.getQuerySet();
-		input = hashMapTest();
+		
+		input = new DataObject(xmlFilePath);
+//		input = hashMapTest();
+		DataObject pippo = new DataObject(xmlFilePath2);
 
 		if (assertionSet.eContents().isEmpty()) {
 			System.out.println("No assertions. Execution halted.");
 			return;
 		}
 
-//		hashMapTest(declarations.get(0).getAssert().getQuery());
-
 		 System.out.println(declarations.size() + " variable declarated.");
-		 System.out.println(assertionSet.getAssertions().size() +
-		 " assertions has been found.");
+		 System.out.println(assertionSet.getAssertions().size() + " assertions has been found.");
 		 System.out.println();
 		
 		 // get variables declaration and sets the hashmap
@@ -247,24 +223,21 @@ public class Main {
 			result = ((assertion.getConstant().getString() == null) ? assertion.getConstant().getInt() : assertion.getConstant().getString());
 			return result;
 		}
-//		String query = assertion.getQuery().queryConstruction(variables);
-//		NodeList results = getXMLResults(xmlFilePath, query);
-//		result = results.item(0).getTextContent();
 		// TODO sto trattando un solo valore! Non considera variabili multivalore
 		if(assertion.getQuery().getSteps().get(0).getPlaceholder() != null && variables.containsKey(assertion.getQuery().getSteps().get(0).getPlaceholder())){
 			Object value = variables.get(assertion.getQuery().getSteps().get(0).getPlaceholder());
 			try {
-				if(assertion.getQuery().getSteps().size() > 1) {
-					result = ((DataObject)value).evaluate(assertion.getQuery()).getData().values().iterator().next();
+				if(assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
+					result = ((DataObject)value).evaluate(assertion.getQuery()).getFirst();
 				} else {
-					result = ((DataObject) value).getData().values().iterator().next();
+					result = ((DataObject) value).getFirst();
 				}
 			} catch (ClassCastException e){
 				result = value;
 			}
 		} else {
 			result = input.evaluate(assertion.getQuery());
-			result = ((DataObject)result).getData().values().iterator().next();
+			result = ((DataObject)result).getFirst();
 		}
 		if (assertion.getFunction() != null) {
 			switch (assertion.getFunction()) {

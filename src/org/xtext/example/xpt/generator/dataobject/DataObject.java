@@ -1,8 +1,22 @@
 package org.xtext.example.xpt.generator.dataobject;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.print.DocFlavor.INPUT_STREAM;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
@@ -25,6 +39,10 @@ public class DataObject {
 		data = LinkedHashMultimap.create();
 	}
 
+	public DataObject(String xmlPath) {
+		data = parseXML(xmlPath);
+	}
+
 	/**
 	 * Method for the evaluation of a Query
 	 * 
@@ -35,7 +53,7 @@ public class DataObject {
 	public DataObject evaluate(Query query) {
 		DataObject current = new DataObject(data);
 		for (Step s : query.getSteps()) {
-			if(s.getPlaceholder() == null){
+			if (s.getPlaceholder() == null) {
 				current = getSubmap(current, s.getName(), s.getAttribute());
 				if (current == null) {
 					return null;
@@ -74,8 +92,7 @@ public class DataObject {
 							return subMap;
 						}
 					} else {
-						subMap.putAll(nextDO); // take the DataObject and all
-												// the sub-attribute
+						subMap.put(nextDO); // take the DataObject and all the sub-attribute
 					}
 				} catch (ClassCastException e) {
 					// if there's the selection of the n-th element
@@ -161,6 +178,15 @@ public class DataObject {
 		return data.get(property);
 	}
 
+	/**
+	 * Return the first entry of the DataObject
+	 * 
+	 * @return value corresponding to the first key putted in the DataObject
+	 */
+	public Object getFirst() {
+		return data.values().iterator().next();
+	}
+
 	public Multiset<String> keys() {
 		return data.keys();
 	}
@@ -181,12 +207,95 @@ public class DataObject {
 		return data;
 	}
 
+	public Collection<Object> values() {
+		return data.values();
+	}
+
 	public boolean put(String key, Object value) {
 		return data.put(key, value);
 	}
 
+	public void put(DataObject dataObj) {
+		Collection<String> keys = dataObj.keySet();
+		for (String k : keys) {
+			Object value = dataObj.get(k);
+			try {
+				Set<Object> set = (Set<Object>) value;
+				Iterator<Object> iter = set.iterator();
+				while(iter.hasNext()){
+					data.put(k, iter.next());
+				}
+			} catch (ClassCastException e) {
+				data.put(k, value);
+			}
+		}
+	}
+
 	public boolean putAll(DataObject dataObject) {
 		return data.putAll(dataObject.getData());
+	}
+
+	private LinkedHashMultimap<String, Object> parseXML(String xmlPath) {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder;
+		try {
+			builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(new File(xmlPath));
+			doc.getDocumentElement().normalize();
+			Node root = doc.getFirstChild();
+			return stepThrow(root).getData();
+		} catch (ParserConfigurationException e2) {
+			e2.printStackTrace();
+		} catch (SAXException | IOException e1) {
+			e1.printStackTrace();
+		}
+		return null;
+	}
+
+	private DataObject stepThrow(Node root) {
+		String name = root.getNodeName();
+		DataObject father = new DataObject();
+		DataObject sons = new DataObject();
+		for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+			Node son = root.getChildNodes().item(i);
+			int grandsons = son.getChildNodes().getLength();
+			if(son instanceof Text){
+				String value = son.getNodeValue().trim();
+				if(!value.equals("")){
+					try {
+						double num = Double.parseDouble(value);
+						father.put(name, num);
+					} catch (NumberFormatException e) {
+						father.put(name, value);
+					}
+					return father;
+				}
+			} else {
+				sons.put(stepThrow(son));
+			}
+		}
+		father.put(name, sons);
+		return father;
+//		for (int i = 0; i < root.getChildNodes().getLength(); i++) {
+//			Node son = root.getChildNodes().item(i);
+//			for (int j = 0; j < son.getChildNodes().getLength(); j++) {
+//				Node grandson = son.getChildNodes().item(j);
+//				if (grandson instanceof Text) {
+//					String value = grandson.getNodeValue().trim();
+//					if (!value.equals("")) {
+//						try {
+//							double number = Double.parseDouble(value);
+//							father.put(son.getNodeName(), number);
+//						} catch (NumberFormatException e) {
+//							father.put(son.getNodeName(), value);
+//						}
+//					}
+//				} else {
+//					String sonName = son.getNodeName();
+//					father.put(sonName, stepThrow(son));
+//				}
+//			}
+//		}
 	}
 
 	public String toString() {
