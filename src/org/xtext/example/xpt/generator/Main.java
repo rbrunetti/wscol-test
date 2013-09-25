@@ -105,6 +105,7 @@ public class Main {
 		EObjectContainmentEList<Declaration> declarations = (EObjectContainmentEList<Declaration>) model.getDeclarations();
 		AssertionSet assertionSet = model.getQuerySet();
 		
+		// get input: via xml parsing or passed DataObject
 		input = new DataObject(xmlFilePath);
 //		input = hashMapTest();
 
@@ -139,7 +140,7 @@ public class Main {
 			laObj = doQueries(af.getLeftAssert());
 			raObj = doQueries(af.getRightAssert());
 			op = af.getOp(); // get Op for using it for the comparisons
-			condition = Helper.assertionFormToString(af);//af.assertionFormConstruction(variables);//TODO
+			condition = Helper.assertionFormToString(af);
 
 			// if the assertion's query has a numeric result
 			if (laObj instanceof Double && raObj instanceof Double) {
@@ -209,9 +210,11 @@ public class Main {
 					}
 					break;
 				}
-			} else {
+			} else if(laObj != null && raObj != null) {
 				System.err.println("Assertion '" + condition + "' malformed: data types conflict.");
 				return;
+			} else {
+				System.err.println("Unable to evaluate assertion '" + condition + "', due to erroneous variables declaration.");
 			}
 		}
 	}
@@ -227,7 +230,12 @@ public class Main {
 			return result;
 		}
 		// TODO sto trattando un solo valore! Non considera variabili multivalore
-		if(assertion.getQuery().getSteps().get(0).getPlaceholder() != null && variables.containsKey(assertion.getQuery().getSteps().get(0).getPlaceholder())){
+		
+		// look if there's a placeholder, if any substitute it with its values (note: the placeholder is always on the first step!)
+		if(assertion.getQuery().getSteps().get(0).getPlaceholder() != null){
+			if(!variables.containsKey(assertion.getQuery().getSteps().get(0).getPlaceholder())){ // TODO da valutare come trattare (dichiarazioni sbagliate -> variabile assente)
+				return null;
+			}
 			Object value = variables.get(assertion.getQuery().getSteps().get(0).getPlaceholder());
 			try {
 				if(assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
@@ -242,6 +250,8 @@ public class Main {
 			result = input.evaluate(assertion.getQuery());
 			result = ((DataObject)result).getFirst();
 		}
+		
+		//*** FUNCTIONS ***
 		if (assertion.getFunction() != null) {
 			switch (assertion.getFunction()) {
 			case "uppercase":
@@ -258,7 +268,7 @@ public class Main {
 	}
 
 	/**
-	 * Set the declarations and puts these in a map of variables
+	 * Set variables according to the declarations
 	 */
 	private void setVariable(EObjectContainmentEList<Declaration> declarations) {
 		System.out.println();
@@ -268,98 +278,18 @@ public class Main {
 				variables.put(d.getVar(), d.getAssert().getConstant());
 			} else {
 				DataObject result = input.evaluate(d.getAssert().getQuery());
-				variables.put(d.getVar(), result);
+				//TODO come trattare il fatto di avere un risultato?
+				// if the assertion is wrong (with respect to the input variable) or empty the program is halted
+				if(result == null){
+					System.err.println("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "'. Please check it.");
+					System.exit(0);
+				} else {
+					variables.put(d.getVar(), result);
+				}
 			}
 			System.out.println(d.getVar() + " = " + Helper.assertionToString(d.getAssert()));
 		}
 		return;
 	}
-
-//	/**
-//	 * Make the evaluation of XPath queries
-//	 */
-//	private static NodeList getXMLResults(String filePath, String xpathQuery) {
-//		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//		DocumentBuilder builder;
-//		try {
-//			builder = factory.newDocumentBuilder();
-//			Document doc = builder.parse(new File(filePath));
-//			doc.getDocumentElement().normalize();
-//			XPathFactory xPathfactory = XPathFactory.newInstance();
-//			XPath xpath = xPathfactory.newXPath();
-//			XPathExpression expr = xpath.compile(xpathQuery);
-//			NodeList nl = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-//			return nl;
-//		} catch (XPathExpressionException e) {
-//			e.printStackTrace();
-//		} catch (ParserConfigurationException e2) {
-//			e2.printStackTrace();
-//		} catch (SAXException | IOException e1) {
-//			e1.printStackTrace();
-//		}
-//		return null;
-//	}
-
-//	/**
-//	 * Check if a string is a number
-//	 * 
-//	 * @param str
-//	 * @return
-//	 */
-//	private static boolean isNumeric(String str) {
-//		try {
-//			@SuppressWarnings("unused")
-//			double d = Double.parseDouble(str);
-//		} catch (NumberFormatException nfe) {
-//			return false;
-//		}
-//		return true;
-//	}
-
-	// /**
-	// * Translate to a string an XPath query
-	// */
-	// private String genQuery(Query query) {
-	// String res = "";
-	// Attr attribute = null;
-	// for (int i = 0; i < query.getSteps().size(); i++) {
-	// if (query.getSteps().get(i).getPlaceholder() != null) {
-	// res = (String) variables.get(query.getSteps().get(i).getPlaceholder());
-	// } else {
-	// res += '/' + query.getSteps().get(i).getName();
-	// attribute = query.getSteps().get(i).getAttribute();
-	// if (attribute != null) {
-	// String property = attribute.getProperty();
-	// String operation = attribute.getOp();
-	// double value = attribute.getInt();
-	// double intValue = attribute.getIntValue();
-	// res += '[';
-	// if (property != null && operation != null) {
-	// res += property + operation;
-	// if (attribute.getStrValue() != null) {
-	// res += '"' + attribute.getStrValue() + '"' + ']';
-	// } else {
-	// res += String.valueOf(intValue) + ']';
-	// }
-	// } else {
-	// res += String.valueOf(value) + ']';
-	// }
-	// }
-	// }
-	// }
-	// return res;
-	// }
-
-	/**
-	 * Translate to a string an XPath query, including the eventual associated
-	 * function
-	 */
-	// private String genQueryForm(Assertion assertion) {
-	// String res = genQuery(assertion.getQuery());
-	// if (assertion.getFunction() != null) {
-	// res += '.' + assertion.getFunction();
-	// }
-	// return res;
-	// }
 
 }
