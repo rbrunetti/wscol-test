@@ -2,6 +2,7 @@ package org.xtext.example.xpt.generator.dataobject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -86,7 +87,7 @@ public class DataObject {
 							return subMap;
 						}
 					} else {
-						subMap.putAll(nextDO); // take the DataObject and all the sub-attribute
+						subMap.put(nextDO); // take the DataObject and all the sub-attribute
 					}
 				} catch (ClassCastException e) {
 					// if there's the selection of the n-th element
@@ -265,6 +266,26 @@ public class DataObject {
 	public boolean put(String key, Object value) {
 		return data.put(key, value);
 	}
+
+	/**
+	 * Copies and stores the key-value pair of another DataObject
+	 * 
+	 * @param dataObj the DataObject from which the key-value pairs are copied
+	 */
+	public void put(DataObject dataObj) {
+		Collection<String> keys = dataObj.keySet();
+		for (String k : keys) {
+			Object value = dataObj.get(k);
+			if (value instanceof Set) {
+				Iterator<Object> iter = ((Set<Object>) value).iterator();
+				while (iter.hasNext()) {
+					data.put(k, iter.next());
+				}
+			} else {
+				data.put(k, value);
+			}
+		}
+	}
 		 
 	/**
 	 * Copies all of another multimap's key-value pairs into this multimap. The order in which the mappings are added is determined by multimap.entries().
@@ -323,7 +344,7 @@ public class DataObject {
 					return father;
 				}
 			} else {
-				sons.putAll(stepThrow(son));
+				sons.put(stepThrow(son));
 			}
 		}
 		father.put(name, sons);
