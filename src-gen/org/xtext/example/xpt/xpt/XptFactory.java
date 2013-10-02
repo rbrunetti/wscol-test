@@ -41,13 +41,22 @@ public interface XptFactory extends EFactory
   Declaration createDeclaration();
 
   /**
-   * Returns a new object of class '<em>Assertion Set</em>'.
+   * Returns a new object of class '<em>Assertions</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assertion Set</em>'.
+   * @return a new object of class '<em>Assertions</em>'.
    * @generated
    */
-  AssertionSet createAssertionSet();
+  Assertions createAssertions();
+
+  /**
+   * Returns a new object of class '<em>Negated Formula</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Negated Formula</em>'.
+   * @generated
+   */
+  NegatedFormula createNegatedFormula();
 
   /**
    * Returns a new object of class '<em>Assertion Form</em>'.
@@ -102,6 +111,24 @@ public interface XptFactory extends EFactory
    * @generated
    */
   Constant createConstant();
+
+  /**
+   * Returns a new object of class '<em>Assertion Set</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assertion Set</em>'.
+   * @generated
+   */
+  AssertionSet createAssertionSet();
+
+  /**
+   * Returns a new object of class '<em>Assertion And</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assertion And</em>'.
+   * @generated
+   */
+  AssertionAnd createAssertionAnd();
 
   /**
    * Returns the package supported by this factory.

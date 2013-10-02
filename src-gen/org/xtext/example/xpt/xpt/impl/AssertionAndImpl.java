@@ -10,25 +10,25 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.xtext.example.xpt.xpt.AssertionSet;
+import org.xtext.example.xpt.xpt.AssertionAnd;
 import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.XptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Assertion Set</b></em>'.
+ * An implementation of the model object '<em><b>Assertion And</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionSetImpl#getLeft <em>Left</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionSetImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionAndImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionAndImpl#getRight <em>Right</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
+public class AssertionAndImpl extends AssertionsImpl implements AssertionAnd
 {
   /**
    * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
@@ -55,7 +55,7 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AssertionSetImpl()
+  protected AssertionAndImpl()
   {
     super();
   }
@@ -68,7 +68,7 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
   @Override
   protected EClass eStaticClass()
   {
-    return XptPackage.Literals.ASSERTION_SET;
+    return XptPackage.Literals.ASSERTION_AND;
   }
 
   /**
@@ -92,7 +92,7 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
     left = newLeft;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_SET__LEFT, oldLeft, newLeft);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_AND__LEFT, oldLeft, newLeft);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -109,14 +109,14 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
     {
       NotificationChain msgs = null;
       if (left != null)
-        msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_SET__LEFT, null, msgs);
+        msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_AND__LEFT, null, msgs);
       if (newLeft != null)
-        msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_SET__LEFT, null, msgs);
+        msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_AND__LEFT, null, msgs);
       msgs = basicSetLeft(newLeft, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_SET__LEFT, newLeft, newLeft));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_AND__LEFT, newLeft, newLeft));
   }
 
   /**
@@ -140,7 +140,7 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
     right = newRight;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_SET__RIGHT, oldRight, newRight);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_AND__RIGHT, oldRight, newRight);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -157,14 +157,14 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
     {
       NotificationChain msgs = null;
       if (right != null)
-        msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_SET__RIGHT, null, msgs);
+        msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_AND__RIGHT, null, msgs);
       if (newRight != null)
-        msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_SET__RIGHT, null, msgs);
+        msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_AND__RIGHT, null, msgs);
       msgs = basicSetRight(newRight, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_SET__RIGHT, newRight, newRight));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_AND__RIGHT, newRight, newRight));
   }
 
   /**
@@ -177,9 +177,9 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION_SET__LEFT:
+      case XptPackage.ASSERTION_AND__LEFT:
         return basicSetLeft(null, msgs);
-      case XptPackage.ASSERTION_SET__RIGHT:
+      case XptPackage.ASSERTION_AND__RIGHT:
         return basicSetRight(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -195,9 +195,9 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION_SET__LEFT:
+      case XptPackage.ASSERTION_AND__LEFT:
         return getLeft();
-      case XptPackage.ASSERTION_SET__RIGHT:
+      case XptPackage.ASSERTION_AND__RIGHT:
         return getRight();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -213,10 +213,10 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION_SET__LEFT:
+      case XptPackage.ASSERTION_AND__LEFT:
         setLeft((Assertions)newValue);
         return;
-      case XptPackage.ASSERTION_SET__RIGHT:
+      case XptPackage.ASSERTION_AND__RIGHT:
         setRight((Assertions)newValue);
         return;
     }
@@ -233,10 +233,10 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION_SET__LEFT:
+      case XptPackage.ASSERTION_AND__LEFT:
         setLeft((Assertions)null);
         return;
-      case XptPackage.ASSERTION_SET__RIGHT:
+      case XptPackage.ASSERTION_AND__RIGHT:
         setRight((Assertions)null);
         return;
     }
@@ -253,12 +253,12 @@ public class AssertionSetImpl extends AssertionsImpl implements AssertionSet
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION_SET__LEFT:
+      case XptPackage.ASSERTION_AND__LEFT:
         return left != null;
-      case XptPackage.ASSERTION_SET__RIGHT:
+      case XptPackage.ASSERTION_AND__RIGHT:
         return right != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //AssertionSetImpl
+} //AssertionAndImpl

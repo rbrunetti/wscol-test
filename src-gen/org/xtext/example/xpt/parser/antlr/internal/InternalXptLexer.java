@@ -28,6 +28,8 @@ public class InternalXptLexer extends Lexer {
     public static final int RULE_SL_COMMENT=9;
     public static final int RULE_ML_COMMENT=8;
     public static final int T__19=19;
+    public static final int T__30=30;
+    public static final int T__31=31;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -58,11 +60,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:11:7: ( 'let' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:11:9: 'let'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:11:7: ( ';' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:11:9: ';'
             {
-            match("let"); 
-
+            match(';'); 
 
             }
 
@@ -79,10 +80,11 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:12:7: ( '=' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:12:9: '='
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:12:7: ( 'let' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:12:9: 'let'
             {
-            match('='); 
+            match("let"); 
+
 
             }
 
@@ -99,10 +101,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:13:7: ( ';' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:13:9: ';'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:13:7: ( '=' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:13:9: '='
             {
-            match(';'); 
+            match('='); 
 
             }
 
@@ -119,10 +121,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:14:7: ( '&&' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:14:9: '&&'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:14:7: ( '||' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:14:9: '||'
             {
-            match("&&"); 
+            match("||"); 
 
 
             }
@@ -140,10 +142,11 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:15:7: ( '.' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:15:9: '.'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:15:7: ( '&&' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:15:9: '&&'
             {
-            match('.'); 
+            match("&&"); 
+
 
             }
 
@@ -160,10 +163,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:16:7: ( '(' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:16:9: '('
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:16:7: ( '!' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:16:9: '!'
             {
-            match('('); 
+            match('!'); 
 
             }
 
@@ -180,10 +183,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:17:7: ( ')' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:17:9: ')'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:17:7: ( '(' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:17:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -200,10 +203,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:18:7: ( '/' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:18:9: '/'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:18:7: ( ')' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:18:9: ')'
             {
-            match('/'); 
+            match(')'); 
 
             }
 
@@ -220,10 +223,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:19:7: ( '[' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:19:9: '['
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:19:7: ( '.' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:19:9: '.'
             {
-            match('['); 
+            match('.'); 
 
             }
 
@@ -240,10 +243,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:20:7: ( ']' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:20:9: ']'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:20:7: ( '/' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:20:9: '/'
             {
-            match(']'); 
+            match('/'); 
 
             }
 
@@ -260,11 +263,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:21:7: ( '!=' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:21:9: '!='
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:21:7: ( '[' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:21:9: '['
             {
-            match("!="); 
-
+            match('['); 
 
             }
 
@@ -281,10 +283,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:22:7: ( '<' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:22:9: '<'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:22:7: ( ']' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:22:9: ']'
             {
-            match('<'); 
+            match(']'); 
 
             }
 
@@ -301,10 +303,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:23:7: ( '<=' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:23:9: '<='
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:23:7: ( '!=' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:23:9: '!='
             {
-            match("<="); 
+            match("!="); 
 
 
             }
@@ -322,10 +324,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:24:7: ( '>' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:24:9: '>'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:24:7: ( '<' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:24:9: '<'
             {
-            match('>'); 
+            match('<'); 
 
             }
 
@@ -342,10 +344,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:25:7: ( '>=' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:25:9: '>='
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:25:7: ( '<=' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:25:9: '<='
             {
-            match(">="); 
+            match("<="); 
 
 
             }
@@ -363,11 +365,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:26:7: ( 'uppercase' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:26:9: 'uppercase'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:26:7: ( '>' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:26:9: '>'
             {
-            match("uppercase"); 
-
+            match('>'); 
 
             }
 
@@ -384,10 +385,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:27:7: ( 'length' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:27:9: 'length'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:27:7: ( '>=' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:27:9: '>='
             {
-            match("length"); 
+            match(">="); 
 
 
             }
@@ -405,10 +406,11 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:28:7: ( '$' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:28:9: '$'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:28:7: ( 'uppercase' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:28:9: 'uppercase'
             {
-            match('$'); 
+            match("uppercase"); 
+
 
             }
 
@@ -420,15 +422,56 @@ public class InternalXptLexer extends Lexer {
     }
     // $ANTLR end "T__29"
 
+    // $ANTLR start "T__30"
+    public final void mT__30() throws RecognitionException {
+        try {
+            int _type = T__30;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:29:7: ( 'length' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:29:9: 'length'
+            {
+            match("length"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__30"
+
+    // $ANTLR start "T__31"
+    public final void mT__31() throws RecognitionException {
+        try {
+            int _type = T__31;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:30:7: ( '$' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:30:9: '$'
+            {
+            match('$'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__31"
+
     // $ANTLR start "RULE_NUMBER"
     public final void mRULE_NUMBER() throws RecognitionException {
         try {
             int _type = RULE_NUMBER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:13: ( ( '0' .. '9' )* ( '.' ( '0' .. '9' )+ )? )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:15: ( '0' .. '9' )* ( '.' ( '0' .. '9' )+ )?
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:13: ( ( '0' .. '9' )* ( '.' ( '0' .. '9' )+ )? )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:15: ( '0' .. '9' )* ( '.' ( '0' .. '9' )+ )?
             {
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:15: ( '0' .. '9' )*
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:15: ( '0' .. '9' )*
             loop1:
             do {
                 int alt1=2;
@@ -441,7 +484,7 @@ public class InternalXptLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:16: '0' .. '9'
+            	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:16: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -453,7 +496,7 @@ public class InternalXptLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:27: ( '.' ( '0' .. '9' )+ )?
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:27: ( '.' ( '0' .. '9' )+ )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -462,10 +505,10 @@ public class InternalXptLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:28: '.' ( '0' .. '9' )+
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:28: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:32: ( '0' .. '9' )+
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:32: ( '0' .. '9' )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -479,7 +522,7 @@ public class InternalXptLexer extends Lexer {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:931:33: '0' .. '9'
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1117:33: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -517,8 +560,8 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:933:10: ( 'this one has been deactivated' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:933:12: 'this one has been deactivated'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1119:10: ( 'this one has been deactivated' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1119:12: 'this one has been deactivated'
             {
             match("this one has been deactivated"); 
 
@@ -538,10 +581,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:935:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:935:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1121:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1121:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:935:11: ( '^' )?
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1121:11: ( '^' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -550,7 +593,7 @@ public class InternalXptLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:935:11: '^'
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1121:11: '^'
                     {
                     match('^'); 
 
@@ -568,7 +611,7 @@ public class InternalXptLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:935:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1121:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop5:
             do {
                 int alt5=2;
@@ -617,10 +660,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -638,10 +681,10 @@ public class InternalXptLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -657,7 +700,7 @@ public class InternalXptLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -673,7 +716,7 @@ public class InternalXptLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -698,10 +741,10 @@ public class InternalXptLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -717,7 +760,7 @@ public class InternalXptLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -733,7 +776,7 @@ public class InternalXptLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:937:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1123:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -776,12 +819,12 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:939:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:939:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1125:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1125:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:939:24: ( options {greedy=false; } : . )*
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1125:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -806,7 +849,7 @@ public class InternalXptLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:939:52: .
+            	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1125:52: .
             	    {
             	    matchAny(); 
 
@@ -836,12 +879,12 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -854,7 +897,7 @@ public class InternalXptLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -874,7 +917,7 @@ public class InternalXptLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:40: ( ( '\\r' )? '\\n' )?
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -883,9 +926,9 @@ public class InternalXptLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:41: ( '\\r' )? '\\n'
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:41: ( '\\r' )?
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -894,7 +937,7 @@ public class InternalXptLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:941:41: '\\r'
+                            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1127:41: '\\r'
                             {
                             match('\r'); 
 
@@ -926,10 +969,10 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:943:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:943:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1129:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1129:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:943:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1129:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -983,8 +1026,8 @@ public class InternalXptLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:945:16: ( . )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:945:18: .
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1131:16: ( . )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1131:18: .
             {
             matchAny(); 
 
@@ -999,8 +1042,8 @@ public class InternalXptLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | RULE_NUMBER | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt14=26;
+        // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | RULE_NUMBER | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt14=28;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
@@ -1130,56 +1173,70 @@ public class InternalXptLexer extends Lexer {
                 }
                 break;
             case 19 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:118: RULE_NUMBER
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:118: T__30
+                {
+                mT__30(); 
+
+                }
+                break;
+            case 20 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:124: T__31
+                {
+                mT__31(); 
+
+                }
+                break;
+            case 21 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:130: RULE_NUMBER
                 {
                 mRULE_NUMBER(); 
 
                 }
                 break;
-            case 20 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:130: RULE_INT
+            case 22 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:142: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 21 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:139: RULE_ID
+            case 23 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:151: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 22 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:147: RULE_STRING
+            case 24 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:159: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 23 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:159: RULE_ML_COMMENT
+            case 25 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:171: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 24 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:175: RULE_SL_COMMENT
+            case 26 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:187: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 25 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:191: RULE_WS
+            case 27 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:203: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 26 :
-                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:199: RULE_ANY_OTHER
+            case 28 :
+                // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:1:211: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1193,66 +1250,64 @@ public class InternalXptLexer extends Lexer {
 
     protected DFA14 dfa14 = new DFA14(this);
     static final String DFA14_eotS =
-        "\1\21\1\32\2\uffff\1\30\1\36\2\uffff\1\43\2\uffff\1\30\1\50\1\52"+
-        "\1\32\3\uffff\1\32\1\30\1\uffff\2\30\2\uffff\1\32\21\uffff\1\32"+
-        "\1\uffff\1\32\2\uffff\1\64\3\32\1\uffff\5\32\1\uffff\1\75\1\32\1"+
-        "\uffff\2\32\1\101\1\uffff";
+        "\1\22\1\uffff\1\34\1\uffff\2\31\1\41\2\uffff\1\44\1\47\2\uffff\1"+
+        "\53\1\55\1\34\3\uffff\1\34\1\31\1\uffff\2\31\3\uffff\1\34\22\uffff"+
+        "\1\34\1\uffff\1\34\2\uffff\1\67\3\34\1\uffff\5\34\1\uffff\1\100"+
+        "\1\34\1\uffff\2\34\1\104\1\uffff";
     static final String DFA14_eofS =
-        "\102\uffff";
+        "\105\uffff";
     static final String DFA14_minS =
-        "\1\0\1\145\2\uffff\1\46\1\60\2\uffff\1\52\2\uffff\3\75\1\160\3\uffff"+
-        "\1\150\1\101\1\uffff\2\0\2\uffff\1\156\21\uffff\1\160\1\uffff\1"+
-        "\151\2\uffff\1\60\1\147\1\145\1\163\1\uffff\1\164\1\162\1\40\1\150"+
-        "\1\143\1\uffff\1\60\1\141\1\uffff\1\163\1\145\1\60\1\uffff";
+        "\1\0\1\uffff\1\145\1\uffff\1\174\1\46\1\75\2\uffff\1\60\1\52\2\uffff"+
+        "\2\75\1\160\3\uffff\1\150\1\101\1\uffff\2\0\3\uffff\1\156\22\uffff"+
+        "\1\160\1\uffff\1\151\2\uffff\1\60\1\147\1\145\1\163\1\uffff\1\164"+
+        "\1\162\1\40\1\150\1\143\1\uffff\1\60\1\141\1\uffff\1\163\1\145\1"+
+        "\60\1\uffff";
     static final String DFA14_maxS =
-        "\1\uffff\1\145\2\uffff\1\46\1\71\2\uffff\1\57\2\uffff\3\75\1\160"+
-        "\3\uffff\1\150\1\172\1\uffff\2\uffff\2\uffff\1\164\21\uffff\1\160"+
-        "\1\uffff\1\151\2\uffff\1\172\1\147\1\145\1\163\1\uffff\1\164\1\162"+
-        "\1\40\1\150\1\143\1\uffff\1\172\1\141\1\uffff\1\163\1\145\1\172"+
-        "\1\uffff";
+        "\1\uffff\1\uffff\1\145\1\uffff\1\174\1\46\1\75\2\uffff\1\71\1\57"+
+        "\2\uffff\2\75\1\160\3\uffff\1\150\1\172\1\uffff\2\uffff\3\uffff"+
+        "\1\164\22\uffff\1\160\1\uffff\1\151\2\uffff\1\172\1\147\1\145\1"+
+        "\163\1\uffff\1\164\1\162\1\40\1\150\1\143\1\uffff\1\172\1\141\1"+
+        "\uffff\1\163\1\145\1\172\1\uffff";
     static final String DFA14_acceptS =
-        "\2\uffff\1\2\1\3\2\uffff\1\6\1\7\1\uffff\1\11\1\12\4\uffff\1\22"+
-        "\2\23\2\uffff\1\25\2\uffff\1\31\1\32\1\uffff\1\25\1\2\1\3\1\4\1"+
-        "\5\1\6\1\7\1\27\1\30\1\10\1\11\1\12\1\13\1\15\1\14\1\17\1\16\1\uffff"+
-        "\1\22\1\uffff\1\26\1\31\4\uffff\1\1\5\uffff\1\24\2\uffff\1\21\3"+
-        "\uffff\1\20";
+        "\1\uffff\1\1\1\uffff\1\3\3\uffff\1\7\1\10\2\uffff\1\13\1\14\3\uffff"+
+        "\1\24\2\25\2\uffff\1\27\2\uffff\1\33\1\34\1\1\1\uffff\1\27\1\3\1"+
+        "\4\1\5\1\15\1\6\1\7\1\10\1\11\1\31\1\32\1\12\1\13\1\14\1\17\1\16"+
+        "\1\21\1\20\1\uffff\1\24\1\uffff\1\30\1\33\4\uffff\1\2\5\uffff\1"+
+        "\26\2\uffff\1\23\3\uffff\1\22";
     static final String DFA14_specialS =
-        "\1\0\24\uffff\1\1\1\2\53\uffff}>";
+        "\1\1\25\uffff\1\2\1\0\55\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\11\30\2\27\2\30\1\27\22\30\1\27\1\13\1\25\1\30\1\17\1\30\1"+
-            "\4\1\26\1\6\1\7\4\30\1\5\1\10\12\20\1\30\1\3\1\14\1\2\1\15\2"+
-            "\30\32\24\1\11\1\30\1\12\1\23\1\24\1\30\13\24\1\1\7\24\1\22"+
-            "\1\16\5\24\uff85\30",
-            "\1\31",
+            "\11\31\2\30\2\31\1\30\22\31\1\30\1\6\1\26\1\31\1\20\1\31\1\5"+
+            "\1\27\1\7\1\10\4\31\1\11\1\12\12\21\1\31\1\1\1\15\1\3\1\16\2"+
+            "\31\32\25\1\13\1\31\1\14\1\24\1\25\1\31\13\25\1\2\7\25\1\23"+
+            "\1\17\5\25\1\31\1\4\uff83\31",
+            "",
+            "\1\33",
+            "",
+            "\1\36",
+            "\1\37",
+            "\1\40",
             "",
             "",
-            "\1\35",
-            "\12\21",
+            "\12\22",
+            "\1\45\4\uffff\1\46",
             "",
             "",
-            "\1\41\4\uffff\1\42",
-            "",
-            "",
-            "\1\46",
-            "\1\47",
-            "\1\51",
-            "\1\53",
-            "",
-            "",
-            "",
-            "\1\55",
-            "\32\32\4\uffff\1\32\1\uffff\32\32",
-            "",
-            "\0\56",
-            "\0\56",
-            "",
-            "",
-            "\1\61\5\uffff\1\60",
+            "\1\52",
+            "\1\54",
+            "\1\56",
             "",
             "",
             "",
+            "\1\60",
+            "\32\34\4\uffff\1\34\1\uffff\32\34",
+            "",
+            "\0\61",
+            "\0\61",
             "",
             "",
+            "",
+            "\1\64\5\uffff\1\63",
             "",
             "",
             "",
@@ -1265,28 +1320,34 @@ public class InternalXptLexer extends Lexer {
             "",
             "",
             "",
-            "\1\62",
-            "",
-            "\1\63",
             "",
             "",
-            "\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32\32",
+            "",
+            "",
+            "",
+            "",
             "\1\65",
-            "\1\66",
-            "\1\67",
             "",
+            "\1\66",
+            "",
+            "",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             "\1\70",
             "\1\71",
             "\1\72",
+            "",
             "\1\73",
             "\1\74",
-            "",
-            "\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32\32",
+            "\1\75",
             "\1\76",
-            "",
             "\1\77",
-            "\1\100",
-            "\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32\32",
+            "",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
+            "\1\101",
+            "",
+            "\1\102",
+            "\1\103",
+            "\12\34\7\uffff\32\34\4\uffff\1\34\1\uffff\32\34",
             ""
     };
 
@@ -1320,73 +1381,75 @@ public class InternalXptLexer extends Lexer {
             this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | RULE_NUMBER | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | RULE_NUMBER | RULE_INT | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA14_0 = input.LA(1);
+                        int LA14_23 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_0=='l') ) {s = 1;}
+                        if ( ((LA14_23>='\u0000' && LA14_23<='\uFFFF')) ) {s = 49;}
 
-                        else if ( (LA14_0=='=') ) {s = 2;}
-
-                        else if ( (LA14_0==';') ) {s = 3;}
-
-                        else if ( (LA14_0=='&') ) {s = 4;}
-
-                        else if ( (LA14_0=='.') ) {s = 5;}
-
-                        else if ( (LA14_0=='(') ) {s = 6;}
-
-                        else if ( (LA14_0==')') ) {s = 7;}
-
-                        else if ( (LA14_0=='/') ) {s = 8;}
-
-                        else if ( (LA14_0=='[') ) {s = 9;}
-
-                        else if ( (LA14_0==']') ) {s = 10;}
-
-                        else if ( (LA14_0=='!') ) {s = 11;}
-
-                        else if ( (LA14_0=='<') ) {s = 12;}
-
-                        else if ( (LA14_0=='>') ) {s = 13;}
-
-                        else if ( (LA14_0=='u') ) {s = 14;}
-
-                        else if ( (LA14_0=='$') ) {s = 15;}
-
-                        else if ( ((LA14_0>='0' && LA14_0<='9')) ) {s = 16;}
-
-                        else if ( (LA14_0=='t') ) {s = 18;}
-
-                        else if ( (LA14_0=='^') ) {s = 19;}
-
-                        else if ( ((LA14_0>='A' && LA14_0<='Z')||LA14_0=='_'||(LA14_0>='a' && LA14_0<='k')||(LA14_0>='m' && LA14_0<='s')||(LA14_0>='v' && LA14_0<='z')) ) {s = 20;}
-
-                        else if ( (LA14_0=='\"') ) {s = 21;}
-
-                        else if ( (LA14_0=='\'') ) {s = 22;}
-
-                        else if ( ((LA14_0>='\t' && LA14_0<='\n')||LA14_0=='\r'||LA14_0==' ') ) {s = 23;}
-
-                        else if ( ((LA14_0>='\u0000' && LA14_0<='\b')||(LA14_0>='\u000B' && LA14_0<='\f')||(LA14_0>='\u000E' && LA14_0<='\u001F')||LA14_0=='#'||LA14_0=='%'||(LA14_0>='*' && LA14_0<='-')||LA14_0==':'||(LA14_0>='?' && LA14_0<='@')||LA14_0=='\\'||LA14_0=='`'||(LA14_0>='{' && LA14_0<='\uFFFF')) ) {s = 24;}
-
-                        else s = 17;
+                        else s = 25;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA14_21 = input.LA(1);
+                        int LA14_0 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA14_21>='\u0000' && LA14_21<='\uFFFF')) ) {s = 46;}
+                        if ( (LA14_0==';') ) {s = 1;}
 
-                        else s = 24;
+                        else if ( (LA14_0=='l') ) {s = 2;}
+
+                        else if ( (LA14_0=='=') ) {s = 3;}
+
+                        else if ( (LA14_0=='|') ) {s = 4;}
+
+                        else if ( (LA14_0=='&') ) {s = 5;}
+
+                        else if ( (LA14_0=='!') ) {s = 6;}
+
+                        else if ( (LA14_0=='(') ) {s = 7;}
+
+                        else if ( (LA14_0==')') ) {s = 8;}
+
+                        else if ( (LA14_0=='.') ) {s = 9;}
+
+                        else if ( (LA14_0=='/') ) {s = 10;}
+
+                        else if ( (LA14_0=='[') ) {s = 11;}
+
+                        else if ( (LA14_0==']') ) {s = 12;}
+
+                        else if ( (LA14_0=='<') ) {s = 13;}
+
+                        else if ( (LA14_0=='>') ) {s = 14;}
+
+                        else if ( (LA14_0=='u') ) {s = 15;}
+
+                        else if ( (LA14_0=='$') ) {s = 16;}
+
+                        else if ( ((LA14_0>='0' && LA14_0<='9')) ) {s = 17;}
+
+                        else if ( (LA14_0=='t') ) {s = 19;}
+
+                        else if ( (LA14_0=='^') ) {s = 20;}
+
+                        else if ( ((LA14_0>='A' && LA14_0<='Z')||LA14_0=='_'||(LA14_0>='a' && LA14_0<='k')||(LA14_0>='m' && LA14_0<='s')||(LA14_0>='v' && LA14_0<='z')) ) {s = 21;}
+
+                        else if ( (LA14_0=='\"') ) {s = 22;}
+
+                        else if ( (LA14_0=='\'') ) {s = 23;}
+
+                        else if ( ((LA14_0>='\t' && LA14_0<='\n')||LA14_0=='\r'||LA14_0==' ') ) {s = 24;}
+
+                        else if ( ((LA14_0>='\u0000' && LA14_0<='\b')||(LA14_0>='\u000B' && LA14_0<='\f')||(LA14_0>='\u000E' && LA14_0<='\u001F')||LA14_0=='#'||LA14_0=='%'||(LA14_0>='*' && LA14_0<='-')||LA14_0==':'||(LA14_0>='?' && LA14_0<='@')||LA14_0=='\\'||LA14_0=='`'||LA14_0=='{'||(LA14_0>='}' && LA14_0<='\uFFFF')) ) {s = 25;}
+
+                        else s = 18;
 
                         if ( s>=0 ) return s;
                         break;
@@ -1394,9 +1457,9 @@ public class InternalXptLexer extends Lexer {
                         int LA14_22 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA14_22>='\u0000' && LA14_22<='\uFFFF')) ) {s = 46;}
+                        if ( ((LA14_22>='\u0000' && LA14_22<='\uFFFF')) ) {s = 49;}
 
-                        else s = 24;
+                        else s = 25;
 
                         if ( s>=0 ) return s;
                         break;

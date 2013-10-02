@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.example.xpt.xpt.AssertionSet;
+import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.XptPackage;
@@ -31,7 +31,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.ModelImpl#getDeclarations <em>Declarations</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.ModelImpl#getQuerySet <em>Query Set</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.ModelImpl#getAssertionSet <em>Assertion Set</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,14 +50,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected EList<Declaration> declarations;
 
   /**
-   * The cached value of the '{@link #getQuerySet() <em>Query Set</em>}' containment reference.
+   * The cached value of the '{@link #getAssertionSet() <em>Assertion Set</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getQuerySet()
+   * @see #getAssertionSet()
    * @generated
    * @ordered
    */
-  protected AssertionSet querySet;
+  protected Assertions assertionSet;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,9 +99,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public AssertionSet getQuerySet()
+  public Assertions getAssertionSet()
   {
-    return querySet;
+    return assertionSet;
   }
 
   /**
@@ -109,13 +109,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetQuerySet(AssertionSet newQuerySet, NotificationChain msgs)
+  public NotificationChain basicSetAssertionSet(Assertions newAssertionSet, NotificationChain msgs)
   {
-    AssertionSet oldQuerySet = querySet;
-    querySet = newQuerySet;
+    Assertions oldAssertionSet = assertionSet;
+    assertionSet = newAssertionSet;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.MODEL__QUERY_SET, oldQuerySet, newQuerySet);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.MODEL__ASSERTION_SET, oldAssertionSet, newAssertionSet);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -126,20 +126,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setQuerySet(AssertionSet newQuerySet)
+  public void setAssertionSet(Assertions newAssertionSet)
   {
-    if (newQuerySet != querySet)
+    if (newAssertionSet != assertionSet)
     {
       NotificationChain msgs = null;
-      if (querySet != null)
-        msgs = ((InternalEObject)querySet).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.MODEL__QUERY_SET, null, msgs);
-      if (newQuerySet != null)
-        msgs = ((InternalEObject)newQuerySet).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.MODEL__QUERY_SET, null, msgs);
-      msgs = basicSetQuerySet(newQuerySet, msgs);
+      if (assertionSet != null)
+        msgs = ((InternalEObject)assertionSet).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.MODEL__ASSERTION_SET, null, msgs);
+      if (newAssertionSet != null)
+        msgs = ((InternalEObject)newAssertionSet).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.MODEL__ASSERTION_SET, null, msgs);
+      msgs = basicSetAssertionSet(newAssertionSet, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.MODEL__QUERY_SET, newQuerySet, newQuerySet));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.MODEL__ASSERTION_SET, newAssertionSet, newAssertionSet));
   }
 
   /**
@@ -154,8 +154,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case XptPackage.MODEL__DECLARATIONS:
         return ((InternalEList<?>)getDeclarations()).basicRemove(otherEnd, msgs);
-      case XptPackage.MODEL__QUERY_SET:
-        return basicSetQuerySet(null, msgs);
+      case XptPackage.MODEL__ASSERTION_SET:
+        return basicSetAssertionSet(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -172,8 +172,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case XptPackage.MODEL__DECLARATIONS:
         return getDeclarations();
-      case XptPackage.MODEL__QUERY_SET:
-        return getQuerySet();
+      case XptPackage.MODEL__ASSERTION_SET:
+        return getAssertionSet();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -193,8 +193,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         getDeclarations().clear();
         getDeclarations().addAll((Collection<? extends Declaration>)newValue);
         return;
-      case XptPackage.MODEL__QUERY_SET:
-        setQuerySet((AssertionSet)newValue);
+      case XptPackage.MODEL__ASSERTION_SET:
+        setAssertionSet((Assertions)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -213,8 +213,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case XptPackage.MODEL__DECLARATIONS:
         getDeclarations().clear();
         return;
-      case XptPackage.MODEL__QUERY_SET:
-        setQuerySet((AssertionSet)null);
+      case XptPackage.MODEL__ASSERTION_SET:
+        setAssertionSet((Assertions)null);
         return;
     }
     super.eUnset(featureID);
@@ -232,8 +232,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case XptPackage.MODEL__DECLARATIONS:
         return declarations != null && !declarations.isEmpty();
-      case XptPackage.MODEL__QUERY_SET:
-        return querySet != null;
+      case XptPackage.MODEL__ASSERTION_SET:
+        return assertionSet != null;
     }
     return super.eIsSet(featureID);
   }

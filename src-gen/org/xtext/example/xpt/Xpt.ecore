@@ -4,7 +4,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
         eType="#//Declaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="querySet" eType="#//AssertionSet"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertionSet" eType="#//Assertions"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Declaration">
@@ -12,11 +12,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="assert" eType="#//Assertion"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssertionSet">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
-        eType="#//AssertionForm" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assertions"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NegatedFormula" eSuperTypes="#//Assertions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="innerFormula" eType="#//Assertions"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssertionForm">
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionForm" eSuperTypes="#//Assertions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftAssert" eType="#//Assertion"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -50,5 +51,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="Constant">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="int" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionSet" eSuperTypes="#//Assertions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Assertions"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Assertions"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionAnd" eSuperTypes="#//Assertions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Assertions"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Assertions"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

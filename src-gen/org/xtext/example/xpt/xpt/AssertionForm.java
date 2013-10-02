@@ -2,7 +2,6 @@
  */
 package org.xtext.example.xpt.xpt;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface AssertionForm extends EObject
+public interface AssertionForm extends Assertions
 {
   /**
    * Returns the value of the '<em><b>Left Assert</b></em>' containment reference.

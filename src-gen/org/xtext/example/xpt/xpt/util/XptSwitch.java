@@ -86,10 +86,18 @@ public class XptSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XptPackage.ASSERTION_SET:
+      case XptPackage.ASSERTIONS:
       {
-        AssertionSet assertionSet = (AssertionSet)theEObject;
-        T result = caseAssertionSet(assertionSet);
+        Assertions assertions = (Assertions)theEObject;
+        T result = caseAssertions(assertions);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.NEGATED_FORMULA:
+      {
+        NegatedFormula negatedFormula = (NegatedFormula)theEObject;
+        T result = caseNegatedFormula(negatedFormula);
+        if (result == null) result = caseAssertions(negatedFormula);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -97,6 +105,7 @@ public class XptSwitch<T> extends Switch<T>
       {
         AssertionForm assertionForm = (AssertionForm)theEObject;
         T result = caseAssertionForm(assertionForm);
+        if (result == null) result = caseAssertions(assertionForm);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -132,6 +141,22 @@ public class XptSwitch<T> extends Switch<T>
       {
         Constant constant = (Constant)theEObject;
         T result = caseConstant(constant);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.ASSERTION_SET:
+      {
+        AssertionSet assertionSet = (AssertionSet)theEObject;
+        T result = caseAssertionSet(assertionSet);
+        if (result == null) result = caseAssertions(assertionSet);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.ASSERTION_AND:
+      {
+        AssertionAnd assertionAnd = (AssertionAnd)theEObject;
+        T result = caseAssertionAnd(assertionAnd);
+        if (result == null) result = caseAssertions(assertionAnd);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -172,17 +197,33 @@ public class XptSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Assertion Set</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Assertions</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Assertion Set</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Assertions</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAssertionSet(AssertionSet object)
+  public T caseAssertions(Assertions object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Negated Formula</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Negated Formula</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNegatedFormula(NegatedFormula object)
   {
     return null;
   }
@@ -279,6 +320,38 @@ public class XptSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseConstant(Constant object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Assertion Set</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assertion Set</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssertionSet(AssertionSet object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Assertion And</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assertion And</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssertionAnd(AssertionAnd object)
   {
     return null;
   }

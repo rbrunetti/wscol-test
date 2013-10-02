@@ -85,9 +85,14 @@ public class XptAdapterFactory extends AdapterFactoryImpl
         return createDeclarationAdapter();
       }
       @Override
-      public Adapter caseAssertionSet(AssertionSet object)
+      public Adapter caseAssertions(Assertions object)
       {
-        return createAssertionSetAdapter();
+        return createAssertionsAdapter();
+      }
+      @Override
+      public Adapter caseNegatedFormula(NegatedFormula object)
+      {
+        return createNegatedFormulaAdapter();
       }
       @Override
       public Adapter caseAssertionForm(AssertionForm object)
@@ -118,6 +123,16 @@ public class XptAdapterFactory extends AdapterFactoryImpl
       public Adapter caseConstant(Constant object)
       {
         return createConstantAdapter();
+      }
+      @Override
+      public Adapter caseAssertionSet(AssertionSet object)
+      {
+        return createAssertionSetAdapter();
+      }
+      @Override
+      public Adapter caseAssertionAnd(AssertionAnd object)
+      {
+        return createAssertionAndAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -172,16 +187,31 @@ public class XptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.AssertionSet <em>Assertion Set</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Assertions <em>Assertions</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.xpt.xpt.AssertionSet
+   * @see org.xtext.example.xpt.xpt.Assertions
    * @generated
    */
-  public Adapter createAssertionSetAdapter()
+  public Adapter createAssertionsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.NegatedFormula <em>Negated Formula</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.xpt.xpt.NegatedFormula
+   * @generated
+   */
+  public Adapter createNegatedFormulaAdapter()
   {
     return null;
   }
@@ -272,6 +302,36 @@ public class XptAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConstantAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.AssertionSet <em>Assertion Set</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.xpt.xpt.AssertionSet
+   * @generated
+   */
+  public Adapter createAssertionSetAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.AssertionAnd <em>Assertion And</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.xpt.xpt.AssertionAnd
+   * @generated
+   */
+  public Adapter createAssertionAndAdapter()
   {
     return null;
   }

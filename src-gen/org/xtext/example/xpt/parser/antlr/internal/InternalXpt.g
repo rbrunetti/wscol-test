@@ -98,22 +98,26 @@ ruleModel returns [EObject current=null]
 )*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getQuerySetAssertionSetParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getAssertionSetAssertionSetParserRuleCall_1_0()); 
 	    }
-		lv_querySet_1_0=ruleAssertionSet		{
+		lv_assertionSet_1_0=ruleAssertionSet		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
-       			"querySet",
-        		lv_querySet_1_0, 
+       			"assertionSet",
+        		lv_assertionSet_1_0, 
         		"AssertionSet");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))
+)	otherlv_2=';' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getSemicolonKeyword_2());
+    }
+)
 ;
 
 
@@ -203,49 +207,231 @@ ruleAssertionSet returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
 (
-		{ 
-	        newCompositeNode(grammarAccess.getAssertionSetAccess().getAssertionsAssertionFormParserRuleCall_0_0()); 
-	    }
-		lv_assertions_0_0=ruleAssertionForm		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAssertionSetRule());
-	        }
-       		add(
-       			$current, 
-       			"assertions",
-        		lv_assertions_0_0, 
-        		"AssertionForm");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(	otherlv_1='&&' 
+    { 
+        newCompositeNode(grammarAccess.getAssertionSetAccess().getAssertionAndParserRuleCall_0()); 
+    }
+    this_AssertionAnd_0=ruleAssertionAnd
+    { 
+        $current = $this_AssertionAnd_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+((
     {
-    	newLeafNode(otherlv_1, grammarAccess.getAssertionSetAccess().getAmpersandAmpersandKeyword_1_0());
+        $current = forceCreateModelElementAndSet(
+            grammarAccess.getAssertionSetAccess().getAssertionSetLeftAction_1_0(),
+            $current);
+    }
+)	otherlv_2='||' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getAssertionSetAccess().getVerticalLineVerticalLineKeyword_1_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionSetAccess().getAssertionsAssertionFormParserRuleCall_1_1_0()); 
+	        newCompositeNode(grammarAccess.getAssertionSetAccess().getRightAssertionAndParserRuleCall_1_2_0()); 
 	    }
-		lv_assertions_2_0=ruleAssertionForm		{
+		lv_right_3_0=ruleAssertionAnd		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAssertionSetRule());
 	        }
-       		add(
+       		set(
        			$current, 
-       			"assertions",
-        		lv_assertions_2_0, 
-        		"AssertionForm");
+       			"right",
+        		lv_right_3_0, 
+        		"AssertionAnd");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_3=';' 
+))*)
+;
+
+
+
+
+
+// Entry rule entryRuleAssertionAnd
+entryRuleAssertionAnd returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAssertionAndRule()); }
+	 iv_ruleAssertionAnd=ruleAssertionAnd 
+	 { $current=$iv_ruleAssertionAnd.current; } 
+	 EOF 
+;
+
+// Rule AssertionAnd
+ruleAssertionAnd returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getAssertionAndAccess().getHighProrityAssertionParserRuleCall_0()); 
+    }
+    this_HighProrityAssertion_0=ruleHighProrityAssertion
+    { 
+        $current = $this_HighProrityAssertion_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+((
     {
-    	newLeafNode(otherlv_3, grammarAccess.getAssertionSetAccess().getSemicolonKeyword_2());
+        $current = forceCreateModelElementAndSet(
+            grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0(),
+            $current);
+    }
+)	otherlv_2='&&' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getAssertionAndAccess().getAmpersandAmpersandKeyword_1_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionAndAccess().getRightHighProrityAssertionParserRuleCall_1_2_0()); 
+	    }
+		lv_right_3_0=ruleHighProrityAssertion		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionAndRule());
+	        }
+       		set(
+       			$current, 
+       			"right",
+        		lv_right_3_0, 
+        		"HighProrityAssertion");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)
+;
+
+
+
+
+
+// Entry rule entryRuleHighProrityAssertion
+entryRuleHighProrityAssertion returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getHighProrityAssertionRule()); }
+	 iv_ruleHighProrityAssertion=ruleHighProrityAssertion 
+	 { $current=$iv_ruleHighProrityAssertion.current; } 
+	 EOF 
+;
+
+// Rule HighProrityAssertion
+ruleHighProrityAssertion returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getNegatedFormulaParserRuleCall_0()); 
+    }
+    this_NegatedFormula_0=ruleNegatedFormula
+    { 
+        $current = $this_NegatedFormula_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getBracedFormulaParserRuleCall_1()); 
+    }
+    this_BracedFormula_1=ruleBracedFormula
+    { 
+        $current = $this_BracedFormula_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionFormParserRuleCall_2()); 
+    }
+    this_AssertionForm_2=ruleAssertionForm
+    { 
+        $current = $this_AssertionForm_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleNegatedFormula
+entryRuleNegatedFormula returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNegatedFormulaRule()); }
+	 iv_ruleNegatedFormula=ruleNegatedFormula 
+	 { $current=$iv_ruleNegatedFormula.current; } 
+	 EOF 
+;
+
+// Rule NegatedFormula
+ruleNegatedFormula returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='!' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getNegatedFormulaAccess().getExclamationMarkKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getNegatedFormulaAccess().getInnerFormulaAssertionSetParserRuleCall_1_0()); 
+	    }
+		lv_innerFormula_1_0=ruleAssertionSet		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getNegatedFormulaRule());
+	        }
+       		set(
+       			$current, 
+       			"innerFormula",
+        		lv_innerFormula_1_0, 
+        		"AssertionSet");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleBracedFormula
+entryRuleBracedFormula returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getBracedFormulaRule()); }
+	 iv_ruleBracedFormula=ruleBracedFormula 
+	 { $current=$iv_ruleBracedFormula.current; } 
+	 EOF 
+;
+
+// Rule BracedFormula
+ruleBracedFormula returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='(' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getBracedFormulaAccess().getLeftParenthesisKeyword_0());
+    }
+
+    { 
+        newCompositeNode(grammarAccess.getBracedFormulaAccess().getAssertionSetParserRuleCall_1()); 
+    }
+    this_AssertionSet_1=ruleAssertionSet
+    { 
+        $current = $this_AssertionSet_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+	otherlv_2=')' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getBracedFormulaAccess().getRightParenthesisKeyword_2());
     }
 )
 ;

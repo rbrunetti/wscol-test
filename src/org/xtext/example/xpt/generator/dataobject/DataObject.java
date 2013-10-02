@@ -186,7 +186,7 @@ public class DataObject {
 	}
 
 	/**
-	 * Return the first entry of the DataObject
+	 * Return the value of the first entry of the DataObject
 	 * 
 	 * @return value corresponding to the first key inserted in the DataObject
 	 */

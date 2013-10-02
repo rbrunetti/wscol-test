@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
@@ -30,7 +29,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *
  * @generated
  */
-public class AssertionFormImpl extends MinimalEObjectImpl.Container implements AssertionForm
+public class AssertionFormImpl extends AssertionsImpl implements AssertionForm
 {
   /**
    * The cached value of the '{@link #getLeftAssert() <em>Left Assert</em>}' containment reference.

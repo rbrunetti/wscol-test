@@ -10,12 +10,15 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.xtext.example.xpt.xpt.Assertion;
+import org.xtext.example.xpt.xpt.AssertionAnd;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionSet;
+import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
+import org.xtext.example.xpt.xpt.NegatedFormula;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.XptFactory;
@@ -48,7 +51,14 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass assertionSetEClass = null;
+  private EClass assertionsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass negatedFormulaEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -91,6 +101,20 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * @generated
    */
   private EClass constantEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass assertionSetEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass assertionAndEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -180,7 +204,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_QuerySet()
+  public EReference getModel_AssertionSet()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -220,9 +244,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAssertionSet()
+  public EClass getAssertions()
   {
-    return assertionSetEClass;
+    return assertionsEClass;
   }
 
   /**
@@ -230,9 +254,19 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAssertionSet_Assertions()
+  public EClass getNegatedFormula()
   {
-    return (EReference)assertionSetEClass.getEStructuralFeatures().get(0);
+    return negatedFormulaEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNegatedFormula_InnerFormula()
+  {
+    return (EReference)negatedFormulaEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -470,6 +504,66 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getAssertionSet()
+  {
+    return assertionSetEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssertionSet_Left()
+  {
+    return (EReference)assertionSetEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssertionSet_Right()
+  {
+    return (EReference)assertionSetEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAssertionAnd()
+  {
+    return assertionAndEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssertionAnd_Left()
+  {
+    return (EReference)assertionAndEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssertionAnd_Right()
+  {
+    return (EReference)assertionAndEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public XptFactory getXptFactory()
   {
     return (XptFactory)getEFactoryInstance();
@@ -497,14 +591,16 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEReference(modelEClass, MODEL__DECLARATIONS);
-    createEReference(modelEClass, MODEL__QUERY_SET);
+    createEReference(modelEClass, MODEL__ASSERTION_SET);
 
     declarationEClass = createEClass(DECLARATION);
     createEAttribute(declarationEClass, DECLARATION__VAR);
     createEReference(declarationEClass, DECLARATION__ASSERT);
 
-    assertionSetEClass = createEClass(ASSERTION_SET);
-    createEReference(assertionSetEClass, ASSERTION_SET__ASSERTIONS);
+    assertionsEClass = createEClass(ASSERTIONS);
+
+    negatedFormulaEClass = createEClass(NEGATED_FORMULA);
+    createEReference(negatedFormulaEClass, NEGATED_FORMULA__INNER_FORMULA);
 
     assertionFormEClass = createEClass(ASSERTION_FORM);
     createEReference(assertionFormEClass, ASSERTION_FORM__LEFT_ASSERT);
@@ -534,6 +630,14 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     constantEClass = createEClass(CONSTANT);
     createEAttribute(constantEClass, CONSTANT__INT);
     createEAttribute(constantEClass, CONSTANT__STRING);
+
+    assertionSetEClass = createEClass(ASSERTION_SET);
+    createEReference(assertionSetEClass, ASSERTION_SET__LEFT);
+    createEReference(assertionSetEClass, ASSERTION_SET__RIGHT);
+
+    assertionAndEClass = createEClass(ASSERTION_AND);
+    createEReference(assertionAndEClass, ASSERTION_AND__LEFT);
+    createEReference(assertionAndEClass, ASSERTION_AND__RIGHT);
   }
 
   /**
@@ -565,18 +669,24 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    negatedFormulaEClass.getESuperTypes().add(this.getAssertions());
+    assertionFormEClass.getESuperTypes().add(this.getAssertions());
+    assertionSetEClass.getESuperTypes().add(this.getAssertions());
+    assertionAndEClass.getESuperTypes().add(this.getAssertions());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getModel_Declarations(), this.getDeclaration(), null, "declarations", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_QuerySet(), this.getAssertionSet(), null, "querySet", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_AssertionSet(), this.getAssertions(), null, "assertionSet", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(declarationEClass, Declaration.class, "Declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getDeclaration_Var(), ecorePackage.getEString(), "var", null, 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeclaration_Assert(), this.getAssertion(), null, "assert", null, 0, 1, Declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(assertionSetEClass, AssertionSet.class, "AssertionSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAssertionSet_Assertions(), this.getAssertionForm(), null, "assertions", null, 0, -1, AssertionSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(assertionsEClass, Assertions.class, "Assertions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(negatedFormulaEClass, NegatedFormula.class, "NegatedFormula", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNegatedFormula_InnerFormula(), this.getAssertions(), null, "innerFormula", null, 0, 1, NegatedFormula.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(assertionFormEClass, AssertionForm.class, "AssertionForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssertionForm_LeftAssert(), this.getAssertion(), null, "leftAssert", null, 0, 1, AssertionForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -606,6 +716,14 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getConstant_Int(), ecorePackage.getEDouble(), "int", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getConstant_String(), ecorePackage.getEString(), "string", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(assertionSetEClass, AssertionSet.class, "AssertionSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAssertionSet_Left(), this.getAssertions(), null, "left", null, 0, 1, AssertionSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssertionSet_Right(), this.getAssertions(), null, "right", null, 0, 1, AssertionSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(assertionAndEClass, AssertionAnd.class, "AssertionAnd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAssertionAnd_Left(), this.getAssertions(), null, "left", null, 0, 1, AssertionAnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssertionAnd_Right(), this.getAssertions(), null, "right", null, 0, 1, AssertionAnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

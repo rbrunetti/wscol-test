@@ -76,13 +76,13 @@ public interface XptPackage extends EPackage
   int MODEL__DECLARATIONS = 0;
 
   /**
-   * The feature id for the '<em><b>Query Set</b></em>' containment reference.
+   * The feature id for the '<em><b>Assertion Set</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__QUERY_SET = 1;
+  int MODEL__ASSERTION_SET = 1;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -131,32 +131,51 @@ public interface XptPackage extends EPackage
   int DECLARATION_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionSetImpl <em>Assertion Set</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionsImpl <em>Assertions</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.xpt.xpt.impl.AssertionSetImpl
-   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionSet()
+   * @see org.xtext.example.xpt.xpt.impl.AssertionsImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertions()
    * @generated
    */
-  int ASSERTION_SET = 2;
+  int ASSERTIONS = 2;
 
   /**
-   * The feature id for the '<em><b>Assertions</b></em>' containment reference list.
+   * The number of structural features of the '<em>Assertions</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_SET__ASSERTIONS = 0;
+  int ASSERTIONS_FEATURE_COUNT = 0;
 
   /**
-   * The number of structural features of the '<em>Assertion Set</em>' class.
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.NegatedFormulaImpl <em>Negated Formula</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.NegatedFormulaImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getNegatedFormula()
+   * @generated
+   */
+  int NEGATED_FORMULA = 3;
+
+  /**
+   * The feature id for the '<em><b>Inner Formula</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_SET_FEATURE_COUNT = 1;
+  int NEGATED_FORMULA__INNER_FORMULA = ASSERTIONS_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Negated Formula</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NEGATED_FORMULA_FEATURE_COUNT = ASSERTIONS_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionFormImpl <em>Assertion Form</em>}' class.
@@ -166,7 +185,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionForm()
    * @generated
    */
-  int ASSERTION_FORM = 3;
+  int ASSERTION_FORM = 4;
 
   /**
    * The feature id for the '<em><b>Left Assert</b></em>' containment reference.
@@ -175,7 +194,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM__LEFT_ASSERT = 0;
+  int ASSERTION_FORM__LEFT_ASSERT = ASSERTIONS_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -184,7 +203,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM__OP = 1;
+  int ASSERTION_FORM__OP = ASSERTIONS_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Right Assert</b></em>' containment reference.
@@ -193,7 +212,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM__RIGHT_ASSERT = 2;
+  int ASSERTION_FORM__RIGHT_ASSERT = ASSERTIONS_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Assertion Form</em>' class.
@@ -202,7 +221,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM_FEATURE_COUNT = 3;
+  int ASSERTION_FORM_FEATURE_COUNT = ASSERTIONS_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -212,7 +231,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertion()
    * @generated
    */
-  int ASSERTION = 4;
+  int ASSERTION = 5;
 
   /**
    * The feature id for the '<em><b>Query</b></em>' containment reference.
@@ -258,7 +277,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getQuery()
    * @generated
    */
-  int QUERY = 5;
+  int QUERY = 6;
 
   /**
    * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -286,7 +305,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getStep()
    * @generated
    */
-  int STEP = 6;
+  int STEP = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -332,7 +351,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAttribute()
    * @generated
    */
-  int ATTRIBUTE = 7;
+  int ATTRIBUTE = 8;
 
   /**
    * The feature id for the '<em><b>Property</b></em>' attribute.
@@ -396,7 +415,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getConstant()
    * @generated
    */
-  int CONSTANT = 8;
+  int CONSTANT = 9;
 
   /**
    * The feature id for the '<em><b>Int</b></em>' attribute.
@@ -425,6 +444,80 @@ public interface XptPackage extends EPackage
    */
   int CONSTANT_FEATURE_COUNT = 2;
 
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionSetImpl <em>Assertion Set</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.AssertionSetImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionSet()
+   * @generated
+   */
+  int ASSERTION_SET = 10;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_SET__LEFT = ASSERTIONS_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_SET__RIGHT = ASSERTIONS_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Assertion Set</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_SET_FEATURE_COUNT = ASSERTIONS_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionAndImpl <em>Assertion And</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.AssertionAndImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionAnd()
+   * @generated
+   */
+  int ASSERTION_AND = 11;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_AND__LEFT = ASSERTIONS_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_AND__RIGHT = ASSERTIONS_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Assertion And</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_AND_FEATURE_COUNT = ASSERTIONS_FEATURE_COUNT + 2;
+
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Model <em>Model</em>}'.
@@ -448,15 +541,15 @@ public interface XptPackage extends EPackage
   EReference getModel_Declarations();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Model#getQuerySet <em>Query Set</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Model#getAssertionSet <em>Assertion Set</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Query Set</em>'.
-   * @see org.xtext.example.xpt.xpt.Model#getQuerySet()
+   * @return the meta object for the containment reference '<em>Assertion Set</em>'.
+   * @see org.xtext.example.xpt.xpt.Model#getAssertionSet()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_QuerySet();
+  EReference getModel_AssertionSet();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Declaration <em>Declaration</em>}'.
@@ -491,25 +584,35 @@ public interface XptPackage extends EPackage
   EReference getDeclaration_Assert();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionSet <em>Assertion Set</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Assertions <em>Assertions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Assertion Set</em>'.
-   * @see org.xtext.example.xpt.xpt.AssertionSet
+   * @return the meta object for class '<em>Assertions</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertions
    * @generated
    */
-  EClass getAssertionSet();
+  EClass getAssertions();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.AssertionSet#getAssertions <em>Assertions</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.NegatedFormula <em>Negated Formula</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Assertions</em>'.
-   * @see org.xtext.example.xpt.xpt.AssertionSet#getAssertions()
-   * @see #getAssertionSet()
+   * @return the meta object for class '<em>Negated Formula</em>'.
+   * @see org.xtext.example.xpt.xpt.NegatedFormula
    * @generated
    */
-  EReference getAssertionSet_Assertions();
+  EClass getNegatedFormula();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.NegatedFormula#getInnerFormula <em>Inner Formula</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Inner Formula</em>'.
+   * @see org.xtext.example.xpt.xpt.NegatedFormula#getInnerFormula()
+   * @see #getNegatedFormula()
+   * @generated
+   */
+  EReference getNegatedFormula_InnerFormula();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionForm <em>Assertion Form</em>}'.
@@ -759,6 +862,70 @@ public interface XptPackage extends EPackage
   EAttribute getConstant_String();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionSet <em>Assertion Set</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Assertion Set</em>'.
+   * @see org.xtext.example.xpt.xpt.AssertionSet
+   * @generated
+   */
+  EClass getAssertionSet();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionSet#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.xpt.xpt.AssertionSet#getLeft()
+   * @see #getAssertionSet()
+   * @generated
+   */
+  EReference getAssertionSet_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionSet#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.xpt.xpt.AssertionSet#getRight()
+   * @see #getAssertionSet()
+   * @generated
+   */
+  EReference getAssertionSet_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionAnd <em>Assertion And</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Assertion And</em>'.
+   * @see org.xtext.example.xpt.xpt.AssertionAnd
+   * @generated
+   */
+  EClass getAssertionAnd();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionAnd#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.xpt.xpt.AssertionAnd#getLeft()
+   * @see #getAssertionAnd()
+   * @generated
+   */
+  EReference getAssertionAnd_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionAnd#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.xpt.xpt.AssertionAnd#getRight()
+   * @see #getAssertionAnd()
+   * @generated
+   */
+  EReference getAssertionAnd_Right();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -800,12 +967,12 @@ public interface XptPackage extends EPackage
     EReference MODEL__DECLARATIONS = eINSTANCE.getModel_Declarations();
 
     /**
-     * The meta object literal for the '<em><b>Query Set</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Assertion Set</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__QUERY_SET = eINSTANCE.getModel_QuerySet();
+    EReference MODEL__ASSERTION_SET = eINSTANCE.getModel_AssertionSet();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.DeclarationImpl <em>Declaration</em>}' class.
@@ -834,22 +1001,32 @@ public interface XptPackage extends EPackage
     EReference DECLARATION__ASSERT = eINSTANCE.getDeclaration_Assert();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionSetImpl <em>Assertion Set</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionsImpl <em>Assertions</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.xpt.xpt.impl.AssertionSetImpl
-     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionSet()
+     * @see org.xtext.example.xpt.xpt.impl.AssertionsImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertions()
      * @generated
      */
-    EClass ASSERTION_SET = eINSTANCE.getAssertionSet();
+    EClass ASSERTIONS = eINSTANCE.getAssertions();
 
     /**
-     * The meta object literal for the '<em><b>Assertions</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.NegatedFormulaImpl <em>Negated Formula</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.NegatedFormulaImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getNegatedFormula()
+     * @generated
+     */
+    EClass NEGATED_FORMULA = eINSTANCE.getNegatedFormula();
+
+    /**
+     * The meta object literal for the '<em><b>Inner Formula</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION_SET__ASSERTIONS = eINSTANCE.getAssertionSet_Assertions();
+    EReference NEGATED_FORMULA__INNER_FORMULA = eINSTANCE.getNegatedFormula_InnerFormula();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionFormImpl <em>Assertion Form</em>}' class.
@@ -1046,6 +1223,58 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EAttribute CONSTANT__STRING = eINSTANCE.getConstant_String();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionSetImpl <em>Assertion Set</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.AssertionSetImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionSet()
+     * @generated
+     */
+    EClass ASSERTION_SET = eINSTANCE.getAssertionSet();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSERTION_SET__LEFT = eINSTANCE.getAssertionSet_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSERTION_SET__RIGHT = eINSTANCE.getAssertionSet_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionAndImpl <em>Assertion And</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.AssertionAndImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionAnd()
+     * @generated
+     */
+    EClass ASSERTION_AND = eINSTANCE.getAssertionAnd();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSERTION_AND__LEFT = eINSTANCE.getAssertionAnd_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSERTION_AND__RIGHT = eINSTANCE.getAssertionAnd_Right();
 
   }
 

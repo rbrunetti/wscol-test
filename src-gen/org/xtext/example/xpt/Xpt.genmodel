@@ -9,14 +9,15 @@
       fileExtensions="xpt" ecorePackage="Xpt.ecore#/">
     <genClasses ecoreClass="Xpt.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Model/declarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Model/querySet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Model/assertionSet"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Declaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Declaration/var"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Declaration/assert"/>
     </genClasses>
-    <genClasses ecoreClass="Xpt.ecore#//AssertionSet">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionSet/assertions"/>
+    <genClasses ecoreClass="Xpt.ecore#//Assertions"/>
+    <genClasses ecoreClass="Xpt.ecore#//NegatedFormula">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//NegatedFormula/innerFormula"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//AssertionForm">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionForm/leftAssert"/>
@@ -46,6 +47,14 @@
     <genClasses ecoreClass="Xpt.ecore#//Constant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/int"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/string"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//AssertionSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionSet/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionSet/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//AssertionAnd">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionAnd/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionAnd/right"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
