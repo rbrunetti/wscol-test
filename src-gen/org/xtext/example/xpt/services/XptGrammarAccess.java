@@ -24,14 +24,14 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDeclarationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cDeclarationsDeclarationParserRuleCall_0_0 = (RuleCall)cDeclarationsAssignment_0.eContents().get(0);
 		private final Assignment cAssertionSetAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cAssertionSetAssertionSetParserRuleCall_1_0 = (RuleCall)cAssertionSetAssignment_1.eContents().get(0);
+		private final RuleCall cAssertionSetAssertionOrParserRuleCall_1_0 = (RuleCall)cAssertionSetAssignment_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Model:
-		//	declarations+=Declaration* assertionSet=AssertionSet ";";
+		//	declarations+=Declaration* assertionSet=AssertionOr ";";
 		public ParserRule getRule() { return rule; }
 
-		//declarations+=Declaration* assertionSet=AssertionSet ";"
+		//declarations+=Declaration* assertionSet=AssertionOr ";"
 		public Group getGroup() { return cGroup; }
 
 		//declarations+=Declaration*
@@ -40,11 +40,11 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//Declaration
 		public RuleCall getDeclarationsDeclarationParserRuleCall_0_0() { return cDeclarationsDeclarationParserRuleCall_0_0; }
 
-		//assertionSet=AssertionSet
+		//assertionSet=AssertionOr
 		public Assignment getAssertionSetAssignment_1() { return cAssertionSetAssignment_1; }
 
-		//AssertionSet
-		public RuleCall getAssertionSetAssertionSetParserRuleCall_1_0() { return cAssertionSetAssertionSetParserRuleCall_1_0; }
+		//AssertionOr
+		public RuleCall getAssertionSetAssertionOrParserRuleCall_1_0() { return cAssertionSetAssertionOrParserRuleCall_1_0; }
 
 		//";"
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
@@ -90,31 +90,31 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
-	public class AssertionSetElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionSet");
+	public class AssertionOrElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionOr");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAssertionAndParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cAssertionSetLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cAssertionOrLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Keyword cVerticalLineVerticalLineKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightAssertionAndParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//AssertionSet returns Assertions:
-		//	AssertionAnd ({AssertionSet.left=current} "||" right=AssertionAnd)*;
+		//AssertionOr returns Assertions:
+		//	AssertionAnd ({AssertionOr.left=current} "||" right=AssertionAnd)*;
 		public ParserRule getRule() { return rule; }
 
-		//AssertionAnd ({AssertionSet.left=current} "||" right=AssertionAnd)*
+		//AssertionAnd ({AssertionOr.left=current} "||" right=AssertionAnd)*
 		public Group getGroup() { return cGroup; }
 
 		//AssertionAnd
 		public RuleCall getAssertionAndParserRuleCall_0() { return cAssertionAndParserRuleCall_0; }
 
-		//({AssertionSet.left=current} "||" right=AssertionAnd)*
+		//({AssertionOr.left=current} "||" right=AssertionAnd)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{AssertionSet.left=current}
-		public Action getAssertionSetLeftAction_1_0() { return cAssertionSetLeftAction_1_0; }
+		//{AssertionOr.left=current}
+		public Action getAssertionOrLeftAction_1_0() { return cAssertionOrLeftAction_1_0; }
 
 		//"||"
 		public Keyword getVerticalLineVerticalLineKeyword_1_1() { return cVerticalLineVerticalLineKeyword_1_1; }
@@ -165,79 +165,149 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	public class HighProrityAssertionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "HighProrityAssertion");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNegatedFormulaParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cBracedFormulaParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cAssertionFormParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cAssertionNotParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cAssertionFormParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cAssertionBracedParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cAssertionQuantifiedParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//HighProrityAssertion returns Assertions:
-		//	NegatedFormula | BracedFormula | //| QuantifiedFormula 
-		//	AssertionForm;
+		//	AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified;
 		public ParserRule getRule() { return rule; }
 
-		//NegatedFormula | BracedFormula | //| QuantifiedFormula 
-		//AssertionForm
+		//AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//NegatedFormula
-		public RuleCall getNegatedFormulaParserRuleCall_0() { return cNegatedFormulaParserRuleCall_0; }
+		//AssertionNot
+		public RuleCall getAssertionNotParserRuleCall_0() { return cAssertionNotParserRuleCall_0; }
 
-		//BracedFormula
-		public RuleCall getBracedFormulaParserRuleCall_1() { return cBracedFormulaParserRuleCall_1; }
-
-		////| QuantifiedFormula 
 		//AssertionForm
-		public RuleCall getAssertionFormParserRuleCall_2() { return cAssertionFormParserRuleCall_2; }
+		public RuleCall getAssertionFormParserRuleCall_1() { return cAssertionFormParserRuleCall_1; }
+
+		//AssertionBraced
+		public RuleCall getAssertionBracedParserRuleCall_2() { return cAssertionBracedParserRuleCall_2; }
+
+		//AssertionQuantified
+		public RuleCall getAssertionQuantifiedParserRuleCall_3() { return cAssertionQuantifiedParserRuleCall_3; }
 	}
 
-	public class NegatedFormulaElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NegatedFormula");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cExclamationMarkKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cInnerFormulaAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cInnerFormulaAssertionSetParserRuleCall_1_0 = (RuleCall)cInnerFormulaAssignment_1.eContents().get(0);
-		
-		////QuantifiedFormula:
-		////	quantifier = Quantifier '[' variables+=LOWERCASE_ID (',' variables += LOWERCASE_ID)* ']' innerFormula = LowBindFormula
-		////;
-		//NegatedFormula:
-		//	"!" innerFormula=AssertionSet;
-		public ParserRule getRule() { return rule; }
-
-		//"!" innerFormula=AssertionSet
-		public Group getGroup() { return cGroup; }
-
-		//"!"
-		public Keyword getExclamationMarkKeyword_0() { return cExclamationMarkKeyword_0; }
-
-		//innerFormula=AssertionSet
-		public Assignment getInnerFormulaAssignment_1() { return cInnerFormulaAssignment_1; }
-
-		//AssertionSet
-		public RuleCall getInnerFormulaAssertionSetParserRuleCall_1_0() { return cInnerFormulaAssertionSetParserRuleCall_1_0; }
-	}
-
-	public class BracedFormulaElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BracedFormula");
+	public class AssertionBracedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionBraced");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cAssertionSetParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cInnerFormulaAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cInnerFormulaAssertionOrParserRuleCall_1_0 = (RuleCall)cInnerFormulaAssignment_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//BracedFormula returns Assertions:
-		//	"(" AssertionSet ")";
+		//AssertionBraced:
+		//	"(" innerFormula=AssertionOr ")";
 		public ParserRule getRule() { return rule; }
 
-		//"(" AssertionSet ")"
+		//"(" innerFormula=AssertionOr ")"
 		public Group getGroup() { return cGroup; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
-		//AssertionSet
-		public RuleCall getAssertionSetParserRuleCall_1() { return cAssertionSetParserRuleCall_1; }
+		//innerFormula=AssertionOr
+		public Assignment getInnerFormulaAssignment_1() { return cInnerFormulaAssignment_1; }
+
+		//AssertionOr
+		public RuleCall getInnerFormulaAssertionOrParserRuleCall_1_0() { return cInnerFormulaAssertionOrParserRuleCall_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
+
+	public class AssertionNotElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionNot");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cExclamationMarkKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cInnerFormulaAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cInnerFormulaAssertionOrParserRuleCall_2_0 = (RuleCall)cInnerFormulaAssignment_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//AssertionNot:
+		//	"!" "(" innerFormula=AssertionOr ")";
+		public ParserRule getRule() { return rule; }
+
+		//"!" "(" innerFormula=AssertionOr ")"
+		public Group getGroup() { return cGroup; }
+
+		//"!"
+		public Keyword getExclamationMarkKeyword_0() { return cExclamationMarkKeyword_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//innerFormula=AssertionOr
+		public Assignment getInnerFormulaAssignment_2() { return cInnerFormulaAssignment_2; }
+
+		//AssertionOr
+		public RuleCall getInnerFormulaAssertionOrParserRuleCall_2_0() { return cInnerFormulaAssertionOrParserRuleCall_2_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+	}
+
+	public class AssertionQuantifiedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionQuantified");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cQuantifierAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuantifierQuantifierParserRuleCall_0_0 = (RuleCall)cQuantifierAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cAliasAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAliasVariableParserRuleCall_2_0 = (RuleCall)cAliasAssignment_2.eContents().get(0);
+		private final Keyword cInKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cValuesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cValuesValuesParserRuleCall_4_0 = (RuleCall)cValuesAssignment_4.eContents().get(0);
+		private final Keyword cCommaKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cConditionsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cConditionsAssertionOrParserRuleCall_6_0 = (RuleCall)cConditionsAssignment_6.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//AssertionQuantified:
+		//	quantifier=Quantifier "(" alias=Variable "in" values=Values "," conditions+=AssertionOr ")";
+		public ParserRule getRule() { return rule; }
+
+		//quantifier=Quantifier "(" alias=Variable "in" values=Values "," conditions+=AssertionOr ")"
+		public Group getGroup() { return cGroup; }
+
+		//quantifier=Quantifier
+		public Assignment getQuantifierAssignment_0() { return cQuantifierAssignment_0; }
+
+		//Quantifier
+		public RuleCall getQuantifierQuantifierParserRuleCall_0_0() { return cQuantifierQuantifierParserRuleCall_0_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//alias=Variable
+		public Assignment getAliasAssignment_2() { return cAliasAssignment_2; }
+
+		//Variable
+		public RuleCall getAliasVariableParserRuleCall_2_0() { return cAliasVariableParserRuleCall_2_0; }
+
+		//"in"
+		public Keyword getInKeyword_3() { return cInKeyword_3; }
+
+		//values=Values
+		public Assignment getValuesAssignment_4() { return cValuesAssignment_4; }
+
+		//Values
+		public RuleCall getValuesValuesParserRuleCall_4_0() { return cValuesValuesParserRuleCall_4_0; }
+
+		//","
+		public Keyword getCommaKeyword_5() { return cCommaKeyword_5; }
+
+		//conditions+=AssertionOr
+		public Assignment getConditionsAssignment_6() { return cConditionsAssignment_6; }
+
+		//AssertionOr
+		public RuleCall getConditionsAssertionOrParserRuleCall_6_0() { return cConditionsAssertionOrParserRuleCall_6_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
 	}
 
 	public class AssertionFormElements extends AbstractParserRuleElementFinder {
@@ -608,15 +678,36 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getStringSTRINGTerminalRuleCall_1_1_0() { return cStringSTRINGTerminalRuleCall_1_1_0; }
 	}
 
+	public class QuantifierElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Quantifier");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cForallKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cExistsKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cNumOfKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		
+		//Quantifier:
+		//	"forall" | "exists" | "numOf";
+		public ParserRule getRule() { return rule; }
+
+		//"forall" | "exists" | "numOf"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//"forall"
+		public Keyword getForallKeyword_0() { return cForallKeyword_0; }
+
+		//"exists"
+		public Keyword getExistsKeyword_1() { return cExistsKeyword_1; }
+
+		//"numOf"
+		public Keyword getNumOfKeyword_2() { return cNumOfKeyword_2; }
+	}
+
 	public class VariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Variable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDollarSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		////Quantifier:
-		////	'forall' | 'exists' | 'numOf'
-		////;
 		//Variable:
 		//	"$" ID;
 		public ParserRule getRule() { return rule; }
@@ -630,15 +721,40 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
 	}
+
+	public class ValuesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Values");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Values:
+		//	"{" ID+ "}";
+		public ParserRule getRule() { return rule; }
+
+		//"{" ID+ "}"
+		public Group getGroup() { return cGroup; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+
+		//ID+
+		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+	}
 	
 	
 	private ModelElements pModel;
 	private DeclarationElements pDeclaration;
-	private AssertionSetElements pAssertionSet;
+	private AssertionOrElements pAssertionOr;
 	private AssertionAndElements pAssertionAnd;
 	private HighProrityAssertionElements pHighProrityAssertion;
-	private NegatedFormulaElements pNegatedFormula;
-	private BracedFormulaElements pBracedFormula;
+	private AssertionBracedElements pAssertionBraced;
+	private AssertionNotElements pAssertionNot;
+	private AssertionQuantifiedElements pAssertionQuantified;
 	private AssertionFormElements pAssertionForm;
 	private AssertionElements pAssertion;
 	private QueryElements pQuery;
@@ -648,7 +764,9 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	private RopElements pRop;
 	private FunctionElements pFunction;
 	private ConstantElements pConstant;
+	private QuantifierElements pQuantifier;
 	private VariableElements pVariable;
+	private ValuesElements pValues;
 	private TerminalRule tNUMBER;
 	private TerminalRule tINT;
 	
@@ -691,7 +809,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//	declarations+=Declaration* assertionSet=AssertionSet ";";
+	//	declarations+=Declaration* assertionSet=AssertionOr ";";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -710,14 +828,14 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getDeclarationAccess().getRule();
 	}
 
-	//AssertionSet returns Assertions:
-	//	AssertionAnd ({AssertionSet.left=current} "||" right=AssertionAnd)*;
-	public AssertionSetElements getAssertionSetAccess() {
-		return (pAssertionSet != null) ? pAssertionSet : (pAssertionSet = new AssertionSetElements());
+	//AssertionOr returns Assertions:
+	//	AssertionAnd ({AssertionOr.left=current} "||" right=AssertionAnd)*;
+	public AssertionOrElements getAssertionOrAccess() {
+		return (pAssertionOr != null) ? pAssertionOr : (pAssertionOr = new AssertionOrElements());
 	}
 	
-	public ParserRule getAssertionSetRule() {
-		return getAssertionSetAccess().getRule();
+	public ParserRule getAssertionOrRule() {
+		return getAssertionOrAccess().getRule();
 	}
 
 	//AssertionAnd returns Assertions:
@@ -731,8 +849,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//HighProrityAssertion returns Assertions:
-	//	NegatedFormula | BracedFormula | //| QuantifiedFormula 
-	//	AssertionForm;
+	//	AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified;
 	public HighProrityAssertionElements getHighProrityAssertionAccess() {
 		return (pHighProrityAssertion != null) ? pHighProrityAssertion : (pHighProrityAssertion = new HighProrityAssertionElements());
 	}
@@ -741,27 +858,34 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getHighProrityAssertionAccess().getRule();
 	}
 
-	////QuantifiedFormula:
-	////	quantifier = Quantifier '[' variables+=LOWERCASE_ID (',' variables += LOWERCASE_ID)* ']' innerFormula = LowBindFormula
-	////;
-	//NegatedFormula:
-	//	"!" innerFormula=AssertionSet;
-	public NegatedFormulaElements getNegatedFormulaAccess() {
-		return (pNegatedFormula != null) ? pNegatedFormula : (pNegatedFormula = new NegatedFormulaElements());
+	//AssertionBraced:
+	//	"(" innerFormula=AssertionOr ")";
+	public AssertionBracedElements getAssertionBracedAccess() {
+		return (pAssertionBraced != null) ? pAssertionBraced : (pAssertionBraced = new AssertionBracedElements());
 	}
 	
-	public ParserRule getNegatedFormulaRule() {
-		return getNegatedFormulaAccess().getRule();
+	public ParserRule getAssertionBracedRule() {
+		return getAssertionBracedAccess().getRule();
 	}
 
-	//BracedFormula returns Assertions:
-	//	"(" AssertionSet ")";
-	public BracedFormulaElements getBracedFormulaAccess() {
-		return (pBracedFormula != null) ? pBracedFormula : (pBracedFormula = new BracedFormulaElements());
+	//AssertionNot:
+	//	"!" "(" innerFormula=AssertionOr ")";
+	public AssertionNotElements getAssertionNotAccess() {
+		return (pAssertionNot != null) ? pAssertionNot : (pAssertionNot = new AssertionNotElements());
 	}
 	
-	public ParserRule getBracedFormulaRule() {
-		return getBracedFormulaAccess().getRule();
+	public ParserRule getAssertionNotRule() {
+		return getAssertionNotAccess().getRule();
+	}
+
+	//AssertionQuantified:
+	//	quantifier=Quantifier "(" alias=Variable "in" values=Values "," conditions+=AssertionOr ")";
+	public AssertionQuantifiedElements getAssertionQuantifiedAccess() {
+		return (pAssertionQuantified != null) ? pAssertionQuantified : (pAssertionQuantified = new AssertionQuantifiedElements());
+	}
+	
+	public ParserRule getAssertionQuantifiedRule() {
+		return getAssertionQuantifiedAccess().getRule();
 	}
 
 	//AssertionForm:
@@ -854,9 +978,16 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getConstantAccess().getRule();
 	}
 
-	////Quantifier:
-	////	'forall' | 'exists' | 'numOf'
-	////;
+	//Quantifier:
+	//	"forall" | "exists" | "numOf";
+	public QuantifierElements getQuantifierAccess() {
+		return (pQuantifier != null) ? pQuantifier : (pQuantifier = new QuantifierElements());
+	}
+	
+	public ParserRule getQuantifierRule() {
+		return getQuantifierAccess().getRule();
+	}
+
 	//Variable:
 	//	"$" ID;
 	public VariableElements getVariableAccess() {
@@ -865,6 +996,16 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getVariableRule() {
 		return getVariableAccess().getRule();
+	}
+
+	//Values:
+	//	"{" ID+ "}";
+	public ValuesElements getValuesAccess() {
+		return (pValues != null) ? pValues : (pValues = new ValuesElements());
+	}
+	
+	public ParserRule getValuesRule() {
+		return getValuesAccess().getRule();
 	}
 
 	//terminal NUMBER returns ecore::EDouble:

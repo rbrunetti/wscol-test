@@ -5,30 +5,28 @@ generate xpt "http://www.xtext.org/example/xpt/Xpt"
 
 Model:
 	declarations+=Declaration*
-	assertionSet=AssertionSet ';';
+	assertionSet=AssertionOr ';';
 
 Declaration:
 	'let' var=Variable '=' assert=Assertion ';';
 
-AssertionSet returns Assertions:
-	AssertionAnd ({AssertionSet.left=current} '||' right=AssertionAnd)*;
+AssertionOr returns Assertions:
+	AssertionAnd ({AssertionOr.left=current} '||' right=AssertionAnd)*;
 
 AssertionAnd returns Assertions:
 	HighProrityAssertion ({AssertionAnd.left=current} '&&' right=HighProrityAssertion)*;
 
 HighProrityAssertion returns Assertions:
-	NegatedFormula | BracedFormula | AssertionForm //| QuantifiedFormula 
-;
+	AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified;
 
-//QuantifiedFormula:
-//	quantifier = Quantifier '[' variables+=LOWERCASE_ID (',' variables += LOWERCASE_ID)* ']' innerFormula = LowBindFormula
-//;
+AssertionBraced:
+	'(' innerFormula=AssertionOr ')';
 
-NegatedFormula:
-	'!' innerFormula=AssertionSet;
+AssertionNot:
+	'!' '(' innerFormula=AssertionOr ')';
 
-BracedFormula returns Assertions:
-	'(' AssertionSet ')';
+AssertionQuantified:
+	quantifier=Quantifier '(' alias=Variable 'in' values=Values ',' conditions+=AssertionOr ')';
 
 AssertionForm:
 	leftAssert=Assertion op=Rop rightAssert=Assertion;
@@ -57,11 +55,14 @@ Function:
 Constant:
 	{Constant} (int=NUMBER | string=STRING);
 
-	//Quantifier:
-//	'forall' | 'exists' | 'numOf'
-//;
+Quantifier:
+	'forall' | 'exists' | 'numOf';
+
 Variable:
 	'$' ID;
+
+Values:
+	'{' ID+ '}';
 
 terminal NUMBER returns ecore::EDouble:
 	('0'..'9')* ('.' ('0'..'9')+)?;

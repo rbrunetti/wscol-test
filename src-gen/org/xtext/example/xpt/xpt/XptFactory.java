@@ -50,13 +50,31 @@ public interface XptFactory extends EFactory
   Assertions createAssertions();
 
   /**
-   * Returns a new object of class '<em>Negated Formula</em>'.
+   * Returns a new object of class '<em>Assertion Braced</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Negated Formula</em>'.
+   * @return a new object of class '<em>Assertion Braced</em>'.
    * @generated
    */
-  NegatedFormula createNegatedFormula();
+  AssertionBraced createAssertionBraced();
+
+  /**
+   * Returns a new object of class '<em>Assertion Not</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assertion Not</em>'.
+   * @generated
+   */
+  AssertionNot createAssertionNot();
+
+  /**
+   * Returns a new object of class '<em>Assertion Quantified</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assertion Quantified</em>'.
+   * @generated
+   */
+  AssertionQuantified createAssertionQuantified();
 
   /**
    * Returns a new object of class '<em>Assertion Form</em>'.
@@ -113,13 +131,13 @@ public interface XptFactory extends EFactory
   Constant createConstant();
 
   /**
-   * Returns a new object of class '<em>Assertion Set</em>'.
+   * Returns a new object of class '<em>Assertion Or</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assertion Set</em>'.
+   * @return a new object of class '<em>Assertion Or</em>'.
    * @generated
    */
-  AssertionSet createAssertionSet();
+  AssertionOr createAssertionOr();
 
   /**
    * Returns a new object of class '<em>Assertion And</em>'.

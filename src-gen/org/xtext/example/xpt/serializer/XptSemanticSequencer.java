@@ -16,13 +16,15 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.xtext.example.xpt.services.XptGrammarAccess;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionAnd;
+import org.xtext.example.xpt.xpt.AssertionBraced;
 import org.xtext.example.xpt.xpt.AssertionForm;
-import org.xtext.example.xpt.xpt.AssertionSet;
+import org.xtext.example.xpt.xpt.AssertionNot;
+import org.xtext.example.xpt.xpt.AssertionOr;
+import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Model;
-import org.xtext.example.xpt.xpt.NegatedFormula;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.XptPackage;
@@ -44,11 +46,20 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case XptPackage.ASSERTION_AND:
 				if(context == grammarAccess.getAssertionAndRule() ||
 				   context == grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0() ||
-				   context == grammarAccess.getAssertionSetRule() ||
-				   context == grammarAccess.getAssertionSetAccess().getAssertionSetLeftAction_1_0() ||
-				   context == grammarAccess.getBracedFormulaRule() ||
-				   context == grammarAccess.getHighProrityAssertionRule()) {
+				   context == grammarAccess.getAssertionOrRule() ||
+				   context == grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0()) {
 					sequence_AssertionAnd(context, (AssertionAnd) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.ASSERTION_BRACED:
+				if(context == grammarAccess.getAssertionAndRule() ||
+				   context == grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0() ||
+				   context == grammarAccess.getAssertionBracedRule() ||
+				   context == grammarAccess.getAssertionOrRule() ||
+				   context == grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0() ||
+				   context == grammarAccess.getHighProrityAssertionRule()) {
+					sequence_AssertionBraced(context, (AssertionBraced) semanticObject); 
 					return; 
 				}
 				else break;
@@ -56,22 +67,39 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				if(context == grammarAccess.getAssertionAndRule() ||
 				   context == grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0() ||
 				   context == grammarAccess.getAssertionFormRule() ||
-				   context == grammarAccess.getAssertionSetRule() ||
-				   context == grammarAccess.getAssertionSetAccess().getAssertionSetLeftAction_1_0() ||
-				   context == grammarAccess.getBracedFormulaRule() ||
+				   context == grammarAccess.getAssertionOrRule() ||
+				   context == grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0() ||
 				   context == grammarAccess.getHighProrityAssertionRule()) {
 					sequence_AssertionForm(context, (AssertionForm) semanticObject); 
 					return; 
 				}
 				else break;
-			case XptPackage.ASSERTION_SET:
+			case XptPackage.ASSERTION_NOT:
 				if(context == grammarAccess.getAssertionAndRule() ||
 				   context == grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0() ||
-				   context == grammarAccess.getAssertionSetRule() ||
-				   context == grammarAccess.getAssertionSetAccess().getAssertionSetLeftAction_1_0() ||
-				   context == grammarAccess.getBracedFormulaRule() ||
+				   context == grammarAccess.getAssertionNotRule() ||
+				   context == grammarAccess.getAssertionOrRule() ||
+				   context == grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0() ||
 				   context == grammarAccess.getHighProrityAssertionRule()) {
-					sequence_AssertionSet(context, (AssertionSet) semanticObject); 
+					sequence_AssertionNot(context, (AssertionNot) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.ASSERTION_OR:
+				if(context == grammarAccess.getAssertionOrRule() ||
+				   context == grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0()) {
+					sequence_AssertionOr(context, (AssertionOr) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.ASSERTION_QUANTIFIED:
+				if(context == grammarAccess.getAssertionAndRule() ||
+				   context == grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0() ||
+				   context == grammarAccess.getAssertionOrRule() ||
+				   context == grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0() ||
+				   context == grammarAccess.getAssertionQuantifiedRule() ||
+				   context == grammarAccess.getHighProrityAssertionRule()) {
+					sequence_AssertionQuantified(context, (AssertionQuantified) semanticObject); 
 					return; 
 				}
 				else break;
@@ -96,18 +124,6 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case XptPackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
 					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
-			case XptPackage.NEGATED_FORMULA:
-				if(context == grammarAccess.getAssertionAndRule() ||
-				   context == grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0() ||
-				   context == grammarAccess.getAssertionSetRule() ||
-				   context == grammarAccess.getAssertionSetAccess().getAssertionSetLeftAction_1_0() ||
-				   context == grammarAccess.getBracedFormulaRule() ||
-				   context == grammarAccess.getHighProrityAssertionRule() ||
-				   context == grammarAccess.getNegatedFormulaRule()) {
-					sequence_NegatedFormula(context, (NegatedFormula) semanticObject); 
 					return; 
 				}
 				else break;
@@ -148,6 +164,22 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     innerFormula=AssertionOr
+	 */
+	protected void sequence_AssertionBraced(EObject context, AssertionBraced semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_BRACED__INNER_FORMULA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_BRACED__INNER_FORMULA));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAssertionBracedAccess().getInnerFormulaAssertionOrParserRuleCall_1_0(), semanticObject.getInnerFormula());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (leftAssert=Assertion op=Rop rightAssert=Assertion)
 	 */
 	protected void sequence_AssertionForm(EObject context, AssertionForm semanticObject) {
@@ -170,20 +202,45 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (left=AssertionSet_AssertionSet_1_0 right=AssertionAnd)
+	 *     innerFormula=AssertionOr
 	 */
-	protected void sequence_AssertionSet(EObject context, AssertionSet semanticObject) {
+	protected void sequence_AssertionNot(EObject context, AssertionNot semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_SET__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_SET__LEFT));
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_SET__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_SET__RIGHT));
+			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_NOT__INNER_FORMULA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_NOT__INNER_FORMULA));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAssertionSetAccess().getAssertionSetLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getAssertionSetAccess().getRightAssertionAndParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.accept(grammarAccess.getAssertionNotAccess().getInnerFormulaAssertionOrParserRuleCall_2_0(), semanticObject.getInnerFormula());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=AssertionOr_AssertionOr_1_0 right=AssertionAnd)
+	 */
+	protected void sequence_AssertionOr(EObject context, AssertionOr semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_OR__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_OR__LEFT));
+			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_OR__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_OR__RIGHT));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAssertionOrAccess().getRightAssertionAndParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (quantifier=Quantifier alias=Variable values=Values conditions+=AssertionOr)
+	 */
+	protected void sequence_AssertionQuantified(EObject context, AssertionQuantified semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -235,26 +292,10 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (declarations+=Declaration* assertionSet=AssertionSet)
+	 *     (declarations+=Declaration* assertionSet=AssertionOr)
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     innerFormula=AssertionSet
-	 */
-	protected void sequence_NegatedFormula(EObject context, NegatedFormula semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.NEGATED_FORMULA__INNER_FORMULA) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.NEGATED_FORMULA__INNER_FORMULA));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getNegatedFormulaAccess().getInnerFormulaAssertionSetParserRuleCall_1_0(), semanticObject.getInnerFormula());
-		feeder.finish();
 	}
 	
 	

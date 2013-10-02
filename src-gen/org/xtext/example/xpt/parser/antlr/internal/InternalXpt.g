@@ -98,9 +98,9 @@ ruleModel returns [EObject current=null]
 )*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getAssertionSetAssertionSetParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getAssertionSetAssertionOrParserRuleCall_1_0()); 
 	    }
-		lv_assertionSet_1_0=ruleAssertionSet		{
+		lv_assertionSet_1_0=ruleAssertionOr		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
@@ -108,7 +108,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"assertionSet",
         		lv_assertionSet_1_0, 
-        		"AssertionSet");
+        		"AssertionOr");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -193,23 +193,23 @@ ruleDeclaration returns [EObject current=null]
 
 
 
-// Entry rule entryRuleAssertionSet
-entryRuleAssertionSet returns [EObject current=null] 
+// Entry rule entryRuleAssertionOr
+entryRuleAssertionOr returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getAssertionSetRule()); }
-	 iv_ruleAssertionSet=ruleAssertionSet 
-	 { $current=$iv_ruleAssertionSet.current; } 
+	{ newCompositeNode(grammarAccess.getAssertionOrRule()); }
+	 iv_ruleAssertionOr=ruleAssertionOr 
+	 { $current=$iv_ruleAssertionOr.current; } 
 	 EOF 
 ;
 
-// Rule AssertionSet
-ruleAssertionSet returns [EObject current=null] 
+// Rule AssertionOr
+ruleAssertionOr returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getAssertionSetAccess().getAssertionAndParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getAssertionOrAccess().getAssertionAndParserRuleCall_0()); 
     }
     this_AssertionAnd_0=ruleAssertionAnd
     { 
@@ -219,21 +219,21 @@ ruleAssertionSet returns [EObject current=null]
 ((
     {
         $current = forceCreateModelElementAndSet(
-            grammarAccess.getAssertionSetAccess().getAssertionSetLeftAction_1_0(),
+            grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0(),
             $current);
     }
 )	otherlv_2='||' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getAssertionSetAccess().getVerticalLineVerticalLineKeyword_1_1());
+    	newLeafNode(otherlv_2, grammarAccess.getAssertionOrAccess().getVerticalLineVerticalLineKeyword_1_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionSetAccess().getRightAssertionAndParserRuleCall_1_2_0()); 
+	        newCompositeNode(grammarAccess.getAssertionOrAccess().getRightAssertionAndParserRuleCall_1_2_0()); 
 	    }
 		lv_right_3_0=ruleAssertionAnd		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAssertionSetRule());
+	            $current = createModelElementForParent(grammarAccess.getAssertionOrRule());
 	        }
        		set(
        			$current, 
@@ -325,31 +325,41 @@ ruleHighProrityAssertion returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getNegatedFormulaParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionNotParserRuleCall_0()); 
     }
-    this_NegatedFormula_0=ruleNegatedFormula
+    this_AssertionNot_0=ruleAssertionNot
     { 
-        $current = $this_NegatedFormula_0.current; 
+        $current = $this_AssertionNot_0.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getBracedFormulaParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionFormParserRuleCall_1()); 
     }
-    this_BracedFormula_1=ruleBracedFormula
+    this_AssertionForm_1=ruleAssertionForm
     { 
-        $current = $this_BracedFormula_1.current; 
+        $current = $this_AssertionForm_1.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionFormParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionBracedParserRuleCall_2()); 
     }
-    this_AssertionForm_2=ruleAssertionForm
+    this_AssertionBraced_2=ruleAssertionBraced
     { 
-        $current = $this_AssertionForm_2.current; 
+        $current = $this_AssertionBraced_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionQuantifiedParserRuleCall_3()); 
+    }
+    this_AssertionQuantified_3=ruleAssertionQuantified
+    { 
+        $current = $this_AssertionQuantified_3.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -359,79 +369,205 @@ ruleHighProrityAssertion returns [EObject current=null]
 
 
 
-// Entry rule entryRuleNegatedFormula
-entryRuleNegatedFormula returns [EObject current=null] 
+// Entry rule entryRuleAssertionBraced
+entryRuleAssertionBraced returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getNegatedFormulaRule()); }
-	 iv_ruleNegatedFormula=ruleNegatedFormula 
-	 { $current=$iv_ruleNegatedFormula.current; } 
+	{ newCompositeNode(grammarAccess.getAssertionBracedRule()); }
+	 iv_ruleAssertionBraced=ruleAssertionBraced 
+	 { $current=$iv_ruleAssertionBraced.current; } 
 	 EOF 
 ;
 
-// Rule NegatedFormula
-ruleNegatedFormula returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='!' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getNegatedFormulaAccess().getExclamationMarkKeyword_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getNegatedFormulaAccess().getInnerFormulaAssertionSetParserRuleCall_1_0()); 
-	    }
-		lv_innerFormula_1_0=ruleAssertionSet		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getNegatedFormulaRule());
-	        }
-       		set(
-       			$current, 
-       			"innerFormula",
-        		lv_innerFormula_1_0, 
-        		"AssertionSet");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))
-;
-
-
-
-
-
-// Entry rule entryRuleBracedFormula
-entryRuleBracedFormula returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getBracedFormulaRule()); }
-	 iv_ruleBracedFormula=ruleBracedFormula 
-	 { $current=$iv_ruleBracedFormula.current; } 
-	 EOF 
-;
-
-// Rule BracedFormula
-ruleBracedFormula returns [EObject current=null] 
+// Rule AssertionBraced
+ruleAssertionBraced returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (	otherlv_0='(' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getBracedFormulaAccess().getLeftParenthesisKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getAssertionBracedAccess().getLeftParenthesisKeyword_0());
     }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionBracedAccess().getInnerFormulaAssertionOrParserRuleCall_1_0()); 
+	    }
+		lv_innerFormula_1_0=ruleAssertionOr		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionBracedRule());
+	        }
+       		set(
+       			$current, 
+       			"innerFormula",
+        		lv_innerFormula_1_0, 
+        		"AssertionOr");
+	        afterParserOrEnumRuleCall();
+	    }
 
-    { 
-        newCompositeNode(grammarAccess.getBracedFormulaAccess().getAssertionSetParserRuleCall_1()); 
-    }
-    this_AssertionSet_1=ruleAssertionSet
-    { 
-        $current = $this_AssertionSet_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-	otherlv_2=')' 
+)
+)	otherlv_2=')' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getBracedFormulaAccess().getRightParenthesisKeyword_2());
+    	newLeafNode(otherlv_2, grammarAccess.getAssertionBracedAccess().getRightParenthesisKeyword_2());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleAssertionNot
+entryRuleAssertionNot returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAssertionNotRule()); }
+	 iv_ruleAssertionNot=ruleAssertionNot 
+	 { $current=$iv_ruleAssertionNot.current; } 
+	 EOF 
+;
+
+// Rule AssertionNot
+ruleAssertionNot returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='!' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getAssertionNotAccess().getExclamationMarkKeyword_0());
+    }
+	otherlv_1='(' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getAssertionNotAccess().getLeftParenthesisKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionNotAccess().getInnerFormulaAssertionOrParserRuleCall_2_0()); 
+	    }
+		lv_innerFormula_2_0=ruleAssertionOr		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionNotRule());
+	        }
+       		set(
+       			$current, 
+       			"innerFormula",
+        		lv_innerFormula_2_0, 
+        		"AssertionOr");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3=')' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getAssertionNotAccess().getRightParenthesisKeyword_3());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleAssertionQuantified
+entryRuleAssertionQuantified returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAssertionQuantifiedRule()); }
+	 iv_ruleAssertionQuantified=ruleAssertionQuantified 
+	 { $current=$iv_ruleAssertionQuantified.current; } 
+	 EOF 
+;
+
+// Rule AssertionQuantified
+ruleAssertionQuantified returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getQuantifierQuantifierParserRuleCall_0_0()); 
+	    }
+		lv_quantifier_0_0=ruleQuantifier		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	        }
+       		set(
+       			$current, 
+       			"quantifier",
+        		lv_quantifier_0_0, 
+        		"Quantifier");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_1='(' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getAssertionQuantifiedAccess().getLeftParenthesisKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getAliasVariableParserRuleCall_2_0()); 
+	    }
+		lv_alias_2_0=ruleVariable		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	        }
+       		set(
+       			$current, 
+       			"alias",
+        		lv_alias_2_0, 
+        		"Variable");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3='in' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getAssertionQuantifiedAccess().getInKeyword_3());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getValuesValuesParserRuleCall_4_0()); 
+	    }
+		lv_values_4_0=ruleValues		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	        }
+       		set(
+       			$current, 
+       			"values",
+        		lv_values_4_0, 
+        		"Values");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_5=',' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getAssertionQuantifiedAccess().getCommaKeyword_5());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getConditionsAssertionOrParserRuleCall_6_0()); 
+	    }
+		lv_conditions_6_0=ruleAssertionOr		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	        }
+       		add(
+       			$current, 
+       			"conditions",
+        		lv_conditions_6_0, 
+        		"AssertionOr");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_7=')' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getAssertionQuantifiedAccess().getRightParenthesisKeyword_7());
     }
 )
 ;
@@ -1080,6 +1216,47 @@ ruleConstant returns [EObject current=null]
 
 
 
+// Entry rule entryRuleQuantifier
+entryRuleQuantifier returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getQuantifierRule()); } 
+	 iv_ruleQuantifier=ruleQuantifier 
+	 { $current=$iv_ruleQuantifier.current.getText(); }  
+	 EOF 
+;
+
+// Rule Quantifier
+ruleQuantifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+	kw='forall' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQuantifierAccess().getForallKeyword_0()); 
+    }
+
+    |
+	kw='exists' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQuantifierAccess().getExistsKeyword_1()); 
+    }
+
+    |
+	kw='numOf' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getQuantifierAccess().getNumOfKeyword_2()); 
+    }
+)
+    ;
+
+
+
+
+
 // Entry rule entryRuleVariable
 entryRuleVariable returns [String current=null] 
 	:
@@ -1106,6 +1283,46 @@ ruleVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 
     { 
     newLeafNode(this_ID_1, grammarAccess.getVariableAccess().getIDTerminalRuleCall_1()); 
+    }
+)
+    ;
+
+
+
+
+
+// Entry rule entryRuleValues
+entryRuleValues returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getValuesRule()); } 
+	 iv_ruleValues=ruleValues 
+	 { $current=$iv_ruleValues.current.getText(); }  
+	 EOF 
+;
+
+// Rule Values
+ruleValues returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+	kw='{' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getValuesAccess().getLeftCurlyBracketKeyword_0()); 
+    }
+(    this_ID_1=RULE_ID    {
+		$current.merge(this_ID_1);
+    }
+
+    { 
+    newLeafNode(this_ID_1, grammarAccess.getValuesAccess().getIDTerminalRuleCall_1()); 
+    }
+)+
+	kw='}' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getValuesAccess().getRightCurlyBracketKeyword_2()); 
     }
 )
     ;

@@ -5,21 +5,21 @@ package org.xtext.example.xpt.xpt;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Negated Formula</b></em>'.
+ * A representation of the model object '<em><b>Assertion Braced</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.NegatedFormula#getInnerFormula <em>Inner Formula</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.AssertionBraced#getInnerFormula <em>Inner Formula</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.xtext.example.xpt.xpt.XptPackage#getNegatedFormula()
+ * @see org.xtext.example.xpt.xpt.XptPackage#getAssertionBraced()
  * @model
  * @generated
  */
-public interface NegatedFormula extends Assertions
+public interface AssertionBraced extends Assertions
 {
   /**
    * Returns the value of the '<em><b>Inner Formula</b></em>' containment reference.
@@ -31,14 +31,14 @@ public interface NegatedFormula extends Assertions
    * <!-- end-user-doc -->
    * @return the value of the '<em>Inner Formula</em>' containment reference.
    * @see #setInnerFormula(Assertions)
-   * @see org.xtext.example.xpt.xpt.XptPackage#getNegatedFormula_InnerFormula()
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAssertionBraced_InnerFormula()
    * @model containment="true"
    * @generated
    */
   Assertions getInnerFormula();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.xpt.xpt.NegatedFormula#getInnerFormula <em>Inner Formula</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.AssertionBraced#getInnerFormula <em>Inner Formula</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Inner Formula</em>' containment reference.
@@ -47,4 +47,4 @@ public interface NegatedFormula extends Assertions
    */
   void setInnerFormula(Assertions value);
 
-} // NegatedFormula
+} // AssertionBraced

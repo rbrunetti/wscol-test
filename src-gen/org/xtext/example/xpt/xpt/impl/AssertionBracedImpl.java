@@ -10,24 +10,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.xtext.example.xpt.xpt.AssertionBraced;
 import org.xtext.example.xpt.xpt.Assertions;
-import org.xtext.example.xpt.xpt.NegatedFormula;
 import org.xtext.example.xpt.xpt.XptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Negated Formula</b></em>'.
+ * An implementation of the model object '<em><b>Assertion Braced</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.NegatedFormulaImpl#getInnerFormula <em>Inner Formula</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionBracedImpl#getInnerFormula <em>Inner Formula</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
+public class AssertionBracedImpl extends AssertionsImpl implements AssertionBraced
 {
   /**
    * The cached value of the '{@link #getInnerFormula() <em>Inner Formula</em>}' containment reference.
@@ -44,7 +44,7 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NegatedFormulaImpl()
+  protected AssertionBracedImpl()
   {
     super();
   }
@@ -57,7 +57,7 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
   @Override
   protected EClass eStaticClass()
   {
-    return XptPackage.Literals.NEGATED_FORMULA;
+    return XptPackage.Literals.ASSERTION_BRACED;
   }
 
   /**
@@ -81,7 +81,7 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
     innerFormula = newInnerFormula;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.NEGATED_FORMULA__INNER_FORMULA, oldInnerFormula, newInnerFormula);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_BRACED__INNER_FORMULA, oldInnerFormula, newInnerFormula);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -98,14 +98,14 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
     {
       NotificationChain msgs = null;
       if (innerFormula != null)
-        msgs = ((InternalEObject)innerFormula).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.NEGATED_FORMULA__INNER_FORMULA, null, msgs);
+        msgs = ((InternalEObject)innerFormula).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_BRACED__INNER_FORMULA, null, msgs);
       if (newInnerFormula != null)
-        msgs = ((InternalEObject)newInnerFormula).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.NEGATED_FORMULA__INNER_FORMULA, null, msgs);
+        msgs = ((InternalEObject)newInnerFormula).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_BRACED__INNER_FORMULA, null, msgs);
       msgs = basicSetInnerFormula(newInnerFormula, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.NEGATED_FORMULA__INNER_FORMULA, newInnerFormula, newInnerFormula));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_BRACED__INNER_FORMULA, newInnerFormula, newInnerFormula));
   }
 
   /**
@@ -118,7 +118,7 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
   {
     switch (featureID)
     {
-      case XptPackage.NEGATED_FORMULA__INNER_FORMULA:
+      case XptPackage.ASSERTION_BRACED__INNER_FORMULA:
         return basicSetInnerFormula(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -134,7 +134,7 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
   {
     switch (featureID)
     {
-      case XptPackage.NEGATED_FORMULA__INNER_FORMULA:
+      case XptPackage.ASSERTION_BRACED__INNER_FORMULA:
         return getInnerFormula();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -150,7 +150,7 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
   {
     switch (featureID)
     {
-      case XptPackage.NEGATED_FORMULA__INNER_FORMULA:
+      case XptPackage.ASSERTION_BRACED__INNER_FORMULA:
         setInnerFormula((Assertions)newValue);
         return;
     }
@@ -167,7 +167,7 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
   {
     switch (featureID)
     {
-      case XptPackage.NEGATED_FORMULA__INNER_FORMULA:
+      case XptPackage.ASSERTION_BRACED__INNER_FORMULA:
         setInnerFormula((Assertions)null);
         return;
     }
@@ -184,10 +184,10 @@ public class NegatedFormulaImpl extends AssertionsImpl implements NegatedFormula
   {
     switch (featureID)
     {
-      case XptPackage.NEGATED_FORMULA__INNER_FORMULA:
+      case XptPackage.ASSERTION_BRACED__INNER_FORMULA:
         return innerFormula != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //NegatedFormulaImpl
+} //AssertionBracedImpl

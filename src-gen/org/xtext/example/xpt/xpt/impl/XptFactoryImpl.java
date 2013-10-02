@@ -67,14 +67,16 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.MODEL: return createModel();
       case XptPackage.DECLARATION: return createDeclaration();
       case XptPackage.ASSERTIONS: return createAssertions();
-      case XptPackage.NEGATED_FORMULA: return createNegatedFormula();
+      case XptPackage.ASSERTION_BRACED: return createAssertionBraced();
+      case XptPackage.ASSERTION_NOT: return createAssertionNot();
+      case XptPackage.ASSERTION_QUANTIFIED: return createAssertionQuantified();
       case XptPackage.ASSERTION_FORM: return createAssertionForm();
       case XptPackage.ASSERTION: return createAssertion();
       case XptPackage.QUERY: return createQuery();
       case XptPackage.STEP: return createStep();
       case XptPackage.ATTRIBUTE: return createAttribute();
       case XptPackage.CONSTANT: return createConstant();
-      case XptPackage.ASSERTION_SET: return createAssertionSet();
+      case XptPackage.ASSERTION_OR: return createAssertionOr();
       case XptPackage.ASSERTION_AND: return createAssertionAnd();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -119,10 +121,32 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public NegatedFormula createNegatedFormula()
+  public AssertionBraced createAssertionBraced()
   {
-    NegatedFormulaImpl negatedFormula = new NegatedFormulaImpl();
-    return negatedFormula;
+    AssertionBracedImpl assertionBraced = new AssertionBracedImpl();
+    return assertionBraced;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AssertionNot createAssertionNot()
+  {
+    AssertionNotImpl assertionNot = new AssertionNotImpl();
+    return assertionNot;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AssertionQuantified createAssertionQuantified()
+  {
+    AssertionQuantifiedImpl assertionQuantified = new AssertionQuantifiedImpl();
+    return assertionQuantified;
   }
 
   /**
@@ -196,10 +220,10 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AssertionSet createAssertionSet()
+  public AssertionOr createAssertionOr()
   {
-    AssertionSetImpl assertionSet = new AssertionSetImpl();
-    return assertionSet;
+    AssertionOrImpl assertionOr = new AssertionOrImpl();
+    return assertionOr;
   }
 
   /**
