@@ -2,21 +2,26 @@ package org.xtext.example.xpt.generator.dataobject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 import org.xtext.example.xpt.xpt.Attribute;
+import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
+import org.xtext.example.xpt.xpt.Values;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multiset;
@@ -31,6 +36,17 @@ public class DataObject {
 
 	public DataObject() {
 		data = LinkedHashMultimap.create();
+	}
+	
+	public DataObject(String name, Values values) {
+		data = LinkedHashMultimap.create();
+		for(Constant c : values.getValue()){
+			if(c.getString() != null){
+				data.put(name, c.getString());
+			} else {
+				data.put(name, c.getNumber());
+			}
+		}
 	}
 
 	public DataObject(String xmlPath) {
@@ -81,7 +97,7 @@ public class DataObject {
 						DataObject checkedAttribute = getSubMapWithAttribute(nextDO, attribute);
 						if (checkedAttribute != null) {
 							subMap.putAll(checkedAttribute);
-						} else if (attribute.getInt() > 0 && attribute.getInt() == i) {
+						} else if (attribute.getNumber() > 0 && attribute.getNumber() == i) {
 							subMap.putAll(nextDO);
 							return subMap;
 						}
@@ -91,8 +107,8 @@ public class DataObject {
 				} catch (ClassCastException e) {
 					// if there's the selection of the n-th element
 					if (attribute != null) {
-						if (attribute.getInt() > 0) {
-							if (attribute.getInt() == i) { // only the i-th would be putted in the map
+						if (attribute.getNumber() > 0) {
+							if (attribute.getNumber() == i) { // only the i-th would be putted in the map
 								subMap.put(property, next);
 								return subMap;
 							}
@@ -117,7 +133,7 @@ public class DataObject {
 		String key = attribute.getProperty();
 		String strValue = attribute.getStrValue();
 		String op = attribute.getOp();
-		double intValue = attribute.getIntValue();
+		double intValue = attribute.getNumberValue();
 
 		if (current.containsKey(key)) {
 			if (op != null) { // check if it's a complete attribute or just a
@@ -192,6 +208,18 @@ public class DataObject {
 	 */
 	public Object getFirst() {
 		return data.values().iterator().next();
+	}
+	
+	private boolean isList() {
+		return data.keySet().size() == 1;
+	}
+	
+	private List<Object> getList() {
+		List<Object> res = new ArrayList<Object>();
+		for(Object e:this.values()){
+			res.add(e);
+		}
+		return res;
 	}
 
 	/**
@@ -340,6 +368,21 @@ public class DataObject {
 		result += "}";
 		return result;
 
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(!(o instanceof DataObject)) {
+			return false;
+		}
+		
+		// check if each of the map of the two DataObject contains a single key with a List value -> if so, ignore the keys and compare the lists
+		if(this.isList() && ((DataObject) o).isList()) {
+			return this.getList().equals(((DataObject) o).getList());
+		}
+		
+		// check if the maps has same values for the same keys
+		return data.equals(((DataObject) o).getData());
 	}
 
 }

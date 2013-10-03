@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getQuery <em>Query</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getConstant <em>Constant</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,5 +102,31 @@ public interface Assertion extends EObject
    * @generated
    */
   void setConstant(Constant value);
+
+  /**
+   * Returns the value of the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Values</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Values</em>' containment reference.
+   * @see #setValues(Values)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAssertion_Values()
+   * @model containment="true"
+   * @generated
+   */
+  Values getValues();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Values</em>' containment reference.
+   * @see #getValues()
+   * @generated
+   */
+  void setValues(Values value);
 
 } // Assertion

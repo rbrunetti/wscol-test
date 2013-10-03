@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getProperty <em>Property</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getOp <em>Op</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getIntValue <em>Int Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getNumberValue <em>Number Value</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getStrValue <em>Str Value</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getInt <em>Int</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getNumber <em>Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,30 +79,30 @@ public interface Attribute extends EObject
   void setOp(String value);
 
   /**
-   * Returns the value of the '<em><b>Int Value</b></em>' attribute.
+   * Returns the value of the '<em><b>Number Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Int Value</em>' attribute isn't clear,
+   * If the meaning of the '<em>Number Value</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Int Value</em>' attribute.
-   * @see #setIntValue(double)
-   * @see org.xtext.example.xpt.xpt.XptPackage#getAttribute_IntValue()
+   * @return the value of the '<em>Number Value</em>' attribute.
+   * @see #setNumberValue(double)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAttribute_NumberValue()
    * @model
    * @generated
    */
-  double getIntValue();
+  double getNumberValue();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Attribute#getIntValue <em>Int Value</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Attribute#getNumberValue <em>Number Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Int Value</em>' attribute.
-   * @see #getIntValue()
+   * @param value the new value of the '<em>Number Value</em>' attribute.
+   * @see #getNumberValue()
    * @generated
    */
-  void setIntValue(double value);
+  void setNumberValue(double value);
 
   /**
    * Returns the value of the '<em><b>Str Value</b></em>' attribute.
@@ -131,29 +131,29 @@ public interface Attribute extends EObject
   void setStrValue(String value);
 
   /**
-   * Returns the value of the '<em><b>Int</b></em>' attribute.
+   * Returns the value of the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Int</em>' attribute isn't clear,
+   * If the meaning of the '<em>Number</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Int</em>' attribute.
-   * @see #setInt(double)
-   * @see org.xtext.example.xpt.xpt.XptPackage#getAttribute_Int()
+   * @return the value of the '<em>Number</em>' attribute.
+   * @see #setNumber(double)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAttribute_Number()
    * @model
    * @generated
    */
-  double getInt();
+  double getNumber();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Attribute#getInt <em>Int</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Attribute#getNumber <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Int</em>' attribute.
-   * @see #getInt()
+   * @param value the new value of the '<em>Number</em>' attribute.
+   * @see #getNumber()
    * @generated
    */
-  void setInt(double value);
+  void setNumber(double value);
 
 } // Attribute

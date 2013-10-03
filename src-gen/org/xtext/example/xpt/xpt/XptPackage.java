@@ -344,13 +344,22 @@ public interface XptPackage extends EPackage
   int ASSERTION__CONSTANT = 2;
 
   /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION__VALUES = 3;
+
+  /**
    * The number of structural features of the '<em>Assertion</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_FEATURE_COUNT = 3;
+  int ASSERTION_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.QueryImpl <em>Query</em>}' class.
@@ -455,13 +464,13 @@ public interface XptPackage extends EPackage
   int ATTRIBUTE__OP = 1;
 
   /**
-   * The feature id for the '<em><b>Int Value</b></em>' attribute.
+   * The feature id for the '<em><b>Number Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__INT_VALUE = 2;
+  int ATTRIBUTE__NUMBER_VALUE = 2;
 
   /**
    * The feature id for the '<em><b>Str Value</b></em>' attribute.
@@ -473,13 +482,13 @@ public interface XptPackage extends EPackage
   int ATTRIBUTE__STR_VALUE = 3;
 
   /**
-   * The feature id for the '<em><b>Int</b></em>' attribute.
+   * The feature id for the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__INT = 4;
+  int ATTRIBUTE__NUMBER = 4;
 
   /**
    * The number of structural features of the '<em>Attribute</em>' class.
@@ -501,13 +510,13 @@ public interface XptPackage extends EPackage
   int CONSTANT = 11;
 
   /**
-   * The feature id for the '<em><b>Int</b></em>' attribute.
+   * The feature id for the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONSTANT__INT = 0;
+  int CONSTANT__NUMBER = 0;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -528,6 +537,34 @@ public interface XptPackage extends EPackage
   int CONSTANT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ValuesImpl <em>Values</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.ValuesImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getValues()
+   * @generated
+   */
+  int VALUES = 12;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUES__VALUE = 0;
+
+  /**
+   * The number of structural features of the '<em>Values</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUES_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionOrImpl <em>Assertion Or</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -535,7 +572,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionOr()
    * @generated
    */
-  int ASSERTION_OR = 12;
+  int ASSERTION_OR = 13;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -572,7 +609,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionAnd()
    * @generated
    */
-  int ASSERTION_AND = 13;
+  int ASSERTION_AND = 14;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -859,6 +896,17 @@ public interface XptPackage extends EPackage
   EReference getAssertion_Constant();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Values</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertion#getValues()
+   * @see #getAssertion()
+   * @generated
+   */
+  EReference getAssertion_Values();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Query <em>Query</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -955,15 +1003,15 @@ public interface XptPackage extends EPackage
   EAttribute getAttribute_Op();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getIntValue <em>Int Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getNumberValue <em>Number Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Int Value</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getIntValue()
+   * @return the meta object for the attribute '<em>Number Value</em>'.
+   * @see org.xtext.example.xpt.xpt.Attribute#getNumberValue()
    * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttribute_IntValue();
+  EAttribute getAttribute_NumberValue();
 
   /**
    * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getStrValue <em>Str Value</em>}'.
@@ -977,15 +1025,15 @@ public interface XptPackage extends EPackage
   EAttribute getAttribute_StrValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getInt <em>Int</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getNumber <em>Number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Int</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getInt()
+   * @return the meta object for the attribute '<em>Number</em>'.
+   * @see org.xtext.example.xpt.xpt.Attribute#getNumber()
    * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttribute_Int();
+  EAttribute getAttribute_Number();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
@@ -998,15 +1046,15 @@ public interface XptPackage extends EPackage
   EClass getConstant();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Constant#getInt <em>Int</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Constant#getNumber <em>Number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Int</em>'.
-   * @see org.xtext.example.xpt.xpt.Constant#getInt()
+   * @return the meta object for the attribute '<em>Number</em>'.
+   * @see org.xtext.example.xpt.xpt.Constant#getNumber()
    * @see #getConstant()
    * @generated
    */
-  EAttribute getConstant_Int();
+  EAttribute getConstant_Number();
 
   /**
    * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Constant#getString <em>String</em>}'.
@@ -1018,6 +1066,27 @@ public interface XptPackage extends EPackage
    * @generated
    */
   EAttribute getConstant_String();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Values <em>Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Values</em>'.
+   * @see org.xtext.example.xpt.xpt.Values
+   * @generated
+   */
+  EClass getValues();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Values#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Value</em>'.
+   * @see org.xtext.example.xpt.xpt.Values#getValue()
+   * @see #getValues()
+   * @generated
+   */
+  EReference getValues_Value();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionOr <em>Assertion Or</em>}'.
@@ -1315,6 +1384,14 @@ public interface XptPackage extends EPackage
     EReference ASSERTION__CONSTANT = eINSTANCE.getAssertion_Constant();
 
     /**
+     * The meta object literal for the '<em><b>Values</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSERTION__VALUES = eINSTANCE.getAssertion_Values();
+
+    /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.QueryImpl <em>Query</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1393,12 +1470,12 @@ public interface XptPackage extends EPackage
     EAttribute ATTRIBUTE__OP = eINSTANCE.getAttribute_Op();
 
     /**
-     * The meta object literal for the '<em><b>Int Value</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Number Value</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__INT_VALUE = eINSTANCE.getAttribute_IntValue();
+    EAttribute ATTRIBUTE__NUMBER_VALUE = eINSTANCE.getAttribute_NumberValue();
 
     /**
      * The meta object literal for the '<em><b>Str Value</b></em>' attribute feature.
@@ -1409,12 +1486,12 @@ public interface XptPackage extends EPackage
     EAttribute ATTRIBUTE__STR_VALUE = eINSTANCE.getAttribute_StrValue();
 
     /**
-     * The meta object literal for the '<em><b>Int</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__INT = eINSTANCE.getAttribute_Int();
+    EAttribute ATTRIBUTE__NUMBER = eINSTANCE.getAttribute_Number();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.
@@ -1427,12 +1504,12 @@ public interface XptPackage extends EPackage
     EClass CONSTANT = eINSTANCE.getConstant();
 
     /**
-     * The meta object literal for the '<em><b>Int</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CONSTANT__INT = eINSTANCE.getConstant_Int();
+    EAttribute CONSTANT__NUMBER = eINSTANCE.getConstant_Number();
 
     /**
      * The meta object literal for the '<em><b>String</b></em>' attribute feature.
@@ -1441,6 +1518,24 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EAttribute CONSTANT__STRING = eINSTANCE.getConstant_String();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ValuesImpl <em>Values</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.ValuesImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getValues()
+     * @generated
+     */
+    EClass VALUES = eINSTANCE.getValues();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VALUES__VALUE = eINSTANCE.getValues_Value();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionOrImpl <em>Assertion Or</em>}' class.

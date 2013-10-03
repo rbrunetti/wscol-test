@@ -131,6 +131,15 @@ public interface XptFactory extends EFactory
   Constant createConstant();
 
   /**
+   * Returns a new object of class '<em>Values</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Values</em>'.
+   * @generated
+   */
+  Values createValues();
+
+  /**
    * Returns a new object of class '<em>Assertion Or</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

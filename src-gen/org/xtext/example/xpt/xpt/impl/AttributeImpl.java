@@ -21,9 +21,9 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * <ul>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getOp <em>Op</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getIntValue <em>Int Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getNumberValue <em>Number Value</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getStrValue <em>Str Value</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getInt <em>Int</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getNumber <em>Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,24 +72,24 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   protected String op = OP_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getIntValue() <em>Int Value</em>}' attribute.
+   * The default value of the '{@link #getNumberValue() <em>Number Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIntValue()
+   * @see #getNumberValue()
    * @generated
    * @ordered
    */
-  protected static final double INT_VALUE_EDEFAULT = 0.0;
+  protected static final double NUMBER_VALUE_EDEFAULT = 0.0;
 
   /**
-   * The cached value of the '{@link #getIntValue() <em>Int Value</em>}' attribute.
+   * The cached value of the '{@link #getNumberValue() <em>Number Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIntValue()
+   * @see #getNumberValue()
    * @generated
    * @ordered
    */
-  protected double intValue = INT_VALUE_EDEFAULT;
+  protected double numberValue = NUMBER_VALUE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getStrValue() <em>Str Value</em>}' attribute.
@@ -112,24 +112,24 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   protected String strValue = STR_VALUE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getInt() <em>Int</em>}' attribute.
+   * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInt()
+   * @see #getNumber()
    * @generated
    * @ordered
    */
-  protected static final double INT_EDEFAULT = 0.0;
+  protected static final double NUMBER_EDEFAULT = 0.0;
 
   /**
-   * The cached value of the '{@link #getInt() <em>Int</em>}' attribute.
+   * The cached value of the '{@link #getNumber() <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInt()
+   * @see #getNumber()
    * @generated
    * @ordered
    */
-  protected double int_ = INT_EDEFAULT;
+  protected double number = NUMBER_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -203,9 +203,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public double getIntValue()
+  public double getNumberValue()
   {
-    return intValue;
+    return numberValue;
   }
 
   /**
@@ -213,12 +213,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIntValue(double newIntValue)
+  public void setNumberValue(double newNumberValue)
   {
-    double oldIntValue = intValue;
-    intValue = newIntValue;
+    double oldNumberValue = numberValue;
+    numberValue = newNumberValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__INT_VALUE, oldIntValue, intValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__NUMBER_VALUE, oldNumberValue, numberValue));
   }
 
   /**
@@ -249,9 +249,9 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public double getInt()
+  public double getNumber()
   {
-    return int_;
+    return number;
   }
 
   /**
@@ -259,12 +259,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInt(double newInt)
+  public void setNumber(double newNumber)
   {
-    double oldInt = int_;
-    int_ = newInt;
+    double oldNumber = number;
+    number = newNumber;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__INT, oldInt, int_));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__NUMBER, oldNumber, number));
   }
 
   /**
@@ -281,12 +281,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return getProperty();
       case XptPackage.ATTRIBUTE__OP:
         return getOp();
-      case XptPackage.ATTRIBUTE__INT_VALUE:
-        return getIntValue();
+      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+        return getNumberValue();
       case XptPackage.ATTRIBUTE__STR_VALUE:
         return getStrValue();
-      case XptPackage.ATTRIBUTE__INT:
-        return getInt();
+      case XptPackage.ATTRIBUTE__NUMBER:
+        return getNumber();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -307,14 +307,14 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case XptPackage.ATTRIBUTE__OP:
         setOp((String)newValue);
         return;
-      case XptPackage.ATTRIBUTE__INT_VALUE:
-        setIntValue((Double)newValue);
+      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+        setNumberValue((Double)newValue);
         return;
       case XptPackage.ATTRIBUTE__STR_VALUE:
         setStrValue((String)newValue);
         return;
-      case XptPackage.ATTRIBUTE__INT:
-        setInt((Double)newValue);
+      case XptPackage.ATTRIBUTE__NUMBER:
+        setNumber((Double)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -336,14 +336,14 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case XptPackage.ATTRIBUTE__OP:
         setOp(OP_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__INT_VALUE:
-        setIntValue(INT_VALUE_EDEFAULT);
+      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+        setNumberValue(NUMBER_VALUE_EDEFAULT);
         return;
       case XptPackage.ATTRIBUTE__STR_VALUE:
         setStrValue(STR_VALUE_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__INT:
-        setInt(INT_EDEFAULT);
+      case XptPackage.ATTRIBUTE__NUMBER:
+        setNumber(NUMBER_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -363,12 +363,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return PROPERTY_EDEFAULT == null ? property != null : !PROPERTY_EDEFAULT.equals(property);
       case XptPackage.ATTRIBUTE__OP:
         return OP_EDEFAULT == null ? op != null : !OP_EDEFAULT.equals(op);
-      case XptPackage.ATTRIBUTE__INT_VALUE:
-        return intValue != INT_VALUE_EDEFAULT;
+      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+        return numberValue != NUMBER_VALUE_EDEFAULT;
       case XptPackage.ATTRIBUTE__STR_VALUE:
         return STR_VALUE_EDEFAULT == null ? strValue != null : !STR_VALUE_EDEFAULT.equals(strValue);
-      case XptPackage.ATTRIBUTE__INT:
-        return int_ != INT_EDEFAULT;
+      case XptPackage.ATTRIBUTE__NUMBER:
+        return number != NUMBER_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -388,12 +388,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     result.append(property);
     result.append(", op: ");
     result.append(op);
-    result.append(", intValue: ");
-    result.append(intValue);
+    result.append(", numberValue: ");
+    result.append(numberValue);
     result.append(", strValue: ");
     result.append(strValue);
-    result.append(", int: ");
-    result.append(int_);
+    result.append(", number: ");
+    result.append(number);
     result.append(')');
     return result.toString();
   }

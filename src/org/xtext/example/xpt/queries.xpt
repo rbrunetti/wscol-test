@@ -1,4 +1,4 @@
-let $a = /inventory/book[1]/title;
-let $c = /inventory/book[author="Larry Niven"]/publisher;
-let $d = /inventory/book[2]/title;
-$a = "Snow Crash" && ($d != "Burning Tower" || $c.length >= 6);
+let $z = ["Larry Niven", "Jerry Pournelle"];
+let $a = /inventory/book[1];
+let $b = /inventory/book[2];
+$z = $b/author && $a = $b || $z != $a;

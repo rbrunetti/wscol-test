@@ -26,13 +26,13 @@ AssertionNot:
 	'!' '(' innerFormula=AssertionOr ')';
 
 AssertionQuantified:
-	quantifier=Quantifier '(' alias=Variable 'in' values=Values ',' conditions+=AssertionOr ')';
+	quantifier=Quantifier '(' alias=Variable 'in' values=Variable ',' conditions+=AssertionOr ')';
 
 AssertionForm:
 	leftAssert=Assertion op=Rop rightAssert=Assertion;
 
 Assertion:
-	query=Query ('.' function=Function)? | constant=Constant;
+	query=Query ('.' function=Function)? | constant=Constant | values=Values;
 
 Query:
 	'(' steps+=Step+ ')' | steps+=Step+;
@@ -41,7 +41,7 @@ Step:
 	'/' name=ID ('[' attribute=Attribute ']')? | placeholder=Variable;
 
 Attribute:
-	property=ID (op=Rop intValue=NUMBER | op=StringRop strValue=STRING) | int=NUMBER;
+	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING) | number=NUMBER;
 
 StringRop:
 	'=' | "!=";
@@ -53,7 +53,7 @@ Function:
 	'uppercase' | 'length' | ID;
 
 Constant:
-	{Constant} (int=NUMBER | string=STRING);
+	number=NUMBER | string=STRING;
 
 Quantifier:
 	'forall' | 'exists' | 'numOf';
@@ -62,7 +62,7 @@ Variable:
 	'$' ID;
 
 Values:
-	'{' ID+ '}';
+	'[' value+=Constant (',' value+=Constant)* ']';
 
 terminal NUMBER returns ecore::EDouble:
 	('0'..'9')* ('.' ('0'..'9')+)?;

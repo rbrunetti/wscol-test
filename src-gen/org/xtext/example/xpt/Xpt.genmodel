@@ -37,6 +37,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/query"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Assertion/function"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/constant"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/values"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Query">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Query/steps"/>
@@ -49,13 +50,16 @@
     <genClasses ecoreClass="Xpt.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/property"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/op"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/intValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/numberValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/strValue"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/int"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/number"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Constant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/int"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/number"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/string"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Values">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Values/value"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//AssertionOr">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionOr/left"/>

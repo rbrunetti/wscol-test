@@ -19,7 +19,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.ConstantImpl#getInt <em>Int</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.ConstantImpl#getNumber <em>Number</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.ConstantImpl#getString <em>String</em>}</li>
  * </ul>
  * </p>
@@ -29,24 +29,24 @@ import org.xtext.example.xpt.xpt.XptPackage;
 public class ConstantImpl extends MinimalEObjectImpl.Container implements Constant
 {
   /**
-   * The default value of the '{@link #getInt() <em>Int</em>}' attribute.
+   * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInt()
+   * @see #getNumber()
    * @generated
    * @ordered
    */
-  protected static final double INT_EDEFAULT = 0.0;
+  protected static final double NUMBER_EDEFAULT = 0.0;
 
   /**
-   * The cached value of the '{@link #getInt() <em>Int</em>}' attribute.
+   * The cached value of the '{@link #getNumber() <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInt()
+   * @see #getNumber()
    * @generated
    * @ordered
    */
-  protected double int_ = INT_EDEFAULT;
+  protected double number = NUMBER_EDEFAULT;
 
   /**
    * The default value of the '{@link #getString() <em>String</em>}' attribute.
@@ -94,9 +94,9 @@ public class ConstantImpl extends MinimalEObjectImpl.Container implements Consta
    * <!-- end-user-doc -->
    * @generated
    */
-  public double getInt()
+  public double getNumber()
   {
-    return int_;
+    return number;
   }
 
   /**
@@ -104,12 +104,12 @@ public class ConstantImpl extends MinimalEObjectImpl.Container implements Consta
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInt(double newInt)
+  public void setNumber(double newNumber)
   {
-    double oldInt = int_;
-    int_ = newInt;
+    double oldNumber = number;
+    number = newNumber;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.CONSTANT__INT, oldInt, int_));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.CONSTANT__NUMBER, oldNumber, number));
   }
 
   /**
@@ -145,8 +145,8 @@ public class ConstantImpl extends MinimalEObjectImpl.Container implements Consta
   {
     switch (featureID)
     {
-      case XptPackage.CONSTANT__INT:
-        return getInt();
+      case XptPackage.CONSTANT__NUMBER:
+        return getNumber();
       case XptPackage.CONSTANT__STRING:
         return getString();
     }
@@ -163,8 +163,8 @@ public class ConstantImpl extends MinimalEObjectImpl.Container implements Consta
   {
     switch (featureID)
     {
-      case XptPackage.CONSTANT__INT:
-        setInt((Double)newValue);
+      case XptPackage.CONSTANT__NUMBER:
+        setNumber((Double)newValue);
         return;
       case XptPackage.CONSTANT__STRING:
         setString((String)newValue);
@@ -183,8 +183,8 @@ public class ConstantImpl extends MinimalEObjectImpl.Container implements Consta
   {
     switch (featureID)
     {
-      case XptPackage.CONSTANT__INT:
-        setInt(INT_EDEFAULT);
+      case XptPackage.CONSTANT__NUMBER:
+        setNumber(NUMBER_EDEFAULT);
         return;
       case XptPackage.CONSTANT__STRING:
         setString(STRING_EDEFAULT);
@@ -203,8 +203,8 @@ public class ConstantImpl extends MinimalEObjectImpl.Container implements Consta
   {
     switch (featureID)
     {
-      case XptPackage.CONSTANT__INT:
-        return int_ != INT_EDEFAULT;
+      case XptPackage.CONSTANT__NUMBER:
+        return number != NUMBER_EDEFAULT;
       case XptPackage.CONSTANT__STRING:
         return STRING_EDEFAULT == null ? string != null : !STRING_EDEFAULT.equals(string);
     }
@@ -222,8 +222,8 @@ public class ConstantImpl extends MinimalEObjectImpl.Container implements Consta
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (int: ");
-    result.append(int_);
+    result.append(" (number: ");
+    result.append(number);
     result.append(", string: ");
     result.append(string);
     result.append(')');

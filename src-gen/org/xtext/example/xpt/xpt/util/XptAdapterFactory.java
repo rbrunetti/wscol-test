@@ -135,6 +135,11 @@ public class XptAdapterFactory extends AdapterFactoryImpl
         return createConstantAdapter();
       }
       @Override
+      public Adapter caseValues(Values object)
+      {
+        return createValuesAdapter();
+      }
+      @Override
       public Adapter caseAssertionOr(AssertionOr object)
       {
         return createAssertionOrAdapter();
@@ -342,6 +347,21 @@ public class XptAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConstantAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Values <em>Values</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.xpt.xpt.Values
+   * @generated
+   */
+  public Adapter createValuesAdapter()
   {
     return null;
   }

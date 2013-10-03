@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Query;
+import org.xtext.example.xpt.xpt.Values;
 import org.xtext.example.xpt.xpt.XptPackage;
 
 /**
@@ -26,6 +27,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getQuery <em>Query</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getFunction <em>Function</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getConstant <em>Constant</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +74,16 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * @ordered
    */
   protected Constant constant;
+
+  /**
+   * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValues()
+   * @generated
+   * @ordered
+   */
+  protected Values values;
 
   /**
    * <!-- begin-user-doc -->
@@ -218,6 +230,54 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
+  public Values getValues()
+  {
+    return values;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetValues(Values newValues, NotificationChain msgs)
+  {
+    Values oldValues = values;
+    values = newValues;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__VALUES, oldValues, newValues);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValues(Values newValues)
+  {
+    if (newValues != values)
+    {
+      NotificationChain msgs = null;
+      if (values != null)
+        msgs = ((InternalEObject)values).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__VALUES, null, msgs);
+      if (newValues != null)
+        msgs = ((InternalEObject)newValues).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__VALUES, null, msgs);
+      msgs = basicSetValues(newValues, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__VALUES, newValues, newValues));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -227,6 +287,8 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         return basicSetQuery(null, msgs);
       case XptPackage.ASSERTION__CONSTANT:
         return basicSetConstant(null, msgs);
+      case XptPackage.ASSERTION__VALUES:
+        return basicSetValues(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -247,6 +309,8 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         return getFunction();
       case XptPackage.ASSERTION__CONSTANT:
         return getConstant();
+      case XptPackage.ASSERTION__VALUES:
+        return getValues();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -269,6 +333,9 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         return;
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)newValue);
+        return;
+      case XptPackage.ASSERTION__VALUES:
+        setValues((Values)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -293,6 +360,9 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)null);
         return;
+      case XptPackage.ASSERTION__VALUES:
+        setValues((Values)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -313,6 +383,8 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         return FUNCTION_EDEFAULT == null ? function != null : !FUNCTION_EDEFAULT.equals(function);
       case XptPackage.ASSERTION__CONSTANT:
         return constant != null;
+      case XptPackage.ASSERTION__VALUES:
+        return values != null;
     }
     return super.eIsSet(featureID);
   }

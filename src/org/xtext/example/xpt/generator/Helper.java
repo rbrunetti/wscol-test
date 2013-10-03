@@ -1,9 +1,14 @@
 package org.xtext.example.xpt.generator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.Attribute;
+import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Query;
+import org.xtext.example.xpt.xpt.Values;
 
 public class Helper {
 	
@@ -15,10 +20,14 @@ public class Helper {
 		String res = "";
 		if(a.getQuery() != null){
 			res = queryToString(a.getQuery());
-		} else if(a.getConstant().getString() == null){
-			res = String.valueOf(a.getConstant().getInt());
-		} else {
-			res = a.getConstant().getString();
+		} else if(a.getConstant() != null) {
+			if(a.getConstant().getString() == null){
+				res = String.valueOf(a.getConstant().getNumber());
+			} else {
+				res = a.getConstant().getString();
+			}
+		} else if(a.getValues() != null) {
+			res = valuesToList(a.getValues()).toString();
 		}
 		if (a.getFunction() != null) {
 			res += '.' + a.getFunction();
@@ -38,8 +47,8 @@ public class Helper {
 				if (attribute != null) {
 					String property = attribute.getProperty();
 					String operation = attribute.getOp();
-					double value = attribute.getInt();
-					double intValue = attribute.getIntValue();
+					double value = attribute.getNumber();
+					double intValue = attribute.getNumberValue();
 					res += '[';
 					if (property != null && operation != null) {
 						res += property + operation;
@@ -55,6 +64,18 @@ public class Helper {
 			}
 		}
 		return res;
+	}
+	
+	public static List<Object> valuesToList(Values values){
+		List<Object> result = new ArrayList<>();
+		for(Constant c : values.getValue()){
+			if(c.getString() != null){
+				result.add(c.getString());
+			} else {
+				result.add(c.getNumber());
+			}
+		}
+		return result;
 	}
 	
 }

@@ -76,6 +76,7 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.STEP: return createStep();
       case XptPackage.ATTRIBUTE: return createAttribute();
       case XptPackage.CONSTANT: return createConstant();
+      case XptPackage.VALUES: return createValues();
       case XptPackage.ASSERTION_OR: return createAssertionOr();
       case XptPackage.ASSERTION_AND: return createAssertionAnd();
       default:
@@ -213,6 +214,17 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
   {
     ConstantImpl constant = new ConstantImpl();
     return constant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Values createValues()
+  {
+    ValuesImpl values = new ValuesImpl();
+    return values;
   }
 
   /**
