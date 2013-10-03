@@ -147,6 +147,11 @@ public class Main {
 
 	}
 
+	/**
+	 * Method for the evaluation of the assertions, considering the operation (NOT, AND, OR) and the corresponding priority (NOT>AND>OR)
+	 * @param assertions the list of assertions to evaluate
+	 * @return true if the assertions are respected, false otherwise
+	 */
 	private boolean verifyAssertions(Assertions assertions) {
 		EList<EObject> a = assertions.eContents();
 		if (assertions instanceof AssertionAnd) {
@@ -196,6 +201,14 @@ public class Main {
 		}
 	}
 
+	/**
+	 * Method for the evaluation of numeric assertion
+	 * @param left the result of the left assertion
+	 * @param right the result of the right assertion
+	 * @param operation a string containing the operation to evaluate
+	 * @param condition a string representation of the assertion
+	 * @return true if the assertion is correct, false otherwise
+	 */
 	private boolean numericAssertion(double left, double right, String operation, String condition) {
 		boolean result;
 		switch (operation) {
@@ -255,6 +268,14 @@ public class Main {
 		return result;
 	}
 
+	/**
+	 * Method for the evaluation of string assertion
+	 * @param left the result of the left assertion
+	 * @param right the result of the right assertion
+	 * @param operation a string containing the operation to evaluate
+	 * @param condition a string representation of the assertion
+	 * @return true if the assertion is correct, false otherwise
+	 */
 	private boolean stringAssertion(String left, String right, String operation, String condition) {
 		boolean result;
 		switch (operation) {
@@ -286,6 +307,14 @@ public class Main {
 		return result;
 	}
 
+	/**
+	 * Method for the evaluation of DataObject assertion
+	 * @param left the result of the left assertion
+	 * @param right the result of the right assertion
+	 * @param operation a string containing the operation to evaluate
+	 * @param condition a string representation of the assertion
+	 * @return true if the assertion is correct, false otherwise
+	 */
 	private boolean dataobjectAssertion(DataObject left, DataObject right, String operation, String condition) {
 		boolean result;
 		switch (operation) {
@@ -324,17 +353,17 @@ public class Main {
 		Object result = new Object();
 		// if the assertion is a constant it's not going to be an xpath query
 		if (assertion.getConstant() != null) {
-			result = ((assertion.getConstant().getString() == null) ? assertion.getConstant().getNumber() : assertion.getConstant().getString());
-			return result;
+			return ((assertion.getConstant().getString() == null) ? assertion.getConstant().getNumber() : assertion.getConstant().getString());
 		}
 		// TODO sto trattando un solo valore! Non considera variabili multivalore
 
 		// look if there's a placeholder, if any substitute it with its values (note: the placeholder is always on the first step!)
-		if (assertion.getQuery().getSteps().get(0).getPlaceholder() != null) {
-			if (!variables.containsKey(assertion.getQuery().getSteps().get(0).getPlaceholder())) { // TODO da valutare come trattare (dichiarazioni sbagliate -> variabile assente)
-				return null;
+		String placeholder = assertion.getQuery().getSteps().get(0).getPlaceholder();
+		if (placeholder != null) {
+			if (!variables.containsKey(placeholder)) { 
+				return null; // TODO da valutare come trattare (dichiarazioni sbagliate -> variabile assente)
 			}
-			Object value = variables.get(assertion.getQuery().getSteps().get(0).getPlaceholder());
+			Object value = variables.get(placeholder);
 			try {
 				if (assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
 					result = ((DataObject) value).evaluate(assertion.getQuery());
@@ -350,18 +379,39 @@ public class Main {
 
 		// *** FUNCTIONS ***
 		if (assertion.getFunction() != null) {
-			switch (assertion.getFunction()) {
-			case "uppercase":
-				result = ((String) result).toUpperCase();
-				break;
-			case "length":
-				result = (double) ((String) result).length();
-				break;
-			default:
-				break;
+			if(result instanceof DataObject){
+				
+			} else if(result instanceof String) {
+				result = applyStringFunctions(result, assertion.getFunction());
+			} else if(result instanceof Double) {
+				result = applyDoubleFunctions(result, assertion.getFunction());
 			}
 		}
 		return result;
+	}
+	
+	private Object applyStringFunctions(Object object, String function) {
+		switch (function) {
+		case "uppercase":
+			return ((String) object).toUpperCase();
+		case "length":
+			return (double) ((String) object).length();
+		case "":
+			
+		default:
+			return null;
+		}
+	}
+	
+	private Object applyDoubleFunctions(Object object, String function) {
+		switch (function) {
+		case "uppercase":
+			return ((String) object).toUpperCase();
+		case "substring":
+			return (double) ((String) object).length();
+		default:
+			return null;
+		}
 	}
 
 	/**

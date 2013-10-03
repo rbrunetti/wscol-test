@@ -66,7 +66,7 @@ public class Helper {
 		return res;
 	}
 	
-	public static List<Object> valuesToList(Values values){
+	private static List<Object> valuesToList(Values values){
 		List<Object> result = new ArrayList<>();
 		for(Constant c : values.getValue()){
 			if(c.getString() != null){
