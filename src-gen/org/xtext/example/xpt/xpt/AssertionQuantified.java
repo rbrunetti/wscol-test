@@ -2,7 +2,6 @@
  */
 package org.xtext.example.xpt.xpt;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.xtext.example.xpt.xpt.AssertionQuantified#getQuantifier <em>Quantifier</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.AssertionQuantified#getAlias <em>Alias</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.AssertionQuantified#getValues <em>Values</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.AssertionQuantified#getVar <em>Var</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.AssertionQuantified#getConditions <em>Conditions</em>}</li>
  * </ul>
  * </p>
@@ -23,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AssertionQuantified extends Assertions
+public interface AssertionQuantified extends Assertion
 {
   /**
    * Returns the value of the '<em><b>Quantifier</b></em>' attribute.
@@ -78,45 +77,55 @@ public interface AssertionQuantified extends Assertions
   void setAlias(String value);
 
   /**
-   * Returns the value of the '<em><b>Values</b></em>' attribute.
+   * Returns the value of the '<em><b>Var</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Values</em>' attribute isn't clear,
+   * If the meaning of the '<em>Var</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Values</em>' attribute.
-   * @see #setValues(String)
-   * @see org.xtext.example.xpt.xpt.XptPackage#getAssertionQuantified_Values()
+   * @return the value of the '<em>Var</em>' attribute.
+   * @see #setVar(String)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAssertionQuantified_Var()
    * @model
    * @generated
    */
-  String getValues();
+  String getVar();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.xpt.xpt.AssertionQuantified#getValues <em>Values</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.AssertionQuantified#getVar <em>Var</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Values</em>' attribute.
-   * @see #getValues()
+   * @param value the new value of the '<em>Var</em>' attribute.
+   * @see #getVar()
    * @generated
    */
-  void setValues(String value);
+  void setVar(String value);
 
   /**
-   * Returns the value of the '<em><b>Conditions</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.xpt.xpt.Assertions}.
+   * Returns the value of the '<em><b>Conditions</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Conditions</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Conditions</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Conditions</em>' containment reference list.
+   * @return the value of the '<em>Conditions</em>' containment reference.
+   * @see #setConditions(Assertions)
    * @see org.xtext.example.xpt.xpt.XptPackage#getAssertionQuantified_Conditions()
    * @model containment="true"
    * @generated
    */
-  EList<Assertions> getConditions();
+  Assertions getConditions();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.AssertionQuantified#getConditions <em>Conditions</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Conditions</em>' containment reference.
+   * @see #getConditions()
+   * @generated
+   */
+  void setConditions(Assertions value);
 
 } // AssertionQuantified

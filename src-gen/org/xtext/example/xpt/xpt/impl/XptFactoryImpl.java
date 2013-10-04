@@ -69,14 +69,15 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.ASSERTIONS: return createAssertions();
       case XptPackage.ASSERTION_BRACED: return createAssertionBraced();
       case XptPackage.ASSERTION_NOT: return createAssertionNot();
-      case XptPackage.ASSERTION_QUANTIFIED: return createAssertionQuantified();
       case XptPackage.ASSERTION_FORM: return createAssertionForm();
       case XptPackage.ASSERTION: return createAssertion();
+      case XptPackage.ASSERTION_QUANTIFIED: return createAssertionQuantified();
       case XptPackage.QUERY: return createQuery();
       case XptPackage.STEP: return createStep();
       case XptPackage.ATTRIBUTE: return createAttribute();
-      case XptPackage.CONSTANT: return createConstant();
+      case XptPackage.FUNCTION: return createFunction();
       case XptPackage.VALUES: return createValues();
+      case XptPackage.CONSTANT: return createConstant();
       case XptPackage.ASSERTION_OR: return createAssertionOr();
       case XptPackage.ASSERTION_AND: return createAssertionAnd();
       default:
@@ -144,17 +145,6 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AssertionQuantified createAssertionQuantified()
-  {
-    AssertionQuantifiedImpl assertionQuantified = new AssertionQuantifiedImpl();
-    return assertionQuantified;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public AssertionForm createAssertionForm()
   {
     AssertionFormImpl assertionForm = new AssertionFormImpl();
@@ -170,6 +160,17 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
   {
     AssertionImpl assertion = new AssertionImpl();
     return assertion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AssertionQuantified createAssertionQuantified()
+  {
+    AssertionQuantifiedImpl assertionQuantified = new AssertionQuantifiedImpl();
+    return assertionQuantified;
   }
 
   /**
@@ -210,10 +211,10 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Constant createConstant()
+  public Function createFunction()
   {
-    ConstantImpl constant = new ConstantImpl();
-    return constant;
+    FunctionImpl function = new FunctionImpl();
+    return function;
   }
 
   /**
@@ -225,6 +226,17 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
   {
     ValuesImpl values = new ValuesImpl();
     return values;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Constant createConstant()
+  {
+    ConstantImpl constant = new ConstantImpl();
+    return constant;
   }
 
   /**

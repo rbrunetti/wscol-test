@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.Constant;
+import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Values;
 import org.xtext.example.xpt.xpt.XptPackage;
@@ -27,6 +28,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getQuery <em>Query</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getFunction <em>Function</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getConstant <em>Constant</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#isBoolean <em>Boolean</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
@@ -46,24 +48,14 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
   protected Query query;
 
   /**
-   * The default value of the '{@link #getFunction() <em>Function</em>}' attribute.
+   * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getFunction()
    * @generated
    * @ordered
    */
-  protected static final String FUNCTION_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getFunction() <em>Function</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFunction()
-   * @generated
-   * @ordered
-   */
-  protected String function = FUNCTION_EDEFAULT;
+  protected Function function;
 
   /**
    * The cached value of the '{@link #getConstant() <em>Constant</em>}' containment reference.
@@ -74,6 +66,26 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * @ordered
    */
   protected Constant constant;
+
+  /**
+   * The default value of the '{@link #isBoolean() <em>Boolean</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBoolean()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean BOOLEAN_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isBoolean() <em>Boolean</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBoolean()
+   * @generated
+   * @ordered
+   */
+  protected boolean boolean_ = BOOLEAN_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference.
@@ -159,7 +171,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFunction()
+  public Function getFunction()
   {
     return function;
   }
@@ -169,12 +181,37 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFunction(String newFunction)
+  public NotificationChain basicSetFunction(Function newFunction, NotificationChain msgs)
   {
-    String oldFunction = function;
+    Function oldFunction = function;
     function = newFunction;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__FUNCTION, oldFunction, function));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__FUNCTION, oldFunction, newFunction);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setFunction(Function newFunction)
+  {
+    if (newFunction != function)
+    {
+      NotificationChain msgs = null;
+      if (function != null)
+        msgs = ((InternalEObject)function).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__FUNCTION, null, msgs);
+      if (newFunction != null)
+        msgs = ((InternalEObject)newFunction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__FUNCTION, null, msgs);
+      msgs = basicSetFunction(newFunction, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__FUNCTION, newFunction, newFunction));
   }
 
   /**
@@ -223,6 +260,29 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__CONSTANT, newConstant, newConstant));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isBoolean()
+  {
+    return boolean_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBoolean(boolean newBoolean)
+  {
+    boolean oldBoolean = boolean_;
+    boolean_ = newBoolean;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__BOOLEAN, oldBoolean, boolean_));
   }
 
   /**
@@ -285,6 +345,8 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
     {
       case XptPackage.ASSERTION__QUERY:
         return basicSetQuery(null, msgs);
+      case XptPackage.ASSERTION__FUNCTION:
+        return basicSetFunction(null, msgs);
       case XptPackage.ASSERTION__CONSTANT:
         return basicSetConstant(null, msgs);
       case XptPackage.ASSERTION__VALUES:
@@ -309,6 +371,8 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         return getFunction();
       case XptPackage.ASSERTION__CONSTANT:
         return getConstant();
+      case XptPackage.ASSERTION__BOOLEAN:
+        return isBoolean();
       case XptPackage.ASSERTION__VALUES:
         return getValues();
     }
@@ -329,10 +393,13 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         setQuery((Query)newValue);
         return;
       case XptPackage.ASSERTION__FUNCTION:
-        setFunction((String)newValue);
+        setFunction((Function)newValue);
         return;
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)newValue);
+        return;
+      case XptPackage.ASSERTION__BOOLEAN:
+        setBoolean((Boolean)newValue);
         return;
       case XptPackage.ASSERTION__VALUES:
         setValues((Values)newValue);
@@ -355,10 +422,13 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         setQuery((Query)null);
         return;
       case XptPackage.ASSERTION__FUNCTION:
-        setFunction(FUNCTION_EDEFAULT);
+        setFunction((Function)null);
         return;
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)null);
+        return;
+      case XptPackage.ASSERTION__BOOLEAN:
+        setBoolean(BOOLEAN_EDEFAULT);
         return;
       case XptPackage.ASSERTION__VALUES:
         setValues((Values)null);
@@ -380,9 +450,11 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
       case XptPackage.ASSERTION__QUERY:
         return query != null;
       case XptPackage.ASSERTION__FUNCTION:
-        return FUNCTION_EDEFAULT == null ? function != null : !FUNCTION_EDEFAULT.equals(function);
+        return function != null;
       case XptPackage.ASSERTION__CONSTANT:
         return constant != null;
+      case XptPackage.ASSERTION__BOOLEAN:
+        return boolean_ != BOOLEAN_EDEFAULT;
       case XptPackage.ASSERTION__VALUES:
         return values != null;
     }
@@ -400,8 +472,8 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (function: ");
-    result.append(function);
+    result.append(" (boolean: ");
+    result.append(boolean_);
     result.append(')');
     return result.toString();
   }

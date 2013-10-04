@@ -20,6 +20,7 @@ import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
+import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
@@ -75,13 +76,6 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass assertionQuantifiedEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass assertionFormEClass = null;
 
   /**
@@ -90,6 +84,13 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * @generated
    */
   private EClass assertionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass assertionQuantifiedEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,7 +118,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass constantEClass = null;
+  private EClass functionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -125,6 +126,13 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * @generated
    */
   private EClass valuesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass constantEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -318,56 +326,6 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAssertionQuantified()
-  {
-    return assertionQuantifiedEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getAssertionQuantified_Quantifier()
-  {
-    return (EAttribute)assertionQuantifiedEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getAssertionQuantified_Alias()
-  {
-    return (EAttribute)assertionQuantifiedEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getAssertionQuantified_Values()
-  {
-    return (EAttribute)assertionQuantifiedEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getAssertionQuantified_Conditions()
-  {
-    return (EReference)assertionQuantifiedEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getAssertionForm()
   {
     return assertionFormEClass;
@@ -428,9 +386,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAssertion_Function()
+  public EReference getAssertion_Function()
   {
-    return (EAttribute)assertionEClass.getEStructuralFeatures().get(1);
+    return (EReference)assertionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -448,9 +406,69 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getAssertion_Boolean()
+  {
+    return (EAttribute)assertionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getAssertion_Values()
   {
-    return (EReference)assertionEClass.getEStructuralFeatures().get(3);
+    return (EReference)assertionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAssertionQuantified()
+  {
+    return assertionQuantifiedEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAssertionQuantified_Quantifier()
+  {
+    return (EAttribute)assertionQuantifiedEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAssertionQuantified_Alias()
+  {
+    return (EAttribute)assertionQuantifiedEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAssertionQuantified_Var()
+  {
+    return (EAttribute)assertionQuantifiedEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAssertionQuantified_Conditions()
+  {
+    return (EReference)assertionQuantifiedEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -578,6 +596,56 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getFunction()
+  {
+    return functionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getFunction_Name()
+  {
+    return (EAttribute)functionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFunction_Params()
+  {
+    return (EReference)functionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getValues()
+  {
+    return valuesEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getValues_Value()
+  {
+    return (EReference)valuesEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getConstant()
   {
     return constantEClass;
@@ -601,26 +669,6 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
   public EAttribute getConstant_String()
   {
     return (EAttribute)constantEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getValues()
-  {
-    return valuesEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getValues_Value()
-  {
-    return (EReference)valuesEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -729,12 +777,6 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     assertionNotEClass = createEClass(ASSERTION_NOT);
     createEReference(assertionNotEClass, ASSERTION_NOT__INNER_FORMULA);
 
-    assertionQuantifiedEClass = createEClass(ASSERTION_QUANTIFIED);
-    createEAttribute(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__QUANTIFIER);
-    createEAttribute(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__ALIAS);
-    createEAttribute(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__VALUES);
-    createEReference(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__CONDITIONS);
-
     assertionFormEClass = createEClass(ASSERTION_FORM);
     createEReference(assertionFormEClass, ASSERTION_FORM__LEFT_ASSERT);
     createEAttribute(assertionFormEClass, ASSERTION_FORM__OP);
@@ -742,9 +784,16 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
 
     assertionEClass = createEClass(ASSERTION);
     createEReference(assertionEClass, ASSERTION__QUERY);
-    createEAttribute(assertionEClass, ASSERTION__FUNCTION);
+    createEReference(assertionEClass, ASSERTION__FUNCTION);
     createEReference(assertionEClass, ASSERTION__CONSTANT);
+    createEAttribute(assertionEClass, ASSERTION__BOOLEAN);
     createEReference(assertionEClass, ASSERTION__VALUES);
+
+    assertionQuantifiedEClass = createEClass(ASSERTION_QUANTIFIED);
+    createEAttribute(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__QUANTIFIER);
+    createEAttribute(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__ALIAS);
+    createEAttribute(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__VAR);
+    createEReference(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__CONDITIONS);
 
     queryEClass = createEClass(QUERY);
     createEReference(queryEClass, QUERY__STEPS);
@@ -761,12 +810,16 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     createEAttribute(attributeEClass, ATTRIBUTE__STR_VALUE);
     createEAttribute(attributeEClass, ATTRIBUTE__NUMBER);
 
-    constantEClass = createEClass(CONSTANT);
-    createEAttribute(constantEClass, CONSTANT__NUMBER);
-    createEAttribute(constantEClass, CONSTANT__STRING);
+    functionEClass = createEClass(FUNCTION);
+    createEAttribute(functionEClass, FUNCTION__NAME);
+    createEReference(functionEClass, FUNCTION__PARAMS);
 
     valuesEClass = createEClass(VALUES);
     createEReference(valuesEClass, VALUES__VALUE);
+
+    constantEClass = createEClass(CONSTANT);
+    createEAttribute(constantEClass, CONSTANT__NUMBER);
+    createEAttribute(constantEClass, CONSTANT__STRING);
 
     assertionOrEClass = createEClass(ASSERTION_OR);
     createEReference(assertionOrEClass, ASSERTION_OR__LEFT);
@@ -808,8 +861,8 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     // Add supertypes to classes
     assertionBracedEClass.getESuperTypes().add(this.getAssertions());
     assertionNotEClass.getESuperTypes().add(this.getAssertions());
-    assertionQuantifiedEClass.getESuperTypes().add(this.getAssertions());
     assertionFormEClass.getESuperTypes().add(this.getAssertions());
+    assertionQuantifiedEClass.getESuperTypes().add(this.getAssertion());
     assertionOrEClass.getESuperTypes().add(this.getAssertions());
     assertionAndEClass.getESuperTypes().add(this.getAssertions());
 
@@ -830,12 +883,6 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     initEClass(assertionNotEClass, AssertionNot.class, "AssertionNot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssertionNot_InnerFormula(), this.getAssertions(), null, "innerFormula", null, 0, 1, AssertionNot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(assertionQuantifiedEClass, AssertionQuantified.class, "AssertionQuantified", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAssertionQuantified_Quantifier(), ecorePackage.getEString(), "quantifier", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAssertionQuantified_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAssertionQuantified_Values(), ecorePackage.getEString(), "values", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAssertionQuantified_Conditions(), this.getAssertions(), null, "conditions", null, 0, -1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(assertionFormEClass, AssertionForm.class, "AssertionForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssertionForm_LeftAssert(), this.getAssertion(), null, "leftAssert", null, 0, 1, AssertionForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAssertionForm_Op(), ecorePackage.getEString(), "op", null, 0, 1, AssertionForm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -843,9 +890,16 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
 
     initEClass(assertionEClass, Assertion.class, "Assertion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssertion_Query(), this.getQuery(), null, "query", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAssertion_Function(), ecorePackage.getEString(), "function", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssertion_Function(), this.getFunction(), null, "function", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAssertion_Constant(), this.getConstant(), null, "constant", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAssertion_Boolean(), ecorePackage.getEBoolean(), "boolean", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAssertion_Values(), this.getValues(), null, "values", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(assertionQuantifiedEClass, AssertionQuantified.class, "AssertionQuantified", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAssertionQuantified_Quantifier(), ecorePackage.getEString(), "quantifier", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAssertionQuantified_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAssertionQuantified_Var(), ecorePackage.getEString(), "var", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssertionQuantified_Conditions(), this.getAssertions(), null, "conditions", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(queryEClass, Query.class, "Query", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getQuery_Steps(), this.getStep(), null, "steps", null, 0, -1, Query.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -862,12 +916,16 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     initEAttribute(getAttribute_StrValue(), ecorePackage.getEString(), "strValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAttribute_Number(), ecorePackage.getEDouble(), "number", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getConstant_Number(), ecorePackage.getEDouble(), "number", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getConstant_String(), ecorePackage.getEString(), "string", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFunction_Name(), ecorePackage.getEString(), "name", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunction_Params(), this.getValues(), null, "params", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(valuesEClass, Values.class, "Values", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getValues_Value(), this.getConstant(), null, "value", null, 0, -1, Values.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConstant_Number(), ecorePackage.getEDouble(), "number", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConstant_String(), ecorePackage.getEString(), "string", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(assertionOrEClass, AssertionOr.class, "AssertionOr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssertionOr_Left(), this.getAssertions(), null, "left", null, 0, 1, AssertionOr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

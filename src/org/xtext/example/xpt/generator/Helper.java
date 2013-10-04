@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionForm;
+import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Query;
@@ -16,7 +17,7 @@ public class Helper {
 		return assertionToString(af.getLeftAssert()) + " " + af.getOp() + " " + assertionToString(af.getRightAssert());
 	}
 
-	public static String assertionToString(Assertion a) {
+	public static String assertionToString(Assertion a) { //TODO sistemare!
 		String res = "";
 		if(a.getQuery() != null){
 			res = queryToString(a.getQuery());
@@ -28,9 +29,21 @@ public class Helper {
 			}
 		} else if(a.getValues() != null) {
 			res = valuesToList(a.getValues()).toString();
+		} else if(a instanceof AssertionQuantified) {
+			AssertionQuantified aq = ((AssertionQuantified) a);
+			res = aq.getQuantifier() + "(" + aq.getVar() + " in " + aq.getAlias() + ", conditions)";
+		} else {
+			res = String.valueOf(a.isBoolean());
 		}
 		if (a.getFunction() != null) {
-			res += '.' + a.getFunction();
+			String params = "";
+			if(a.getFunction().getParams() != null) {
+				for(Constant v : a.getFunction().getParams().getValue()){
+					params += constantToString(v) + ", ";
+				}
+				params = params.substring(0, params.length()-2);
+			}
+			res += '.' + a.getFunction().getName() + '(' + params + ')' ;
 		}
 		return res;
 	}
@@ -76,6 +89,14 @@ public class Helper {
 			}
 		}
 		return result;
+	}
+	
+	private static String constantToString(Constant constant) {
+		if(constant.getString() != null){
+			return constant.getString();
+		} else {
+			return String.valueOf(constant.getNumber());
+		}
 	}
 	
 }

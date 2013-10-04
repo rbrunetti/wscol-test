@@ -1,4 +1,5 @@
-let $z = ["Larry Niven", "Jerry Pournelle"];
-let $a = /inventory/book[1];
-let $b = /inventory/book[2];
-$z = $b/author && $a = $b || $z != $a;
+let $a = /inventory/book[1]/title;
+let $b = /inventory/book[2]/author;
+let $c = numOf($aa in $b, $aa.length() > 11);
+let $d = forall($bb in $c, $bb > 1);
+ $c > 1;

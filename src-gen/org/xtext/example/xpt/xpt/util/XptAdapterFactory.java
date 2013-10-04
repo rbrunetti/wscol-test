@@ -100,11 +100,6 @@ public class XptAdapterFactory extends AdapterFactoryImpl
         return createAssertionNotAdapter();
       }
       @Override
-      public Adapter caseAssertionQuantified(AssertionQuantified object)
-      {
-        return createAssertionQuantifiedAdapter();
-      }
-      @Override
       public Adapter caseAssertionForm(AssertionForm object)
       {
         return createAssertionFormAdapter();
@@ -113,6 +108,11 @@ public class XptAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAssertion(Assertion object)
       {
         return createAssertionAdapter();
+      }
+      @Override
+      public Adapter caseAssertionQuantified(AssertionQuantified object)
+      {
+        return createAssertionQuantifiedAdapter();
       }
       @Override
       public Adapter caseQuery(Query object)
@@ -130,14 +130,19 @@ public class XptAdapterFactory extends AdapterFactoryImpl
         return createAttributeAdapter();
       }
       @Override
-      public Adapter caseConstant(Constant object)
+      public Adapter caseFunction(Function object)
       {
-        return createConstantAdapter();
+        return createFunctionAdapter();
       }
       @Override
       public Adapter caseValues(Values object)
       {
         return createValuesAdapter();
+      }
+      @Override
+      public Adapter caseConstant(Constant object)
+      {
+        return createConstantAdapter();
       }
       @Override
       public Adapter caseAssertionOr(AssertionOr object)
@@ -247,21 +252,6 @@ public class XptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.AssertionQuantified <em>Assertion Quantified</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.example.xpt.xpt.AssertionQuantified
-   * @generated
-   */
-  public Adapter createAssertionQuantifiedAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.AssertionForm <em>Assertion Form</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -287,6 +277,21 @@ public class XptAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAssertionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.AssertionQuantified <em>Assertion Quantified</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.xpt.xpt.AssertionQuantified
+   * @generated
+   */
+  public Adapter createAssertionQuantifiedAdapter()
   {
     return null;
   }
@@ -337,16 +342,16 @@ public class XptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Function <em>Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.xpt.xpt.Constant
+   * @see org.xtext.example.xpt.xpt.Function
    * @generated
    */
-  public Adapter createConstantAdapter()
+  public Adapter createFunctionAdapter()
   {
     return null;
   }
@@ -362,6 +367,21 @@ public class XptAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createValuesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.xpt.xpt.Constant
+   * @generated
+   */
+  public Adapter createConstantAdapter()
   {
     return null;
   }

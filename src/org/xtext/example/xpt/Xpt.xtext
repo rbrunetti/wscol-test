@@ -17,7 +17,7 @@ AssertionAnd returns Assertions:
 	HighProrityAssertion ({AssertionAnd.left=current} '&&' right=HighProrityAssertion)*;
 
 HighProrityAssertion returns Assertions:
-	AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified;
+	AssertionNot | AssertionForm | AssertionBraced;
 
 AssertionBraced:
 	'(' innerFormula=AssertionOr ')';
@@ -25,14 +25,14 @@ AssertionBraced:
 AssertionNot:
 	'!' '(' innerFormula=AssertionOr ')';
 
-AssertionQuantified:
-	quantifier=Quantifier '(' alias=Variable 'in' values=Variable ',' conditions+=AssertionOr ')';
-
 AssertionForm:
 	leftAssert=Assertion op=Rop rightAssert=Assertion;
 
 Assertion:
-	query=Query ('.' function=Function)? | constant=Constant | values=Values;
+	query=Query ('.' function=Function)? | AssertionQuantified | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';
+
+AssertionQuantified:
+	quantifier=Quantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')'; //var è solo di tipo Variable, ok?
 
 Query:
 	'(' steps+=Step+ ')' | steps+=Step+;
@@ -50,7 +50,7 @@ Rop:
 	StringRop | '<' | '<=' | '>' | '>=';
 
 Function:
-	'uppercase' | 'length' | ID;
+	name=ID '(' (params=Values)? ')';
 
 Quantifier:
 	'forall' | 'exists' | 'numOf';
@@ -59,11 +59,14 @@ Variable:
 	'$' ID;
 
 Values:
-	'[' value+=Constant (',' value+=Constant)* ']';
+	value+=Constant (',' value+=Constant)*;
 
 Constant:
 	number=NUMBER | string=STRING;
-	
+
+terminal BOOLEAN returns ecore::EBoolean:
+	'true' | 'false';
+
 terminal NUMBER returns ecore::EDouble:
 	('0'..'9')* ('.' ('0'..'9')+)?;
 

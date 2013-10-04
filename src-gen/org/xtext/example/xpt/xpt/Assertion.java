@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getQuery <em>Query</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getConstant <em>Constant</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Assertion#isBoolean <em>Boolean</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
@@ -52,30 +53,30 @@ public interface Assertion extends EObject
   void setQuery(Query value);
 
   /**
-   * Returns the value of the '<em><b>Function</b></em>' attribute.
+   * Returns the value of the '<em><b>Function</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Function</em>' attribute isn't clear,
+   * If the meaning of the '<em>Function</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Function</em>' attribute.
-   * @see #setFunction(String)
+   * @return the value of the '<em>Function</em>' containment reference.
+   * @see #setFunction(Function)
    * @see org.xtext.example.xpt.xpt.XptPackage#getAssertion_Function()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getFunction();
+  Function getFunction();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Function</em>' attribute.
+   * @param value the new value of the '<em>Function</em>' containment reference.
    * @see #getFunction()
    * @generated
    */
-  void setFunction(String value);
+  void setFunction(Function value);
 
   /**
    * Returns the value of the '<em><b>Constant</b></em>' containment reference.
@@ -102,6 +103,32 @@ public interface Assertion extends EObject
    * @generated
    */
   void setConstant(Constant value);
+
+  /**
+   * Returns the value of the '<em><b>Boolean</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Boolean</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Boolean</em>' attribute.
+   * @see #setBoolean(boolean)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAssertion_Boolean()
+   * @model
+   * @generated
+   */
+  boolean isBoolean();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Assertion#isBoolean <em>Boolean</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Boolean</em>' attribute.
+   * @see #isBoolean()
+   * @generated
+   */
+  void setBoolean(boolean value);
 
   /**
    * Returns the value of the '<em><b>Values</b></em>' containment reference.

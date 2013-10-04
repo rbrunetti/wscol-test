@@ -5,6 +5,7 @@ package org.xtext.example.xpt.generator;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +27,11 @@ import org.xtext.example.xpt.xpt.AssertionBraced;
 import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionNot;
 import org.xtext.example.xpt.xpt.AssertionOr;
+import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.Assertions;
+import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
+import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
 
 import com.google.inject.Inject;
@@ -114,7 +118,7 @@ public class Main {
 		// get num of assertions
 		int count = 0;
 		TreeIterator<EObject> a = assertionSet.eAllContents();
-		if(assertionSet instanceof AssertionForm) {
+		if (assertionSet instanceof AssertionForm) {
 			count = count + 1;
 		}
 		while (a.hasNext()) {
@@ -149,7 +153,9 @@ public class Main {
 
 	/**
 	 * Method for the evaluation of the assertions, considering the operation (NOT, AND, OR) and the corresponding priority (NOT>AND>OR)
-	 * @param assertions the list of assertions to evaluate
+	 * 
+	 * @param assertions
+	 *            the list of assertions to evaluate
 	 * @return true if the assertions are respected, false otherwise
 	 */
 	private boolean verifyAssertions(Assertions assertions) {
@@ -162,6 +168,8 @@ public class Main {
 			return !verifyAssertions(((AssertionNot) assertions).getInnerFormula());
 		} else if (assertions instanceof AssertionBraced) {
 			return verifyAssertions(((AssertionBraced) assertions).getInnerFormula());
+		} else if (assertions instanceof AssertionQuantified) {
+			return false;
 		} else if (assertions instanceof AssertionForm) {
 			try {
 				return verifyAssertionForm((AssertionForm) assertions);
@@ -192,6 +200,8 @@ public class Main {
 			return stringAssertion((String) laObj, (String) raObj, operation, condition);
 		} else if (laObj instanceof DataObject && raObj instanceof DataObject) {
 			return dataobjectAssertion((DataObject) laObj, (DataObject) raObj, operation, condition);
+		} else if (laObj instanceof Boolean && raObj instanceof Boolean) {
+			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, condition);
 		} else if (laObj != null && raObj != null) {
 			System.err.println("Assertion '" + condition + "' malformed: data types conflict.");
 			throw new Exception();
@@ -203,10 +213,15 @@ public class Main {
 
 	/**
 	 * Method for the evaluation of numeric assertion
-	 * @param left the result of the left assertion
-	 * @param right the result of the right assertion
-	 * @param operation a string containing the operation to evaluate
-	 * @param condition a string representation of the assertion
+	 * 
+	 * @param left
+	 *            the result of the left assertion
+	 * @param right
+	 *            the result of the right assertion
+	 * @param operation
+	 *            a string containing the operation to evaluate
+	 * @param condition
+	 *            a string representation of the assertion
 	 * @return true if the assertion is correct, false otherwise
 	 */
 	private boolean numericAssertion(double left, double right, String operation, String condition) {
@@ -270,24 +285,29 @@ public class Main {
 
 	/**
 	 * Method for the evaluation of string assertion
-	 * @param left the result of the left assertion
-	 * @param right the result of the right assertion
-	 * @param operation a string containing the operation to evaluate
-	 * @param condition a string representation of the assertion
+	 * 
+	 * @param left
+	 *            the result of the left assertion
+	 * @param right
+	 *            the result of the right assertion
+	 * @param operation
+	 *            a string containing the operation to evaluate
+	 * @param condition
+	 *            a string representation of the assertion
 	 * @return true if the assertion is correct, false otherwise
 	 */
 	private boolean stringAssertion(String left, String right, String operation, String condition) {
 		boolean result;
 		switch (operation) {
 		case "=":
-			if (left == right) {
+			if (left.equals(right)) {
 				result = true;
 			} else {
 				result = false;
 			}
 			break;
 		case "!=":
-			if (left != right) {
+			if (!left.equals(right)) {
 				result = true;
 			} else {
 				result = false;
@@ -308,11 +328,52 @@ public class Main {
 	}
 
 	/**
+	 * Method for the evaluation of boolean assertion
+	 * 
+	 * @param left
+	 *            the result of the left assertion
+	 * @param right
+	 *            the result of the right assertion
+	 * @param operation
+	 *            a string containing the operation to evaluate
+	 * @param condition
+	 *            a string representation of the assertion
+	 * @return true if the assertion is correct, false otherwise
+	 */
+	private boolean booleanAssertion(boolean left, boolean right, String operation, String condition) {
+		boolean result;
+		switch (operation) {
+		case "=":
+			result = left == right;
+			break;
+		case "!=":
+			result = left != right;
+			break;
+		default:
+			result = false; // TODO eccezione
+			break;
+		}
+
+		if (result) {
+			System.out.println("Assertion '" + condition + "' is verified.");
+		} else {
+			System.out.println("Assertion '" + condition + "' is wrong.");
+		}
+
+		return result;
+	}
+
+	/**
 	 * Method for the evaluation of DataObject assertion
-	 * @param left the result of the left assertion
-	 * @param right the result of the right assertion
-	 * @param operation a string containing the operation to evaluate
-	 * @param condition a string representation of the assertion
+	 * 
+	 * @param left
+	 *            the result of the left assertion
+	 * @param right
+	 *            the result of the right assertion
+	 * @param operation
+	 *            a string containing the operation to evaluate
+	 * @param condition
+	 *            a string representation of the assertion
 	 * @return true if the assertion is correct, false otherwise
 	 */
 	private boolean dataobjectAssertion(DataObject left, DataObject right, String operation, String condition) {
@@ -348,67 +409,184 @@ public class Main {
 
 	/**
 	 * Print the result of the evaluation of queries
+	 * 
+	 * @throws Exception
 	 */
-	private Object doQueries(Assertion assertion) {
+	private Object doQueries(Assertion assertion) throws Exception {
+
+		if (assertion instanceof AssertionQuantified) {
+			return doAssertionQuantified(assertion);
+		}
+
 		Object result = new Object();
 		// if the assertion is a constant it's not going to be an xpath query
 		if (assertion.getConstant() != null) {
 			return ((assertion.getConstant().getString() == null) ? assertion.getConstant().getNumber() : assertion.getConstant().getString());
 		}
-		// TODO sto trattando un solo valore! Non considera variabili multivalore
-
 		// look if there's a placeholder, if any substitute it with its values (note: the placeholder is always on the first step!)
-		String placeholder = assertion.getQuery().getSteps().get(0).getPlaceholder();
-		if (placeholder != null) {
-			if (!variables.containsKey(placeholder)) { 
-				return null; // TODO da valutare come trattare (dichiarazioni sbagliate -> variabile assente)
-			}
-			Object value = variables.get(placeholder);
-			try {
-				if (assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
-					result = ((DataObject) value).evaluate(assertion.getQuery());
-				} else {
-					result = (DataObject) value;
+		if (assertion.getQuery() != null) {
+			String placeholder = assertion.getQuery().getSteps().get(0).getPlaceholder();
+
+			if (placeholder != null) {
+				if (!variables.containsKey(placeholder)) {
+					return null; // TODO da valutare come trattare (dichiarazioni sbagliate -> variabile assente)
 				}
-			} catch (ClassCastException e) {
-				result = value;
+				Object value = variables.get(placeholder);
+				try {
+					if (assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
+						result = ((DataObject) value).evaluate(assertion.getQuery());
+						if (((DataObject) result).isSingleValue()) {
+							result = ((DataObject) result).getFirst();
+						}
+					} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
+						result = value;
+					} else {
+						if (((DataObject) value).isSingleValue()) {
+							result = ((DataObject) value).getFirst();
+						} else {
+							result = value;
+						}
+					}
+				} catch (ClassCastException e) {
+					result = value;
+				}
+			} else {
+				result = input.evaluate(assertion.getQuery());
 			}
 		} else {
-			result = input.evaluate(assertion.getQuery());
+			result = assertion.isBoolean();
 		}
 
 		// *** FUNCTIONS ***
 		if (assertion.getFunction() != null) {
-			if(result instanceof DataObject){
-				
-			} else if(result instanceof String) {
+			if (result instanceof DataObject) {
+				// TODO
+			} else if (result instanceof String) {
 				result = applyStringFunctions(result, assertion.getFunction());
-			} else if(result instanceof Double) {
+			} else if (result instanceof Double) {
 				result = applyDoubleFunctions(result, assertion.getFunction());
 			}
 		}
 		return result;
 	}
-	
-	private Object applyStringFunctions(Object object, String function) {
-		switch (function) {
+
+	private Object doAssertionQuantified(Assertion assertion) throws Exception {
+		AssertionQuantified aq = (AssertionQuantified) assertion;
+
+		if (!(variables.get(aq.getVar()) instanceof DataObject)) {
+			throw new Exception(); // it's a single value (String, Double or Boolean), so we could not iterate over it
+		}
+
+		DataObject set = (DataObject) variables.get(aq.getVar());
+		String alias = aq.getAlias();
+		boolean result;
+
+		if (variables.containsKey(alias)) { // variable name already used
+			throw new Exception();
+		}
+
+		Iterator<Object> iter = set.values().iterator();
+
+		switch (aq.getQuantifier()) {
+		case "forall":
+			while (iter.hasNext()) {
+				variables.put(alias, iter.next());
+				result = verifyAssertions(aq.getConditions());
+				if (!result) {
+					return false;
+				}
+			}
+			return true;
+		case "exists":
+			result = false;
+			while (iter.hasNext()) {
+				variables.put(alias, iter.next());
+				result = result | verifyAssertions(aq.getConditions());
+			}
+			return true;
+		case "numOf":
+			double count = 0;
+			while(iter.hasNext()) {
+				variables.put(alias, iter.next());
+				if(verifyAssertions(aq.getConditions())) {
+					count = count + 1;
+				}
+			}
+			return count;
+		default:
+			return null; //TODO
+		}
+	}
+
+	private Object applyStringFunctions(Object object, Function function) {
+		EList<Constant> params = null;
+		if (function.getParams() != null) {
+			params = function.getParams().getValue();
+		}
+		switch (function.getName()) {
 		case "uppercase":
-			return ((String) object).toUpperCase();
+			if (params == null) {
+				return ((String) object).toUpperCase();
+			} else {
+				return null;
+			}
 		case "length":
-			return (double) ((String) object).length();
-		case "":
-			
+			if (params == null) {
+				return (double) ((String) object).length();
+			} else {
+				return null;
+			}
+		case "startsWith":
+			if (params != null && params.size() == 1) {
+				String prefix = (params.get(0).getString() != null) ? params.get(0).getString() : String.valueOf(params.get(0).getNumber());
+				return ((String) object).startsWith(prefix);
+			} else {
+				return null;
+			}
+		case "endsWith":
+			if (params != null && params.size() == 1) {
+				String suffix = (params.get(0).getString() != null) ? params.get(0).getString() : String.valueOf(params.get(0).getNumber());
+				return ((String) object).endsWith(suffix);
+			} else {
+				return null;
+			}
+		case "substring":
+			if (params != null && params.size() == 2) {
+				int beginIndex = (Math.rint(params.get(0).getNumber()) == params.get(0).getNumber()) ? (int) params.get(0).getNumber() : null;
+				int endIndex = (Math.rint(params.get(1).getNumber()) == params.get(1).getNumber()) ? (int) params.get(1).getNumber() : null;
+				return ((String) object).substring(beginIndex, endIndex);
+			} else {
+				return null;
+			}
+		case "replace":
+			if (params != null && params.size() == 2) {
+				return ((String) object).replace(params.get(0).getString(), params.get(1).getString());
+			} else {
+				return null;
+			}
 		default:
 			return null;
 		}
 	}
-	
-	private Object applyDoubleFunctions(Object object, String function) {
-		switch (function) {
-		case "uppercase":
-			return ((String) object).toUpperCase();
-		case "substring":
-			return (double) ((String) object).length();
+
+	private Object applyDoubleFunctions(Object object, Function function) {
+		EList<Constant> params = null;
+		if (function.getParams() != null) {
+			params = function.getParams().getValue();
+		}
+		switch (function.getName()) {
+		case "abs":
+			if (params == null) {
+				return Math.abs((double) object);
+			} else {
+				return null;
+			}
+		case "length":
+			if (params == null) {
+				return (double) String.valueOf((double) object).length();
+			} else {
+				return null;
+			}
 		default:
 			return null;
 		}
@@ -428,7 +606,7 @@ public class Main {
 				}
 			} else if (d.getAssert().getValues() != null) {
 				variables.put(d.getVar(), new DataObject(d.getVar(), d.getAssert().getValues()));
-			} else {
+			} else if (d.getAssert().getQuery() != null) {
 				DataObject result = input.evaluate(d.getAssert().getQuery());
 				// TODO come trattare il fatto di avere un risultato?
 				// if the assertion is wrong (with respect to the input variable) or empty the program is halted
@@ -438,6 +616,15 @@ public class Main {
 				} else {
 					variables.put(d.getVar(), result);
 				}
+			} else if(d.getAssert() instanceof AssertionQuantified) {
+				try {
+					Object result = doAssertionQuantified(d.getAssert());
+					variables.put(d.getVar(), result);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				variables.put(d.getVar(), d.getAssert().isBoolean());
 			}
 			System.out.println(d.getVar() + " = " + Helper.assertionToString(d.getAssert()));
 		}

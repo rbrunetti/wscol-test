@@ -68,15 +68,6 @@ public interface XptFactory extends EFactory
   AssertionNot createAssertionNot();
 
   /**
-   * Returns a new object of class '<em>Assertion Quantified</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assertion Quantified</em>'.
-   * @generated
-   */
-  AssertionQuantified createAssertionQuantified();
-
-  /**
    * Returns a new object of class '<em>Assertion Form</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -93,6 +84,15 @@ public interface XptFactory extends EFactory
    * @generated
    */
   Assertion createAssertion();
+
+  /**
+   * Returns a new object of class '<em>Assertion Quantified</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assertion Quantified</em>'.
+   * @generated
+   */
+  AssertionQuantified createAssertionQuantified();
 
   /**
    * Returns a new object of class '<em>Query</em>'.
@@ -122,13 +122,13 @@ public interface XptFactory extends EFactory
   Attribute createAttribute();
 
   /**
-   * Returns a new object of class '<em>Constant</em>'.
+   * Returns a new object of class '<em>Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Constant</em>'.
+   * @return a new object of class '<em>Function</em>'.
    * @generated
    */
-  Constant createConstant();
+  Function createFunction();
 
   /**
    * Returns a new object of class '<em>Values</em>'.
@@ -138,6 +138,15 @@ public interface XptFactory extends EFactory
    * @generated
    */
   Values createValues();
+
+  /**
+   * Returns a new object of class '<em>Constant</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Constant</em>'.
+   * @generated
+   */
+  Constant createConstant();
 
   /**
    * Returns a new object of class '<em>Assertion Or</em>'.

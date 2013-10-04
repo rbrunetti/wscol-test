@@ -2,20 +2,13 @@
  */
 package org.xtext.example.xpt.xpt.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.Assertions;
@@ -30,14 +23,14 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * <ul>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getQuantifier <em>Quantifier</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getAlias <em>Alias</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getVar <em>Var</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getConditions <em>Conditions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AssertionQuantifiedImpl extends AssertionsImpl implements AssertionQuantified
+public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQuantified
 {
   /**
    * The default value of the '{@link #getQuantifier() <em>Quantifier</em>}' attribute.
@@ -80,34 +73,34 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
   protected String alias = ALIAS_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getValues() <em>Values</em>}' attribute.
+   * The default value of the '{@link #getVar() <em>Var</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValues()
+   * @see #getVar()
    * @generated
    * @ordered
    */
-  protected static final String VALUES_EDEFAULT = null;
+  protected static final String VAR_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getValues() <em>Values</em>}' attribute.
+   * The cached value of the '{@link #getVar() <em>Var</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValues()
+   * @see #getVar()
    * @generated
    * @ordered
    */
-  protected String values = VALUES_EDEFAULT;
+  protected String var = VAR_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
+   * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getConditions()
    * @generated
    * @ordered
    */
-  protected EList<Assertions> conditions;
+  protected Assertions conditions;
 
   /**
    * <!-- begin-user-doc -->
@@ -181,9 +174,9 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getValues()
+  public String getVar()
   {
-    return values;
+    return var;
   }
 
   /**
@@ -191,12 +184,12 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValues(String newValues)
+  public void setVar(String newVar)
   {
-    String oldValues = values;
-    values = newValues;
+    String oldVar = var;
+    var = newVar;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__VALUES, oldValues, values));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__VAR, oldVar, var));
   }
 
   /**
@@ -204,13 +197,47 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Assertions> getConditions()
+  public Assertions getConditions()
   {
-    if (conditions == null)
-    {
-      conditions = new EObjectContainmentEList<Assertions>(Assertions.class, this, XptPackage.ASSERTION_QUANTIFIED__CONDITIONS);
-    }
     return conditions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetConditions(Assertions newConditions, NotificationChain msgs)
+  {
+    Assertions oldConditions = conditions;
+    conditions = newConditions;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__CONDITIONS, oldConditions, newConditions);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setConditions(Assertions newConditions)
+  {
+    if (newConditions != conditions)
+    {
+      NotificationChain msgs = null;
+      if (conditions != null)
+        msgs = ((InternalEObject)conditions).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_QUANTIFIED__CONDITIONS, null, msgs);
+      if (newConditions != null)
+        msgs = ((InternalEObject)newConditions).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_QUANTIFIED__CONDITIONS, null, msgs);
+      msgs = basicSetConditions(newConditions, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__CONDITIONS, newConditions, newConditions));
   }
 
   /**
@@ -224,7 +251,7 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
     switch (featureID)
     {
       case XptPackage.ASSERTION_QUANTIFIED__CONDITIONS:
-        return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
+        return basicSetConditions(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -243,8 +270,8 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
         return getQuantifier();
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
         return getAlias();
-      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
-        return getValues();
+      case XptPackage.ASSERTION_QUANTIFIED__VAR:
+        return getVar();
       case XptPackage.ASSERTION_QUANTIFIED__CONDITIONS:
         return getConditions();
     }
@@ -256,7 +283,6 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -268,12 +294,11 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
         setAlias((String)newValue);
         return;
-      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
-        setValues((String)newValue);
+      case XptPackage.ASSERTION_QUANTIFIED__VAR:
+        setVar((String)newValue);
         return;
       case XptPackage.ASSERTION_QUANTIFIED__CONDITIONS:
-        getConditions().clear();
-        getConditions().addAll((Collection<? extends Assertions>)newValue);
+        setConditions((Assertions)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -295,11 +320,11 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
         setAlias(ALIAS_EDEFAULT);
         return;
-      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
-        setValues(VALUES_EDEFAULT);
+      case XptPackage.ASSERTION_QUANTIFIED__VAR:
+        setVar(VAR_EDEFAULT);
         return;
       case XptPackage.ASSERTION_QUANTIFIED__CONDITIONS:
-        getConditions().clear();
+        setConditions((Assertions)null);
         return;
     }
     super.eUnset(featureID);
@@ -319,10 +344,10 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
         return QUANTIFIER_EDEFAULT == null ? quantifier != null : !QUANTIFIER_EDEFAULT.equals(quantifier);
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
         return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
-      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
-        return VALUES_EDEFAULT == null ? values != null : !VALUES_EDEFAULT.equals(values);
+      case XptPackage.ASSERTION_QUANTIFIED__VAR:
+        return VAR_EDEFAULT == null ? var != null : !VAR_EDEFAULT.equals(var);
       case XptPackage.ASSERTION_QUANTIFIED__CONDITIONS:
-        return conditions != null && !conditions.isEmpty();
+        return conditions != null;
     }
     return super.eIsSet(featureID);
   }
@@ -342,8 +367,8 @@ public class AssertionQuantifiedImpl extends AssertionsImpl implements Assertion
     result.append(quantifier);
     result.append(", alias: ");
     result.append(alias);
-    result.append(", values: ");
-    result.append(values);
+    result.append(", var: ");
+    result.append(var);
     result.append(')');
     return result.toString();
   }

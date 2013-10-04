@@ -206,7 +206,14 @@ public class DataObject {
 	 * @return value corresponding to the first key inserted in the DataObject
 	 */
 	public Object getFirst() {
-		return data.values().iterator().next();
+		if(isSingleValue()) {
+			return data.values().iterator().next();
+		}
+		return null;
+	}
+	
+	public boolean isSingleValue() {
+		return data.values().size() == 1;
 	}
 	
 	private boolean isList() {

@@ -168,13 +168,12 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAssertionNotParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cAssertionFormParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cAssertionBracedParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cAssertionQuantifiedParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//HighProrityAssertion returns Assertions:
-		//	AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified;
+		//	AssertionNot | AssertionForm | AssertionBraced;
 		public ParserRule getRule() { return rule; }
 
-		//AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified
+		//AssertionNot | AssertionForm | AssertionBraced
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//AssertionNot
@@ -185,9 +184,6 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//AssertionBraced
 		public RuleCall getAssertionBracedParserRuleCall_2() { return cAssertionBracedParserRuleCall_2; }
-
-		//AssertionQuantified
-		public RuleCall getAssertionQuantifiedParserRuleCall_3() { return cAssertionQuantifiedParserRuleCall_3; }
 	}
 
 	public class AssertionBracedElements extends AbstractParserRuleElementFinder {
@@ -250,66 +246,6 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
-	public class AssertionQuantifiedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionQuantified");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cQuantifierAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cQuantifierQuantifierParserRuleCall_0_0 = (RuleCall)cQuantifierAssignment_0.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cAliasAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAliasVariableParserRuleCall_2_0 = (RuleCall)cAliasAssignment_2.eContents().get(0);
-		private final Keyword cInKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cValuesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cValuesVariableParserRuleCall_4_0 = (RuleCall)cValuesAssignment_4.eContents().get(0);
-		private final Keyword cCommaKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cConditionsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cConditionsAssertionOrParserRuleCall_6_0 = (RuleCall)cConditionsAssignment_6.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		
-		//AssertionQuantified:
-		//	quantifier=Quantifier "(" alias=Variable "in" values=Variable "," conditions+=AssertionOr ")";
-		public ParserRule getRule() { return rule; }
-
-		//quantifier=Quantifier "(" alias=Variable "in" values=Variable "," conditions+=AssertionOr ")"
-		public Group getGroup() { return cGroup; }
-
-		//quantifier=Quantifier
-		public Assignment getQuantifierAssignment_0() { return cQuantifierAssignment_0; }
-
-		//Quantifier
-		public RuleCall getQuantifierQuantifierParserRuleCall_0_0() { return cQuantifierQuantifierParserRuleCall_0_0; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-
-		//alias=Variable
-		public Assignment getAliasAssignment_2() { return cAliasAssignment_2; }
-
-		//Variable
-		public RuleCall getAliasVariableParserRuleCall_2_0() { return cAliasVariableParserRuleCall_2_0; }
-
-		//"in"
-		public Keyword getInKeyword_3() { return cInKeyword_3; }
-
-		//values=Variable
-		public Assignment getValuesAssignment_4() { return cValuesAssignment_4; }
-
-		//Variable
-		public RuleCall getValuesVariableParserRuleCall_4_0() { return cValuesVariableParserRuleCall_4_0; }
-
-		//","
-		public Keyword getCommaKeyword_5() { return cCommaKeyword_5; }
-
-		//conditions+=AssertionOr
-		public Assignment getConditionsAssignment_6() { return cConditionsAssignment_6; }
-
-		//AssertionOr
-		public RuleCall getConditionsAssertionOrParserRuleCall_6_0() { return cConditionsAssertionOrParserRuleCall_6_0; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
-	}
-
 	public class AssertionFormElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionForm");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -356,16 +292,23 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
 		private final Assignment cFunctionAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
 		private final RuleCall cFunctionFunctionParserRuleCall_0_1_1_0 = (RuleCall)cFunctionAssignment_0_1_1.eContents().get(0);
-		private final Assignment cConstantAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cConstantConstantParserRuleCall_1_0 = (RuleCall)cConstantAssignment_1.eContents().get(0);
-		private final Assignment cValuesAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
-		private final RuleCall cValuesValuesParserRuleCall_2_0 = (RuleCall)cValuesAssignment_2.eContents().get(0);
+		private final RuleCall cAssertionQuantifiedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Assignment cConstantAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cConstantConstantParserRuleCall_2_0 = (RuleCall)cConstantAssignment_2.eContents().get(0);
+		private final Assignment cBooleanAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall cBooleanBOOLEANTerminalRuleCall_3_0 = (RuleCall)cBooleanAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
+		private final Keyword cLeftSquareBracketKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cValuesAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cValuesValuesParserRuleCall_4_1_0 = (RuleCall)cValuesAssignment_4_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//Assertion:
-		//	query=Query ("." function=Function)? | constant=Constant | values=Values;
+		//	query=Query ("." function=Function)? | AssertionQuantified | constant=Constant | boolean=BOOLEAN | "[" values=Values
+		//	"]";
 		public ParserRule getRule() { return rule; }
 
-		//query=Query ("." function=Function)? | constant=Constant | values=Values
+		//query=Query ("." function=Function)? | AssertionQuantified | constant=Constant | boolean=BOOLEAN | "[" values=Values "]"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//query=Query ("." function=Function)?
@@ -389,17 +332,95 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//Function
 		public RuleCall getFunctionFunctionParserRuleCall_0_1_1_0() { return cFunctionFunctionParserRuleCall_0_1_1_0; }
 
+		//AssertionQuantified
+		public RuleCall getAssertionQuantifiedParserRuleCall_1() { return cAssertionQuantifiedParserRuleCall_1; }
+
 		//constant=Constant
-		public Assignment getConstantAssignment_1() { return cConstantAssignment_1; }
+		public Assignment getConstantAssignment_2() { return cConstantAssignment_2; }
 
 		//Constant
-		public RuleCall getConstantConstantParserRuleCall_1_0() { return cConstantConstantParserRuleCall_1_0; }
+		public RuleCall getConstantConstantParserRuleCall_2_0() { return cConstantConstantParserRuleCall_2_0; }
+
+		//boolean=BOOLEAN
+		public Assignment getBooleanAssignment_3() { return cBooleanAssignment_3; }
+
+		//BOOLEAN
+		public RuleCall getBooleanBOOLEANTerminalRuleCall_3_0() { return cBooleanBOOLEANTerminalRuleCall_3_0; }
+
+		//"[" values=Values "]"
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"["
+		public Keyword getLeftSquareBracketKeyword_4_0() { return cLeftSquareBracketKeyword_4_0; }
 
 		//values=Values
-		public Assignment getValuesAssignment_2() { return cValuesAssignment_2; }
+		public Assignment getValuesAssignment_4_1() { return cValuesAssignment_4_1; }
 
 		//Values
-		public RuleCall getValuesValuesParserRuleCall_2_0() { return cValuesValuesParserRuleCall_2_0; }
+		public RuleCall getValuesValuesParserRuleCall_4_1_0() { return cValuesValuesParserRuleCall_4_1_0; }
+
+		//"]"
+		public Keyword getRightSquareBracketKeyword_4_2() { return cRightSquareBracketKeyword_4_2; }
+	}
+
+	public class AssertionQuantifiedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionQuantified");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cQuantifierAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cQuantifierQuantifierParserRuleCall_0_0 = (RuleCall)cQuantifierAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cAliasAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAliasVariableParserRuleCall_2_0 = (RuleCall)cAliasAssignment_2.eContents().get(0);
+		private final Keyword cInKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cVarAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cVarVariableParserRuleCall_4_0 = (RuleCall)cVarAssignment_4.eContents().get(0);
+		private final Keyword cCommaKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cConditionsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cConditionsAssertionOrParserRuleCall_6_0 = (RuleCall)cConditionsAssignment_6.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//AssertionQuantified:
+		//	quantifier=Quantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
+		public ParserRule getRule() { return rule; }
+
+		//quantifier=Quantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")"
+		public Group getGroup() { return cGroup; }
+
+		//quantifier=Quantifier
+		public Assignment getQuantifierAssignment_0() { return cQuantifierAssignment_0; }
+
+		//Quantifier
+		public RuleCall getQuantifierQuantifierParserRuleCall_0_0() { return cQuantifierQuantifierParserRuleCall_0_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//alias=Variable
+		public Assignment getAliasAssignment_2() { return cAliasAssignment_2; }
+
+		//Variable
+		public RuleCall getAliasVariableParserRuleCall_2_0() { return cAliasVariableParserRuleCall_2_0; }
+
+		//"in"
+		public Keyword getInKeyword_3() { return cInKeyword_3; }
+
+		//var=Variable
+		public Assignment getVarAssignment_4() { return cVarAssignment_4; }
+
+		//Variable
+		public RuleCall getVarVariableParserRuleCall_4_0() { return cVarVariableParserRuleCall_4_0; }
+
+		//","
+		public Keyword getCommaKeyword_5() { return cCommaKeyword_5; }
+
+		//conditions=AssertionOr
+		public Assignment getConditionsAssignment_6() { return cConditionsAssignment_6; }
+
+		//AssertionOr
+		public RuleCall getConditionsAssertionOrParserRuleCall_6_0() { return cConditionsAssertionOrParserRuleCall_6_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
 	}
 
 	public class QueryElements extends AbstractParserRuleElementFinder {
@@ -628,54 +649,38 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class FunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Function");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cUppercaseKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cLengthKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cParamsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cParamsValuesParserRuleCall_2_0 = (RuleCall)cParamsAssignment_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Function:
-		//	"uppercase" | "length" | ID;
+		//	name=ID "(" params=Values? ")";
 		public ParserRule getRule() { return rule; }
 
-		//"uppercase" | "length" | ID
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//name=ID "(" params=Values? ")"
+		public Group getGroup() { return cGroup; }
 
-		//"uppercase"
-		public Keyword getUppercaseKeyword_0() { return cUppercaseKeyword_0; }
-
-		//"length"
-		public Keyword getLengthKeyword_1() { return cLengthKeyword_1; }
+		//name=ID
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
 		//ID
-		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
-	}
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-	public class ConstantElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Constant");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cNumberAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cNumberNUMBERTerminalRuleCall_0_0 = (RuleCall)cNumberAssignment_0.eContents().get(0);
-		private final Assignment cStringAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cStringSTRINGTerminalRuleCall_1_0 = (RuleCall)cStringAssignment_1.eContents().get(0);
-		
-		//Constant:
-		//	number=NUMBER | string=STRING;
-		public ParserRule getRule() { return rule; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//number=NUMBER | string=STRING
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//params=Values?
+		public Assignment getParamsAssignment_2() { return cParamsAssignment_2; }
 
-		//number=NUMBER
-		public Assignment getNumberAssignment_0() { return cNumberAssignment_0; }
+		//Values
+		public RuleCall getParamsValuesParserRuleCall_2_0() { return cParamsValuesParserRuleCall_2_0; }
 
-		//NUMBER
-		public RuleCall getNumberNUMBERTerminalRuleCall_0_0() { return cNumberNUMBERTerminalRuleCall_0_0; }
-
-		//string=STRING
-		public Assignment getStringAssignment_1() { return cStringAssignment_1; }
-
-		//STRING
-		public RuleCall getStringSTRINGTerminalRuleCall_1_0() { return cStringSTRINGTerminalRuleCall_1_0; }
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
 	public class QuantifierElements extends AbstractParserRuleElementFinder {
@@ -725,45 +730,65 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	public class ValuesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Values");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueConstantParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cValueConstantParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cValueConstantParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cValueConstantParserRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		
 		//Values:
-		//	"[" value+=Constant ("," value+=Constant)* "]";
+		//	value+=Constant ("," value+=Constant)*;
 		public ParserRule getRule() { return rule; }
 
-		//"[" value+=Constant ("," value+=Constant)* "]"
+		//value+=Constant ("," value+=Constant)*
 		public Group getGroup() { return cGroup; }
 
-		//"["
-		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
-
 		//value+=Constant
-		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
 
 		//Constant
-		public RuleCall getValueConstantParserRuleCall_1_0() { return cValueConstantParserRuleCall_1_0; }
+		public RuleCall getValueConstantParserRuleCall_0_0() { return cValueConstantParserRuleCall_0_0; }
 
 		//("," value+=Constant)*
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_1() { return cGroup_1; }
 
 		//","
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
 
 		//value+=Constant
-		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
+		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
 		//Constant
-		public RuleCall getValueConstantParserRuleCall_2_1_0() { return cValueConstantParserRuleCall_2_1_0; }
+		public RuleCall getValueConstantParserRuleCall_1_1_0() { return cValueConstantParserRuleCall_1_1_0; }
+	}
 
-		//"]"
-		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
+	public class ConstantElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Constant");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cNumberAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cNumberNUMBERTerminalRuleCall_0_0 = (RuleCall)cNumberAssignment_0.eContents().get(0);
+		private final Assignment cStringAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cStringSTRINGTerminalRuleCall_1_0 = (RuleCall)cStringAssignment_1.eContents().get(0);
+		
+		//Constant:
+		//	number=NUMBER | string=STRING;
+		public ParserRule getRule() { return rule; }
+
+		//number=NUMBER | string=STRING
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//number=NUMBER
+		public Assignment getNumberAssignment_0() { return cNumberAssignment_0; }
+
+		//NUMBER
+		public RuleCall getNumberNUMBERTerminalRuleCall_0_0() { return cNumberNUMBERTerminalRuleCall_0_0; }
+
+		//string=STRING
+		public Assignment getStringAssignment_1() { return cStringAssignment_1; }
+
+		//STRING
+		public RuleCall getStringSTRINGTerminalRuleCall_1_0() { return cStringSTRINGTerminalRuleCall_1_0; }
 	}
 	
 	
@@ -774,19 +799,20 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	private HighProrityAssertionElements pHighProrityAssertion;
 	private AssertionBracedElements pAssertionBraced;
 	private AssertionNotElements pAssertionNot;
-	private AssertionQuantifiedElements pAssertionQuantified;
 	private AssertionFormElements pAssertionForm;
 	private AssertionElements pAssertion;
+	private AssertionQuantifiedElements pAssertionQuantified;
 	private QueryElements pQuery;
 	private StepElements pStep;
 	private AttributeElements pAttribute;
 	private StringRopElements pStringRop;
 	private RopElements pRop;
 	private FunctionElements pFunction;
-	private ConstantElements pConstant;
 	private QuantifierElements pQuantifier;
 	private VariableElements pVariable;
 	private ValuesElements pValues;
+	private ConstantElements pConstant;
+	private TerminalRule tBOOLEAN;
 	private TerminalRule tNUMBER;
 	private TerminalRule tINT;
 	
@@ -869,7 +895,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//HighProrityAssertion returns Assertions:
-	//	AssertionNot | AssertionForm | AssertionBraced | AssertionQuantified;
+	//	AssertionNot | AssertionForm | AssertionBraced;
 	public HighProrityAssertionElements getHighProrityAssertionAccess() {
 		return (pHighProrityAssertion != null) ? pHighProrityAssertion : (pHighProrityAssertion = new HighProrityAssertionElements());
 	}
@@ -898,16 +924,6 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssertionNotAccess().getRule();
 	}
 
-	//AssertionQuantified:
-	//	quantifier=Quantifier "(" alias=Variable "in" values=Variable "," conditions+=AssertionOr ")";
-	public AssertionQuantifiedElements getAssertionQuantifiedAccess() {
-		return (pAssertionQuantified != null) ? pAssertionQuantified : (pAssertionQuantified = new AssertionQuantifiedElements());
-	}
-	
-	public ParserRule getAssertionQuantifiedRule() {
-		return getAssertionQuantifiedAccess().getRule();
-	}
-
 	//AssertionForm:
 	//	leftAssert=Assertion op=Rop rightAssert=Assertion;
 	public AssertionFormElements getAssertionFormAccess() {
@@ -919,13 +935,24 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Assertion:
-	//	query=Query ("." function=Function)? | constant=Constant | values=Values;
+	//	query=Query ("." function=Function)? | AssertionQuantified | constant=Constant | boolean=BOOLEAN | "[" values=Values
+	//	"]";
 	public AssertionElements getAssertionAccess() {
 		return (pAssertion != null) ? pAssertion : (pAssertion = new AssertionElements());
 	}
 	
 	public ParserRule getAssertionRule() {
 		return getAssertionAccess().getRule();
+	}
+
+	//AssertionQuantified:
+	//	quantifier=Quantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
+	public AssertionQuantifiedElements getAssertionQuantifiedAccess() {
+		return (pAssertionQuantified != null) ? pAssertionQuantified : (pAssertionQuantified = new AssertionQuantifiedElements());
+	}
+	
+	public ParserRule getAssertionQuantifiedRule() {
+		return getAssertionQuantifiedAccess().getRule();
 	}
 
 	//Query:
@@ -979,23 +1006,13 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Function:
-	//	"uppercase" | "length" | ID;
+	//	name=ID "(" params=Values? ")";
 	public FunctionElements getFunctionAccess() {
 		return (pFunction != null) ? pFunction : (pFunction = new FunctionElements());
 	}
 	
 	public ParserRule getFunctionRule() {
 		return getFunctionAccess().getRule();
-	}
-
-	//Constant:
-	//	number=NUMBER | string=STRING;
-	public ConstantElements getConstantAccess() {
-		return (pConstant != null) ? pConstant : (pConstant = new ConstantElements());
-	}
-	
-	public ParserRule getConstantRule() {
-		return getConstantAccess().getRule();
 	}
 
 	//Quantifier:
@@ -1019,7 +1036,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Values:
-	//	"[" value+=Constant ("," value+=Constant)* "]";
+	//	value+=Constant ("," value+=Constant)*;
 	public ValuesElements getValuesAccess() {
 		return (pValues != null) ? pValues : (pValues = new ValuesElements());
 	}
@@ -1027,6 +1044,22 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getValuesRule() {
 		return getValuesAccess().getRule();
 	}
+
+	//Constant:
+	//	number=NUMBER | string=STRING;
+	public ConstantElements getConstantAccess() {
+		return (pConstant != null) ? pConstant : (pConstant = new ConstantElements());
+	}
+	
+	public ParserRule getConstantRule() {
+		return getConstantAccess().getRule();
+	}
+
+	//terminal BOOLEAN returns ecore::EBoolean:
+	//	"true" | "false";
+	public TerminalRule getBOOLEANRule() {
+		return (tBOOLEAN != null) ? tBOOLEAN : (tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOLEAN"));
+	} 
 
 	//terminal NUMBER returns ecore::EDouble:
 	//	"0".."9"* ("." "0".."9"+)?;

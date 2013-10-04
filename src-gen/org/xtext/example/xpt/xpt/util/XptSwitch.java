@@ -109,14 +109,6 @@ public class XptSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XptPackage.ASSERTION_QUANTIFIED:
-      {
-        AssertionQuantified assertionQuantified = (AssertionQuantified)theEObject;
-        T result = caseAssertionQuantified(assertionQuantified);
-        if (result == null) result = caseAssertions(assertionQuantified);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XptPackage.ASSERTION_FORM:
       {
         AssertionForm assertionForm = (AssertionForm)theEObject;
@@ -129,6 +121,14 @@ public class XptSwitch<T> extends Switch<T>
       {
         Assertion assertion = (Assertion)theEObject;
         T result = caseAssertion(assertion);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.ASSERTION_QUANTIFIED:
+      {
+        AssertionQuantified assertionQuantified = (AssertionQuantified)theEObject;
+        T result = caseAssertionQuantified(assertionQuantified);
+        if (result == null) result = caseAssertion(assertionQuantified);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -153,10 +153,10 @@ public class XptSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XptPackage.CONSTANT:
+      case XptPackage.FUNCTION:
       {
-        Constant constant = (Constant)theEObject;
-        T result = caseConstant(constant);
+        Function function = (Function)theEObject;
+        T result = caseFunction(function);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -164,6 +164,13 @@ public class XptSwitch<T> extends Switch<T>
       {
         Values values = (Values)theEObject;
         T result = caseValues(values);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.CONSTANT:
+      {
+        Constant constant = (Constant)theEObject;
+        T result = caseConstant(constant);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -268,22 +275,6 @@ public class XptSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Assertion Quantified</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Assertion Quantified</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAssertionQuantified(AssertionQuantified object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Assertion Form</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -311,6 +302,22 @@ public class XptSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAssertion(Assertion object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Assertion Quantified</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assertion Quantified</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssertionQuantified(AssertionQuantified object)
   {
     return null;
   }
@@ -364,17 +371,17 @@ public class XptSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Constant</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Constant</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Function</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseConstant(Constant object)
+  public T caseFunction(Function object)
   {
     return null;
   }
@@ -391,6 +398,22 @@ public class XptSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseValues(Values object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Constant</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Constant</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConstant(Constant object)
   {
     return null;
   }

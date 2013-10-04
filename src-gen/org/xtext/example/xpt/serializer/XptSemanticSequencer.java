@@ -24,6 +24,7 @@ import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
+import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
@@ -94,12 +95,8 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case XptPackage.ASSERTION_QUANTIFIED:
-				if(context == grammarAccess.getAssertionAndRule() ||
-				   context == grammarAccess.getAssertionAndAccess().getAssertionAndLeftAction_1_0() ||
-				   context == grammarAccess.getAssertionOrRule() ||
-				   context == grammarAccess.getAssertionOrAccess().getAssertionOrLeftAction_1_0() ||
-				   context == grammarAccess.getAssertionQuantifiedRule() ||
-				   context == grammarAccess.getHighProrityAssertionRule()) {
+				if(context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getAssertionQuantifiedRule()) {
 					sequence_AssertionQuantified(context, (AssertionQuantified) semanticObject); 
 					return; 
 				}
@@ -119,6 +116,12 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case XptPackage.DECLARATION:
 				if(context == grammarAccess.getDeclarationRule()) {
 					sequence_Declaration(context, (Declaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.FUNCTION:
+				if(context == grammarAccess.getFunctionRule()) {
+					sequence_Function(context, (Function) semanticObject); 
 					return; 
 				}
 				else break;
@@ -244,7 +247,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (quantifier=Quantifier alias=Variable values=Variable conditions+=AssertionOr)
+	 *     (quantifier=Quantifier alias=Variable var=Variable conditions=AssertionOr)
 	 */
 	protected void sequence_AssertionQuantified(EObject context, AssertionQuantified semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -253,7 +256,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((query=Query function=Function?) | constant=Constant | values=Values)
+	 *     ((query=Query function=Function?) | constant=Constant | boolean=BOOLEAN | values=Values)
 	 */
 	protected void sequence_Assertion(EObject context, Assertion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -294,6 +297,15 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getDeclarationAccess().getVarVariableParserRuleCall_1_0(), semanticObject.getVar());
 		feeder.accept(grammarAccess.getDeclarationAccess().getAssertAssertionParserRuleCall_3_0(), semanticObject.getAssert());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=ID params=Values?)
+	 */
+	protected void sequence_Function(EObject context, Function semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
