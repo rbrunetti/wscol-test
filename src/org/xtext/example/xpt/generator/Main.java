@@ -101,11 +101,18 @@ public class Main {
 		Resource resource = set.getResource(URI.createURI(string), true);
 
 		// validate the resource
+		// GrammarSintaxHelper.validation(validator, resource);
 		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 		if (!list.isEmpty()) {
 			System.err.println("*** MALFORMED ASSERTIONS ***");
 			for (Issue issue : list) {
-				System.err.println(issue);
+				URI problemURI = issue.getUriToProblem();
+				String location = problemURI.fragment();
+				String msg = issue.getMessage();
+				Integer lineNumb = issue.getLineNumber();
+				// Integer offset = issue.getOffset();
+				// Integer length = issue.getLength();
+				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - " + location);
 			}
 			return;
 		}
@@ -115,7 +122,7 @@ public class Main {
 		EObjectContainmentEList<Declaration> declarations = (EObjectContainmentEList<Declaration>) model.getDeclarations();
 		Assertions assertionSet = model.getAssertionSet();
 
-		// get num of assertions
+		// number of assertions
 		int count = 0;
 		TreeIterator<EObject> a = assertionSet.eAllContents();
 		if (assertionSet instanceof AssertionForm) {
@@ -130,7 +137,7 @@ public class Main {
 
 		// get input: via xml parsing or passed DataObject
 		input = new DataObject(xmlFilePath);
-		// input = hashMapTest();
+		// input = hashMapTest(); // load input from a DataObject
 		System.out.println("################## INPUT ###################\n" + input + "\n");
 
 		if (count == 0) {
@@ -143,11 +150,21 @@ public class Main {
 		System.out.println(count + " assertions has been found.\n");
 
 		// get variables declaration and sets the hashmap
-		setVariable(declarations);
+		try {
+			setVariable(declarations);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(0);
+		}
 
 		// verify the assertions
 		System.out.println("\n################ ASSERTIONS ################");
-		System.out.println("Result: " + verifyAssertions(assertionSet));
+		try {
+			System.out.println("Result: " + verifyAssertions(assertionSet));
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.exit(0);
+		}
 
 	}
 
@@ -157,8 +174,10 @@ public class Main {
 	 * @param assertions
 	 *            the list of assertions to evaluate
 	 * @return true if the assertions are respected, false otherwise
+	 * @throws Exception
+	 *             if there are exception from the verification of the assertions
 	 */
-	private boolean verifyAssertions(Assertions assertions) {
+	private boolean verifyAssertions(Assertions assertions) throws Exception {
 		EList<EObject> a = assertions.eContents();
 		if (assertions instanceof AssertionAnd) {
 			return (verifyAssertions((Assertions) a.get(0)) & verifyAssertions((Assertions) a.get(1)));
@@ -171,12 +190,7 @@ public class Main {
 		} else if (assertions instanceof AssertionQuantified) {
 			return false;
 		} else if (assertions instanceof AssertionForm) {
-			try {
-				return verifyAssertionForm((AssertionForm) assertions);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.exit(0);
-			}
+			return verifyAssertionForm((AssertionForm) assertions);
 		}
 		return false;
 	}
@@ -186,6 +200,7 @@ public class Main {
 	 * 
 	 * @param assertionSet
 	 * @throws Exception
+	 *             if there is data types conflicts
 	 */
 	private boolean verifyAssertionForm(AssertionForm af) throws Exception {
 		Object laObj = doQueries(af.getLeftAssert());
@@ -203,11 +218,16 @@ public class Main {
 		} else if (laObj instanceof Boolean && raObj instanceof Boolean) {
 			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, condition);
 		} else if (laObj != null && raObj != null) {
-			System.err.println("Assertion '" + condition + "' malformed: data types conflict.");
-			throw new Exception();
+			String msg = "Assertion " + condition + " cause data types conflicts.";
+			if (laObj instanceof DataObject && ((DataObject) laObj).isEmpty()) {
+				msg += "\n NOTE: '" + Helper.assertionToString(af.getLeftAssert()) + "' gives empty result.";
+			}
+			if (raObj instanceof DataObject && ((DataObject) raObj).isEmpty()) {
+				msg += "\n NOTE: '" + Helper.assertionToString(af.getRightAssert()) + "' gives empty result.";
+			}
+			throw new Exception(msg);
 		} else {
-			System.err.println("Unable to evaluate assertion '" + condition + "', due to erroneous variables declaration.");
-			throw new Exception();
+			throw new Exception("Unable to evaluate assertion '" + condition + "', due to erroneous variables declaration.");
 		}
 	}
 
@@ -295,8 +315,10 @@ public class Main {
 	 * @param condition
 	 *            a string representation of the assertion
 	 * @return true if the assertion is correct, false otherwise
+	 * @throws Exception
+	 *             if the operation is not supported
 	 */
-	private boolean stringAssertion(String left, String right, String operation, String condition) {
+	private boolean stringAssertion(String left, String right, String operation, String condition) throws Exception {
 		boolean result;
 		switch (operation) {
 		case "=":
@@ -314,8 +336,7 @@ public class Main {
 			}
 			break;
 		default:
-			result = false;
-			break;
+			throw new Exception("Unsopported operation '" + operation + "' for a String assertion.");
 		}
 
 		if (result) {
@@ -339,8 +360,10 @@ public class Main {
 	 * @param condition
 	 *            a string representation of the assertion
 	 * @return true if the assertion is correct, false otherwise
+	 * @throws Exception
+	 *             if the operation is not supported
 	 */
-	private boolean booleanAssertion(boolean left, boolean right, String operation, String condition) {
+	private boolean booleanAssertion(boolean left, boolean right, String operation, String condition) throws Exception {
 		boolean result;
 		switch (operation) {
 		case "=":
@@ -350,8 +373,7 @@ public class Main {
 			result = left != right;
 			break;
 		default:
-			result = false; // TODO eccezione
-			break;
+			throw new Exception("Unsopported operation '" + operation + "' for a boolean assertion.");
 		}
 
 		if (result) {
@@ -375,8 +397,10 @@ public class Main {
 	 * @param condition
 	 *            a string representation of the assertion
 	 * @return true if the assertion is correct, false otherwise
+	 * @throws Exception
+	 *             if the operation is not supported
 	 */
-	private boolean dataobjectAssertion(DataObject left, DataObject right, String operation, String condition) {
+	private boolean dataobjectAssertion(DataObject left, DataObject right, String operation, String condition) throws Exception {
 		boolean result;
 		switch (operation) {
 		case "=":
@@ -394,8 +418,7 @@ public class Main {
 			}
 			break;
 		default:
-			result = false;
-			break;
+			throw new Exception("Unsopported operation '" + operation + "' for a DataObject assertion.");
 		}
 
 		if (result) {
@@ -411,6 +434,9 @@ public class Main {
 	 * Print the result of the evaluation of queries
 	 * 
 	 * @throws Exception
+	 *             if is used an empty variable for the assertion
+	 * @throws Exception
+	 *             if the variable
 	 */
 	private Object doQueries(Assertion assertion) throws Exception {
 
@@ -429,10 +455,10 @@ public class Main {
 
 			if (placeholder != null) {
 				if (!variables.containsKey(placeholder)) {
-					return null; // TODO da valutare come trattare (dichiarazioni sbagliate -> variabile assente)
+					throw new Exception("Variable '" + placeholder + "' is not defined.");
 				}
 				Object value = variables.get(placeholder);
-				try {
+				if (value instanceof DataObject) {
 					if (assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
 						result = ((DataObject) value).evaluate(assertion.getQuery());
 						if (((DataObject) result).isSingleValue()) {
@@ -447,7 +473,7 @@ public class Main {
 							result = value;
 						}
 					}
-				} catch (ClassCastException e) {
+				} else {
 					result = value;
 				}
 			} else {
@@ -470,19 +496,28 @@ public class Main {
 		return result;
 	}
 
+	/**
+	 * Evaluate a quantified assertion
+	 * 
+	 * @param assertion
+	 *            the AssertionQuatified to evaluate
+	 * @return a boolean if the quantifier is 'forall' or 'exists', otherwise a double in the case the quantifier is 'numOf'
+	 * @throws Exception
+	 *             if the selected variable is not of DataObject type and if the chosen variable alias is already used
+	 */
 	private Object doAssertionQuantified(Assertion assertion) throws Exception {
 		AssertionQuantified aq = (AssertionQuantified) assertion;
 
 		if (!(variables.get(aq.getVar()) instanceof DataObject)) {
-			throw new Exception(); // it's a single value (String, Double or Boolean), so we could not iterate over it
+			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getName() + ". A DataObject type was expected.");
 		}
 
 		DataObject set = (DataObject) variables.get(aq.getVar());
 		String alias = aq.getAlias();
 		boolean result;
 
-		if (variables.containsKey(alias)) { // variable name already used
-			throw new Exception();
+		if (variables.containsKey(alias)) {
+			throw new Exception("The variable '" + alias + "' is already used. Choose another.");
 		}
 
 		Iterator<Object> iter = set.values().iterator();
@@ -493,6 +528,7 @@ public class Main {
 				variables.put(alias, iter.next());
 				result = verifyAssertions(aq.getConditions());
 				if (!result) {
+					variables.remove(alias);
 					return false;
 				}
 			}
@@ -503,21 +539,32 @@ public class Main {
 				variables.put(alias, iter.next());
 				result = result | verifyAssertions(aq.getConditions());
 			}
+			variables.remove(alias);
 			return true;
 		case "numOf":
 			double count = 0;
-			while(iter.hasNext()) {
+			while (iter.hasNext()) {
 				variables.put(alias, iter.next());
-				if(verifyAssertions(aq.getConditions())) {
+				if (verifyAssertions(aq.getConditions())) {
 					count = count + 1;
 				}
 			}
+			variables.remove(alias);
 			return count;
 		default:
-			return null; //TODO
+			return null; // never reached: other cases are blocked by the grammar parser as errors
 		}
 	}
 
+	/**
+	 * List of functions for the String results
+	 * 
+	 * @param object
+	 *            the String the elaborate
+	 * @param function
+	 *            the function and the parameters for the function
+	 * @return the result of the function
+	 */
 	private Object applyStringFunctions(Object object, Function function) {
 		EList<Constant> params = null;
 		if (function.getParams() != null) {
@@ -569,6 +616,15 @@ public class Main {
 		}
 	}
 
+	/**
+	 * List of functions for the numeric results
+	 * 
+	 * @param object
+	 *            the number (of type Double) the elaborate
+	 * @param function
+	 *            the function and the parameters for the function
+	 * @return the result of the function
+	 */
 	private Object applyDoubleFunctions(Object object, Function function) {
 		EList<Constant> params = null;
 		if (function.getParams() != null) {
@@ -594,10 +650,15 @@ public class Main {
 
 	/**
 	 * Set variables according to the declarations
+	 * 
+	 * @throws Exception
 	 */
-	private void setVariable(EObjectContainmentEList<Declaration> declarations) {
+	private void setVariable(EObjectContainmentEList<Declaration> declarations) throws Exception {
 		System.out.println("############### DECLARATIONS ###############");
 		for (Declaration d : declarations) {
+			if (variables.containsKey(d.getVar())) {
+				throw new Exception("The variable '" + d.getVar() + "' in '" + Helper.declarationToString(d) + "' is already used. Choose another.");
+			}
 			if (d.getAssert().getConstant() != null) {
 				if (d.getAssert().getConstant().getString() != null) {
 					variables.put(d.getVar(), d.getAssert().getConstant().getString());
@@ -607,26 +668,41 @@ public class Main {
 			} else if (d.getAssert().getValues() != null) {
 				variables.put(d.getVar(), new DataObject(d.getVar(), d.getAssert().getValues()));
 			} else if (d.getAssert().getQuery() != null) {
-				DataObject result = input.evaluate(d.getAssert().getQuery());
-				// TODO come trattare il fatto di avere un risultato?
-				// if the assertion is wrong (with respect to the input variable) or empty the program is halted
-				if (result == null) {
-					System.err.println("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "'. Please check it.");
-					System.exit(0);
+				DataObject result;
+
+				String placeholder = d.getAssert().getQuery().getSteps().get(0).getPlaceholder();
+
+				if (placeholder != null) {
+					if (!variables.containsKey(placeholder)) {
+						throw new Exception("Variable '" + placeholder + "' is not defined.");
+					}
+					DataObject value = (DataObject) variables.get(placeholder);
+					if (d.getAssert().getQuery().getSteps().size() > 1) { // if there query goes deeper
+						try {
+							result = value.evaluate(d.getAssert().getQuery());
+						} catch (Exception e) {
+							throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+						}
+					} else {
+						result = value;
+					}
 				} else {
-					variables.put(d.getVar(), result);
+					try {
+						result = input.evaluate(d.getAssert().getQuery());
+					} catch (Exception e) {
+						throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+					}
 				}
-			} else if(d.getAssert() instanceof AssertionQuantified) {
-				try {
-					Object result = doAssertionQuantified(d.getAssert());
-					variables.put(d.getVar(), result);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+
+				variables.put(d.getVar(), result);
+
+			} else if (d.getAssert() instanceof AssertionQuantified) {
+				Object result = doAssertionQuantified(d.getAssert());
+				variables.put(d.getVar(), result);
 			} else {
 				variables.put(d.getVar(), d.getAssert().isBoolean());
 			}
-			System.out.println(d.getVar() + " = " + Helper.assertionToString(d.getAssert()));
+			System.out.println(Helper.declarationToString(d));
 		}
 		return;
 	}

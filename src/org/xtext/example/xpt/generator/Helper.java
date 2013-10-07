@@ -8,13 +8,19 @@ import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
+import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Query;
+import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Values;
 
 public class Helper {
 	
 	public static String assertionFormToString(AssertionForm af) {
 		return assertionToString(af.getLeftAssert()) + " " + af.getOp() + " " + assertionToString(af.getRightAssert());
+	}
+	
+	public static String declarationToString(Declaration d) {
+		return d.getVar() + " = " + assertionToString(d.getAssert());
 	}
 
 	public static String assertionToString(Assertion a) { //TODO sistemare!
@@ -31,7 +37,7 @@ public class Helper {
 			res = valuesToList(a.getValues()).toString();
 		} else if(a instanceof AssertionQuantified) {
 			AssertionQuantified aq = ((AssertionQuantified) a);
-			res = aq.getQuantifier() + "(" + aq.getVar() + " in " + aq.getAlias() + ", conditions)";
+			res = aq.getQuantifier() + "(" + aq.getAlias() + " in " + aq.getVar() + ", ...conditions...)";
 		} else {
 			res = String.valueOf(a.isBoolean());
 		}
@@ -52,28 +58,54 @@ public class Helper {
 		String res = "";
 		Attribute attribute = null;
 		for (int i = 0; i < q.getSteps().size(); i++) {
-			if (q.getSteps().get(i).getPlaceholder() != null) {
-				res = q.getSteps().get(i).getPlaceholder();
-			} else {
-				res += '/' + q.getSteps().get(i).getName();
-				attribute = q.getSteps().get(i).getAttribute();
-				if (attribute != null) {
-					String property = attribute.getProperty();
-					String operation = attribute.getOp();
-					double value = attribute.getNumber();
-					double intValue = attribute.getNumberValue();
-					res += '[';
-					if (property != null && operation != null) {
-						res += property + operation;
-						if (attribute.getStrValue() != null) {
-							res += '"' + attribute.getStrValue() + '"' + ']';
-						} else {
-							res += String.valueOf(intValue) + ']';
-						}
-					} else {
-						res += String.valueOf(value) + ']';
-					}
+//			if (q.getSteps().get(i).getPlaceholder() != null) {
+//				res = q.getSteps().get(i).getPlaceholder();
+//			} else {
+				res += stepToString(q.getSteps().get(i));//.getName();
+//				attribute = q.getSteps().get(i).getAttribute();
+//				if (attribute != null) {
+//					String property = attribute.getProperty();
+//					String operation = attribute.getOp();
+//					double value = attribute.getNumber();
+//					double intValue = attribute.getNumberValue();
+//					res += '[';
+//					if (property != null && operation != null) {
+//						res += property + operation;
+//						if (attribute.getStrValue() != null) {
+//							res += '"' + attribute.getStrValue() + '"' + ']';
+//						} else {
+//							res += String.valueOf(intValue) + ']';
+//						}
+//					} else {
+//						res += String.valueOf(value) + ']';
+//					}
+//				}
+//			}
+		}
+		return res;
+	}
+	
+	public static String stepToString(Step s) {
+		if(s.getPlaceholder() != null) {
+			return s.getPlaceholder();
+		}
+		String res = '/' + s.getName();
+		Attribute attribute = s.getAttribute();
+		if (attribute != null) {
+			String property = attribute.getProperty();
+			String operation = attribute.getOp();
+			double value = attribute.getNumber();
+			double intValue = attribute.getNumberValue();
+			res += '[';
+			if (property != null && operation != null) {
+				res += property + operation;
+				if (attribute.getStrValue() != null) {
+					res += '"' + attribute.getStrValue() + '"' + ']';
+				} else {
+					res += String.valueOf(intValue) + ']';
 				}
+			} else {
+				res += String.valueOf(value) + ']';
 			}
 		}
 		return res;

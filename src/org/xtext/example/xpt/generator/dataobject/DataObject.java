@@ -36,11 +36,11 @@ public class DataObject {
 	public DataObject() {
 		data = LinkedHashMultimap.create();
 	}
-	
+
 	public DataObject(String name, Values values) {
 		data = LinkedHashMultimap.create();
-		for(Constant c : values.getValue()){
-			if(c.getString() != null){
+		for (Constant c : values.getValue()) {
+			if (c.getString() != null) {
 				data.put(name, c.getString());
 			} else {
 				data.put(name, c.getNumber());
@@ -58,8 +58,10 @@ public class DataObject {
 	 * @param query
 	 *            to evaluate
 	 * @return a DataObject containing the results of the query
+	 * @throws Exception
+	 *             if the evaluation goes wrong (see the called method for the specific exception)
 	 */
-	public DataObject evaluate(Query query) {
+	public DataObject evaluate(Query query) throws Exception {
 		DataObject current = new DataObject(data);
 		for (Step s : query.getSteps()) {
 			if (s.getPlaceholder() == null) {
@@ -80,8 +82,10 @@ public class DataObject {
 	 * @param property
 	 *            the searched key/property in the DataObject
 	 * @return a DataObject corresponding to the searched value
+	 * @throws Exception
+	 *             if the searched property is not found
 	 */
-	private DataObject getSubmap(DataObject current, String property, Attribute attribute) {
+	private DataObject getSubmap(DataObject current, String property, Attribute attribute) throws Exception {
 		DataObject subMap = new DataObject();
 		if (current.keys().contains(property)) {
 			Set<Object> sub = current.get(property);
@@ -90,20 +94,24 @@ public class DataObject {
 			while (iter.hasNext()) {
 				Object next = iter.next();
 				i = i + 1;
-				try {
+				if (next instanceof DataObject) {
 					DataObject nextDO = (DataObject) next;
 					if (attribute != null) {
-						DataObject checkedAttribute = getSubMapWithAttribute(nextDO, attribute);
-						if (checkedAttribute != null) {
-							subMap.putAll(checkedAttribute);
-						} else if (attribute.getNumber() > 0 && attribute.getNumber() == i) {
-							subMap.putAll(nextDO);
-							return subMap;
+						if (attribute.getNumber() > 0) { 
+							if (attribute.getNumber() == i) {
+								subMap.putAll(nextDO);
+								return subMap;
+							}
+						} else {
+							DataObject subMapWithAttribute = getSubMapWithAttribute(nextDO, attribute);
+							if (subMapWithAttribute != null) {
+								subMap.putAll(subMapWithAttribute);
+							}
 						}
 					} else {
 						subMap.putAll(nextDO); // take the DataObject and all the sub-attribute
 					}
-				} catch (ClassCastException e) {
+				} else {
 					// if there's the selection of the n-th element
 					if (attribute != null) {
 						if (attribute.getNumber() > 0) {
@@ -119,16 +127,21 @@ public class DataObject {
 			}
 			return subMap;
 		}
-		return null;
+		throw new Exception("The property '" + property + "' is not contained in '" + current.toString());
 	}
 
 	/**
 	 * Evaluate the attributes on a passed DataObject
-	 * @param current DataObject on which the attribute is verified
-	 * @param attribute attribute to check
+	 * 
+	 * @param current
+	 *            DataObject on which the attribute is verified
+	 * @param attribute
+	 *            attribute to check
 	 * @return DataObject selected from 'current' with the corresponding attribute
+	 * @throws Exception
+	 *             if the searched property is not found
 	 */
-	private DataObject getSubMapWithAttribute(DataObject current, Attribute attribute) {
+	private DataObject getSubMapWithAttribute(DataObject current, Attribute attribute) throws Exception {
 		String key = attribute.getProperty();
 		String strValue = attribute.getStrValue();
 		String op = attribute.getOp();
@@ -154,45 +167,45 @@ public class DataObject {
 							if ((double) iter.next() == intValue) {
 								return current;
 							}
-							break;
+							return null;
 						case "!=":
 							if ((double) iter.next() != intValue) {
 								return current;
 							}
-							break;
+							return null;
 						case ">":
 							if ((double) iter.next() > intValue) {
 								return current;
 							}
-							break;
+							return null;
 						case ">=":
 							if ((double) iter.next() >= intValue) {
 								return current;
 							}
-							break;
+							return null;
 						case "<":
 							if ((double) iter.next() < intValue) {
 								return current;
 							}
-							break;
+							return null;
 						case "<=":
 							if ((double) iter.next() <= intValue) {
 								return current;
 							}
-							break;
+							return null;
 						}
 					}
-					return null;
 				}
 			}
 		}
-		return null;
+		throw new Exception("The property '" + key + "' is not contained in '" + current.toString());
 	}
 
 	/**
 	 * Returns a collection view of all values associated with a key.
 	 * 
-	 * @param key key to search for in multimap
+	 * @param key
+	 *            key to search for in multimap
 	 * @return the collection of values that the key maps to
 	 * @see com.google.common.collect.AbstractSetMultimap#get(Object)
 	 */
@@ -206,23 +219,27 @@ public class DataObject {
 	 * @return value corresponding to the first key inserted in the DataObject
 	 */
 	public Object getFirst() {
-		if(isSingleValue()) {
+		if (isSingleValue()) {
 			return data.values().iterator().next();
 		}
 		return null;
 	}
-	
+
 	public boolean isSingleValue() {
 		return data.values().size() == 1;
 	}
-	
+
 	private boolean isList() {
 		return data.keySet().size() == 1;
 	}
 	
+	public boolean isEmpty() {
+		return data.isEmpty();
+	}
+
 	private List<Object> getList() {
 		List<Object> res = new ArrayList<Object>();
-		for(Object e:this.values()){
+		for (Object e : this.values()) {
 			res.add(e);
 		}
 		return res;
@@ -251,7 +268,8 @@ public class DataObject {
 	/**
 	 * Returns true if the multimap contains any values for the specified key.
 	 * 
-	 * @param key key to search for in multimap
+	 * @param key
+	 *            key to search for in multimap
 	 * @see com.google.common.collect.AbstractSetMultimap#containsKey(Object)
 	 */
 	public boolean containsKey(Object key) {
@@ -261,8 +279,10 @@ public class DataObject {
 	/**
 	 * Returns true if the multimap contains the specified key-value pair.
 	 * 
-	 * @param key key to search for in multimap
-	 * @param value value to search for in multimap
+	 * @param key
+	 *            key to search for in multimap
+	 * @param value
+	 *            value to search for in multimap
 	 * @see com.google.common.collect.AbstractSetMultimap#containsEntry(Object, Object)
 	 */
 	public boolean containsEntry(Object key, Object value) {
@@ -287,34 +307,39 @@ public class DataObject {
 	public Collection<Object> values() {
 		return data.values();
 	}
-		 
+
 	/**
 	 * Stores a key-value pair in the multimap.
 	 * 
-	 * @param key key to store in the multimap
-	 * @param value value to store in the multimap
+	 * @param key
+	 *            key to store in the multimap
+	 * @param value
+	 *            value to store in the multimap
 	 * @return true if the method increased the size of the multimap, or false if the multimap already contained the key-value pair
 	 * @see com.google.common.collect.AbstractSetMultimap#put(Object, Object)
 	 */
 	public boolean put(String key, Object value) {
 		return data.put(key, value);
 	}
-		 
+
 	/**
 	 * Copies all of another multimap's key-value pairs into this multimap. The order in which the mappings are added is determined by multimap.entries().
-	 * @param dataObject mappings to store in this multimap
+	 * 
+	 * @param dataObject
+	 *            mappings to store in this multimap
 	 * @return true if the multimap changed
 	 */
 	public boolean putAll(DataObject dataObject) {
 		return data.putAll(dataObject.getData());
 	}
 
-	//*** XML PARSING METHODS ***
-	
+	// *** XML PARSING METHODS ***
+
 	/**
 	 * Returns the Map corresponding to the input XML file
 	 * 
-	 * @param xmlPath the path of the XML file to parse
+	 * @param xmlPath
+	 *            the path of the XML file to parse
 	 * @return the corresponding Map
 	 */
 	private LinkedHashMultimap<String, Object> parseXML(String xmlPath) {
@@ -336,6 +361,7 @@ public class DataObject {
 
 	/**
 	 * TODO
+	 * 
 	 * @param root
 	 * @return
 	 */
@@ -370,23 +396,25 @@ public class DataObject {
 		for (String key : data.keySet()) {
 			result += key + "=" + data.get(key) + ", ";
 		}
-		result = result.substring(0, result.length() - 2);
+		if(result.length()>1){
+			result = result.substring(0, result.length() - 2);
+		}
 		result += "}";
 		return result;
 
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-		if(!(o instanceof DataObject)) {
+	public boolean equals(Object o) {
+		if (!(o instanceof DataObject)) {
 			return false;
 		}
-		
+
 		// check if each of the map of the two DataObject contains a single key with a List value -> if so, ignore the keys and compare the lists
-		if(this.isList() && ((DataObject) o).isList()) {
+		if (this.isList() && ((DataObject) o).isList()) {
 			return this.getList().equals(((DataObject) o).getList());
 		}
-		
+
 		// check if the maps has same values for the same keys
 		return data.equals(((DataObject) o).getData());
 	}
