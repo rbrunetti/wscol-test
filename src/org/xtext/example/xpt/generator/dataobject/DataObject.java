@@ -225,6 +225,10 @@ public class DataObject {
 		return null;
 	}
 
+	/**
+	 * Return true if there is only a value in the DataObject
+	 * @return
+	 */
 	public boolean isSingleValue() {
 		return data.values().size() == 1;
 	}

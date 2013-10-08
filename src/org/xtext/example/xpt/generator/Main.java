@@ -508,6 +508,11 @@ public class Main {
 	private Object doAssertionQuantified(Assertion assertion) throws Exception {
 		AssertionQuantified aq = (AssertionQuantified) assertion;
 
+		if(!(variables.containsKey(aq.getVar()))) {
+			throw new Exception("The variable '" + aq.getVar() + "' is not defined.");
+			
+		}
+		
 		if (!(variables.get(aq.getVar()) instanceof DataObject)) {
 			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getName() + ". A DataObject type was expected.");
 		}
@@ -654,6 +659,7 @@ public class Main {
 	 * @throws Exception
 	 */
 	private void setVariable(EObjectContainmentEList<Declaration> declarations) throws Exception {
+		Object result = null;
 		System.out.println("############### DECLARATIONS ###############");
 		for (Declaration d : declarations) {
 			if (variables.containsKey(d.getVar())) {
@@ -661,27 +667,40 @@ public class Main {
 			}
 			if (d.getAssert().getConstant() != null) {
 				if (d.getAssert().getConstant().getString() != null) {
-					variables.put(d.getVar(), d.getAssert().getConstant().getString());
+					result = d.getAssert().getConstant().getString();
 				} else {
-					variables.put(d.getVar(), d.getAssert().getConstant().getNumber());
+					result = d.getAssert().getConstant().getNumber();
 				}
 			} else if (d.getAssert().getValues() != null) {
-				variables.put(d.getVar(), new DataObject(d.getVar(), d.getAssert().getValues()));
+				result = new DataObject(d.getVar(), d.getAssert().getValues());
 			} else if (d.getAssert().getQuery() != null) {
-				DataObject result;
-
 				String placeholder = d.getAssert().getQuery().getSteps().get(0).getPlaceholder();
 
 				if (placeholder != null) {
 					if (!variables.containsKey(placeholder)) {
 						throw new Exception("Variable '" + placeholder + "' is not defined.");
 					}
-					DataObject value = (DataObject) variables.get(placeholder);
-					if (d.getAssert().getQuery().getSteps().size() > 1) { // if there query goes deeper
-						try {
-							result = value.evaluate(d.getAssert().getQuery());
-						} catch (Exception e) {
-							throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+					
+					Object value = variables.get(placeholder);
+					if (value instanceof DataObject) {
+						if (d.getAssert().getQuery().getSteps().size() > 1) { // if there query goes deeper
+							try {
+								result = ((DataObject) value).evaluate(d.getAssert().getQuery());
+							} catch (Exception e) {
+								throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+							}
+							// if the DataObject is containing a single value, only that single value is stored as variable
+							if (((DataObject) result).isSingleValue()) {
+								result = ((DataObject) result).getFirst();
+							}
+						} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
+							result = value;
+						} else {
+//							if (((DataObject) value).isSingleValue()) {
+//								result = ((DataObject) value).getFirst();
+//							} else {
+								result = value;
+//							}
 						}
 					} else {
 						result = value;
@@ -692,16 +711,48 @@ public class Main {
 					} catch (Exception e) {
 						throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
 					}
+					if (((DataObject) result).isSingleValue()) {
+						result = ((DataObject) result).getFirst();
+					}
+				}
+					
+//					Object value = variables.get(placeholder);
+//					if (value instanceof DataObject) {
+//						if (d.getAssert().getQuery().getSteps().size() > 1) { // if there query goes deeper
+//							try {
+//								result = ((DataObject) value).evaluate(d.getAssert().getQuery());
+//							} catch (Exception e) {
+//								throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+//							}
+//						} else {
+//							result = value;
+//						}
+//					} else {
+//						try {
+//							result = input.evaluate(d.getAssert().getQuery());
+//						} catch (Exception e) {
+//							throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+//						}
+//					}
+
+				// *** FUNCTIONS ***
+				if (d.getAssert().getFunction() != null) {
+					if (result instanceof DataObject) {
+						// TODO
+					} else if (result instanceof String) {
+						result = applyStringFunctions(result, d.getAssert().getFunction());
+					} else if (result instanceof Double) {
+						result = applyDoubleFunctions(result, d.getAssert().getFunction());
+					}
 				}
 
-				variables.put(d.getVar(), result);
-
 			} else if (d.getAssert() instanceof AssertionQuantified) {
-				Object result = doAssertionQuantified(d.getAssert());
-				variables.put(d.getVar(), result);
+				result = doAssertionQuantified(d.getAssert());
 			} else {
-				variables.put(d.getVar(), d.getAssert().isBoolean());
+				result = d.getAssert().isBoolean();
 			}
+			
+			variables.put(d.getVar(), result);
 			System.out.println(Helper.declarationToString(d));
 		}
 		return;
