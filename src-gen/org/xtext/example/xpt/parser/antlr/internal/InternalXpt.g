@@ -1417,7 +1417,7 @@ ruleConstant returns [EObject current=null]
 
 RULE_BOOLEAN : ('true'|'false');
 
-RULE_NUMBER : ('0'..'9')* ('.' ('0'..'9')+)?;
+RULE_NUMBER : '-'? ('0'..'9')* ('.' ('0'..'9')+)?;
 
 RULE_INT : 'this one has been deactivated';
 

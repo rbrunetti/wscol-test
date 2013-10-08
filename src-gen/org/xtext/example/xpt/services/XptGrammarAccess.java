@@ -379,6 +379,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cConditionsAssertionOrParserRuleCall_6_0 = (RuleCall)cConditionsAssignment_6.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
+		////var è solo di tipo Variable, ok?
 		//AssertionQuantified:
 		//	quantifier=Quantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
 		public ParserRule getRule() { return rule; }
@@ -945,6 +946,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssertionAccess().getRule();
 	}
 
+	////var è solo di tipo Variable, ok?
 	//AssertionQuantified:
 	//	quantifier=Quantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
 	public AssertionQuantifiedElements getAssertionQuantifiedAccess() {
@@ -1062,7 +1064,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal NUMBER returns ecore::EDouble:
-	//	"0".."9"* ("." "0".."9"+)?;
+	//	"-"? "0".."9"* ("." "0".."9"+)?;
 	public TerminalRule getNUMBERRule() {
 		return (tNUMBER != null) ? tNUMBER : (tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER"));
 	} 
