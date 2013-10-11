@@ -1,0 +1,34 @@
+ _______  _____  ______   _____ 
+    |    |     | |     \ |     |
+    |    |_____| |_____/ |_____|
+
+	• Better syntax errors messages: what and why is wrong, what's the possible solution, etc...
+		• also for runtime errors    
+	• Make the boolean value in AssertionForm implicit (ex. exists(...) = true -> exists(...))
+	• Implementation of rules for 'max', 'min', 'avg', 'sum' and 'product'
+	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! 
+	• 
+	• 
+	• 
+ ______   _____  _     _ ______  _______ _______
+ |     \ |     | |     | |_____]    |    |______
+ |_____/ |_____| |_____| |_____]    |    ______|
+ 
+ 	• Add complex assertions even in the declarations -> is it useful?
+	• Variables in Values -> what's happening if I put a variable referring to a DataObject? What if I call an 'exists' over it?
+	• Add variables and functions in Step's attribute (ex. /step[$a.lengt()] is, for now, invalid) -> is it useful?  
+	• 
+	• 
+	•
+ _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
+   |   |  |  | |_____] |      |______ |  |  | |______ | \  |    |    |______ |     \
+ __|__ |  |  | |       |_____ |______ |  |  | |______ |  \_|    |    |______ |_____/
+ 
+ 	• Base rules of the grammar (...)
+ 	• Make a TODO list :)
+ 	• Rules for make assertions with AND, OR and NOT (with the corresponding priority: NOT > AND > OR)
+ 	• Rules for quantified assertions 'forall', 'exists' and 'numOf'
+ 	• Runtime errors (ex. quantified assertion over a single value variable and not on a set of value) throws exception with a corresponding message
+ 	• 
+ 	• 
+	•  
