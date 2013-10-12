@@ -2,10 +2,7 @@
     |    |     | |     \ |     |
     |    |_____| |_____/ |_____|
 
-	• Better syntax errors messages: what and why is wrong, what's the possible solution, etc...
-		• also for runtime errors    
-	• Make the boolean value in AssertionForm implicit (ex. exists(...) = true -> exists(...))
-	• Implementation of rules for 'max', 'min', 'avg', 'sum' and 'product'
+	• Better syntax errors messages: hints on possible solutions
 	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! 
 	• 
 	• 
@@ -29,6 +26,12 @@
  	• Rules for make assertions with AND, OR and NOT (with the corresponding priority: NOT > AND > OR)
  	• Rules for quantified assertions 'forall', 'exists' and 'numOf'
  	• Runtime errors (ex. quantified assertion over a single value variable and not on a set of value) throws exception with a corresponding message
- 	• 
+ 	• Implementation of rules for 'max', 'min', 'avg', 'sum' and 'product'
+ 		• BUT with the correction of the rule Variable ('min', 'max', etc are now language keyword, so I could not declare a variable '$min' without correcting the Variable rule)
+ 		• BUT float numbers could be different for a minimum fraction, maybe we can use a limited number of decimal digit 
+ 	• Make the boolean value in AssertionForm implicit (ex. exists(...) = true -> exists(...))
+ 		• BUT rules are not so pretty...
+ 	• Better syntax errors messages: what and why is wrong; also for runtime errors with values printing
+	• 
  	• 
 	•  

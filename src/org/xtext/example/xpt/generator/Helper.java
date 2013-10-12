@@ -16,6 +16,9 @@ import org.xtext.example.xpt.xpt.Values;
 public class Helper {
 	
 	public static String assertionFormToString(AssertionForm af) {
+		if(af.getOp() == null && af.getRightAssert() == null) {
+			return assertionToString(af.getLeftAssert());
+		}
 		return assertionToString(af.getLeftAssert()) + " " + af.getOp() + " " + assertionToString(af.getRightAssert());
 	}
 	

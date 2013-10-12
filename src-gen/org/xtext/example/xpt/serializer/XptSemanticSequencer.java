@@ -95,9 +95,13 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case XptPackage.ASSERTION_QUANTIFIED:
-				if(context == grammarAccess.getAssertionRule() ||
-				   context == grammarAccess.getAssertionQuantifiedRule()) {
-					sequence_AssertionQuantified(context, (AssertionQuantified) semanticObject); 
+				if(context == grammarAccess.getAssertionQuantifiedBooleanRule()) {
+					sequence_AssertionQuantifiedBoolean(context, (AssertionQuantified) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getAssertionQuantifiedNumericRule()) {
+					sequence_AssertionQuantifiedNumeric(context, (AssertionQuantified) semanticObject); 
 					return; 
 				}
 				else break;
@@ -190,23 +194,10 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (leftAssert=Assertion op=Rop rightAssert=Assertion)
+	 *     ((leftAssert=Assertion op=Rop rightAssert=Assertion) | leftAssert=AssertionQuantifiedBoolean)
 	 */
 	protected void sequence_AssertionForm(EObject context, AssertionForm semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_FORM__LEFT_ASSERT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_FORM__LEFT_ASSERT));
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_FORM__OP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_FORM__OP));
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.ASSERTION_FORM__RIGHT_ASSERT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.ASSERTION_FORM__RIGHT_ASSERT));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAssertionFormAccess().getLeftAssertAssertionParserRuleCall_0_0(), semanticObject.getLeftAssert());
-		feeder.accept(grammarAccess.getAssertionFormAccess().getOpRopParserRuleCall_1_0(), semanticObject.getOp());
-		feeder.accept(grammarAccess.getAssertionFormAccess().getRightAssertAssertionParserRuleCall_2_0(), semanticObject.getRightAssert());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -247,9 +238,18 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (quantifier=Quantifier alias=Variable var=Variable conditions=AssertionOr)
+	 *     (quantifier=BoolQuantifier alias=Variable var=Variable conditions=AssertionOr)
 	 */
-	protected void sequence_AssertionQuantified(EObject context, AssertionQuantified semanticObject) {
+	protected void sequence_AssertionQuantifiedBoolean(EObject context, AssertionQuantified semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (quantifier=NumbQuantifier alias=Variable var=Variable conditions=AssertionOr)
+	 */
+	protected void sequence_AssertionQuantifiedNumeric(EObject context, AssertionQuantified semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -283,20 +283,10 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (var=Variable assert=Assertion)
+	 *     (var=Variable (assert=Assertion | assert=AssertionQuantifiedBoolean))
 	 */
 	protected void sequence_Declaration(EObject context, Declaration semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.DECLARATION__VAR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.DECLARATION__VAR));
-			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.DECLARATION__ASSERT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.DECLARATION__ASSERT));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getDeclarationAccess().getVarVariableParserRuleCall_1_0(), semanticObject.getVar());
-		feeder.accept(grammarAccess.getDeclarationAccess().getAssertAssertionParserRuleCall_3_0(), semanticObject.getAssert());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

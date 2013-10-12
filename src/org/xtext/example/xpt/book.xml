@@ -4,7 +4,7 @@
     	<title>Snow Crash</title>
     	<author>Neal Stephenson</author>
     	<publisher>Spectra</publisher>
-    	<isbn>0553380958</isbn>
+    	<isbn>i0553380958</isbn>
     	<price>15</price>
     </book>
     <book>
@@ -13,8 +13,8 @@
     	<author>Larry Niven</author>
     	<author>Jerry Pournelle</author>
     	<publisher>Pocket</publisher>
-   		<isbn>0743416910</isbn>
-    	<price>5.99</price>
+   		<isbn>i0743416910</isbn>
+    	<price>6</price>
     </book>
     <book>
 		<year>1995</year>

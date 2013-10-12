@@ -166,20 +166,38 @@ ruleDeclaration returns [EObject current=null]
     }
 (
 (
+(
 		{ 
-	        newCompositeNode(grammarAccess.getDeclarationAccess().getAssertAssertionParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getDeclarationAccess().getAssertAssertionParserRuleCall_3_0_0()); 
 	    }
-		lv_assert_3_0=ruleAssertion		{
+		lv_assert_3_1=ruleAssertion		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDeclarationRule());
 	        }
        		set(
        			$current, 
        			"assert",
-        		lv_assert_3_0, 
+        		lv_assert_3_1, 
         		"Assertion");
 	        afterParserOrEnumRuleCall();
 	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getDeclarationAccess().getAssertAssertionQuantifiedBooleanParserRuleCall_3_0_1()); 
+	    }
+		lv_assert_3_2=ruleAssertionQuantifiedBoolean		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getDeclarationRule());
+	        }
+       		set(
+       			$current, 
+       			"assert",
+        		lv_assert_3_2, 
+        		"AssertionQuantifiedBoolean");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 
 )
 )	otherlv_4=';' 
@@ -335,21 +353,21 @@ ruleHighProrityAssertion returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionFormParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionBracedParserRuleCall_1()); 
     }
-    this_AssertionForm_1=ruleAssertionForm
+    this_AssertionBraced_1=ruleAssertionBraced
     { 
-        $current = $this_AssertionForm_1.current; 
+        $current = $this_AssertionBraced_1.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionBracedParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getHighProrityAssertionAccess().getAssertionFormParserRuleCall_2()); 
     }
-    this_AssertionBraced_2=ruleAssertionBraced
+    this_AssertionForm_2=ruleAssertionForm
     { 
-        $current = $this_AssertionBraced_2.current; 
+        $current = $this_AssertionForm_2.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -471,10 +489,10 @@ ruleAssertionForm returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionFormAccess().getLeftAssertAssertionParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getAssertionFormAccess().getLeftAssertAssertionParserRuleCall_0_0_0()); 
 	    }
 		lv_leftAssert_0_0=ruleAssertion		{
 	        if ($current==null) {
@@ -492,7 +510,7 @@ ruleAssertionForm returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionFormAccess().getOpRopParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getAssertionFormAccess().getOpRopParserRuleCall_0_1_0()); 
 	    }
 		lv_op_1_0=ruleRop		{
 	        if ($current==null) {
@@ -510,7 +528,7 @@ ruleAssertionForm returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionFormAccess().getRightAssertAssertionParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getAssertionFormAccess().getRightAssertAssertionParserRuleCall_0_2_0()); 
 	    }
 		lv_rightAssert_2_0=ruleAssertion		{
 	        if ($current==null) {
@@ -521,6 +539,25 @@ ruleAssertionForm returns [EObject current=null]
        			"rightAssert",
         		lv_rightAssert_2_0, 
         		"Assertion");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionFormAccess().getLeftAssertAssertionQuantifiedBooleanParserRuleCall_1_0()); 
+	    }
+		lv_leftAssert_3_0=ruleAssertionQuantifiedBoolean		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionFormRule());
+	        }
+       		set(
+       			$current, 
+       			"leftAssert",
+        		lv_leftAssert_3_0, 
+        		"AssertionQuantifiedBoolean");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -589,11 +626,11 @@ ruleAssertion returns [EObject current=null]
 ))?)
     |
     { 
-        newCompositeNode(grammarAccess.getAssertionAccess().getAssertionQuantifiedParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getAssertionAccess().getAssertionQuantifiedNumericParserRuleCall_1()); 
     }
-    this_AssertionQuantified_3=ruleAssertionQuantified
+    this_AssertionQuantifiedNumeric_3=ruleAssertionQuantifiedNumeric
     { 
-        $current = $this_AssertionQuantified_3.current; 
+        $current = $this_AssertionQuantifiedNumeric_3.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -668,50 +705,50 @@ ruleAssertion returns [EObject current=null]
 
 
 
-// Entry rule entryRuleAssertionQuantified
-entryRuleAssertionQuantified returns [EObject current=null] 
+// Entry rule entryRuleAssertionQuantifiedBoolean
+entryRuleAssertionQuantifiedBoolean returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getAssertionQuantifiedRule()); }
-	 iv_ruleAssertionQuantified=ruleAssertionQuantified 
-	 { $current=$iv_ruleAssertionQuantified.current; } 
+	{ newCompositeNode(grammarAccess.getAssertionQuantifiedBooleanRule()); }
+	 iv_ruleAssertionQuantifiedBoolean=ruleAssertionQuantifiedBoolean 
+	 { $current=$iv_ruleAssertionQuantifiedBoolean.current; } 
 	 EOF 
 ;
 
-// Rule AssertionQuantified
-ruleAssertionQuantified returns [EObject current=null] 
+// Rule AssertionQuantifiedBoolean
+ruleAssertionQuantifiedBoolean returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getQuantifierQuantifierParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedBooleanAccess().getQuantifierBoolQuantifierParserRuleCall_0_0()); 
 	    }
-		lv_quantifier_0_0=ruleQuantifier		{
+		lv_quantifier_0_0=ruleBoolQuantifier		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedBooleanRule());
 	        }
        		set(
        			$current, 
        			"quantifier",
         		lv_quantifier_0_0, 
-        		"Quantifier");
+        		"BoolQuantifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )	otherlv_1='(' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getAssertionQuantifiedAccess().getLeftParenthesisKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getAssertionQuantifiedBooleanAccess().getLeftParenthesisKeyword_1());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getAliasVariableParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedBooleanAccess().getAliasVariableParserRuleCall_2_0()); 
 	    }
 		lv_alias_2_0=ruleVariable		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedBooleanRule());
 	        }
        		set(
        			$current, 
@@ -724,16 +761,16 @@ ruleAssertionQuantified returns [EObject current=null]
 )
 )	otherlv_3='in' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getAssertionQuantifiedAccess().getInKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getAssertionQuantifiedBooleanAccess().getInKeyword_3());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getVarVariableParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedBooleanAccess().getVarVariableParserRuleCall_4_0()); 
 	    }
 		lv_var_4_0=ruleVariable		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedBooleanRule());
 	        }
        		set(
        			$current, 
@@ -746,16 +783,16 @@ ruleAssertionQuantified returns [EObject current=null]
 )
 )	otherlv_5=',' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getAssertionQuantifiedAccess().getCommaKeyword_5());
+    	newLeafNode(otherlv_5, grammarAccess.getAssertionQuantifiedBooleanAccess().getCommaKeyword_5());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAssertionQuantifiedAccess().getConditionsAssertionOrParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedBooleanAccess().getConditionsAssertionOrParserRuleCall_6_0()); 
 	    }
 		lv_conditions_6_0=ruleAssertionOr		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedRule());
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedBooleanRule());
 	        }
        		set(
        			$current, 
@@ -768,7 +805,116 @@ ruleAssertionQuantified returns [EObject current=null]
 )
 )	otherlv_7=')' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getAssertionQuantifiedAccess().getRightParenthesisKeyword_7());
+    	newLeafNode(otherlv_7, grammarAccess.getAssertionQuantifiedBooleanAccess().getRightParenthesisKeyword_7());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleAssertionQuantifiedNumeric
+entryRuleAssertionQuantifiedNumeric returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAssertionQuantifiedNumericRule()); }
+	 iv_ruleAssertionQuantifiedNumeric=ruleAssertionQuantifiedNumeric 
+	 { $current=$iv_ruleAssertionQuantifiedNumeric.current; } 
+	 EOF 
+;
+
+// Rule AssertionQuantifiedNumeric
+ruleAssertionQuantifiedNumeric returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedNumericAccess().getQuantifierNumbQuantifierParserRuleCall_0_0()); 
+	    }
+		lv_quantifier_0_0=ruleNumbQuantifier		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedNumericRule());
+	        }
+       		set(
+       			$current, 
+       			"quantifier",
+        		lv_quantifier_0_0, 
+        		"NumbQuantifier");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_1='(' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getAssertionQuantifiedNumericAccess().getLeftParenthesisKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedNumericAccess().getAliasVariableParserRuleCall_2_0()); 
+	    }
+		lv_alias_2_0=ruleVariable		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedNumericRule());
+	        }
+       		set(
+       			$current, 
+       			"alias",
+        		lv_alias_2_0, 
+        		"Variable");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3='in' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getAssertionQuantifiedNumericAccess().getInKeyword_3());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedNumericAccess().getVarVariableParserRuleCall_4_0()); 
+	    }
+		lv_var_4_0=ruleVariable		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedNumericRule());
+	        }
+       		set(
+       			$current, 
+       			"var",
+        		lv_var_4_0, 
+        		"Variable");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_5=',' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getAssertionQuantifiedNumericAccess().getCommaKeyword_5());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAssertionQuantifiedNumericAccess().getConditionsAssertionOrParserRuleCall_6_0()); 
+	    }
+		lv_conditions_6_0=ruleAssertionOr		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAssertionQuantifiedNumericRule());
+	        }
+       		set(
+       			$current, 
+       			"conditions",
+        		lv_conditions_6_0, 
+        		"AssertionOr");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_7=')' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getAssertionQuantifiedNumericAccess().getRightParenthesisKeyword_7());
     }
 )
 ;
@@ -1221,17 +1367,17 @@ ruleFunction returns [EObject current=null]
 
 
 
-// Entry rule entryRuleQuantifier
-entryRuleQuantifier returns [String current=null] 
+// Entry rule entryRuleBoolQuantifier
+entryRuleBoolQuantifier returns [String current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getQuantifierRule()); } 
-	 iv_ruleQuantifier=ruleQuantifier 
-	 { $current=$iv_ruleQuantifier.current.getText(); }  
+	{ newCompositeNode(grammarAccess.getBoolQuantifierRule()); } 
+	 iv_ruleBoolQuantifier=ruleBoolQuantifier 
+	 { $current=$iv_ruleBoolQuantifier.current.getText(); }  
 	 EOF 
 ;
 
-// Rule Quantifier
-ruleQuantifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+// Rule BoolQuantifier
+ruleBoolQuantifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -1239,21 +1385,76 @@ ruleQuantifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 	kw='forall' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQuantifierAccess().getForallKeyword_0()); 
+        newLeafNode(kw, grammarAccess.getBoolQuantifierAccess().getForallKeyword_0()); 
     }
 
     |
 	kw='exists' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQuantifierAccess().getExistsKeyword_1()); 
+        newLeafNode(kw, grammarAccess.getBoolQuantifierAccess().getExistsKeyword_1()); 
     }
+)
+    ;
 
-    |
+
+
+
+
+// Entry rule entryRuleNumbQuantifier
+entryRuleNumbQuantifier returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNumbQuantifierRule()); } 
+	 iv_ruleNumbQuantifier=ruleNumbQuantifier 
+	 { $current=$iv_ruleNumbQuantifier.current.getText(); }  
+	 EOF 
+;
+
+// Rule NumbQuantifier
+ruleNumbQuantifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
 	kw='numOf' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getQuantifierAccess().getNumOfKeyword_2()); 
+        newLeafNode(kw, grammarAccess.getNumbQuantifierAccess().getNumOfKeyword_0()); 
+    }
+
+    |
+	kw='sum' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getNumbQuantifierAccess().getSumKeyword_1()); 
+    }
+
+    |
+	kw='avg' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getNumbQuantifierAccess().getAvgKeyword_2()); 
+    }
+
+    |
+	kw='min' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getNumbQuantifierAccess().getMinKeyword_3()); 
+    }
+
+    |
+	kw='max' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getNumbQuantifierAccess().getMaxKeyword_4()); 
+    }
+
+    |
+	kw='product' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getNumbQuantifierAccess().getProductKeyword_5()); 
     }
 )
     ;
@@ -1282,14 +1483,38 @@ ruleVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getVariableAccess().getDollarSignKeyword_0()); 
     }
-    this_ID_1=RULE_ID    {
+(    this_ID_1=RULE_ID    {
 		$current.merge(this_ID_1);
     }
 
     { 
-    newLeafNode(this_ID_1, grammarAccess.getVariableAccess().getIDTerminalRuleCall_1()); 
+    newLeafNode(this_ID_1, grammarAccess.getVariableAccess().getIDTerminalRuleCall_1_0()); 
     }
-)
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVariableAccess().getBoolQuantifierParserRuleCall_1_1()); 
+    }
+    this_BoolQuantifier_2=ruleBoolQuantifier    {
+		$current.merge(this_BoolQuantifier_2);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVariableAccess().getNumbQuantifierParserRuleCall_1_2()); 
+    }
+    this_NumbQuantifier_3=ruleNumbQuantifier    {
+		$current.merge(this_NumbQuantifier_3);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+))
     ;
 
 

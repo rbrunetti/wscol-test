@@ -8,7 +8,7 @@ Model:
 	assertionSet=AssertionOr ';';
 
 Declaration:
-	'let' var=Variable '=' assert=Assertion ';';
+	'let' var=Variable '=' assert=(Assertion | AssertionQuantifiedBoolean) ';';
 
 AssertionOr returns Assertions:
 	AssertionAnd ({AssertionOr.left=current} '||' right=AssertionAnd)*;
@@ -17,7 +17,7 @@ AssertionAnd returns Assertions:
 	HighProrityAssertion ({AssertionAnd.left=current} '&&' right=HighProrityAssertion)*;
 
 HighProrityAssertion returns Assertions:
-	AssertionNot | AssertionForm | AssertionBraced;
+	AssertionNot | AssertionBraced | AssertionForm;
 
 AssertionBraced:
 	'(' innerFormula=AssertionOr ')';
@@ -26,13 +26,16 @@ AssertionNot:
 	'!' '(' innerFormula=AssertionOr ')';
 
 AssertionForm:
-	leftAssert=Assertion op=Rop rightAssert=Assertion;
+	leftAssert=Assertion op=Rop rightAssert=Assertion | leftAssert=AssertionQuantifiedBoolean;
 
 Assertion:
-	query=Query ('.' function=Function)? | AssertionQuantified | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';
+	query=Query ('.' function=Function)? | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';
 
-AssertionQuantified:
-	quantifier=Quantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')'; //var è solo di tipo Variable, ok?
+AssertionQuantifiedBoolean returns AssertionQuantified:
+	quantifier=BoolQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')'; //var è solo di tipo Variable, ok?
+	
+AssertionQuantifiedNumeric returns AssertionQuantified:
+	quantifier=NumbQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')'; //var è solo di tipo Variable, ok?
 
 Query:
 	'(' steps+=Step+ ')' | steps+=Step+;
@@ -52,11 +55,14 @@ Rop:
 Function:
 	name=ID '(' (params=Values)? ')';
 
-Quantifier:
-	'forall' | 'exists' | 'numOf';
+BoolQuantifier:
+	'forall' | 'exists';
+
+NumbQuantifier:
+	'numOf' | 'sum' | 'avg' | 'min' | 'max' | 'product';
 
 Variable:
-	'$' ID;
+	'$' ( ID | BoolQuantifier | NumbQuantifier);
 
 Values:
 	value+=Constant (',' value+=Constant)*;

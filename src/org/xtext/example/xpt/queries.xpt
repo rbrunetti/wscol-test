@@ -1,21 +1,24 @@
-let $a = /inventory/book/title;
-let $b = forall($aa in $a, $aa.startsWith("Z") = false);
-let $c = /inventory/book;
-let $d = $c/author;
-numOf($cc in $d, $cc.length() > 0) > 1 || !(exists($aaa in $a, $aaa.startsWith("Z") = false) = true) || $b = true;
+let $prices = /inventory/book/price;
+let $min = min($book in $prices, $book > 0);
+let $max = max($book in $prices, $book > 0);
+let $avg = avg($book in $prices, $book > 0);
+let $prod = product($book in $prices, $book > 0);
+let $sum = sum($book in $prices, $book > 0);
+$min = 6 && $max = 15 && $avg = 9.5 && $prod = 675.0 && $sum = 28.5;
 
 /*
 
 "Location" degli errori secondo Validator e Issue:
 
-let $c = /inventory/book.leght(; -> //@declarations.0
-let $c = treu; -> //@declarations.0
-let c = true -> //@declarations.0
-let $c = numOf(a in $c, $a.length() > 0); -> //@declarations.0/@assert
-let $c = /inventory/book[price>"10"] -> //@declarations.0/@assert/@query/@steps.1
-let $c = /inventory/book/$a; -> //@declarations.0/@assert/@query/@steps.2
-let $c = numOf($a in $c, $a.length( > 0); -> //@declarations.0/@assert/@conditions
-let $c = [1, 2, sdoap]; -> //@declarations.0/@assert/@values
+let $c = /inventory/book.leght(; 					-> //@declarations.0
+let $c = treu; -> //@declarations.0					-> //@declarations.0
+let c = true -> //@declarations.0					-> //@declarations.0
+let $c = numOf(a in $c, $a.length() > 0); 			-> //@declarations.0/@assert
+let $c = /inventory/book[price>"10"]				-> //@declarations.0/@assert/@query/@steps.1
+let $c = /inventory/book/$a; 						-> //@declarations.0/@assert/@query/@steps.2
+let $c = numOf($a in $c, $a.length( > 0); 			-> //@declarations.0/@assert/@conditions
+let $c = [1, 2, sdoap]; 							-> //@declarations.0/@assert/@values
 ...
+/inventory/book[title>"2"]/isbn = (...) [x5 '&&']	-> //@assertionSet/@left/@left/@left/@left/@left/@leftAssert/@query/@steps.1/@attribute
 
 */

@@ -99,7 +99,7 @@ public class Main {
 		// load the resource
 		ResourceSet set = resourceSetProvider.get();
 		Resource resource = set.getResource(URI.createURI(string), true);
-
+		
 		// validate the resource
 		// GrammarSintaxHelper.validation(validator, resource);
 		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
@@ -110,8 +110,7 @@ public class Main {
 				String location = problemURI.fragment();
 				String msg = issue.getMessage();
 				Integer lineNumb = issue.getLineNumber();
-				// Integer offset = issue.getOffset();
-				// Integer length = issue.getLength();
+				// Print out syntax errors
 				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - " + location);
 			}
 			return;
@@ -203,9 +202,20 @@ public class Main {
 	 *             if there is data types conflicts
 	 */
 	private boolean verifyAssertionForm(AssertionForm af) throws Exception {
-		Object laObj = doQueries(af.getLeftAssert());
-		Object raObj = doQueries(af.getRightAssert());
-		String operation = af.getOp(); // get Op for using it for the comparisons
+		Object laObj, raObj;
+		String operation;
+
+		laObj = doQueries(af.getLeftAssert());
+
+		// check if the AssertionForm is of type AssertionQualifiedBoolean (so without the '= true' explicitly specified)
+		if (af.getOp() == null && af.getRightAssert() == null) {
+			operation = "=";
+			raObj = true;
+		} else {
+			operation = af.getOp(); // get Op for using it for the comparisons
+			raObj = doQueries(af.getRightAssert());
+		}
+
 		String condition = Helper.assertionFormToString(af);
 
 		// check the objects class and evaluate the corresponding assertion
@@ -218,13 +228,15 @@ public class Main {
 		} else if (laObj instanceof Boolean && raObj instanceof Boolean) {
 			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, condition);
 		} else if (laObj != null && raObj != null) {
-			String msg = "Assertion " + condition + " cause data types conflicts.";
+			String msg = "Assertion " + condition + " could not be evaluated due to data types conflicts.";
 			if (laObj instanceof DataObject && ((DataObject) laObj).isEmpty()) {
 				msg += "\n NOTE: '" + Helper.assertionToString(af.getLeftAssert()) + "' gives empty result.";
 			}
 			if (raObj instanceof DataObject && ((DataObject) raObj).isEmpty()) {
 				msg += "\n NOTE: '" + Helper.assertionToString(af.getRightAssert()) + "' gives empty result.";
 			}
+			msg += "\n Left assertion = " + laObj + " [Class: " + laObj.getClass().getSimpleName() + "]";
+			msg += "\n Right assertion = " + raObj + " [Class: " + raObj.getClass().getSimpleName() + "]";
 			throw new Exception(msg);
 		} else {
 			throw new Exception("Unable to evaluate assertion '" + condition + "', due to erroneous variables declaration.");
@@ -336,7 +348,10 @@ public class Main {
 			}
 			break;
 		default:
-			throw new Exception("Unsopported operation '" + operation + "' for a String assertion.");
+			String msg = "Unsopported operation '" + operation + "' for the assertion between two String: '" + condition + "'";
+			msg += "\n Left assertion = '" + left + "' ";
+			msg += "\n Right assertion = '" + right + "' ";
+			throw new Exception(msg);
 		}
 
 		if (result) {
@@ -373,7 +388,10 @@ public class Main {
 			result = left != right;
 			break;
 		default:
-			throw new Exception("Unsopported operation '" + operation + "' for a boolean assertion.");
+			String msg = "Unsopported operation '" + operation + "' for the assertion between two Boolean: '" + condition + "'";
+			msg += "\n Left assertion = '" + left + "' ";
+			msg += "\n Right assertion = '" + right + "' ";
+			throw new Exception(msg);
 		}
 
 		if (result) {
@@ -418,7 +436,10 @@ public class Main {
 			}
 			break;
 		default:
-			throw new Exception("Unsopported operation '" + operation + "' for a DataObject assertion.");
+			String msg = "Unsopported operation '" + operation + "' for the assertion between two DataObject: '" + condition + "'";
+			msg += "\n Left assertion = '" + left + "' ";
+			msg += "\n Right assertion = '" + right + "' ";
+			throw new Exception(msg);
 		}
 
 		if (result) {
@@ -478,6 +499,10 @@ public class Main {
 				}
 			} else {
 				result = input.evaluate(assertion.getQuery());
+				// if the DataObject is containing a single value it will be extrapolated from the Object
+				if (((DataObject) result).isSingleValue()) {
+					result = ((DataObject) result).getFirst();
+				}
 			}
 		} else {
 			result = assertion.isBoolean();
@@ -508,11 +533,11 @@ public class Main {
 	private Object doAssertionQuantified(Assertion assertion) throws Exception {
 		AssertionQuantified aq = (AssertionQuantified) assertion;
 
-		if(!(variables.containsKey(aq.getVar()))) {
+		if (!(variables.containsKey(aq.getVar()))) {
 			throw new Exception("The variable '" + aq.getVar() + "' is not defined.");
-			
+
 		}
-		
+
 		if (!(variables.get(aq.getVar()) instanceof DataObject)) {
 			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getName() + ". A DataObject type was expected.");
 		}
@@ -520,6 +545,7 @@ public class Main {
 		DataObject set = (DataObject) variables.get(aq.getVar());
 		String alias = aq.getAlias();
 		boolean result;
+		double count, sum;
 
 		if (variables.containsKey(alias)) {
 			throw new Exception("The variable '" + alias + "' is already used. Choose another.");
@@ -547,7 +573,7 @@ public class Main {
 			variables.remove(alias);
 			return true;
 		case "numOf":
-			double count = 0;
+			count = 0;
 			while (iter.hasNext()) {
 				variables.put(alias, iter.next());
 				if (verifyAssertions(aq.getConditions())) {
@@ -556,6 +582,82 @@ public class Main {
 			}
 			variables.remove(alias);
 			return count;
+		case "sum":
+			sum = 0;
+			while (iter.hasNext()) {
+				Object next = iter.next();
+				if (!(next instanceof Double)) {
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+				}
+				variables.put(alias, next);
+				if (verifyAssertions(aq.getConditions())) {
+					sum += (double) next;
+				}
+			}
+			variables.remove(alias);
+			return sum;
+		case "avg":
+			sum = 0;
+			count = 0;
+			while (iter.hasNext()) {
+				Object next = iter.next();
+				if (!(next instanceof Double)) {
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+				}
+				variables.put(alias, next);
+				if (verifyAssertions(aq.getConditions())) {
+					sum += (double) next;
+					count += 1;
+				}
+			}
+			variables.remove(alias);
+			return sum / count;
+		case "product":
+			double product = 1;
+			while (iter.hasNext()) {
+				Object next = iter.next();
+				if (!(next instanceof Double)) {
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+				}
+				variables.put(alias, next);
+				if (verifyAssertions(aq.getConditions())) {
+					product *= (double) next;
+				}
+			}
+			variables.remove(alias);
+			return product;
+		case "max":
+			double max = Double.NEGATIVE_INFINITY;
+			while (iter.hasNext()) {
+				Object next = iter.next();
+				if (!(next instanceof Double)) {
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+				}
+				variables.put(alias, next);
+				if (verifyAssertions(aq.getConditions())) {
+					if ((double) next > max) {
+						max = (double) next;
+					}
+				}
+			}
+			variables.remove(alias);
+			return max;
+		case "min":
+			double min = Double.POSITIVE_INFINITY;
+			while (iter.hasNext()) {
+				Object next = iter.next();
+				if (!(next instanceof Double)) {
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+				}
+				variables.put(alias, next);
+				if (verifyAssertions(aq.getConditions())) {
+					if ((double) next < min) {
+						min = (double) next;
+					}
+				}
+			}
+			variables.remove(alias);
+			return min;
 		default:
 			return null; // never reached: other cases are blocked by the grammar parser as errors
 		}
@@ -663,7 +765,7 @@ public class Main {
 		System.out.println("############### DECLARATIONS ###############");
 		for (Declaration d : declarations) {
 			if (variables.containsKey(d.getVar())) {
-				throw new Exception("The variable '" + d.getVar() + "' in '" + Helper.declarationToString(d) + "' is already used. Choose another.");
+				throw new Exception("The variable '" + d.getVar() + "' in '" + Helper.declarationToString(d) + "' is already used (" + d.getVar() + " = " + variables.get(d.getVar()) + "). Choose another.");
 			}
 			if (d.getAssert().getConstant() != null) {
 				if (d.getAssert().getConstant().getString() != null) {
@@ -680,7 +782,7 @@ public class Main {
 					if (!variables.containsKey(placeholder)) {
 						throw new Exception("Variable '" + placeholder + "' is not defined.");
 					}
-					
+
 					Object value = variables.get(placeholder);
 					if (value instanceof DataObject) {
 						if (d.getAssert().getQuery().getSteps().size() > 1) { // if there query goes deeper
@@ -696,11 +798,11 @@ public class Main {
 						} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
 							result = value;
 						} else {
-//							if (((DataObject) value).isSingleValue()) {
-//								result = ((DataObject) value).getFirst();
-//							} else {
-								result = value;
-//							}
+							// if (((DataObject) value).isSingleValue()) {
+							// result = ((DataObject) value).getFirst();
+							// } else {
+							result = value;
+							// }
 						}
 					} else {
 						result = value;
@@ -715,25 +817,6 @@ public class Main {
 						result = ((DataObject) result).getFirst();
 					}
 				}
-					
-//					Object value = variables.get(placeholder);
-//					if (value instanceof DataObject) {
-//						if (d.getAssert().getQuery().getSteps().size() > 1) { // if there query goes deeper
-//							try {
-//								result = ((DataObject) value).evaluate(d.getAssert().getQuery());
-//							} catch (Exception e) {
-//								throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
-//							}
-//						} else {
-//							result = value;
-//						}
-//					} else {
-//						try {
-//							result = input.evaluate(d.getAssert().getQuery());
-//						} catch (Exception e) {
-//							throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
-//						}
-//					}
 
 				// *** FUNCTIONS ***
 				if (d.getAssert().getFunction() != null) {
@@ -751,7 +834,7 @@ public class Main {
 			} else {
 				result = d.getAssert().isBoolean();
 			}
-			
+
 			variables.put(d.getVar(), result);
 			System.out.println(Helper.declarationToString(d));
 		}
