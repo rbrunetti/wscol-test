@@ -16,6 +16,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -33,6 +37,8 @@ import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
+import org.xtext.example.xpt.xpt.Query;
+import org.xtext.example.xpt.xpt.Step;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -100,21 +106,23 @@ public class Main {
 		ResourceSet set = resourceSetProvider.get();
 		Resource resource = set.getResource(URI.createURI(string), true);
 		
-		// validate the resource
-		// GrammarSintaxHelper.validation(validator, resource);
-		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-		if (!list.isEmpty()) {
-			System.err.println("*** MALFORMED ASSERTIONS ***");
-			for (Issue issue : list) {
-				URI problemURI = issue.getUriToProblem();
-				String location = problemURI.fragment();
-				String msg = issue.getMessage();
-				Integer lineNumb = issue.getLineNumber();
-				// Print out syntax errors
-				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - " + location);
-			}
+		if(checkSyntaxErrors(resource))
 			return;
-		}
+
+		// validate the resource
+//		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+//		if (!list.isEmpty()) {
+//			System.err.println("*** MALFORMED ASSERTIONS ***");
+//			for (Issue issue : list) {
+//				URI problemURI = issue.getUriToProblem();
+//				String location = problemURI.fragment();
+//				String msg = issue.getMessage();
+//				Integer lineNumb = issue.getLineNumber();
+//				// Print out syntax errors
+//				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - " + location);
+//			}
+//			return;
+//		}
 
 		// get contents
 		Model model = (Model) resource.getContents().get(0);
@@ -159,12 +167,78 @@ public class Main {
 		// verify the assertions
 		System.out.println("\n################ ASSERTIONS ################");
 		try {
-			System.out.println("Result: " + verifyAssertions(assertionSet));
+			System.out.println("\nRESULT: " + verifyAssertions(assertionSet));
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			System.exit(0);
 		}
 
+	}
+
+	/**
+	 * Syntax error checking, with the indication of the erroneous token
+	 * @param resource the result of the loading by the parser
+	 * @return true if there is no errors, false otherwise
+	 */
+	private boolean checkSyntaxErrors(Resource resource) {
+		// syntax errors checking
+		Iterable<INode> errors = ((XtextResource) resource).getParseResult().getSyntaxErrors();
+		Iterator<INode> iter = errors.iterator();
+		int number = resource.getErrors().size();
+		
+		if(number == 0) {
+			return false;
+		}
+		
+		System.err.println("**** MALFORMED ASSERTIONS ****\n*** " + number + " syntax errors found ***\n");
+
+		INode errorNode = null;
+		while (iter.hasNext()) {
+			errorNode = iter.next();
+			ICompositeNode parent = errorNode.getParent();
+			EObject semanticElement = errorNode.getSemanticElement();
+			int sl = errorNode.getStartLine();
+			SyntaxErrorMessage errm = errorNode.getSyntaxErrorMessage();
+			String erroneousToken = "";
+			if (semanticElement instanceof AssertionForm) {
+				erroneousToken = Helper.assertionFormToString((AssertionForm) semanticElement);
+			} else if (semanticElement instanceof Assertion) {
+				erroneousToken = Helper.assertionToString((Assertion) semanticElement);
+			} else if (semanticElement instanceof Declaration) {
+				erroneousToken = Helper.declarationToString((Declaration) semanticElement);
+			} else if (semanticElement instanceof Query) {
+				erroneousToken = Helper.queryToString((Query) semanticElement);
+			} else if (semanticElement instanceof Step) {
+				erroneousToken = Helper.stepToString((Step) semanticElement);
+			} else {
+				EObject parentSemanticElement = parent.getSemanticElement();
+				while (erroneousToken.equals("")) {
+					if (parentSemanticElement instanceof AssertionForm) {
+						erroneousToken = Helper.assertionFormToString((AssertionForm) parentSemanticElement);
+					} else if (parentSemanticElement instanceof Assertion) {
+						erroneousToken = Helper.assertionToString((Assertion) parentSemanticElement);
+					} else if (parentSemanticElement instanceof Declaration) {
+						erroneousToken = Helper.declarationToString((Declaration) parentSemanticElement);
+					} else if (parentSemanticElement instanceof Query) {
+						erroneousToken = Helper.queryToString((Query) parentSemanticElement);
+					} else if (parentSemanticElement instanceof Step) {
+						erroneousToken = Helper.stepToString((Step) parentSemanticElement);
+					} else {
+						if(parentSemanticElement.eContainer() != null) {
+							parentSemanticElement = parentSemanticElement.eContainer();
+						} else { // we are in the root node
+							break; //TODO come trattarlo...??
+						}
+					}
+				}
+			}
+			String txt = errorNode.getText();
+			System.err.println("ERROR: " + errm.getMessage() + " - line: " + sl + " - token: '" + erroneousToken + "'");
+			
+			// "table-formatted" output
+			//System.err.printf("%-60s - %-8s - %-60s %n", "ERROR: " + errm.getMessage(), "line: " + sl, "token: " + erroneousToken);
+		}
+		return false;
 	}
 
 	/**
