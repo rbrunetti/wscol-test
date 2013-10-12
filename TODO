@@ -3,6 +3,7 @@
     |    |_____| |_____/ |_____|
 
 	• Better syntax errors messages: hints on possible solutions
+	• Make some junit tests for the query
 	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! 
 	• 
 	• 
@@ -14,7 +15,7 @@
  	• Add complex assertions even in the declarations -> is it useful?
 	• Variables in Values -> what's happening if I put a variable referring to a DataObject? What if I call an 'exists' over it?
 	• Add variables and functions in Step's attribute (ex. /step[$a.lengt()] is, for now, invalid) -> is it useful?  
-	• 
+	•  
 	• 
 	•
  _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
