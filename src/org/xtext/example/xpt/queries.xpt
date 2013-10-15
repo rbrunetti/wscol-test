@@ -1,5 +1,5 @@
 // Test for Afun (min, max, avg, etc...)
-
+/*
 let $prices = /inventory/book/price;
 let $min = min($book in $prices, $book > 0);
 let $max = max($book in $prices, $book > 0);
@@ -7,7 +7,7 @@ let $avg = avg($book in $prices, $book > 0);
 let $prod = product($book in $prices, $book > 0);
 let $sum = sum($book in $prices, $book > 0);
 $min = 6.00 && $max = 15 && $avg = 9.5 && $prod = 675.0 && $sum = 28.5 && $prices > 0;
-
+*/
 /*
 // Test for QuantifiedAssertion (forall, numOf, exists)
 
@@ -17,7 +17,7 @@ let $d = $c/author;
 numOf($cc in $d, $cc.length() > 0) > 1 || !(exists($aaa in $a, $aaa.startsWith("Z") = false)) || forall($aa in $a, $aa.startsWith("Z") = false);
 */
 
-/*
+
 // Test with various syntax errors 
 
 let $c = /inventory/book.leght(;
@@ -32,7 +32,7 @@ let $c = [1, 2, sdoap];
 let $c = /inventory/book/price; // the only one that's correct!
 numOf($a in $c, $a.length()>0) > 0 & $c = 1; 
 
-*/
+
 
 /*
 // Test for runtime errors (note that it'll block the execution after the first error is found)
