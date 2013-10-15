@@ -3,8 +3,8 @@
     |    |_____| |_____/ |_____|
 
 	• Better syntax errors messages: hints on possible solutions
-	• Make some junit tests for the query
-	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! 
+	• Make some junit tests based on assertions in 'queries.xpt' file
+	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java!
 	• 
 	• 
 	• 
@@ -12,9 +12,9 @@
  |     \ |     | |     | |_____]    |    |______
  |_____/ |_____| |_____| |_____]    |    ______|
  
- 	• Add complex assertions even in the declarations -> is it useful?
-	• Variables in Values -> what's happening if I put a variable referring to a DataObject? What if I call an 'exists' over it?
-	• Add variables and functions in Step's attribute (ex. /step[$a.lengt()] is, for now, invalid) -> is it useful?  
+ 	• Add complex assertions even in the declarations => useful?
+	• Variables in Values => what's happening if I put a variable referring to a DataObject? What if I call an 'exists' over it?
+	• Add variables and functions in Step's attribute (ex. /step[$a.length()] is, for now, invalid) => useful?  
 	•  
 	• 
 	•
@@ -29,7 +29,7 @@
  	• Runtime errors (ex. quantified assertion over a single value variable and not on a set of value) throws exception with a corresponding message
  	• Implementation of rules for 'max', 'min', 'avg', 'sum' and 'product'
  		• BUT with the correction of the rule Variable ('min', 'max', etc are now language keyword, so I could not declare a variable '$min' without correcting the Variable rule)
- 		• BUT float numbers could be different for a minimum fraction, maybe we can use a limited number of decimal digit 
+ 		• BUT float numbers could be different for a minimum fraction, maybe we can use a limited number of decimal digit
  	• Make the boolean value in AssertionForm implicit (ex. exists(...) = true -> exists(...))
  		• BUT rules are not so pretty...
  	• Better syntax errors messages: what and why is wrong; also for runtime errors with values printing

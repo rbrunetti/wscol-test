@@ -57,7 +57,7 @@ public class Main {
 	@SuppressWarnings("unused")
 	private static String xmlFilePath2 = "src/org/xtext/example/xpt/book2.xml";
 
-	private static Map<String, Object> variables = new HashMap<>();
+	private static Map<String, Object> variables = new HashMap<String, Object>();
 	private static DataObject input = new DataObject();
 
 	public static void main(String[] args) {
@@ -106,23 +106,9 @@ public class Main {
 		ResourceSet set = resourceSetProvider.get();
 		Resource resource = set.getResource(URI.createURI(string), true);
 		
-		if(checkSyntaxErrors(resource))
+		if(syntaxErrors(resource)) {
 			return;
-
-		// validate the resource
-//		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-//		if (!list.isEmpty()) {
-//			System.err.println("*** MALFORMED ASSERTIONS ***");
-//			for (Issue issue : list) {
-//				URI problemURI = issue.getUriToProblem();
-//				String location = problemURI.fragment();
-//				String msg = issue.getMessage();
-//				Integer lineNumb = issue.getLineNumber();
-//				// Print out syntax errors
-//				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - " + location);
-//			}
-//			return;
-//		}
+		}
 
 		// get contents
 		Model model = (Model) resource.getContents().get(0);
@@ -180,7 +166,7 @@ public class Main {
 	 * @param resource the result of the loading by the parser
 	 * @return true if there is no errors, false otherwise
 	 */
-	private boolean checkSyntaxErrors(Resource resource) {
+	private boolean syntaxErrors(Resource resource) {
 		// syntax errors checking
 		Iterable<INode> errors = ((XtextResource) resource).getParseResult().getSyntaxErrors();
 		Iterator<INode> iter = errors.iterator();
@@ -232,11 +218,35 @@ public class Main {
 					}
 				}
 			}
-			String txt = errorNode.getText();
 			System.err.println("ERROR: " + errm.getMessage() + " - line: " + sl + " - token: '" + erroneousToken + "'");
 			
 			// "table-formatted" output
 			//System.err.printf("%-60s - %-8s - %-60s %n", "ERROR: " + errm.getMessage(), "line: " + sl, "token: " + erroneousToken);
+		}
+		return true;
+	}
+	
+	/**
+	 * Syntax errors checking with the validator
+	 * TODO valuta se eliminabile
+	 * @param resource
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	private boolean checkSyntaxErrorValidator(Resource resource){
+		// validate the resource
+		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+		if (!list.isEmpty()) {
+			System.err.println("*** MALFORMED ASSERTIONS ***");
+			for (Issue issue : list) {
+				URI problemURI = issue.getUriToProblem();
+				String location = problemURI.fragment();
+				String msg = issue.getMessage();
+				Integer lineNumb = issue.getLineNumber();
+				// Print out syntax errors
+				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - " + location);
+			}
+			return true;
 		}
 		return false;
 	}
@@ -250,7 +260,7 @@ public class Main {
 	 * @throws Exception
 	 *             if there are exception from the verification of the assertions
 	 */
-	private boolean verifyAssertions(Assertions assertions) throws Exception {
+	public boolean verifyAssertions(Assertions assertions) throws Exception {
 		EList<EObject> a = assertions.eContents();
 		if (assertions instanceof AssertionAnd) {
 			return (verifyAssertions((Assertions) a.get(0)) & verifyAssertions((Assertions) a.get(1)));

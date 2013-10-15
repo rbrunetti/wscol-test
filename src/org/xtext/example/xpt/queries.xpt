@@ -1,12 +1,12 @@
 // Test for Afun (min, max, avg, etc...)
 
 let $prices = /inventory/book/price;
-let $min = min($book in $a, $book > 0);
+let $min = min($book in $prices, $book > 0);
 let $max = max($book in $prices, $book > 0);
 let $avg = avg($book in $prices, $book > 0);
 let $prod = product($book in $prices, $book > 0);
 let $sum = sum($book in $prices, $book > 0);
-$min = 6.00 && $max = 15 && $avg = 9.5 && $prod = 675.0 && $sum = 28.5 && $prices[1] > 0;
+$min = 6.00 && $max = 15 && $avg = 9.5 && $prod = 675.0 && $sum = 28.5 && $prices > 0;
 
 /*
 // Test for QuantifiedAssertion (forall, numOf, exists)
