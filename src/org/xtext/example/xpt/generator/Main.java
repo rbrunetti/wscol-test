@@ -4,6 +4,7 @@
 package org.xtext.example.xpt.generator;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -77,28 +78,28 @@ public class Main {
 		DataObject book1 = new DataObject();
 		DataObject book2 = new DataObject();
 
-		book1.put("title", "Snow Crash");
-		book1.put("year", (double) 2000);
-		book1.put("author", "Neal Stephenson");
-		book1.put("publisher", "Spectra");
-		book1.put("isbn", "0553380958");
-		book1.put("price", (double) 15.0);
-		books.put("book", book1);
-
-		book2.put("title", "Burning Tower");
-		book2.put("year", (double) 2005);
+//		book1.put("title", "Snow Crash");
+//		book1.put("year", (double) 2000);
+//		book1.put("author", "Neal Stephenson");
+//		book1.put("publisher", "Spectra");
+//		book1.put("isbn", "0553380958");
+//		book1.put("price", (double) 15.0);
+//		books.put("book", book1);
+//
+//		book2.put("title", "Burning Tower");
+//		book2.put("year", (double) 2005);
 		book2.put("author", "Larry Niven");
 		book2.put("author", "Jerry Pournelle");
-		book2.put("publisher", "Pocket");
-		book2.put("isbn", "0743416910");
-		book2.put("price", (double) 5.99);
-		books.put("book", book2);
+//		book2.put("publisher", "Pocket");
+//		book2.put("isbn", "0743416910");
+//		book2.put("price", (double) 5.99);
+//		books.put("book", book2);
 
-		books.put("book", (double) 5);
+//		books.put("book", (double) 5);
 
-		data.put("inventory", books);
+		data.put("inventory", book2);
 
-		return data;
+		return book2;
 	}
 
 	protected void runGenerator(String string) {
@@ -130,9 +131,20 @@ public class Main {
 
 		// get input: via xml parsing or passed DataObject
 		input = new DataObject(xmlFilePath);
+		DataObject input2 = new DataObject(xmlFilePath2);
+		DataObject input3 = hashMapTest();
+		Map<String, Collection<Object>> map1 = input.getData().asMap();
+		Map<String, Collection<Object>> map2 = input2.getData().asMap();
+		Map<String, Collection<Object>> map3 = input3.getData().asMap();
+		boolean result = input.equals(input2);
+		boolean strcmp = input3.isSingleValue();
+		input3.isList();
+		List<Object> list = input3.getList();
+		System.out.println("input: " + input + "\ninput3: " + input3 + "\n\n" + strcmp + "\n\n" + list + "\n\nresult: " + result);
 		// input = hashMapTest(); // load input from a DataObject
+		/*
 		System.out.println("################## INPUT ###################\n" + input + "\n");
-
+		
 		if (count == 0) {
 			System.out.println("No assertions. Execution halted.");
 			return;
@@ -158,7 +170,7 @@ public class Main {
 			System.err.println(e.getMessage());
 			System.exit(0);
 		}
-
+		*/
 	}
 
 	/**
@@ -567,13 +579,13 @@ public class Main {
 					if (assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
 						result = ((DataObject) value).evaluate(assertion.getQuery());
 						if (((DataObject) result).isSingleValue()) {
-							result = ((DataObject) result).getFirst();
+							result = ((DataObject) result).getFirstValue();
 						}
 					} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
 						result = value;
 					} else {
 						if (((DataObject) value).isSingleValue()) {
-							result = ((DataObject) value).getFirst();
+							result = ((DataObject) value).getFirstValue();
 						} else {
 							result = value;
 						}
@@ -585,7 +597,7 @@ public class Main {
 				result = input.evaluate(assertion.getQuery());
 				// if the DataObject is containing a single value it will be extrapolated from the Object
 				if (((DataObject) result).isSingleValue()) {
-					result = ((DataObject) result).getFirst();
+					result = ((DataObject) result).getFirstValue();
 				}
 			}
 		} else {
@@ -838,6 +850,22 @@ public class Main {
 			return null;
 		}
 	}
+	
+	private Object applyDataObjectFunctions(Object object, Function function) {
+		EList<Constant> params = null;
+		if(function.getParams() != null){
+			params = function.getParams().getValue();
+		}
+		//TODO
+		switch (function.getName()) {
+		case "":
+			break;
+
+		default:
+			break;
+		}
+		return null;
+	}
 
 	/**
 	 * Set variables according to the declarations
@@ -877,7 +905,7 @@ public class Main {
 							}
 							// if the DataObject is containing a single value, only that single value is stored as variable
 							if (((DataObject) result).isSingleValue()) {
-								result = ((DataObject) result).getFirst();
+								result = ((DataObject) result).getFirstValue();
 							}
 						} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
 							result = value;
@@ -898,7 +926,7 @@ public class Main {
 						throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
 					}
 					if (((DataObject) result).isSingleValue()) {
-						result = ((DataObject) result).getFirst();
+						result = ((DataObject) result).getFirstValue();
 					}
 				}
 

@@ -2,7 +2,7 @@
     |    |     | |     \ |     |
     |    |_____| |_____/ |_____|
 
-	• Better syntax errors messages: hints on possible solutions
+	• Find and implement possible functions for DataObject variables
 	• Make some junit tests based on assertions in 'queries.xpt' file
 	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java!
 	• 

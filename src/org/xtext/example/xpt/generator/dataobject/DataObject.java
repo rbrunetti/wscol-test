@@ -97,7 +97,7 @@ public class DataObject {
 				if (next instanceof DataObject) {
 					DataObject nextDO = (DataObject) next;
 					if (attribute != null) {
-						if (attribute.getNumber() > 0) { 
+						if (attribute.getNumber() > 0) {
 							if (attribute.getNumber() == i) {
 								subMap.putAll(nextDO);
 								return subMap;
@@ -218,30 +218,48 @@ public class DataObject {
 	 * 
 	 * @return value corresponding to the first key inserted in the DataObject
 	 */
-	public Object getFirst() {
-		if (isSingleValue()) {
-			return data.values().iterator().next();
-		}
-		return null;
+	public Object getFirstValue() {
+		return data.values().iterator().next();
 	}
 
 	/**
 	 * Return true if there is only a value in the DataObject
+	 * 
 	 * @return
 	 */
 	public boolean isSingleValue() {
-		return data.values().size() == 1;
+		return data.values().size() == 1 && !(this.getFirstValue() instanceof DataObject);
 	}
 
-	private boolean isList() {
-		return data.keySet().size() == 1;
+	/**
+	 * Check if the DataObject contains just a single key with a list of simple values (not of type DataObject) associated 
+	 * @return true if it is a List, false otherwise
+	 */
+	public boolean isList() {
+		if(data.keySet().size() != 1) {
+			return false;
+		}
+		for(Object o:this.values()){
+			if(!(o instanceof String || o instanceof Boolean || o instanceof Double)) {
+				return false;
+			}
+		}
+		return true;
 	}
-	
+
 	public boolean isEmpty() {
 		return data.isEmpty();
 	}
 
-	private List<Object> getList() {
+	/**
+	 * Convert a DataObject to a List (used in case of array declaration, where the defined array became a DataObject view multiple value associated a key equal to the name of the declaration variable)
+	 * 
+	 * @return
+	 */
+	public List<Object> getList() {
+		if (this.keySet().size() != 1) {
+			return null;
+		}
 		List<Object> res = new ArrayList<Object>();
 		for (Object e : this.values()) {
 			res.add(e);
@@ -400,7 +418,7 @@ public class DataObject {
 		for (String key : data.keySet()) {
 			result += key + "=" + data.get(key) + ", ";
 		}
-		if(result.length()>1){
+		if (result.length() > 1) {
 			result = result.substring(0, result.length() - 2);
 		}
 		result += "}";
@@ -415,12 +433,46 @@ public class DataObject {
 		}
 
 		// check if each of the map of the two DataObject contains a single key with a List value -> if so, ignore the keys and compare the lists
-		if (this.isList() && ((DataObject) o).isList()) {
-			return this.getList().equals(((DataObject) o).getList());
-		}
+		 if (this.isList() && ((DataObject) o).isList()) {
+			 return this.getList().equals(((DataObject) o).getList());
+		 }
 
 		// check if the maps has same values for the same keys
-		return data.equals(((DataObject) o).getData());
+		return deepEqual(this, (DataObject) o);
+	}
+	
+	/**
+	 * Search and compare every single key-value pair
+	 * @param a the DataObject to compare
+	 * @param b the DataObject to compare
+	 * @return true if the DataObject are equals, false otherwise
+	 */
+	private boolean deepEqual(DataObject a, DataObject b) {
+		Set<String> keysA = a.keySet();
+		Set<String> keysB = b.keySet();
+		if(keysA.size() != keysB.size() || a.values().size() != b.values().size()){
+			return false;
+		}
+		for(String keyA:keysA) {
+			if(!keysB.contains(keyA)) {
+				return false;
+			}
+			Iterator<Object> iterA = a.get(keyA).iterator();
+			Iterator<Object> iterB = b.get(keyA).iterator();
+			while(iterA.hasNext() && iterB.hasNext()){
+				Object elemA = iterA.next();
+				Object elemB = iterB.next();
+				if (elemA instanceof DataObject && elemB instanceof DataObject) {
+					boolean res = deepEqual((DataObject) elemA, (DataObject) elemB);
+					if(!res){
+						return false;
+					}
+				} else if (!elemA.equals(elemB)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 }
