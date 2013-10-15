@@ -48,7 +48,7 @@ Attribute:
 	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING) | number=NUMBER;
 
 StringRop:
-	'=' | "!=";
+	'==' | "!=";
 
 Rop:
 	StringRop | '<' | '<=' | '>' | '>=';

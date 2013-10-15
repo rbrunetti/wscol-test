@@ -293,7 +293,7 @@ public class Main {
 
 		// check if the AssertionForm is of type AssertionQualifiedBoolean (so without the '= true' explicitly specified)
 		if (af.getOp() == null && af.getRightAssert() == null) {
-			operation = "=";
+			operation = "==";
 			raObj = true;
 		} else {
 			operation = af.getOp(); // get Op for using it for the comparisons
@@ -371,7 +371,7 @@ public class Main {
 				result = false;
 			}
 			break;
-		case "=":
+		case "==":
 			if (left == right) {
 				result = true;
 			} else {
@@ -417,7 +417,7 @@ public class Main {
 	private boolean stringAssertion(String left, String right, String operation, String condition) throws Exception {
 		boolean result;
 		switch (operation) {
-		case "=":
+		case "==":
 			if (left.equals(right)) {
 				result = true;
 			} else {
@@ -465,7 +465,7 @@ public class Main {
 	private boolean booleanAssertion(boolean left, boolean right, String operation, String condition) throws Exception {
 		boolean result;
 		switch (operation) {
-		case "=":
+		case "==":
 			result = left == right;
 			break;
 		case "!=":
@@ -505,7 +505,7 @@ public class Main {
 	private boolean dataobjectAssertion(DataObject left, DataObject right, String operation, String condition) throws Exception {
 		boolean result;
 		switch (operation) {
-		case "=":
+		case "==":
 			if (left.equals(right)) {
 				result = true;
 			} else {

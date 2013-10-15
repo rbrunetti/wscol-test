@@ -1223,10 +1223,10 @@ ruleStringRop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
     @after { leaveRule(); }:
 (
-	kw='=' 
+	kw='==' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getStringRopAccess().getEqualsSignKeyword_0()); 
+        newLeafNode(kw, grammarAccess.getStringRopAccess().getEqualsSignEqualsSignKeyword_0()); 
     }
 
     |

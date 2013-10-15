@@ -681,18 +681,18 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	public class StringRopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringRop");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cEqualsSignEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cExclamationMarkEqualsSignKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//StringRop:
-		//	"=" | "!=";
+		//	"==" | "!=";
 		public ParserRule getRule() { return rule; }
 
-		//"=" | "!="
+		//"==" | "!="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"="
-		public Keyword getEqualsSignKeyword_0() { return cEqualsSignKeyword_0; }
+		//"=="
+		public Keyword getEqualsSignEqualsSignKeyword_0() { return cEqualsSignEqualsSignKeyword_0; }
 
 		//"!="
 		public Keyword getExclamationMarkEqualsSignKeyword_1() { return cExclamationMarkEqualsSignKeyword_1; }
@@ -1127,7 +1127,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StringRop:
-	//	"=" | "!=";
+	//	"==" | "!=";
 	public StringRopElements getStringRopAccess() {
 		return (pStringRop != null) ? pStringRop : (pStringRop = new StringRopElements());
 	}
