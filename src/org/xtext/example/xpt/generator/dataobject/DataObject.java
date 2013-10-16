@@ -37,14 +37,10 @@ public class DataObject {
 		data = LinkedHashMultimap.create();
 	}
 
-	public DataObject(String name, Values values) {
+	public DataObject(String name, List<Object> values) {
 		data = LinkedHashMultimap.create();
-		for (Constant c : values.getValue()) {
-			if (c.getString() != null) {
-				data.put(name, c.getString());
-			} else {
-				data.put(name, c.getNumber());
-			}
+		for (Object o : values) {
+			data.put(name, o); // in this way there's values associated to a key ('data.put(name,values)' would associate a list to a key)
 		}
 	}
 
@@ -232,15 +228,16 @@ public class DataObject {
 	}
 
 	/**
-	 * Check if the DataObject contains just a single key with a list of simple values (not of type DataObject) associated 
+	 * Check if the DataObject contains just a single key with a list of simple values (not of type DataObject) associated
+	 * 
 	 * @return true if it is a List, false otherwise
 	 */
 	public boolean isList() {
-		if(data.keySet().size() != 1) {
+		if (data.keySet().size() != 1) {
 			return false;
 		}
-		for(Object o:this.values()){
-			if(!(o instanceof String || o instanceof Boolean || o instanceof Double)) {
+		for (Object o : this.values()) {
+			if (!(o instanceof String || o instanceof Boolean || o instanceof Double)) {
 				return false;
 			}
 		}
@@ -265,6 +262,35 @@ public class DataObject {
 			res.add(e);
 		}
 		return res;
+	}
+
+	/**
+	 * Search and compare every single key-value pair
+	 * 
+	 * @param a
+	 *            the DataObject to compare
+	 * @param b
+	 *            the DataObject to compare
+	 * @return true if the DataObject are equals, false otherwise
+	 */
+	public boolean contains(Object target) {
+		if (data.containsValue(target)) {
+			return true;
+		}
+		Iterator<Object> iter = this.values().iterator();
+		while (iter.hasNext()) {
+			Object elem = iter.next();
+			if (elem instanceof DataObject) {
+				if (target instanceof DataObject && elem.equals(target)) {
+					return true;
+				}
+				boolean res = ((DataObject) elem).contains(target);
+				if (res) {
+					return res;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -433,38 +459,41 @@ public class DataObject {
 		}
 
 		// check if each of the map of the two DataObject contains a single key with a List value -> if so, ignore the keys and compare the lists
-		 if (this.isList() && ((DataObject) o).isList()) {
-			 return this.getList().equals(((DataObject) o).getList());
-		 }
+		// if (this.isList() && ((DataObject) o).isList()) {
+		// return this.getList().equals(((DataObject) o).getList());
+		// }
 
 		// check if the maps has same values for the same keys
 		return deepEqual(this, (DataObject) o);
 	}
-	
+
 	/**
 	 * Search and compare every single key-value pair
-	 * @param a the DataObject to compare
-	 * @param b the DataObject to compare
+	 * 
+	 * @param a
+	 *            the DataObject to compare
+	 * @param b
+	 *            the DataObject to compare
 	 * @return true if the DataObject are equals, false otherwise
 	 */
 	private boolean deepEqual(DataObject a, DataObject b) {
 		Set<String> keysA = a.keySet();
 		Set<String> keysB = b.keySet();
-		if(keysA.size() != keysB.size() || a.values().size() != b.values().size()){
+		if (keysA.size() != keysB.size() || a.values().size() != b.values().size()) {
 			return false;
 		}
-		for(String keyA:keysA) {
-			if(!keysB.contains(keyA)) {
+		for (String keyA : keysA) {
+			if (!keysB.contains(keyA)) {
 				return false;
 			}
 			Iterator<Object> iterA = a.get(keyA).iterator();
 			Iterator<Object> iterB = b.get(keyA).iterator();
-			while(iterA.hasNext() && iterB.hasNext()){
+			while (iterA.hasNext() && iterB.hasNext()) {
 				Object elemA = iterA.next();
 				Object elemB = iterB.next();
 				if (elemA instanceof DataObject && elemB instanceof DataObject) {
 					boolean res = deepEqual((DataObject) elemA, (DataObject) elemB);
-					if(!res){
+					if (!res) {
 						return false;
 					}
 				} else if (!elemA.equals(elemB)) {

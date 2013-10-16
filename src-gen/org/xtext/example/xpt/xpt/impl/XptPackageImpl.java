@@ -24,6 +24,7 @@ import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
+import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
 import org.xtext.example.xpt.xpt.XptFactory;
 import org.xtext.example.xpt.xpt.XptPackage;
@@ -126,6 +127,13 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * @generated
    */
   private EClass valuesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass valueEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -646,6 +654,26 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getValue()
+  {
+    return valueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getValue_Var()
+  {
+    return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getConstant()
   {
     return constantEClass;
@@ -817,6 +845,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     valuesEClass = createEClass(VALUES);
     createEReference(valuesEClass, VALUES__VALUE);
 
+    valueEClass = createEClass(VALUE);
+    createEAttribute(valueEClass, VALUE__VAR);
+
     constantEClass = createEClass(CONSTANT);
     createEAttribute(constantEClass, CONSTANT__NUMBER);
     createEAttribute(constantEClass, CONSTANT__STRING);
@@ -863,6 +894,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     assertionNotEClass.getESuperTypes().add(this.getAssertions());
     assertionFormEClass.getESuperTypes().add(this.getAssertions());
     assertionQuantifiedEClass.getESuperTypes().add(this.getAssertion());
+    constantEClass.getESuperTypes().add(this.getValue());
     assertionOrEClass.getESuperTypes().add(this.getAssertions());
     assertionAndEClass.getESuperTypes().add(this.getAssertions());
 
@@ -921,7 +953,10 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     initEReference(getFunction_Params(), this.getValues(), null, "params", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(valuesEClass, Values.class, "Values", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getValues_Value(), this.getConstant(), null, "value", null, 0, -1, Values.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getValues_Value(), this.getValue(), null, "value", null, 0, -1, Values.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getValue_Var(), ecorePackage.getEString(), "var", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getConstant_Number(), ecorePackage.getEDouble(), "number", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

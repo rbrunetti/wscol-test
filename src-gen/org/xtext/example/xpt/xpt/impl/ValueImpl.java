@@ -2,55 +2,57 @@
  */
 package org.xtext.example.xpt.xpt.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.xtext.example.xpt.xpt.Value;
-import org.xtext.example.xpt.xpt.Values;
 import org.xtext.example.xpt.xpt.XptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Values</b></em>'.
+ * An implementation of the model object '<em><b>Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.ValuesImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.ValueImpl#getVar <em>Var</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
+public class ValueImpl extends MinimalEObjectImpl.Container implements Value
 {
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference list.
+   * The default value of the '{@link #getVar() <em>Var</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #getVar()
    * @generated
    * @ordered
    */
-  protected EList<Value> value;
+  protected static final String VAR_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getVar() <em>Var</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVar()
+   * @generated
+   * @ordered
+   */
+  protected String var = VAR_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ValuesImpl()
+  protected ValueImpl()
   {
     super();
   }
@@ -63,7 +65,7 @@ public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
   @Override
   protected EClass eStaticClass()
   {
-    return XptPackage.Literals.VALUES;
+    return XptPackage.Literals.VALUE;
   }
 
   /**
@@ -71,13 +73,9 @@ public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Value> getValue()
+  public String getVar()
   {
-    if (value == null)
-    {
-      value = new EObjectContainmentEList<Value>(Value.class, this, XptPackage.VALUES__VALUE);
-    }
-    return value;
+    return var;
   }
 
   /**
@@ -85,15 +83,12 @@ public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setVar(String newVar)
   {
-    switch (featureID)
-    {
-      case XptPackage.VALUES__VALUE:
-        return ((InternalEList<?>)getValue()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldVar = var;
+    var = newVar;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.VALUE__VAR, oldVar, var));
   }
 
   /**
@@ -106,8 +101,8 @@ public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
   {
     switch (featureID)
     {
-      case XptPackage.VALUES__VALUE:
-        return getValue();
+      case XptPackage.VALUE__VAR:
+        return getVar();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,15 +112,13 @@ public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case XptPackage.VALUES__VALUE:
-        getValue().clear();
-        getValue().addAll((Collection<? extends Value>)newValue);
+      case XptPackage.VALUE__VAR:
+        setVar((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +134,8 @@ public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
   {
     switch (featureID)
     {
-      case XptPackage.VALUES__VALUE:
-        getValue().clear();
+      case XptPackage.VALUE__VAR:
+        setVar(VAR_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +151,27 @@ public class ValuesImpl extends MinimalEObjectImpl.Container implements Values
   {
     switch (featureID)
     {
-      case XptPackage.VALUES__VALUE:
-        return value != null && !value.isEmpty();
+      case XptPackage.VALUE__VAR:
+        return VAR_EDEFAULT == null ? var != null : !VAR_EDEFAULT.equals(var);
     }
     return super.eIsSet(featureID);
   }
 
-} //ValuesImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (var: ");
+    result.append(var);
+    result.append(')');
+    return result.toString();
+  }
+
+} //ValueImpl

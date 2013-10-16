@@ -4,6 +4,7 @@
 package org.xtext.example.xpt.generator;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,6 +41,7 @@ import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
+import org.xtext.example.xpt.xpt.Value;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -78,36 +80,36 @@ public class Main {
 		DataObject book1 = new DataObject();
 		DataObject book2 = new DataObject();
 
-//		book1.put("title", "Snow Crash");
-//		book1.put("year", (double) 2000);
-//		book1.put("author", "Neal Stephenson");
-//		book1.put("publisher", "Spectra");
-//		book1.put("isbn", "0553380958");
-//		book1.put("price", (double) 15.0);
-//		books.put("book", book1);
-//
-//		book2.put("title", "Burning Tower");
-//		book2.put("year", (double) 2005);
+		// book1.put("title", "Snow Crash");
+		// book1.put("year", (double) 2000);
+		// book1.put("author", "Neal Stephenson");
+		// book1.put("publisher", "Spectra");
+		// book1.put("isbn", "0553380958");
+		// book1.put("price", (double) 15.0);
+		// books.put("book", book1);
+		//
+		// book2.put("title", "Burning Tower");
+		// book2.put("year", (double) 2005);
 		book2.put("author", "Larry Niven");
 		book2.put("author", "Jerry Pournelle");
-//		book2.put("publisher", "Pocket");
-//		book2.put("isbn", "0743416910");
-//		book2.put("price", (double) 5.99);
-//		books.put("book", book2);
+		// book2.put("publisher", "Pocket");
+		// book2.put("isbn", "0743416910");
+		// book2.put("price", (double) 5.99);
+		// books.put("book", book2);
 
-//		books.put("book", (double) 5);
+		// books.put("book", (double) 5);
 
 		data.put("inventory", book2);
 
-		return book2;
+		return data;
 	}
 
 	protected void runGenerator(String string) {
 		// load the resource
 		ResourceSet set = resourceSetProvider.get();
 		Resource resource = set.getResource(URI.createURI(string), true);
-		
-		if(syntaxErrors(resource)) {
+
+		if (syntaxErrors(resource)) {
 			return;
 		}
 
@@ -131,20 +133,16 @@ public class Main {
 
 		// get input: via xml parsing or passed DataObject
 		input = new DataObject(xmlFilePath);
-		DataObject input2 = new DataObject(xmlFilePath2);
-		DataObject input3 = hashMapTest();
-		Map<String, Collection<Object>> map1 = input.getData().asMap();
-		Map<String, Collection<Object>> map2 = input2.getData().asMap();
-		Map<String, Collection<Object>> map3 = input3.getData().asMap();
-		boolean result = input.equals(input2);
-		boolean strcmp = input3.isSingleValue();
-		input3.isList();
-		List<Object> list = input3.getList();
-		System.out.println("input: " + input + "\ninput3: " + input3 + "\n\n" + strcmp + "\n\n" + list + "\n\nresult: " + result);
+//		 DataObject input2 = new DataObject(xmlFilePath2);
+//		 DataObject input3 = hashMapTest();
+//		 DataObject input4 = new DataObject();
+//		 input4.put("weq", "Larry Niven");
+//		 boolean rcon = input3.contains("Larry Niven");
+//		 System.out.println(input3 + "\n" + input4 + "\nCOntains1: " + rcon + "\n" + input + "\n" + input2 + "\n" + "con2: " + input.contains(input2));
 		// input = hashMapTest(); // load input from a DataObject
-		/*
+
 		System.out.println("################## INPUT ###################\n" + input + "\n");
-		
+
 		if (count == 0) {
 			System.out.println("No assertions. Execution halted.");
 			return;
@@ -170,12 +168,14 @@ public class Main {
 			System.err.println(e.getMessage());
 			System.exit(0);
 		}
-		*/
+
 	}
 
 	/**
 	 * Syntax error checking, with the indication of the erroneous token
-	 * @param resource the result of the loading by the parser
+	 * 
+	 * @param resource
+	 *            the result of the loading by the parser
 	 * @return true if there is no errors, false otherwise
 	 */
 	private boolean syntaxErrors(Resource resource) {
@@ -183,11 +183,11 @@ public class Main {
 		Iterable<INode> errors = ((XtextResource) resource).getParseResult().getSyntaxErrors();
 		Iterator<INode> iter = errors.iterator();
 		int number = resource.getErrors().size();
-		
-		if(number == 0) {
+
+		if (number == 0) {
 			return false;
 		}
-		
+
 		System.err.println("**** MALFORMED ASSERTIONS ****\n*** " + number + " syntax errors found ***\n");
 
 		INode errorNode = null;
@@ -222,30 +222,30 @@ public class Main {
 					} else if (parentSemanticElement instanceof Step) {
 						erroneousToken = Helper.stepToString((Step) parentSemanticElement);
 					} else {
-						if(parentSemanticElement.eContainer() != null) {
+						if (parentSemanticElement.eContainer() != null) {
 							parentSemanticElement = parentSemanticElement.eContainer();
 						} else { // we are in the root node
-							break; //TODO come trattarlo...??
+							break; // TODO come trattarlo...??
 						}
 					}
 				}
 			}
 			System.err.println("ERROR: " + errm.getMessage() + " - line: " + sl + " - token: '" + erroneousToken + "'");
-			
+
 			// "table-formatted" output
-			//System.err.printf("%-60s - %-8s - %-60s %n", "ERROR: " + errm.getMessage(), "line: " + sl, "token: " + erroneousToken);
+			// System.err.printf("%-60s - %-8s - %-60s %n", "ERROR: " + errm.getMessage(), "line: " + sl, "token: " + erroneousToken);
 		}
 		return true;
 	}
-	
+
 	/**
-	 * Syntax errors checking with the validator
-	 * TODO valuta se eliminabile
+	 * Syntax errors checking with the validator TODO valuta se eliminabile
+	 * 
 	 * @param resource
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	private boolean checkSyntaxErrorValidator(Resource resource){
+	private boolean checkSyntaxErrorValidator(Resource resource) {
 		// validate the resource
 		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 		if (!list.isEmpty()) {
@@ -581,8 +581,8 @@ public class Main {
 						if (((DataObject) result).isSingleValue()) {
 							result = ((DataObject) result).getFirstValue();
 						}
-					} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
-						result = value;
+//					} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
+//						result = value;
 					} else {
 						if (((DataObject) value).isSingleValue()) {
 							result = ((DataObject) value).getFirstValue();
@@ -606,12 +606,17 @@ public class Main {
 
 		// *** FUNCTIONS ***
 		if (assertion.getFunction() != null) {
-			if (result instanceof DataObject) {
-				// TODO
-			} else if (result instanceof String) {
-				result = applyStringFunctions(result, assertion.getFunction());
-			} else if (result instanceof Double) {
-				result = applyDoubleFunctions(result, assertion.getFunction());
+			try {
+				if (result instanceof DataObject) {
+					result = applyDataObjectFunctions(result, assertion.getFunction());
+				} else if (result instanceof String) {
+					result = applyStringFunctions(result, assertion.getFunction());
+				} else if (result instanceof Double) {
+					result = applyDoubleFunctions(result, assertion.getFunction());
+				}
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				System.exit(0);
 			}
 		}
 		return result;
@@ -628,6 +633,7 @@ public class Main {
 	 */
 	private Object doAssertionQuantified(Assertion assertion) throws Exception {
 		AssertionQuantified aq = (AssertionQuantified) assertion;
+		String assertionRepr = "[assertion: '" + Helper.assertionQuantifiedToString(aq) + "']";
 
 		if (!(variables.containsKey(aq.getVar()))) {
 			throw new Exception("The variable '" + aq.getVar() + "' is not defined.");
@@ -635,7 +641,7 @@ public class Main {
 		}
 
 		if (!(variables.get(aq.getVar()) instanceof DataObject)) {
-			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getName() + ". A DataObject type was expected.");
+			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getSimpleName() + " (" + aq.getVar() + "). A DataObject type was expected " + assertionRepr);
 		}
 
 		DataObject set = (DataObject) variables.get(aq.getVar());
@@ -683,7 +689,7 @@ public class Main {
 			while (iter.hasNext()) {
 				Object next = iter.next();
 				if (!(next instanceof Double)) {
-					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function " + assertionRepr);
 				}
 				variables.put(alias, next);
 				if (verifyAssertions(aq.getConditions())) {
@@ -698,7 +704,7 @@ public class Main {
 			while (iter.hasNext()) {
 				Object next = iter.next();
 				if (!(next instanceof Double)) {
-					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function " + assertionRepr);
 				}
 				variables.put(alias, next);
 				if (verifyAssertions(aq.getConditions())) {
@@ -713,7 +719,7 @@ public class Main {
 			while (iter.hasNext()) {
 				Object next = iter.next();
 				if (!(next instanceof Double)) {
-					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function " + assertionRepr);
 				}
 				variables.put(alias, next);
 				if (verifyAssertions(aq.getConditions())) {
@@ -727,7 +733,7 @@ public class Main {
 			while (iter.hasNext()) {
 				Object next = iter.next();
 				if (!(next instanceof Double)) {
-					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function " + assertionRepr);
 				}
 				variables.put(alias, next);
 				if (verifyAssertions(aq.getConditions())) {
@@ -743,7 +749,7 @@ public class Main {
 			while (iter.hasNext()) {
 				Object next = iter.next();
 				if (!(next instanceof Double)) {
-					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function.");
+					throw new Exception("The variable '" + aq.getVar() + "' contains an element of class '" + next.getClass().getSimpleName() + "'. Only Doubles are accepted by '" + aq.getQuantifier() + "' function " + assertionRepr);
 				}
 				variables.put(alias, next);
 				if (verifyAssertions(aq.getConditions())) {
@@ -767,52 +773,81 @@ public class Main {
 	 * @param function
 	 *            the function and the parameters for the function
 	 * @return the result of the function
+	 * @throws Exception
 	 */
-	private Object applyStringFunctions(Object object, Function function) {
-		EList<Constant> params = null;
-		if (function.getParams() != null) {
-			params = function.getParams().getValue();
-		}
+	private Object applyStringFunctions(Object object, Function function) throws Exception {
+		List<Object> params = getFunctionParams(function);
 		switch (function.getName()) {
 		case "uppercase":
 			if (params == null) {
 				return ((String) object).toUpperCase();
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
 		case "length":
 			if (params == null) {
 				return (double) ((String) object).length();
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
 		case "startsWith":
 			if (params != null && params.size() == 1) {
-				String prefix = (params.get(0).getString() != null) ? params.get(0).getString() : String.valueOf(params.get(0).getNumber());
-				return ((String) object).startsWith(prefix);
+				if (params.get(0) instanceof Constant) {
+					String prefix = (((Constant) params.get(0)).getString() != null) ? ((Constant) params.get(0)).getString() : String.valueOf(((Constant) params.get(0)).getNumber());
+					return ((String) object).startsWith(prefix);
+				} else {
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string)");
+				}
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
 			}
 		case "endsWith":
 			if (params != null && params.size() == 1) {
-				String suffix = (params.get(0).getString() != null) ? params.get(0).getString() : String.valueOf(params.get(0).getNumber());
-				return ((String) object).endsWith(suffix);
+				if (params.get(0) instanceof Constant) {
+					String suffix = (((Constant) params.get(0)).getString() != null) ? ((Constant) params.get(0)).getString() : String.valueOf(((Constant) params.get(0)).getNumber());
+					return ((String) object).endsWith(suffix);
+				} else {
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string)");
+				}
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
 			}
 		case "substring":
 			if (params != null && params.size() == 2) {
-				int beginIndex = (Math.rint(params.get(0).getNumber()) == params.get(0).getNumber()) ? (int) params.get(0).getNumber() : null;
-				int endIndex = (Math.rint(params.get(1).getNumber()) == params.get(1).getNumber()) ? (int) params.get(1).getNumber() : null;
-				return ((String) object).substring(beginIndex, endIndex);
+				if (params.get(0) instanceof Constant && params.get(1) instanceof Constant) {
+					int beginIndex, endIndex;
+					if (Math.rint(((Constant) params.get(0)).getNumber()) == ((Constant) params.get(0)).getNumber()) {
+						beginIndex = (int) ((Constant) params.get(0)).getNumber();
+					} else {
+						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type Int.");
+					}
+					if ((Math.rint(((Constant) params.get(1)).getNumber()) == ((Constant) params.get(1)).getNumber())) {
+						endIndex = (int) ((Constant) params.get(1)).getNumber();
+					} else {
+						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type Int.");
+					}
+					return ((String) object).substring(beginIndex, endIndex);
+				} else {
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two numbers)");
+				}
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		case "replace":
 			if (params != null && params.size() == 2) {
-				return ((String) object).replace(params.get(0).getString(), params.get(1).getString());
+				if (params.get(0) instanceof Constant && params.get(1) instanceof Constant) {
+					if (((Constant) params.get(1)).getString() == null) {
+						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type String.");
+					}
+					if (((Constant) params.get(1)).getString() == null) {
+						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type String.");
+					}
+					return ((String) object).replace(((Constant) params.get(0)).getString(), ((Constant) params.get(1)).getString());
+				} else {
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two String)");
+				}
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		default:
 			return null;
@@ -827,44 +862,76 @@ public class Main {
 	 * @param function
 	 *            the function and the parameters for the function
 	 * @return the result of the function
+	 * @throws Exception
 	 */
-	private Object applyDoubleFunctions(Object object, Function function) {
-		EList<Constant> params = null;
-		if (function.getParams() != null) {
-			params = function.getParams().getValue();
-		}
+	private Object applyDoubleFunctions(Object object, Function function) throws Exception {
+		List<Object> params = getFunctionParams(function);
 		switch (function.getName()) {
 		case "abs":
 			if (params == null) {
 				return Math.abs((double) object);
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		case "length":
 			if (params == null) {
 				return (double) String.valueOf((double) object).length();
 			} else {
-				return null;
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		default:
 			return null;
 		}
 	}
-	
-	private Object applyDataObjectFunctions(Object object, Function function) {
-		EList<Constant> params = null;
-		if(function.getParams() != null){
-			params = function.getParams().getValue();
-		}
-		//TODO
-		switch (function.getName()) {
-		case "":
-			break;
 
+	private Object applyDataObjectFunctions(Object object, Function function) throws Exception {
+		List<Object> params = getFunctionParams(function);
+		// TODO
+		switch (function.getName()) {
+		case "contains":
+			if (params.size() == 1) {
+				return ((DataObject) object).contains(params.get(0));
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
+			}
 		default:
 			break;
 		}
 		return null;
+	}
+
+	/**
+	 * Given the function extract the parameters (resolving the ones related to a variable) and return a list of value (of different type)
+	 * 
+	 * @param function
+	 *            the function to elaborate
+	 * @return list of value
+	 * @throws Exception
+	 */
+	private List<Object> getFunctionParams(Function function) throws Exception {
+		if (function.getParams() != null) {
+			List<Object> params = new ArrayList<Object>();
+			for (Value v : function.getParams().getValue()) {
+				if (v.getVar() != null) {
+					if (variables.containsKey(v.getVar())) {
+						params.add(variables.get(v.getVar()));
+					} else {
+						throw new Exception("Variable '" + v.getVar() + "' is not defined.");
+					}
+				} else if (v instanceof Constant) {
+					if (((Constant) v).getString() != null) {
+						params.add(((Constant) v).getString());
+					} else {
+						params.add(((Constant) v).getNumber());
+					}
+				} else {
+					params.add(v);
+				}
+			}
+			return params;
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -886,7 +953,25 @@ public class Main {
 					result = d.getAssert().getConstant().getNumber();
 				}
 			} else if (d.getAssert().getValues() != null) {
-				result = new DataObject(d.getVar(), d.getAssert().getValues());
+				List<Object> values = new ArrayList<Object>();
+				for (Value v : d.getAssert().getValues().getValue()) {
+					if (v.getVar() != null) {
+						if (variables.containsKey(v.getVar())) {
+							values.add(variables.get(v.getVar()));
+						} else {
+							throw new Exception("Variable '" + v.getVar() + "' is not defined.");
+						}
+					} else if (v instanceof Constant) {
+						if (((Constant) v).getString() != null) {
+							values.add(((Constant) v).getString());
+						} else {
+							values.add(((Constant) v).getNumber());
+						}
+					} else {
+						values.add(v);
+					}
+				}
+				result = new DataObject(d.getVar(), values);
 			} else if (d.getAssert().getQuery() != null) {
 				String placeholder = d.getAssert().getQuery().getSteps().get(0).getPlaceholder();
 
@@ -907,8 +992,6 @@ public class Main {
 							if (((DataObject) result).isSingleValue()) {
 								result = ((DataObject) result).getFirstValue();
 							}
-						} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
-							result = value;
 						} else {
 							// if (((DataObject) value).isSingleValue()) {
 							// result = ((DataObject) value).getFirst();

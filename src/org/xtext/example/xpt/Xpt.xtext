@@ -1,7 +1,6 @@
 grammar org.xtext.example.xpt.Xpt with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-
 generate xpt "http://www.xtext.org/example/xpt/Xpt"
 
 Model:
@@ -33,10 +32,10 @@ Assertion:
 	query=Query ('.' function=Function)? | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';
 
 AssertionQuantifiedBoolean returns AssertionQuantified:
-	quantifier=BoolQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')'; //var è solo di tipo Variable, ok?
-	
+	quantifier=BoolQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')';
+
 AssertionQuantifiedNumeric returns AssertionQuantified:
-	quantifier=NumbQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')'; //var è solo di tipo Variable, ok?
+	quantifier=NumbQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')';
 
 Query:
 	'(' steps+=Step+ ')' | steps+=Step+;
@@ -63,10 +62,13 @@ NumbQuantifier:
 	'numOf' | 'sum' | 'avg' | 'min' | 'max' | 'product';
 
 Variable:
-	'$' ( ID | BoolQuantifier | NumbQuantifier);
+	'$' (ID | BoolQuantifier | NumbQuantifier);
 
 Values:
-	value+=Constant (',' value+=Constant)*;
+	value+=Value (',' value+=Value)*;
+
+Value:
+	Constant | var=Variable;
 
 Constant:
 	number=NUMBER | string=STRING;

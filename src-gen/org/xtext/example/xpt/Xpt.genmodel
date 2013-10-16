@@ -62,6 +62,9 @@
     <genClasses ecoreClass="Xpt.ecore#//Values">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Values/value"/>
     </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Value/var"/>
+    </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Constant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/number"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/string"/>

@@ -1,3 +1,8 @@
+let $a = /inventory/book[2];
+let $b = ["Larry Niven", "Jerry Pournelle"];
+$a.contains($b) == true;
+
+/*
 // Test for Afun (min, max, avg, etc...)
 
 let $prices = /inventory/book/price;
@@ -7,7 +12,7 @@ let $avg = avg($book in $prices, $book > 0);
 let $prod = product($book in $prices, $book > 0);
 let $sum = sum($book in $prices, $book > 0);
 $min == 6.00 && $max == 15 && $avg == 9.5 && $prod == 675.0 && $sum == 28.5;
-
+*/
 /*
 // Test for QuantifiedAssertion (forall, numOf, exists)
 

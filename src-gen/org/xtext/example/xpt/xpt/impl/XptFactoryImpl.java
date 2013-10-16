@@ -77,6 +77,7 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.ATTRIBUTE: return createAttribute();
       case XptPackage.FUNCTION: return createFunction();
       case XptPackage.VALUES: return createValues();
+      case XptPackage.VALUE: return createValue();
       case XptPackage.CONSTANT: return createConstant();
       case XptPackage.ASSERTION_OR: return createAssertionOr();
       case XptPackage.ASSERTION_AND: return createAssertionAnd();
@@ -226,6 +227,17 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
   {
     ValuesImpl values = new ValuesImpl();
     return values;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Value createValue()
+  {
+    ValueImpl value = new ValueImpl();
+    return value;
   }
 
   /**

@@ -140,6 +140,15 @@ public interface XptFactory extends EFactory
   Values createValues();
 
   /**
+   * Returns a new object of class '<em>Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value</em>'.
+   * @generated
+   */
+  Value createValue();
+
+  /**
    * Returns a new object of class '<em>Constant</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

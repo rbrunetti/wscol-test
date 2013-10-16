@@ -1538,9 +1538,9 @@ ruleValues returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getValuesAccess().getValueConstantParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getValuesAccess().getValueValueParserRuleCall_0_0()); 
 	    }
-		lv_value_0_0=ruleConstant		{
+		lv_value_0_0=ruleValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getValuesRule());
 	        }
@@ -1548,7 +1548,7 @@ ruleValues returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"Constant");
+        		"Value");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1560,9 +1560,9 @@ ruleValues returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getValuesAccess().getValueConstantParserRuleCall_1_1_0()); 
+	        newCompositeNode(grammarAccess.getValuesAccess().getValueValueParserRuleCall_1_1_0()); 
 	    }
-		lv_value_2_0=ruleConstant		{
+		lv_value_2_0=ruleValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getValuesRule());
 	        }
@@ -1570,12 +1570,61 @@ ruleValues returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"Constant");
+        		"Value");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 ))*)
+;
+
+
+
+
+
+// Entry rule entryRuleValue
+entryRuleValue returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getValueRule()); }
+	 iv_ruleValue=ruleValue 
+	 { $current=$iv_ruleValue.current; } 
+	 EOF 
+;
+
+// Rule Value
+ruleValue returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getValueAccess().getConstantParserRuleCall_0()); 
+    }
+    this_Constant_0=ruleConstant
+    { 
+        $current = $this_Constant_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getValueAccess().getVarVariableParserRuleCall_1_0()); 
+	    }
+		lv_var_1_0=ruleVariable		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getValueRule());
+	        }
+       		set(
+       			$current, 
+       			"var",
+        		lv_var_1_0, 
+        		"Variable");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
 ;
 
 

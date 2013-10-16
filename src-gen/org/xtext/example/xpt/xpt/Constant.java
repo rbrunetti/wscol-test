@@ -2,7 +2,6 @@
  */
 package org.xtext.example.xpt.xpt;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Constant extends EObject
+public interface Constant extends Value
 {
   /**
    * Returns the value of the '<em><b>Number</b></em>' attribute.

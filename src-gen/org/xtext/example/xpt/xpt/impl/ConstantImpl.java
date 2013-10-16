@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.XptPackage;
@@ -26,7 +25,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *
  * @generated
  */
-public class ConstantImpl extends MinimalEObjectImpl.Container implements Constant
+public class ConstantImpl extends ValueImpl implements Constant
 {
   /**
    * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.

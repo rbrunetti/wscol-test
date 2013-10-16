@@ -16,6 +16,7 @@ import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
+import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
 
 public class Helper {
@@ -30,21 +31,25 @@ public class Helper {
 	public static String declarationToString(Declaration d) {
 		return d.getVar() + " = " + assertionToString(d.getAssert());
 	}
-	
+
 	public static String assertionsToString(Assertions a) {
 		String res = "";
-		if(a instanceof AssertionOr) {
+		if (a instanceof AssertionOr) {
 			res = assertionsToString(((AssertionOr) a).getLeft()) + " || " + assertionsToString(((AssertionOr) a).getRight());
 		} else if (a instanceof AssertionAnd) {
-			res = assertionsToString(((AssertionAnd) a).getLeft()) + " && " + assertionsToString(((AssertionAnd) a).getRight()); 
+			res = assertionsToString(((AssertionAnd) a).getLeft()) + " && " + assertionsToString(((AssertionAnd) a).getRight());
 		} else if (a instanceof AssertionNot) {
 			res = "!(" + assertionsToString(((AssertionNot) a).getInnerFormula()) + ")";
-		}else if (a instanceof AssertionBraced) {
+		} else if (a instanceof AssertionBraced) {
 			res = "(" + assertionsToString(((AssertionBraced) a).getInnerFormula()) + ")";
 		} else if (a instanceof AssertionForm) {
 			res = assertionFormToString((AssertionForm) a);
 		}
 		return res;
+	}
+	
+	public static String assertionQuantifiedToString(AssertionQuantified aq) {
+		return aq.getQuantifier() + "(" + aq.getAlias() + " in " + aq.getVar() + ", " + assertionsToString(aq.getConditions()) + ")";
 	}
 
 	public static String assertionToString(Assertion a) { // TODO sistemare!
@@ -63,16 +68,15 @@ public class Helper {
 		} else if (a.getValues() != null) {
 			res = valuesToList(a.getValues()).toString();
 		} else if (a instanceof AssertionQuantified) {
-			AssertionQuantified aq = ((AssertionQuantified) a);
-			res = aq.getQuantifier() + "(" + aq.getAlias() + " in " + aq.getVar() + ", " + assertionsToString(aq.getConditions()) + ")";
+			res = assertionQuantifiedToString((AssertionQuantified) a);
 		} else {
 			res = String.valueOf(a.isBoolean());
 		}
 		if (a.getFunction() != null) {
 			String params = "";
 			if (a.getFunction().getParams() != null) {
-				for (Constant v : a.getFunction().getParams().getValue()) {
-					params += constantToString(v) + ", ";
+				for (Value v : a.getFunction().getParams().getValue()) {
+					params += ((v instanceof Constant) ? constantToString((Constant) v) : v.getVar()) + ", ";
 				}
 				params = params.substring(0, params.length() - 2);
 			}
@@ -117,11 +121,17 @@ public class Helper {
 
 	private static List<Object> valuesToList(Values values) {
 		List<Object> result = new ArrayList<>();
-		for (Constant c : values.getValue()) {
-			if (c.getString() != null) {
-				result.add(c.getString());
+		for (Value c : values.getValue()) {
+			if (c.getVar() != null) {
+				result.add(c.getVar());
+			} else if (c instanceof Constant) {
+				if (((Constant) c).getString() != null) {
+					result.add(((Constant) c).getString());
+				} else {
+					result.add(((Constant) c).getNumber());
+				}
 			} else {
-				result.add(c.getNumber());
+				result.add(c);
 			}
 		}
 		return result;

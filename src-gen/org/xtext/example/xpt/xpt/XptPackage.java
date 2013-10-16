@@ -619,6 +619,34 @@ public interface XptPackage extends EPackage
   int VALUES_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ValueImpl <em>Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.ValueImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getValue()
+   * @generated
+   */
+  int VALUE = 13;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE__VAR = 0;
+
+  /**
+   * The number of structural features of the '<em>Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -626,7 +654,16 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getConstant()
    * @generated
    */
-  int CONSTANT = 13;
+  int CONSTANT = 14;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTANT__VAR = VALUE__VAR;
 
   /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -635,7 +672,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONSTANT__NUMBER = 0;
+  int CONSTANT__NUMBER = VALUE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>String</b></em>' attribute.
@@ -644,7 +681,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONSTANT__STRING = 1;
+  int CONSTANT__STRING = VALUE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Constant</em>' class.
@@ -653,7 +690,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONSTANT_FEATURE_COUNT = 2;
+  int CONSTANT_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionOrImpl <em>Assertion Or</em>}' class.
@@ -663,7 +700,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionOr()
    * @generated
    */
-  int ASSERTION_OR = 14;
+  int ASSERTION_OR = 15;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -700,7 +737,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionAnd()
    * @generated
    */
-  int ASSERTION_AND = 15;
+  int ASSERTION_AND = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1191,6 +1228,27 @@ public interface XptPackage extends EPackage
   EReference getValues_Value();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Value <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Value</em>'.
+   * @see org.xtext.example.xpt.xpt.Value
+   * @generated
+   */
+  EClass getValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Value#getVar <em>Var</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Var</em>'.
+   * @see org.xtext.example.xpt.xpt.Value#getVar()
+   * @see #getValue()
+   * @generated
+   */
+  EAttribute getValue_Var();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1678,6 +1736,24 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EReference VALUES__VALUE = eINSTANCE.getValues_Value();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ValueImpl <em>Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.ValueImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getValue()
+     * @generated
+     */
+    EClass VALUE = eINSTANCE.getValue();
+
+    /**
+     * The meta object literal for the '<em><b>Var</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VALUE__VAR = eINSTANCE.getValue_Var();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.

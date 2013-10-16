@@ -28,6 +28,7 @@ import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
+import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
 import org.xtext.example.xpt.xpt.XptPackage;
 
@@ -112,7 +113,8 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case XptPackage.CONSTANT:
-				if(context == grammarAccess.getConstantRule()) {
+				if(context == grammarAccess.getConstantRule() ||
+				   context == grammarAccess.getValueRule()) {
 					sequence_Constant(context, (Constant) semanticObject); 
 					return; 
 				}
@@ -144,6 +146,12 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case XptPackage.STEP:
 				if(context == grammarAccess.getStepRule()) {
 					sequence_Step(context, (Step) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.VALUE:
+				if(context == grammarAccess.getValueRule()) {
+					sequence_Value(context, (Value) semanticObject); 
 					return; 
 				}
 				else break;
@@ -328,7 +336,23 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (value+=Constant value+=Constant*)
+	 *     var=Variable
+	 */
+	protected void sequence_Value(EObject context, Value semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XptPackage.Literals.VALUE__VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XptPackage.Literals.VALUE__VAR));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getValueAccess().getVarVariableParserRuleCall_1_0(), semanticObject.getVar());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (value+=Value value+=Value*)
 	 */
 	protected void sequence_Values(EObject context, Values semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

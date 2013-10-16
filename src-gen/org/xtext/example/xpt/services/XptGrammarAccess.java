@@ -400,7 +400,6 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cConditionsAssertionOrParserRuleCall_6_0 = (RuleCall)cConditionsAssignment_6.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		////var è solo di tipo Variable, ok?
 		//AssertionQuantifiedBoolean returns AssertionQuantified:
 		//	quantifier=BoolQuantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
 		public ParserRule getRule() { return rule; }
@@ -461,7 +460,6 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cConditionsAssertionOrParserRuleCall_6_0 = (RuleCall)cConditionsAssignment_6.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		////var è solo di tipo Variable, ok?
 		//AssertionQuantifiedNumeric returns AssertionQuantified:
 		//	quantifier=NumbQuantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
 		public ParserRule getRule() { return rule; }
@@ -858,36 +856,60 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Values");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cValueConstantParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
+		private final RuleCall cValueValueParserRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cValueConstantParserRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
+		private final RuleCall cValueValueParserRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		
 		//Values:
-		//	value+=Constant ("," value+=Constant)*;
+		//	value+=Value ("," value+=Value)*;
 		public ParserRule getRule() { return rule; }
 
-		//value+=Constant ("," value+=Constant)*
+		//value+=Value ("," value+=Value)*
 		public Group getGroup() { return cGroup; }
 
-		//value+=Constant
+		//value+=Value
 		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
 
-		//Constant
-		public RuleCall getValueConstantParserRuleCall_0_0() { return cValueConstantParserRuleCall_0_0; }
+		//Value
+		public RuleCall getValueValueParserRuleCall_0_0() { return cValueValueParserRuleCall_0_0; }
 
-		//("," value+=Constant)*
+		//("," value+=Value)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//","
 		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
 
-		//value+=Constant
+		//value+=Value
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
+		//Value
+		public RuleCall getValueValueParserRuleCall_1_1_0() { return cValueValueParserRuleCall_1_1_0; }
+	}
+
+	public class ValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Value");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Assignment cVarAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cVarVariableParserRuleCall_1_0 = (RuleCall)cVarAssignment_1.eContents().get(0);
+		
+		//Value:
+		//	Constant | var=Variable;
+		public ParserRule getRule() { return rule; }
+
+		//Constant | var=Variable
+		public Alternatives getAlternatives() { return cAlternatives; }
+
 		//Constant
-		public RuleCall getValueConstantParserRuleCall_1_1_0() { return cValueConstantParserRuleCall_1_1_0; }
+		public RuleCall getConstantParserRuleCall_0() { return cConstantParserRuleCall_0; }
+
+		//var=Variable
+		public Assignment getVarAssignment_1() { return cVarAssignment_1; }
+
+		//Variable
+		public RuleCall getVarVariableParserRuleCall_1_0() { return cVarVariableParserRuleCall_1_0; }
 	}
 
 	public class ConstantElements extends AbstractParserRuleElementFinder {
@@ -940,6 +962,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	private NumbQuantifierElements pNumbQuantifier;
 	private VariableElements pVariable;
 	private ValuesElements pValues;
+	private ValueElements pValue;
 	private ConstantElements pConstant;
 	private TerminalRule tBOOLEAN;
 	private TerminalRule tNUMBER;
@@ -1074,7 +1097,6 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssertionAccess().getRule();
 	}
 
-	////var è solo di tipo Variable, ok?
 	//AssertionQuantifiedBoolean returns AssertionQuantified:
 	//	quantifier=BoolQuantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
 	public AssertionQuantifiedBooleanElements getAssertionQuantifiedBooleanAccess() {
@@ -1085,7 +1107,6 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssertionQuantifiedBooleanAccess().getRule();
 	}
 
-	////var è solo di tipo Variable, ok?
 	//AssertionQuantifiedNumeric returns AssertionQuantified:
 	//	quantifier=NumbQuantifier "(" alias=Variable "in" var=Variable "," conditions=AssertionOr ")";
 	public AssertionQuantifiedNumericElements getAssertionQuantifiedNumericAccess() {
@@ -1187,13 +1208,23 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Values:
-	//	value+=Constant ("," value+=Constant)*;
+	//	value+=Value ("," value+=Value)*;
 	public ValuesElements getValuesAccess() {
 		return (pValues != null) ? pValues : (pValues = new ValuesElements());
 	}
 	
 	public ParserRule getValuesRule() {
 		return getValuesAccess().getRule();
+	}
+
+	//Value:
+	//	Constant | var=Variable;
+	public ValueElements getValueAccess() {
+		return (pValue != null) ? pValue : (pValue = new ValueElements());
+	}
+	
+	public ParserRule getValueRule() {
+		return getValueAccess().getRule();
 	}
 
 	//Constant:
