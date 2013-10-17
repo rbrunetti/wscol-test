@@ -5,7 +5,6 @@ package org.xtext.example.xpt.generator;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -156,7 +155,7 @@ public class Main {
 		try {
 			setVariable(declarations);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			System.err.println("\n**** RUNTIME ERRORS ****\n" + e.getMessage());
 			System.exit(0);
 		}
 
@@ -165,7 +164,7 @@ public class Main {
 		try {
 			System.out.println("\nRESULT: " + verifyAssertions(assertionSet));
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			System.err.println("\n**** RUNTIME ERRORS ****\n" + e.getMessage());
 			System.exit(0);
 		}
 
@@ -256,7 +255,7 @@ public class Main {
 				String msg = issue.getMessage();
 				Integer lineNumb = issue.getLineNumber();
 				// Print out syntax errors
-				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - " + location);
+				System.err.println("ERROR:" + msg + " - line: " + lineNumb + " - token: '" + location + "'");
 			}
 			return true;
 		}
@@ -324,18 +323,18 @@ public class Main {
 		} else if (laObj instanceof Boolean && raObj instanceof Boolean) {
 			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, condition);
 		} else if (laObj != null && raObj != null) {
-			String msg = "Assertion " + condition + " could not be evaluated due to data types conflicts.";
+			String msg = "Assertion could not be evaluated due to data types conflicts [token: '" + condition + "']";
 			if (laObj instanceof DataObject && ((DataObject) laObj).isEmpty()) {
-				msg += "\n NOTE: '" + Helper.assertionToString(af.getLeftAssert()) + "' gives empty result.";
+				laObj = "EMPTY!";
 			}
 			if (raObj instanceof DataObject && ((DataObject) raObj).isEmpty()) {
-				msg += "\n NOTE: '" + Helper.assertionToString(af.getRightAssert()) + "' gives empty result.";
+				raObj = "EMPTY!";
 			}
-			msg += "\n Left assertion = " + laObj + " [Class: " + laObj.getClass().getSimpleName() + "]";
-			msg += "\n Right assertion = " + raObj + " [Class: " + raObj.getClass().getSimpleName() + "]";
+			msg += "\n Left assertion [token: '" + Helper.assertionToString(af.getLeftAssert()) + "'] = " + laObj + " (Class: " + laObj.getClass().getSimpleName() + ")";
+			msg += "\n Right assertion [token: '" + Helper.assertionToString(af.getRightAssert()) + "'] = " + raObj + " (Class: " + raObj.getClass().getSimpleName() + ")";
 			throw new Exception(msg);
 		} else {
-			throw new Exception("Unable to evaluate assertion '" + condition + "', due to erroneous variables declaration.");
+			throw new Exception("Unable to evaluate the assertion, due to erroneous variables declaration [token: '" + condition + "']");
 		}
 	}
 
@@ -444,7 +443,7 @@ public class Main {
 			}
 			break;
 		default:
-			String msg = "Unsopported operation '" + operation + "' for the assertion between two String: '" + condition + "'";
+			String msg = "Unsopported operation '" + operation + "' for the assertion between two String [token: '" + condition + "']";
 			msg += "\n Left assertion = '" + left + "' ";
 			msg += "\n Right assertion = '" + right + "' ";
 			throw new Exception(msg);
@@ -484,7 +483,7 @@ public class Main {
 			result = left != right;
 			break;
 		default:
-			String msg = "Unsopported operation '" + operation + "' for the assertion between two Boolean: '" + condition + "'";
+			String msg = "Unsopported operation '" + operation + "' for the assertion between two Boolean [token: '" + condition + "']";
 			msg += "\n Left assertion = '" + left + "' ";
 			msg += "\n Right assertion = '" + right + "' ";
 			throw new Exception(msg);
@@ -532,7 +531,7 @@ public class Main {
 			}
 			break;
 		default:
-			String msg = "Unsopported operation '" + operation + "' for the assertion between two DataObject: '" + condition + "'";
+			String msg = "Unsopported operation '" + operation + "' for the assertion between two DataObject [token: '" + condition + "']";
 			msg += "\n Left assertion = '" + left + "' ";
 			msg += "\n Right assertion = '" + right + "' ";
 			throw new Exception(msg);
@@ -572,7 +571,7 @@ public class Main {
 
 			if (placeholder != null) {
 				if (!variables.containsKey(placeholder)) {
-					throw new Exception("Variable '" + placeholder + "' is not defined.");
+					throw new Exception("Variable '" + placeholder + "' is not defined [token: '" + Helper.assertionToString(assertion) + "']");
 				}
 				Object value = variables.get(placeholder);
 				if (value instanceof DataObject) {
@@ -606,18 +605,13 @@ public class Main {
 
 		// *** FUNCTIONS ***
 		if (assertion.getFunction() != null) {
-			try {
 				if (result instanceof DataObject) {
-					result = applyDataObjectFunctions(result, assertion.getFunction());
+					result = applyDataObjectFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
 				} else if (result instanceof String) {
-					result = applyStringFunctions(result, assertion.getFunction());
+					result = applyStringFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
 				} else if (result instanceof Double) {
-					result = applyDoubleFunctions(result, assertion.getFunction());
+					result = applyDoubleFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
 				}
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-				System.exit(0);
-			}
 		}
 		return result;
 	}
@@ -633,10 +627,10 @@ public class Main {
 	 */
 	private Object doAssertionQuantified(Assertion assertion) throws Exception {
 		AssertionQuantified aq = (AssertionQuantified) assertion;
-		String assertionRepr = "[assertion: '" + Helper.assertionQuantifiedToString(aq) + "']";
+		String assertionRepr = "[token: '" + Helper.assertionQuantifiedToString(aq) + "']";
 
 		if (!(variables.containsKey(aq.getVar()))) {
-			throw new Exception("The variable '" + aq.getVar() + "' is not defined.");
+			throw new Exception("The variable '" + aq.getVar() + "' is not defined. " + assertionRepr);
 
 		}
 
@@ -650,7 +644,7 @@ public class Main {
 		double count, sum;
 
 		if (variables.containsKey(alias)) {
-			throw new Exception("The variable '" + alias + "' is already used. Choose another.");
+			throw new Exception("The variable '" + alias + "' is already used. Choose another. " + assertionRepr);
 		}
 
 		Iterator<Object> iter = set.values().iterator();
@@ -775,20 +769,20 @@ public class Main {
 	 * @return the result of the function
 	 * @throws Exception
 	 */
-	private Object applyStringFunctions(Object object, Function function) throws Exception {
-		List<Object> params = getFunctionParams(function);
+	private Object applyStringFunctions(Object object, Function function, String assertionRep) throws Exception {
+		List<Object> params = getFunctionParams(function, assertionRep);
 		switch (function.getName()) {
 		case "uppercase":
 			if (params == null) {
 				return ((String) object).toUpperCase();
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0) [token: '" + assertionRep + "']");
 			}
 		case "length":
 			if (params == null) {
 				return (double) ((String) object).length();
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0) [token: '" + assertionRep + "']");
 			}
 		case "startsWith":
 			if (params != null && params.size() == 1) {
@@ -796,10 +790,10 @@ public class Main {
 					String prefix = (((Constant) params.get(0)).getString() != null) ? ((Constant) params.get(0)).getString() : String.valueOf(((Constant) params.get(0)).getNumber());
 					return ((String) object).startsWith(prefix);
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string)");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string) [token: '" + assertionRep + "']");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
 			}
 		case "endsWith":
 			if (params != null && params.size() == 1) {
@@ -807,10 +801,10 @@ public class Main {
 					String suffix = (((Constant) params.get(0)).getString() != null) ? ((Constant) params.get(0)).getString() : String.valueOf(((Constant) params.get(0)).getNumber());
 					return ((String) object).endsWith(suffix);
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string)");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string) [token: '" + assertionRep + "']");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
 			}
 		case "substring":
 			if (params != null && params.size() == 2) {
@@ -819,35 +813,35 @@ public class Main {
 					if (Math.rint(((Constant) params.get(0)).getNumber()) == ((Constant) params.get(0)).getNumber()) {
 						beginIndex = (int) ((Constant) params.get(0)).getNumber();
 					} else {
-						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type Int.");
+						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type Int. [token: '" + assertionRep + "']");
 					}
 					if ((Math.rint(((Constant) params.get(1)).getNumber()) == ((Constant) params.get(1)).getNumber())) {
 						endIndex = (int) ((Constant) params.get(1)).getNumber();
 					} else {
-						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type Int.");
+						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type Int. [token: '" + assertionRep + "']");
 					}
 					return ((String) object).substring(beginIndex, endIndex);
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two numbers)");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two numbers) [token: '" + assertionRep + "']");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
 			}
 		case "replace":
 			if (params != null && params.size() == 2) {
 				if (params.get(0) instanceof Constant && params.get(1) instanceof Constant) {
 					if (((Constant) params.get(1)).getString() == null) {
-						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type String.");
+						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type String [token: '" + assertionRep + "']");
 					}
 					if (((Constant) params.get(1)).getString() == null) {
-						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type String.");
+						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type String [token: '" + assertionRep + "']");
 					}
 					return ((String) object).replace(((Constant) params.get(0)).getString(), ((Constant) params.get(1)).getString());
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two String)");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two String) [token: '" + assertionRep + "']");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
 			}
 		default:
 			return null;
@@ -864,35 +858,35 @@ public class Main {
 	 * @return the result of the function
 	 * @throws Exception
 	 */
-	private Object applyDoubleFunctions(Object object, Function function) throws Exception {
-		List<Object> params = getFunctionParams(function);
+	private Object applyDoubleFunctions(Object object, Function function, String assertionRep) throws Exception {
+		List<Object> params = getFunctionParams(function, assertionRep);
 		switch (function.getName()) {
 		case "abs":
 			if (params == null) {
 				return Math.abs((double) object);
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
 			}
 		case "length":
 			if (params == null) {
 				return (double) String.valueOf((double) object).length();
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
 			}
 		default:
 			return null;
 		}
 	}
 
-	private Object applyDataObjectFunctions(Object object, Function function) throws Exception {
-		List<Object> params = getFunctionParams(function);
+	private Object applyDataObjectFunctions(Object object, Function function, String assertionRep) throws Exception {
+		List<Object> params = getFunctionParams(function, assertionRep);
 		// TODO
 		switch (function.getName()) {
 		case "contains":
 			if (params.size() == 1) {
 				return ((DataObject) object).contains(params.get(0));
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
 			}
 		default:
 			break;
@@ -908,7 +902,7 @@ public class Main {
 	 * @return list of value
 	 * @throws Exception
 	 */
-	private List<Object> getFunctionParams(Function function) throws Exception {
+	private List<Object> getFunctionParams(Function function, String assertionRep) throws Exception {
 		if (function.getParams() != null) {
 			List<Object> params = new ArrayList<Object>();
 			for (Value v : function.getParams().getValue()) {
@@ -916,7 +910,7 @@ public class Main {
 					if (variables.containsKey(v.getVar())) {
 						params.add(variables.get(v.getVar()));
 					} else {
-						throw new Exception("Variable '" + v.getVar() + "' is not defined.");
+						throw new Exception("Variable '" + v.getVar() + "' is not defined [token: '" + assertionRep + "']");
 					}
 				} else if (v instanceof Constant) {
 					if (((Constant) v).getString() != null) {
@@ -943,8 +937,9 @@ public class Main {
 		Object result = null;
 		System.out.println("############### DECLARATIONS ###############");
 		for (Declaration d : declarations) {
+			String assertionRep = Helper.declarationToString(d);
 			if (variables.containsKey(d.getVar())) {
-				throw new Exception("The variable '" + d.getVar() + "' in '" + Helper.declarationToString(d) + "' is already used (" + d.getVar() + " = " + variables.get(d.getVar()) + "). Choose another.");
+				throw new Exception("The variable '" + d.getVar() + "' in '" + Helper.declarationToString(d) + "' is already used (" + d.getVar() + " = " + variables.get(d.getVar()) + "). Choose another [token: '" + assertionRep + "']");
 			}
 			if (d.getAssert().getConstant() != null) {
 				if (d.getAssert().getConstant().getString() != null) {
@@ -959,7 +954,7 @@ public class Main {
 						if (variables.containsKey(v.getVar())) {
 							values.add(variables.get(v.getVar()));
 						} else {
-							throw new Exception("Variable '" + v.getVar() + "' is not defined.");
+							throw new Exception("Variable '" + v.getVar() + "' is not defined [token: '" + assertionRep + "']");
 						}
 					} else if (v instanceof Constant) {
 						if (((Constant) v).getString() != null) {
@@ -977,7 +972,7 @@ public class Main {
 
 				if (placeholder != null) {
 					if (!variables.containsKey(placeholder)) {
-						throw new Exception("Variable '" + placeholder + "' is not defined.");
+						throw new Exception("Variable '" + placeholder + "' is not defined [token: '" + assertionRep + "']");
 					}
 
 					Object value = variables.get(placeholder);
@@ -986,7 +981,7 @@ public class Main {
 							try {
 								result = ((DataObject) value).evaluate(d.getAssert().getQuery());
 							} catch (Exception e) {
-								throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+								throw new Exception("Unable to evaluate the declaration. Please check it [token: '" + assertionRep + "']\n" + " CAUSE: " + e.getMessage());
 							}
 							// if the DataObject is containing a single value, only that single value is stored as variable
 							if (((DataObject) result).isSingleValue()) {
@@ -1006,7 +1001,7 @@ public class Main {
 					try {
 						result = input.evaluate(d.getAssert().getQuery());
 					} catch (Exception e) {
-						throw new Exception("Unable to evaluate '" + d.getVar() + " = " + Helper.assertionToString(d.getAssert()) + "' declaration. Please check it.\n" + " CAUSE: " + e.getMessage());
+						throw new Exception("Unable to evaluate the declaration. Please check it [token: '" + assertionRep + "']\n" + " CAUSE: " + e.getMessage());
 					}
 					if (((DataObject) result).isSingleValue()) {
 						result = ((DataObject) result).getFirstValue();
@@ -1016,11 +1011,11 @@ public class Main {
 				// *** FUNCTIONS ***
 				if (d.getAssert().getFunction() != null) {
 					if (result instanceof DataObject) {
-						// TODO
+						result = applyDataObjectFunctions(result, d.getAssert().getFunction(), Helper.assertionToString(d.getAssert()));
 					} else if (result instanceof String) {
-						result = applyStringFunctions(result, d.getAssert().getFunction());
+						result = applyStringFunctions(result, d.getAssert().getFunction(), Helper.assertionToString(d.getAssert()));
 					} else if (result instanceof Double) {
-						result = applyDoubleFunctions(result, d.getAssert().getFunction());
+						result = applyDoubleFunctions(result, d.getAssert().getFunction(), Helper.assertionToString(d.getAssert()));
 					}
 				}
 
@@ -1035,5 +1030,38 @@ public class Main {
 		}
 		return;
 	}
+	
+//	private void throwError(String msg, Object element) throws Exception{
+//		String prefix = "RUNTIME ERROR: ";
+//		String location = "";
+//		
+//		if(element instanceof Assertions){
+//			location = Helper.assertionsToString((Assertions) element);
+//		} else if(element instanceof AssertionQuantified) {
+//			location = Helper.assertionQuantifiedToString((AssertionQuantified) element);
+//		} else if(element instanceof AssertionForm) {
+//			location = Helper.assertionFormToString((AssertionForm) element);
+//		} else if(element instanceof Assertion) {
+//			location = Helper.assertionToString((Assertion) element);
+//		}
+//		msg = msg.replace("#", "[" + location + "]");
+//		throw new Exception(prefix + msg);
+//	}
+//	
+//	private void throwError(String msg, Object element, Object leftResult, Object rightResult) throws Exception{
+//		String left = "\n Left assertion ['" + Helper.assertionToString(((AssertionForm) element).getLeftAssert()) + "'] = ";
+//		String right = "\n Right assertion ['" + Helper.assertionToString(((AssertionForm) element).getRightAssert()) + "'] = ";
+//		if (leftResult instanceof DataObject && ((DataObject) leftResult).isEmpty()) {
+//			left += "EMPTY!";
+//		} else {
+//			left += leftResult + " (Class: " + leftResult.getClass().getSimpleName() + ")";
+//		}
+//		if (rightResult instanceof DataObject && ((DataObject) rightResult).isEmpty()) {
+//			right += "EMPTY!";
+//		} else {
+//			right += rightResult + " (Class: " + rightResult.getClass().getSimpleName() + ")";
+//		}
+//		throwError(msg + left + right, element);
+//	}
 
 }

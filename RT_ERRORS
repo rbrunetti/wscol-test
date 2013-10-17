@@ -1,0 +1,23 @@
+  ______ _     _ __   _ _______ _____ _______ _______
+ |_____/ |     | | \  |    |      |   |  |  | |______
+ |    \_ |_____| |  \_|    |    __|__ |  |  | |______
+ 
+Check: 
+	• Type conflict between the two sides of an AssertionForm
+			• the value and the type of each side will be printed (also if a side is empty it'll be signaled)
+	• Every side is null -> rivaluta!
+	• Wrong operation between sides (ex. "str1">"str" has no sense here) for Strings, Booleans, Doubles and DataObject
+			• the value and the type of each side will be printed
+	• Variables used in an Assertion are defined
+	• Variable used in a QuantifiedAssertion is a DataObject (and so iterable)
+	• Variable used in a QuantifiedAssertion for the 'alias' variable is not in use
+	• Objects contained in the variable used in a QuantifiedAssertion are of the right type (ex. 'sum(...)' could not sum string)
+	• Number of parameter and type of parameters [applyXFunctions()]
+	• Variable already used [setVariable()]
+	• Variable not defined when evaluating an Assertion based on it [setVariable()] 
+	• Key not found in DataObject [-> DataObject]
+	•     
+	• 
+	• 
+	• 
+	• 

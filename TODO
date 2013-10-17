@@ -5,7 +5,7 @@
 	• Find and implement possible functions for DataObject variables
 	• Make some junit tests based on assertions in 'queries.xpt' file
 	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java!
-	• 
+	• (Partially done) Make runtime errors and static errors more uniform: similar error message, similar informations printed (-> add a function?)
 	• 
 	• 
  ______   _____  _     _ ______  _______ _______
@@ -13,9 +13,9 @@
  |_____/ |_____| |_____| |_____]    |    ______|
  
  	• Add complex assertions even in the declarations => useful?
-	• Variables in Values => what's happening if I put a variable referring to a DataObject? What if I call an 'exists' over it?
+	• Add the use of variables inside all the functions (it'll be done w/o touching any grammar rule) => useful?
 	• Add variables and functions in Step's attribute (ex. /step[$a.length()] is, for now, invalid) => useful?  
-	•  
+	• Implicit 'true' even for functions (ex. $a.startsWith(".."))
 	• 
 	•
  _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
@@ -33,6 +33,8 @@
  	• Make the boolean value in AssertionForm implicit (ex. exists(...) = true -> exists(...))
  		• BUT rules are not so pretty...
  	• Better syntax errors messages: what and why is wrong; also for runtime errors with values printing
-	• 
+	• Values can contain variable referring to other object
+ 	• Function 'contains' for DataObject: search for an Object (of any type) deeply inside them
+	•  
  	• 
 	•  

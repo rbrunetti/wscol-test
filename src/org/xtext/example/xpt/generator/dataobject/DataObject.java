@@ -17,10 +17,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 import org.xtext.example.xpt.xpt.Attribute;
-import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
-import org.xtext.example.xpt.xpt.Values;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multiset;
@@ -123,7 +121,7 @@ public class DataObject {
 			}
 			return subMap;
 		}
-		throw new Exception("The property '" + property + "' is not contained in '" + current.toString());
+		throw new Exception("The property '" + property + "' is not contained in '" + current.toString() + "'");
 	}
 
 	/**
@@ -194,7 +192,7 @@ public class DataObject {
 				}
 			}
 		}
-		throw new Exception("The property '" + key + "' is not contained in '" + current.toString());
+		throw new Exception("The property '" + key + "' is not contained in '" + current.toString() + "'");
 	}
 
 	/**
@@ -274,7 +272,19 @@ public class DataObject {
 	 * @return true if the DataObject are equals, false otherwise
 	 */
 	public boolean contains(Object target) {
-		if (data.containsValue(target)) {
+
+		// for each value contained in the target try to find it in 'data', if one of them is not in 'data' we try to search them deeper
+		if(target instanceof DataObject) {
+			Collection<Object> values = ((DataObject) target).values();
+			boolean res = true;
+			for(Object o:values){
+				if(!data.containsValue(o)) {
+					res = res & false;
+					break;
+				}
+			}
+			if(res) return true;
+		} else if (data.containsValue(target)) {
 			return true;
 		}
 		Iterator<Object> iter = this.values().iterator();

@@ -1,6 +1,6 @@
-let $a = /inventory/book[2];
-let $b = ["Larry Niven", "Jerry Pournelle"];
-$a.contains($b) == true;
+let $a = /inventory/book[2]/tite;
+let $a = ["Larry Niven", "Jerry Pournelle", 5];
+$a.uppercase(1) == "io";
 
 /*
 // Test for Afun (min, max, avg, etc...)
