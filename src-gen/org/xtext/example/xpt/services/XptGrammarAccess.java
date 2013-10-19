@@ -617,17 +617,26 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOpStringRopParserRuleCall_0_1_1_0_0 = (RuleCall)cOpAssignment_0_1_1_0.eContents().get(0);
 		private final Assignment cStrValueAssignment_0_1_1_1 = (Assignment)cGroup_0_1_1.eContents().get(1);
 		private final RuleCall cStrValueSTRINGTerminalRuleCall_0_1_1_1_0 = (RuleCall)cStrValueAssignment_0_1_1_1.eContents().get(0);
+		private final Group cGroup_0_1_2 = (Group)cAlternatives_0_1.eContents().get(2);
+		private final Assignment cOpAssignment_0_1_2_0 = (Assignment)cGroup_0_1_2.eContents().get(0);
+		private final RuleCall cOpRopParserRuleCall_0_1_2_0_0 = (RuleCall)cOpAssignment_0_1_2_0.eContents().get(0);
+		private final Assignment cVarValueAssignment_0_1_2_1 = (Assignment)cGroup_0_1_2.eContents().get(1);
+		private final RuleCall cVarValueVariableParserRuleCall_0_1_2_1_0 = (RuleCall)cVarValueAssignment_0_1_2_1.eContents().get(0);
 		private final Assignment cNumberAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cNumberNUMBERTerminalRuleCall_1_0 = (RuleCall)cNumberAssignment_1.eContents().get(0);
+		private final Assignment cVarAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
+		private final RuleCall cVarVariableParserRuleCall_2_0 = (RuleCall)cVarAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING) | number=NUMBER;
+		//	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER |
+		//	var=Variable;
 		public ParserRule getRule() { return rule; }
 
-		//property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING) | number=NUMBER
+		//property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER |
+		//var=Variable
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING)
+		//property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable)
 		public Group getGroup_0() { return cGroup_0; }
 
 		//property=ID
@@ -636,7 +645,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getPropertyIDTerminalRuleCall_0_0_0() { return cPropertyIDTerminalRuleCall_0_0_0; }
 
-		//op=Rop numberValue=NUMBER | op=StringRop strValue=STRING
+		//op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable
 		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
 
 		//op=Rop numberValue=NUMBER
@@ -669,11 +678,32 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getStrValueSTRINGTerminalRuleCall_0_1_1_1_0() { return cStrValueSTRINGTerminalRuleCall_0_1_1_1_0; }
 
+		//op=Rop varValue=Variable
+		public Group getGroup_0_1_2() { return cGroup_0_1_2; }
+
+		//op=Rop
+		public Assignment getOpAssignment_0_1_2_0() { return cOpAssignment_0_1_2_0; }
+
+		//Rop
+		public RuleCall getOpRopParserRuleCall_0_1_2_0_0() { return cOpRopParserRuleCall_0_1_2_0_0; }
+
+		//varValue=Variable
+		public Assignment getVarValueAssignment_0_1_2_1() { return cVarValueAssignment_0_1_2_1; }
+
+		//Variable
+		public RuleCall getVarValueVariableParserRuleCall_0_1_2_1_0() { return cVarValueVariableParserRuleCall_0_1_2_1_0; }
+
 		//number=NUMBER
 		public Assignment getNumberAssignment_1() { return cNumberAssignment_1; }
 
 		//NUMBER
 		public RuleCall getNumberNUMBERTerminalRuleCall_1_0() { return cNumberNUMBERTerminalRuleCall_1_0; }
+
+		//var=Variable
+		public Assignment getVarAssignment_2() { return cVarAssignment_2; }
+
+		//Variable
+		public RuleCall getVarVariableParserRuleCall_2_0() { return cVarVariableParserRuleCall_2_0; }
 	}
 
 	public class StringRopElements extends AbstractParserRuleElementFinder {
@@ -1138,7 +1168,8 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Attribute:
-	//	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING) | number=NUMBER;
+	//	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER |
+	//	var=Variable;
 	public AttributeElements getAttributeAccess() {
 		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
 	}

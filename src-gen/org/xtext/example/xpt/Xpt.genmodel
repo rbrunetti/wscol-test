@@ -53,7 +53,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/op"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/numberValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/strValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/varValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/number"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Attribute/var"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Function">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Function/name"/>

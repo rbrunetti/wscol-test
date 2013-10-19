@@ -23,7 +23,9 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getOp <em>Op</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getNumberValue <em>Number Value</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getStrValue <em>Str Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getVarValue <em>Var Value</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getNumber <em>Number</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getVar <em>Var</em>}</li>
  * </ul>
  * </p>
  *
@@ -112,6 +114,26 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   protected String strValue = STR_VALUE_EDEFAULT;
 
   /**
+   * The default value of the '{@link #getVarValue() <em>Var Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVarValue()
+   * @generated
+   * @ordered
+   */
+  protected static final String VAR_VALUE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getVarValue() <em>Var Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVarValue()
+   * @generated
+   * @ordered
+   */
+  protected String varValue = VAR_VALUE_EDEFAULT;
+
+  /**
    * The default value of the '{@link #getNumber() <em>Number</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -130,6 +152,26 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * @ordered
    */
   protected double number = NUMBER_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getVar() <em>Var</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVar()
+   * @generated
+   * @ordered
+   */
+  protected static final String VAR_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getVar() <em>Var</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getVar()
+   * @generated
+   * @ordered
+   */
+  protected String var = VAR_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -249,6 +291,29 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getVarValue()
+  {
+    return varValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setVarValue(String newVarValue)
+  {
+    String oldVarValue = varValue;
+    varValue = newVarValue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__VAR_VALUE, oldVarValue, varValue));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public double getNumber()
   {
     return number;
@@ -272,6 +337,29 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getVar()
+  {
+    return var;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setVar(String newVar)
+  {
+    String oldVar = var;
+    var = newVar;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__VAR, oldVar, var));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -285,8 +373,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return getNumberValue();
       case XptPackage.ATTRIBUTE__STR_VALUE:
         return getStrValue();
+      case XptPackage.ATTRIBUTE__VAR_VALUE:
+        return getVarValue();
       case XptPackage.ATTRIBUTE__NUMBER:
         return getNumber();
+      case XptPackage.ATTRIBUTE__VAR:
+        return getVar();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -313,8 +405,14 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case XptPackage.ATTRIBUTE__STR_VALUE:
         setStrValue((String)newValue);
         return;
+      case XptPackage.ATTRIBUTE__VAR_VALUE:
+        setVarValue((String)newValue);
+        return;
       case XptPackage.ATTRIBUTE__NUMBER:
         setNumber((Double)newValue);
+        return;
+      case XptPackage.ATTRIBUTE__VAR:
+        setVar((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -342,8 +440,14 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
       case XptPackage.ATTRIBUTE__STR_VALUE:
         setStrValue(STR_VALUE_EDEFAULT);
         return;
+      case XptPackage.ATTRIBUTE__VAR_VALUE:
+        setVarValue(VAR_VALUE_EDEFAULT);
+        return;
       case XptPackage.ATTRIBUTE__NUMBER:
         setNumber(NUMBER_EDEFAULT);
+        return;
+      case XptPackage.ATTRIBUTE__VAR:
+        setVar(VAR_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -367,8 +471,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
         return numberValue != NUMBER_VALUE_EDEFAULT;
       case XptPackage.ATTRIBUTE__STR_VALUE:
         return STR_VALUE_EDEFAULT == null ? strValue != null : !STR_VALUE_EDEFAULT.equals(strValue);
+      case XptPackage.ATTRIBUTE__VAR_VALUE:
+        return VAR_VALUE_EDEFAULT == null ? varValue != null : !VAR_VALUE_EDEFAULT.equals(varValue);
       case XptPackage.ATTRIBUTE__NUMBER:
         return number != NUMBER_EDEFAULT;
+      case XptPackage.ATTRIBUTE__VAR:
+        return VAR_EDEFAULT == null ? var != null : !VAR_EDEFAULT.equals(var);
     }
     return super.eIsSet(featureID);
   }
@@ -392,8 +500,12 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     result.append(numberValue);
     result.append(", strValue: ");
     result.append(strValue);
+    result.append(", varValue: ");
+    result.append(varValue);
     result.append(", number: ");
     result.append(number);
+    result.append(", var: ");
+    result.append(var);
     result.append(')');
     return result.toString();
   }

@@ -1,6 +1,9 @@
-let $a = /inventory/book[2]/tite;
-let $a = ["Larry Niven", "Jerry Pournelle", 5];
-$a.uppercase(1) == "io";
+let $a = /inventory/book[title!="Snow Crash"]/price[1];
+let $aa = 1;
+let $c = "i";
+let $b = /inventory/book[title>=$c]/isbn;
+let $d = $b.replace($a,"S");
+ $b.startsWith($c) == true && $d != "io";
 
 /*
 // Test for Afun (min, max, avg, etc...)

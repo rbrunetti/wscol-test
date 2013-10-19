@@ -786,9 +786,8 @@ public class Main {
 			}
 		case "startsWith":
 			if (params != null && params.size() == 1) {
-				if (params.get(0) instanceof Constant) {
-					String prefix = (((Constant) params.get(0)).getString() != null) ? ((Constant) params.get(0)).getString() : String.valueOf(((Constant) params.get(0)).getNumber());
-					return ((String) object).startsWith(prefix);
+				if (params.get(0) instanceof String) {
+					return ((String) object).startsWith((String) params.get(0));
 				} else {
 					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string) [token: '" + assertionRep + "']");
 				}
@@ -797,9 +796,8 @@ public class Main {
 			}
 		case "endsWith":
 			if (params != null && params.size() == 1) {
-				if (params.get(0) instanceof Constant) {
-					String suffix = (((Constant) params.get(0)).getString() != null) ? ((Constant) params.get(0)).getString() : String.valueOf(((Constant) params.get(0)).getNumber());
-					return ((String) object).endsWith(suffix);
+				if (params.get(0) instanceof String) {
+					return ((String) object).endsWith((String) params.get(0));
 				} else {
 					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string) [token: '" + assertionRep + "']");
 				}
@@ -808,15 +806,15 @@ public class Main {
 			}
 		case "substring":
 			if (params != null && params.size() == 2) {
-				if (params.get(0) instanceof Constant && params.get(1) instanceof Constant) {
+				if (params.get(0) instanceof Double && params.get(1) instanceof Double) {
 					int beginIndex, endIndex;
-					if (Math.rint(((Constant) params.get(0)).getNumber()) == ((Constant) params.get(0)).getNumber()) {
-						beginIndex = (int) ((Constant) params.get(0)).getNumber();
+					if (Math.rint((double) params.get(0)) == (double) params.get(0)) {
+						beginIndex = (int) ((double)params.get(0));
 					} else {
 						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type Int. [token: '" + assertionRep + "']");
 					}
-					if ((Math.rint(((Constant) params.get(1)).getNumber()) == ((Constant) params.get(1)).getNumber())) {
-						endIndex = (int) ((Constant) params.get(1)).getNumber();
+					if (Math.rint((double) params.get(1)) == (double) params.get(1)) {
+						endIndex = (int) ((double)params.get(1));
 					} else {
 						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type Int. [token: '" + assertionRep + "']");
 					}
@@ -829,14 +827,8 @@ public class Main {
 			}
 		case "replace":
 			if (params != null && params.size() == 2) {
-				if (params.get(0) instanceof Constant && params.get(1) instanceof Constant) {
-					if (((Constant) params.get(1)).getString() == null) {
-						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type String [token: '" + assertionRep + "']");
-					}
-					if (((Constant) params.get(1)).getString() == null) {
-						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type String [token: '" + assertionRep + "']");
-					}
-					return ((String) object).replace(((Constant) params.get(0)).getString(), ((Constant) params.get(1)).getString());
+				if (params.get(0) instanceof String && params.get(1) instanceof String) {
+					return ((String) object).replace((String)params.get(0), (String)params.get(1));
 				} else {
 					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two String) [token: '" + assertionRep + "']");
 				}
@@ -1063,5 +1055,9 @@ public class Main {
 //		}
 //		throwError(msg + left + right, element);
 //	}
+	
+	public static Object getVariable(String key) {
+		return variables.get(key);
+	}
 
 }

@@ -16,6 +16,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
+import org.xtext.example.xpt.generator.Main;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
@@ -58,11 +59,9 @@ public class DataObject {
 	public DataObject evaluate(Query query) throws Exception {
 		DataObject current = new DataObject(data);
 		for (Step s : query.getSteps()) {
-			if (s.getPlaceholder() == null) {
-				current = getSubmap(current, s.getName(), s.getAttribute());
-				if (current == null) {
-					return null;
-				}
+			current = getSubmap(current, s.getName(), s.getAttribute());
+			if (current == null) {
+				return null;
 			}
 		}
 		return current;
@@ -91,8 +90,24 @@ public class DataObject {
 				if (next instanceof DataObject) {
 					DataObject nextDO = (DataObject) next;
 					if (attribute != null) {
-						if (attribute.getNumber() > 0) {
-							if (attribute.getNumber() == i) {
+
+						// check the case in which there's a variable instead of a String or a Double
+						int number = -1;
+						if (attribute.getVar() != null) {
+							Object num = Main.getVariable(attribute.getVar());
+							if (num instanceof Double) {
+								number = (int) (double) num;
+							} else if (num == null) {
+								throw new Exception("The variable '" + attribute.getVar() + "' is not defined.");
+							} else {
+								throw new Exception("The variable '" + attribute.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
+							}
+						} else {
+							number = (int) attribute.getNumber();
+						}
+
+						if (number > 0) {
+							if (number == i) {
 								subMap.putAll(nextDO);
 								return subMap;
 							}
@@ -108,8 +123,24 @@ public class DataObject {
 				} else {
 					// if there's the selection of the n-th element
 					if (attribute != null) {
-						if (attribute.getNumber() > 0) {
-							if (attribute.getNumber() == i) { // only the i-th would be putted in the map
+
+						// check the case in which there's a variable instead of a String or a Double
+						int number = -1;
+						if (attribute.getVar() != null) {
+							Object num = Main.getVariable(attribute.getVar());
+							if (num instanceof Double) {
+								number = (int) (double) num;
+							} else if (num == null) {
+								throw new Exception("The variable '" + attribute.getVar() + "' is not defined.");
+							} else {
+								throw new Exception("The variable '" + attribute.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
+							}
+						} else {
+							number = (int) attribute.getNumber();
+						}
+
+						if (number > 0) {
+							if (number == i) { // only the i-th would be putted in the map
 								subMap.put(property, next);
 								return subMap;
 							}
@@ -131,7 +162,7 @@ public class DataObject {
 	 *            DataObject on which the attribute is verified
 	 * @param attribute
 	 *            attribute to check
-	 * @return DataObject selected from 'current' with the corresponding attribute
+	 * @return DataObject selected from 'current' with the corresponding attribute, null if the attribute is not respected
 	 * @throws Exception
 	 *             if the searched property is not found
 	 */
@@ -142,13 +173,31 @@ public class DataObject {
 		double intValue = attribute.getNumberValue();
 
 		if (current.containsKey(key)) {
-			if (op != null) { // check if it's a complete attribute or just a
-								// constant (eg. /book[title="..."] or /book[1])
+			if (op != null) { // check if it's a complete attribute or just a constant (eg. /book[title="..."] or /book[1])
+
+				// check if the comparison is done with a variable; if necessary retrieve the value
+				if (attribute.getVarValue() != null) {
+					Object value = Main.getVariable(attribute.getVarValue());
+					if (value != null) {
+						if (value instanceof String) {
+							strValue = (String) value;
+						} else if (value instanceof Double) {
+							intValue = (double) value;
+						} else {
+							throw new Exception("The variable '" + attribute.getVarValue() + "' contains a DataObject, unacceptable in attributes.");
+						}
+					} else {
+						throw new Exception("The variable '" + attribute.getVarValue() + "' is not defined.");
+					}
+				}
+
 				if (strValue != null) { // check if it's a string attribute
 					if (op.equals("=") && current.containsEntry(key, strValue)) {
 						return current;
 					} else if (op.equals("!=") && !current.containsEntry(key, strValue)) {
 						return current;
+					} else if(!(op.equals("!=") || op.equals("=="))){ // runtime check in the case that the strValue is obtained by a variable (so there's not static analysis of tokens)
+						throw new Exception("Unsupported operation '" + op + "' for a String.");
 					} else {
 						return null;
 					}
@@ -274,16 +323,17 @@ public class DataObject {
 	public boolean contains(Object target) {
 
 		// for each value contained in the target try to find it in 'data', if one of them is not in 'data' we try to search them deeper
-		if(target instanceof DataObject) {
+		if (target instanceof DataObject) {
 			Collection<Object> values = ((DataObject) target).values();
 			boolean res = true;
-			for(Object o:values){
-				if(!data.containsValue(o)) {
+			for (Object o : values) {
+				if (!data.containsValue(o)) {
 					res = res & false;
 					break;
 				}
 			}
-			if(res) return true;
+			if (res)
+				return true;
 		} else if (data.containsValue(target)) {
 			return true;
 		}

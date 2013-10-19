@@ -1182,12 +1182,49 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getOpRopParserRuleCall_0_1_2_0_0()); 
+	    }
+		lv_op_5_0=ruleRop		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
+	        }
+       		set(
+       			$current, 
+       			"op",
+        		lv_op_5_0, 
+        		"Rop");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getVarValueVariableParserRuleCall_0_1_2_1_0()); 
+	    }
+		lv_varValue_6_0=ruleVariable		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
+	        }
+       		set(
+       			$current, 
+       			"varValue",
+        		lv_varValue_6_0, 
+        		"Variable");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))))
     |(
 (
-		lv_number_5_0=RULE_NUMBER
+		lv_number_7_0=RULE_NUMBER
 		{
-			newLeafNode(lv_number_5_0, grammarAccess.getAttributeAccess().getNumberNUMBERTerminalRuleCall_1_0()); 
+			newLeafNode(lv_number_7_0, grammarAccess.getAttributeAccess().getNumberNUMBERTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1196,8 +1233,27 @@ ruleAttribute returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"number",
-        		lv_number_5_0, 
+        		lv_number_7_0, 
         		"NUMBER");
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAttributeAccess().getVarVariableParserRuleCall_2_0()); 
+	    }
+		lv_var_8_0=ruleVariable		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAttributeRule());
+	        }
+       		set(
+       			$current, 
+       			"var",
+        		lv_var_8_0, 
+        		"Variable");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )

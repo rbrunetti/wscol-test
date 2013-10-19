@@ -536,13 +536,31 @@ public interface XptPackage extends EPackage
   int ATTRIBUTE__STR_VALUE = 3;
 
   /**
+   * The feature id for the '<em><b>Var Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUTE__VAR_VALUE = 4;
+
+  /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__NUMBER = 4;
+  int ATTRIBUTE__NUMBER = 5;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUTE__VAR = 6;
 
   /**
    * The number of structural features of the '<em>Attribute</em>' class.
@@ -551,7 +569,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FEATURE_COUNT = 5;
+  int ATTRIBUTE_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.FunctionImpl <em>Function</em>}' class.
@@ -1164,6 +1182,17 @@ public interface XptPackage extends EPackage
   EAttribute getAttribute_StrValue();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getVarValue <em>Var Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Var Value</em>'.
+   * @see org.xtext.example.xpt.xpt.Attribute#getVarValue()
+   * @see #getAttribute()
+   * @generated
+   */
+  EAttribute getAttribute_VarValue();
+
+  /**
    * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getNumber <em>Number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1173,6 +1202,17 @@ public interface XptPackage extends EPackage
    * @generated
    */
   EAttribute getAttribute_Number();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getVar <em>Var</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Var</em>'.
+   * @see org.xtext.example.xpt.xpt.Attribute#getVar()
+   * @see #getAttribute()
+   * @generated
+   */
+  EAttribute getAttribute_Var();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Function <em>Function</em>}'.
@@ -1686,12 +1726,28 @@ public interface XptPackage extends EPackage
     EAttribute ATTRIBUTE__STR_VALUE = eINSTANCE.getAttribute_StrValue();
 
     /**
+     * The meta object literal for the '<em><b>Var Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUTE__VAR_VALUE = eINSTANCE.getAttribute_VarValue();
+
+    /**
      * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute ATTRIBUTE__NUMBER = eINSTANCE.getAttribute_Number();
+
+    /**
+     * The meta object literal for the '<em><b>Var</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUTE__VAR = eINSTANCE.getAttribute_Var();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.FunctionImpl <em>Function</em>}' class.

@@ -13,9 +13,7 @@
  |_____/ |_____| |_____| |_____]    |    ______|
  
  	• Add complex assertions even in the declarations => useful?
-	• Add the use of variables inside all the functions (it'll be done w/o touching any grammar rule) => useful?
-	• Add variables and functions in Step's attribute (ex. /step[$a.length()] is, for now, invalid) => useful?  
-	• Implicit 'true' even for functions (ex. $a.startsWith(".."))
+	• Implicit 'true' even for functions (ex. $a.startsWith("..")) (lots of changing in rules...) => necessary?
 	• 
 	•
  _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
@@ -31,10 +29,11 @@
  		• BUT with the correction of the rule Variable ('min', 'max', etc are now language keyword, so I could not declare a variable '$min' without correcting the Variable rule)
  		• BUT float numbers could be different for a minimum fraction, maybe we can use a limited number of decimal digit
  	• Make the boolean value in AssertionForm implicit (ex. exists(...) = true -> exists(...))
- 		• BUT rules are not so pretty...
  	• Better syntax errors messages: what and why is wrong; also for runtime errors with values printing
 	• Values can contain variable referring to other object
  	• Function 'contains' for DataObject: search for an Object (of any type) deeply inside them
-	•  
+	• Added the use of variables inside all the functions, even inside the attribute of a Step
+		• BUT without the possibility to use functions: no "/step[$a.length()]", only "/step[$a]" or "/step[property==$a]"
+		• values of the passed variable must be of the correct type (ex. 1 is a Double, "1" a String...no parsing from one to another)
  	• 
 	•  

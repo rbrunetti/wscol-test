@@ -273,7 +273,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((property=ID ((op=Rop numberValue=NUMBER) | (op=StringRop strValue=STRING))) | number=NUMBER)
+	 *     ((property=ID ((op=Rop numberValue=NUMBER) | (op=StringRop strValue=STRING) | (op=Rop varValue=Variable))) | number=NUMBER | var=Variable)
 	 */
 	protected void sequence_Attribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

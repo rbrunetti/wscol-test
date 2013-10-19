@@ -16,7 +16,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getOp <em>Op</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getNumberValue <em>Number Value</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getStrValue <em>Str Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getVarValue <em>Var Value</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getNumber <em>Number</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Attribute#getVar <em>Var</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,6 +133,32 @@ public interface Attribute extends EObject
   void setStrValue(String value);
 
   /**
+   * Returns the value of the '<em><b>Var Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Var Value</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Var Value</em>' attribute.
+   * @see #setVarValue(String)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAttribute_VarValue()
+   * @model
+   * @generated
+   */
+  String getVarValue();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Attribute#getVarValue <em>Var Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Var Value</em>' attribute.
+   * @see #getVarValue()
+   * @generated
+   */
+  void setVarValue(String value);
+
+  /**
    * Returns the value of the '<em><b>Number</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
@@ -155,5 +183,31 @@ public interface Attribute extends EObject
    * @generated
    */
   void setNumber(double value);
+
+  /**
+   * Returns the value of the '<em><b>Var</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Var</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Var</em>' attribute.
+   * @see #setVar(String)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAttribute_Var()
+   * @model
+   * @generated
+   */
+  String getVar();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Attribute#getVar <em>Var</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Var</em>' attribute.
+   * @see #getVar()
+   * @generated
+   */
+  void setVar(String value);
 
 } // Attribute

@@ -109,11 +109,13 @@ public class Helper {
 				res += property + operation;
 				if (attribute.getStrValue() != null) {
 					res += '"' + attribute.getStrValue() + '"' + ']';
+				} else if(attribute.getVarValue() != null) {
+					res += attribute.getVarValue() + ']';
 				} else {
 					res += String.valueOf(intValue) + ']';
 				}
 			} else {
-				res += String.valueOf(value) + ']';
+				res += ((attribute.getVar()!=null) ? attribute.getVar() : String.valueOf(value)) + ']';
 			}
 		}
 		return res;

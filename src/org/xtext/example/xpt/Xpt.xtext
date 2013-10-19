@@ -44,7 +44,7 @@ Step:
 	'/' name=ID ('[' attribute=Attribute ']')? | placeholder=Variable;
 
 Attribute:
-	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING) | number=NUMBER;
+	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER | var=Variable;
 
 StringRop:
 	'==' | "!=";
