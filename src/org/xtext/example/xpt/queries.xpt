@@ -1,9 +1,9 @@
 let $a = /inventory/book[title!="Snow Crash"]/price[1];
 let $aa = 1;
 let $c = "i";
-let $b = /inventory/book[title>=$c]/isbn;
+let $b = /inventory/book[3]/isbn;
 let $d = $b.replace($a,"S");
- $b.startsWith($c) == true && $d != "io";
+$d != "io";
 
 /*
 // Test for Afun (min, max, avg, etc...)

@@ -224,7 +224,7 @@ public class Main {
 						if (parentSemanticElement.eContainer() != null) {
 							parentSemanticElement = parentSemanticElement.eContainer();
 						} else { // we are in the root node
-							break; // TODO come trattarlo...??
+							erroneousToken = "ROOT";
 						}
 					}
 				}
@@ -997,6 +997,9 @@ public class Main {
 					}
 					if (((DataObject) result).isSingleValue()) {
 						result = ((DataObject) result).getFirstValue();
+					} else if(((DataObject)result).isEmpty()) { // if the result is empty
+						throw new Exception("The declaration gives empty result. Please check it [token: '" + assertionRep + "']");
+						//TODO alternativamente il problema viene segnalato e la variabile non viene dichiarata, se verrà usata successivamente scatterà l'eccezione in quanto non definita
 					}
 				}
 

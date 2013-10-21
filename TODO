@@ -14,7 +14,7 @@
  
  	• Add complex assertions even in the declarations => useful?
 	• Implicit 'true' even for functions (ex. $a.startsWith("..")) (lots of changing in rules...) => necessary?
-	• 
+	• Attribute could not be defined on variables: $a[1] or $a[title="titolo"] => useful?
 	•
  _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
    |   |  |  | |_____] |      |______ |  |  | |______ | \  |    |    |______ |     \

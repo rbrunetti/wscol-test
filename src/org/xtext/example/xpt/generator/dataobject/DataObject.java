@@ -110,6 +110,8 @@ public class DataObject {
 							if (number == i) {
 								subMap.putAll(nextDO);
 								return subMap;
+							} else if(number > current.size()) {
+								throw new Exception("Index out of bound (index = " + number + ", actual size = " + current.size() + ")");
 							}
 						} else {
 							DataObject subMapWithAttribute = getSubMapWithAttribute(nextDO, attribute);
@@ -143,6 +145,8 @@ public class DataObject {
 							if (number == i) { // only the i-th would be putted in the map
 								subMap.put(property, next);
 								return subMap;
+							} else if(number > current.size()) {
+								throw new Exception("Index out of bound (index = " + number + ", actual size = " + current.size() + ")");
 							}
 						}
 					} else {
@@ -254,6 +258,13 @@ public class DataObject {
 	 */
 	public Set<Object> get(String property) {
 		return data.get(property);
+	}
+	
+	/**
+	 * Returns the size of the DataObject (the number of pairs key-value)
+	 */
+	public int size() {
+		return data.size();
 	}
 
 	/**
