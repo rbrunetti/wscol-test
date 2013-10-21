@@ -26,6 +26,8 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.xtext.example.xpt.generator.dataobject.DataObject;
+import org.xtext.example.xpt.services.XptGrammarAccess.AssertionQuantifiedBooleanElements;
+import org.xtext.example.xpt.services.XptGrammarAccess.AssertionQuantifiedNumericElements;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionAnd;
 import org.xtext.example.xpt.xpt.AssertionBraced;
@@ -41,6 +43,7 @@ import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
+import org.xtext.example.xpt.xpt.Values;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -104,10 +107,11 @@ public class Main {
 	}
 
 	protected void runGenerator(String string) {
-		// load the resource
+		// load the resource and parse it
 		ResourceSet set = resourceSetProvider.get();
 		Resource resource = set.getResource(URI.createURI(string), true);
 
+		// check for syntax errors
 		if (syntaxErrors(resource)) {
 			return;
 		}
@@ -132,14 +136,9 @@ public class Main {
 
 		// get input: via xml parsing or passed DataObject
 		input = new DataObject(xmlFilePath);
-//		 DataObject input2 = new DataObject(xmlFilePath2);
-//		 DataObject input3 = hashMapTest();
-//		 DataObject input4 = new DataObject();
-//		 input4.put("weq", "Larry Niven");
-//		 boolean rcon = input3.contains("Larry Niven");
-//		 System.out.println(input3 + "\n" + input4 + "\nCOntains1: " + rcon + "\n" + input + "\n" + input2 + "\n" + "con2: " + input.contains(input2));
 		// input = hashMapTest(); // load input from a DataObject
 
+		// print out the DataObject conversion of the XML file
 		System.out.println("################## INPUT ###################\n" + input + "\n");
 
 		if (count == 0) {
@@ -171,11 +170,10 @@ public class Main {
 	}
 
 	/**
-	 * Syntax error checking, with the indication of the erroneous token
+	 * Syntax error checking, with information about the error (an error message, the line number of the error and wrong token)
 	 * 
-	 * @param resource
-	 *            the result of the loading by the parser
-	 * @return true if there is no errors, false otherwise
+	 * @param resource the result of the parsed rules
+	 * @return <code>true</code> if there is errors, <code>false</code> otherwise
 	 */
 	private boolean syntaxErrors(Resource resource) {
 		// syntax errors checking
@@ -183,7 +181,7 @@ public class Main {
 		Iterator<INode> iter = errors.iterator();
 		int number = resource.getErrors().size();
 
-		if (number == 0) {
+		if (number == 0) { // no errors, go away!
 			return false;
 		}
 
@@ -238,11 +236,12 @@ public class Main {
 	}
 
 	/**
-	 * Syntax errors checking with the validator TODO valuta se eliminabile
+	 * Syntax errors checking with the validator of the grammar
 	 * 
-	 * @param resource
-	 * @return
+	 * @param resource the result of the parsed rules
+	 * @return <code>true</code> if there is errors, <code>false</code> otherwise
 	 */
+	//TODO valuta se eliminabile
 	@SuppressWarnings("unused")
 	private boolean checkSyntaxErrorValidator(Resource resource) {
 		// validate the resource
@@ -263,13 +262,11 @@ public class Main {
 	}
 
 	/**
-	 * Method for the evaluation of the assertions, considering the operation (NOT, AND, OR) and the corresponding priority (NOT>AND>OR)
+	 * Method for the evaluation of the {@link Assertions}, considering the operation (NOT, AND, OR) and the corresponding priority (NOT>AND>OR)
 	 * 
-	 * @param assertions
-	 *            the list of assertions to evaluate
-	 * @return true if the assertions are respected, false otherwise
-	 * @throws Exception
-	 *             if there are exception from the verification of the assertions
+	 * @param assertions the list of {@link Assertions} to evaluate
+	 * @return <code>true</code> if the {@link Assertions} are respected, <code>false</code> otherwise
+	 * @throws Exception if there are exception (caused by runtime errors) from the single {@link Assertions}
 	 */
 	public boolean verifyAssertions(Assertions assertions) throws Exception {
 		EList<EObject> a = assertions.eContents();
@@ -290,11 +287,12 @@ public class Main {
 	}
 
 	/**
-	 * Check all the assertions
+	 * Check an {@link AssertionForm}, in its various forms
 	 * 
-	 * @param assertionSet
-	 * @throws Exception
-	 *             if there is data types conflicts
+	 * @param af the {@link AssertionForm} to check
+	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise 
+	 * @throws Exception if there is data types conflicts, specifying the cause of the error and the erroneous values 
+	 * @throws Exception if there is a generic runtime error, specified with a proper message
 	 */
 	private boolean verifyAssertionForm(AssertionForm af) throws Exception {
 		Object laObj, raObj;
@@ -311,19 +309,19 @@ public class Main {
 			raObj = doQueries(af.getRightAssert());
 		}
 
-		String condition = Helper.assertionFormToString(af);
+		String assertionRepr = Helper.assertionFormToString(af);
 
 		// check the objects class and evaluate the corresponding assertion
 		if (laObj instanceof Double && raObj instanceof Double) {
-			return numericAssertion((double) laObj, (double) raObj, operation, condition);
+			return numericAssertion((double) laObj, (double) raObj, operation, assertionRepr);
 		} else if (laObj instanceof String && raObj instanceof String) {
-			return stringAssertion((String) laObj, (String) raObj, operation, condition);
+			return stringAssertion((String) laObj, (String) raObj, operation, assertionRepr);
 		} else if (laObj instanceof DataObject && raObj instanceof DataObject) {
-			return dataobjectAssertion((DataObject) laObj, (DataObject) raObj, operation, condition);
+			return dataobjectAssertion((DataObject) laObj, (DataObject) raObj, operation, assertionRepr);
 		} else if (laObj instanceof Boolean && raObj instanceof Boolean) {
-			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, condition);
+			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, assertionRepr);
 		} else if (laObj != null && raObj != null) {
-			String msg = "Assertion could not be evaluated due to data types conflicts [token: '" + condition + "']";
+			String msg = "Assertion could not be evaluated due to data types conflicts [token: '" + assertionRepr + "']";
 			if (laObj instanceof DataObject && ((DataObject) laObj).isEmpty()) {
 				laObj = "EMPTY!";
 			}
@@ -334,24 +332,21 @@ public class Main {
 			msg += "\n Right assertion [token: '" + Helper.assertionToString(af.getRightAssert()) + "'] = " + raObj + " (Class: " + raObj.getClass().getSimpleName() + ")";
 			throw new Exception(msg);
 		} else {
-			throw new Exception("Unable to evaluate the assertion, due to erroneous variables declaration [token: '" + condition + "']");
+			throw new Exception("Unable to evaluate the assertion, due to erroneous variables declaration [token: '" + assertionRepr + "']");
 		}
 	}
 
 	/**
-	 * Method for the evaluation of numeric assertion
+	 * Method for the evaluation of numeric {@link AssertionForm}
 	 * 
-	 * @param left
-	 *            the result of the left assertion
-	 * @param right
-	 *            the result of the right assertion
-	 * @param operation
-	 *            a string containing the operation to evaluate
-	 * @param condition
-	 *            a string representation of the assertion
-	 * @return true if the assertion is correct, false otherwise
+	 * @param left the result of the left part of the {@link AssertionForm}
+	 * @param right the result of the right part of the {@link AssertionForm}
+	 * @param operation a {@link String} containing the operation to evaluate
+	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
+	 * @throws Exception if the operation is not supported
 	 */
-	private boolean numericAssertion(double left, double right, String operation, String condition) {
+	private boolean numericAssertion(double left, double right, String operation, String condition) throws Exception {
 		boolean result;
 		switch (operation) {
 		case ">":
@@ -397,8 +392,10 @@ public class Main {
 			}
 			break;
 		default:
-			result = false;
-			break;
+			String msg = "Unsopported operation '" + operation + "' for the assertion between two String [token: '" + condition + "']";
+			msg += "\n Left assertion = '" + left + "' ";
+			msg += "\n Right assertion = '" + right + "' ";
+			throw new Exception(msg);
 		}
 
 		if (result) {
@@ -411,19 +408,14 @@ public class Main {
 	}
 
 	/**
-	 * Method for the evaluation of string assertion
+	 * Method for the evaluation of string {@link AssertionForm}
 	 * 
-	 * @param left
-	 *            the result of the left assertion
-	 * @param right
-	 *            the result of the right assertion
-	 * @param operation
-	 *            a string containing the operation to evaluate
-	 * @param condition
-	 *            a string representation of the assertion
-	 * @return true if the assertion is correct, false otherwise
-	 * @throws Exception
-	 *             if the operation is not supported
+	 * @param left the result of the left part of the {@link AssertionForm}
+	 * @param right the result of the right part of the {@link AssertionForm}
+	 * @param operation a {@link String} containing the operation to evaluate
+	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
+	 * @throws Exception if the operation is not supported
 	 */
 	private boolean stringAssertion(String left, String right, String operation, String condition) throws Exception {
 		boolean result;
@@ -459,19 +451,14 @@ public class Main {
 	}
 
 	/**
-	 * Method for the evaluation of boolean assertion
+	 * Method for the evaluation of boolean {@link AssertionForm}
 	 * 
-	 * @param left
-	 *            the result of the left assertion
-	 * @param right
-	 *            the result of the right assertion
-	 * @param operation
-	 *            a string containing the operation to evaluate
-	 * @param condition
-	 *            a string representation of the assertion
-	 * @return true if the assertion is correct, false otherwise
-	 * @throws Exception
-	 *             if the operation is not supported
+	 * @param left the result of the left part of the {@link AssertionForm}
+	 * @param right the result of the right part of the {@link AssertionForm}
+	 * @param operation a {@link String} containing the operation to evaluate
+	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
+	 * @throws Exception if the operation is not supported
 	 */
 	private boolean booleanAssertion(boolean left, boolean right, String operation, String condition) throws Exception {
 		boolean result;
@@ -499,19 +486,14 @@ public class Main {
 	}
 
 	/**
-	 * Method for the evaluation of DataObject assertion
+	 * Method for the evaluation of DataObject {@link AssertionForm}
 	 * 
-	 * @param left
-	 *            the result of the left assertion
-	 * @param right
-	 *            the result of the right assertion
-	 * @param operation
-	 *            a string containing the operation to evaluate
-	 * @param condition
-	 *            a string representation of the assertion
-	 * @return true if the assertion is correct, false otherwise
-	 * @throws Exception
-	 *             if the operation is not supported
+	 * @param left the result of the left part of the {@link AssertionForm}
+	 * @param right the result of the right part of the {@link AssertionForm}
+	 * @param operation a {@link String} containing the operation to evaluate
+	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
+	 * @throws Exception if the operation is not supported
 	 */
 	private boolean dataobjectAssertion(DataObject left, DataObject right, String operation, String condition) throws Exception {
 		boolean result;
@@ -547,12 +529,12 @@ public class Main {
 	}
 
 	/**
-	 * Print the result of the evaluation of queries
+	 * Returns the result of a single {@link Assertion}, considering also the applied functions
 	 * 
-	 * @throws Exception
-	 *             if is used an empty variable for the assertion
-	 * @throws Exception
-	 *             if the variable
+	 * @param assertion the {@link Assertion} to evaluate
+	 * @return an {@link Object} corresponding to the result of the evaluation
+	 * @throws Exception if is used an undefined variable for the {@link Assertion} specification 
+	 * @throws Exception if the evaluation goes wrong, the cause will be specified with a message
 	 */
 	private Object doQueries(Assertion assertion) throws Exception {
 
@@ -603,27 +585,30 @@ public class Main {
 			result = assertion.isBoolean();
 		}
 
-		// *** FUNCTIONS ***
+		// functions evaluation, according to the corresponding type 
 		if (assertion.getFunction() != null) {
-				if (result instanceof DataObject) {
-					result = applyDataObjectFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
-				} else if (result instanceof String) {
-					result = applyStringFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
-				} else if (result instanceof Double) {
-					result = applyDoubleFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
-				}
+			if (result instanceof DataObject) {
+				result = applyDataObjectFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
+			} else if (result instanceof String) {
+				result = applyStringFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
+			} else if (result instanceof Double) {
+				result = applyDoubleFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
+			}
 		}
 		return result;
 	}
 
 	/**
-	 * Evaluate a quantified assertion
+	 * Returns the result of an {@link AssertionQuantified}.
+	 * {@link AssertionQuantified} are of two types: {@link AssertionQuantifiedNumericElements} if the result is of type {@link Double}
+	 *  and {@link AssertionQuantifiedBooleanElements} if the result is of type {@link Boolean}
 	 * 
-	 * @param assertion
-	 *            the AssertionQuatified to evaluate
-	 * @return a boolean if the quantifier is 'forall' or 'exists', otherwise a double in the case the quantifier is 'numOf'
-	 * @throws Exception
-	 *             if the selected variable is not of DataObject type and if the chosen variable alias is already used
+	 * @param assertion the {@link AssertionQuantified} to evaluate
+	 * @return a boolean if the assertion is a {@link AssertionQuantifiedBooleanElements}, otherwise a double in the case of {@link AssertionQuantifiedNumericElements}
+	 * @throws Exception if the selected variable is not of {@link DataObject} type
+	 * @throws Exception if the chosen variable alias is already used
+	 * @throws Exception if the variable is not defined
+	 * @throws Exception if the variable is not of the correct type regarding to the quantifier
 	 */
 	private Object doAssertionQuantified(Assertion assertion) throws Exception {
 		AssertionQuantified aq = (AssertionQuantified) assertion;
@@ -760,14 +745,13 @@ public class Main {
 	}
 
 	/**
-	 * List of functions for the String results
+	 * List of functions for the String results from an {@link Assertion} evaluation
 	 * 
-	 * @param object
-	 *            the String the elaborate
-	 * @param function
-	 *            the function and the parameters for the function
+	 * @param object the String the elaborate
+	 * @param function the {@link Function} to apply
 	 * @return the result of the function
-	 * @throws Exception
+	 * @throws Exception if the number of parameter is wrong, according to the function, and prints out the expected number
+	 * @throws Exception if the type of parameter is wrong, according to the function, and prints out the value and the expected type
 	 */
 	private Object applyStringFunctions(Object object, Function function, String assertionRep) throws Exception {
 		List<Object> params = getFunctionParams(function, assertionRep);
@@ -841,14 +825,12 @@ public class Main {
 	}
 
 	/**
-	 * List of functions for the numeric results
+	 * List of functions for the numeric results from an {@link Assertion} evaluation
 	 * 
-	 * @param object
-	 *            the number (of type Double) the elaborate
-	 * @param function
-	 *            the function and the parameters for the function
+	 * @param object the number (type {@link Double}) the elaborate
+	 * @param function the {@link Function} to apply
 	 * @return the result of the function
-	 * @throws Exception
+	 * @throws Exception if the number of parameter is wrong, according to the function, and prints out the expected number
 	 */
 	private Object applyDoubleFunctions(Object object, Function function, String assertionRep) throws Exception {
 		List<Object> params = getFunctionParams(function, assertionRep);
@@ -870,9 +852,17 @@ public class Main {
 		}
 	}
 
+	/**
+	 * List of functions for the {@link DataObject} results from an {@link Assertion} evaluation
+	 * 
+	 * @param object the {@link DataObject} the elaborate
+	 * @param function the {@link Function} to apply
+	 * @return the result of the function
+	 * @throws Exception if the number of parameter is wrong, according to the function, and prints out the expected number
+	 */
+	// TODO add other functions
 	private Object applyDataObjectFunctions(Object object, Function function, String assertionRep) throws Exception {
 		List<Object> params = getFunctionParams(function, assertionRep);
-		// TODO
 		switch (function.getName()) {
 		case "contains":
 			if (params.size() == 1) {
@@ -887,12 +877,12 @@ public class Main {
 	}
 
 	/**
-	 * Given the function extract the parameters (resolving the ones related to a variable) and return a list of value (of different type)
+	 * Given the function extract the parameters (resolving the ones related to a variable) and returns a 
+	 * list of value (of different type: {@link String}, {@link Double}, {@link Boolean} or {@link DataObject})
 	 * 
-	 * @param function
-	 *            the function to elaborate
-	 * @return list of value
-	 * @throws Exception
+	 * @param function the {@link Function} to elaborate
+	 * @return the list of value
+	 * @throws Exception if the variable (if present) it's not defined
 	 */
 	private List<Object> getFunctionParams(Function function, String assertionRep) throws Exception {
 		if (function.getParams() != null) {
@@ -921,9 +911,15 @@ public class Main {
 	}
 
 	/**
-	 * Set variables according to the declarations
+	 * Set variables according to the {@link Declaration}.
+	 * Evaluates the query, resolves the variables, translate {@link Values} into {@link DataObject}, extract correct value from a {@link Constant} and assigns the values to a key with the specified name
+	 * The values are extracted and saved as simple type ({@link String}, {@link Double} and {@link Boolean}) if the results of an evaluation is a {@link DataObject} with a single value. Otherwise as a {@link DataObject}.  
 	 * 
-	 * @throws Exception
+	 * @param declarations the list of {@link Declaration} rules parsed
+	 * @throws Exception if the variable is already in use
+	 * @throws Exception if a variable, used inside a declaration and on which that is based, is not defined 
+	 * @throws Exception if the evaluation goes wrong, the cause will be specified 
+	 * @throws Exception if the evaluation gives back an empty result
 	 */
 	private void setVariable(EObjectContainmentEList<Declaration> declarations) throws Exception {
 		Object result = null;
@@ -1059,6 +1055,14 @@ public class Main {
 //		throwError(msg + left + right, element);
 //	}
 	
+	/**
+	 * Returns the value corresponding to the passed key
+	 * 
+	 * @param key the name (and the key) of the variable to retrieve
+	 * @return the corresponding value if the key is found, null otherwise
+	 * @see Map#get(Object)
+	 */
+	//TODO da tenere?
 	public static Object getVariable(String key) {
 		return variables.get(key);
 	}

@@ -12,7 +12,7 @@
  |     \ |     | |     | |_____]    |    |______
  |_____/ |_____| |_____| |_____]    |    ______|
  
- 	• Add complex assertions even in the declarations => useful?
+ 	• Add complex assertions even in the declarations (changing actual rules cause left recursion...) => useful?
 	• Implicit 'true' even for functions (ex. $a.startsWith("..")) (lots of changing in rules...) => necessary?
 	• Attribute could not be defined on variables: $a[1] or $a[title="titolo"] => useful?
 	•

@@ -20,22 +20,39 @@ import org.xtext.example.xpt.generator.Main;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
+import org.xtext.example.xpt.xpt.Values;
 
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
 public class DataObject {
 
 	private LinkedHashMultimap<String, Object> data;
 
-	public DataObject(LinkedHashMultimap<String, Object> data) {
-		this.data = data;
-	}
-
+	/**
+	 * Default constructor, build an empty {@link LinkedHashMultimap}
+	 */
 	public DataObject() {
 		data = LinkedHashMultimap.create();
 	}
 
+	/**
+	 * Builds the {@link DataObject} starting from a passed {@link LinkedHashMultimap}
+	 * 
+	 * @param data the {@link LinkedHashMultimap} from which data are copied
+	 */
+	public DataObject(LinkedHashMultimap<String, Object> data) {
+		this.data = data;
+	}
+
+	/**
+	 * Builds the {@link DataObject} as a single pair key-value, where the value is a list of {@link Object}
+	 * (used for the representation of {@link Values} elements)
+	 * 
+	 * @param name the key name
+	 * @param values the list of values to associate with the key
+	 */
 	public DataObject(String name, List<Object> values) {
 		data = LinkedHashMultimap.create();
 		for (Object o : values) {
@@ -43,6 +60,11 @@ public class DataObject {
 		}
 	}
 
+	/**
+	 * Builds the {@link DataObject} from the parsing of an XML file
+	 * 
+	 * @param xmlPath the path of the XML file to parse
+	 */
 	public DataObject(String xmlPath) {
 		data = parseXML(xmlPath);
 	}
@@ -50,11 +72,9 @@ public class DataObject {
 	/**
 	 * Method for the evaluation of a Query
 	 * 
-	 * @param query
-	 *            to evaluate
-	 * @return a DataObject containing the results of the query
-	 * @throws Exception
-	 *             if the evaluation goes wrong (see the called method for the specific exception)
+	 * @param query the {@link Query} to evaluate
+	 * @return a {@link DataObject} containing the results of the query
+	 * @throws Exception if the evaluation goes wrong (see the called method for the specific exception)
 	 */
 	public DataObject evaluate(Query query) throws Exception {
 		DataObject current = new DataObject(data);
@@ -70,30 +90,26 @@ public class DataObject {
 	/**
 	 * Search the specified key in the DataObject and return the corresponding DataObject value
 	 * 
-	 * @param current
-	 *            the DataObject in which the search is done
-	 * @param property
-	 *            the searched key/property in the DataObject
-	 * @return a DataObject corresponding to the searched value
-	 * @throws Exception
-	 *             if the searched property is not found
+	 * @param current the {@link DataObject} in which the search is done
+	 * @param property the searched key/property in the {@link DataObject}
+	 * @return a {@link DataObject} corresponding to the searched value (if found)
+	 * @throws Exception if the searched property is not found
 	 */
 	private DataObject getSubmap(DataObject current, String property, Attribute attribute) throws Exception {
 		DataObject subMap = new DataObject();
 		if (current.keys().contains(property)) {
-			Set<Object> sub = current.get(property);
-			Iterator<Object> iter = sub.iterator();
-			double i = 0;
+			Set<Object> values = current.get(property);
+			Iterator<Object> iter = values.iterator();
+			double i = 0; // index used for counting the i-th element to extract (if the proper attribute is set)
 			while (iter.hasNext()) {
 				Object next = iter.next();
 				i = i + 1;
 				if (next instanceof DataObject) {
 					DataObject nextDO = (DataObject) next;
 					if (attribute != null) {
-
 						// check the case in which there's a variable instead of a String or a Double
 						int number = -1;
-						if (attribute.getVar() != null) {
+						if (attribute.getVar() != null) { // check if the attribute is a variable to retrieve
 							Object num = Main.getVariable(attribute.getVar());
 							if (num instanceof Double) {
 								number = (int) (double) num;
@@ -120,7 +136,7 @@ public class DataObject {
 							}
 						}
 					} else {
-						subMap.putAll(nextDO); // take the DataObject and all the sub-attribute
+						subMap.putAll(nextDO); // take the whole DataObject and all the sub-attribute
 					}
 				} else {
 					// if there's the selection of the n-th element
@@ -160,24 +176,21 @@ public class DataObject {
 	}
 
 	/**
-	 * Evaluate the attributes on a passed DataObject
+	 * Evaluate the attributes on a passed {@link DataObject}
 	 * 
-	 * @param current
-	 *            DataObject on which the attribute is verified
-	 * @param attribute
-	 *            attribute to check
-	 * @return DataObject selected from 'current' with the corresponding attribute, null if the attribute is not respected
-	 * @throws Exception
-	 *             if the searched property is not found
+	 * @param current {@link DataObject} on which the attribute is verified
+	 * @param attribute {@link Attribute} to check
+	 * @return {@link DataObject} selected from 'current' with the corresponding attribute, <code>null</code> if the attribute is not respected
+	 * @throws Exception if the searched property is not found
 	 */
 	private DataObject getSubMapWithAttribute(DataObject current, Attribute attribute) throws Exception {
 		String key = attribute.getProperty();
 		String strValue = attribute.getStrValue();
 		String op = attribute.getOp();
-		double intValue = attribute.getNumberValue();
+		double numericValue = attribute.getNumberValue();
 
 		if (current.containsKey(key)) {
-			if (op != null) { // check if it's a complete attribute or just a constant (eg. /book[title="..."] or /book[1])
+			if (op != null) { // check if it's a complete attribute (eg. /book[title="..."]), other types of attribute (by i-th selection and by varible are already checked)
 
 				// check if the comparison is done with a variable; if necessary retrieve the value
 				if (attribute.getVarValue() != null) {
@@ -186,7 +199,7 @@ public class DataObject {
 						if (value instanceof String) {
 							strValue = (String) value;
 						} else if (value instanceof Double) {
-							intValue = (double) value;
+							numericValue = (double) value;
 						} else {
 							throw new Exception("The variable '" + attribute.getVarValue() + "' contains a DataObject, unacceptable in attributes.");
 						}
@@ -211,32 +224,32 @@ public class DataObject {
 					while (iter.hasNext()) {
 						switch (op) {
 						case "=":
-							if ((double) iter.next() == intValue) {
+							if ((double) iter.next() == numericValue) {
 								return current;
 							}
 							return null;
 						case "!=":
-							if ((double) iter.next() != intValue) {
+							if ((double) iter.next() != numericValue) {
 								return current;
 							}
 							return null;
 						case ">":
-							if ((double) iter.next() > intValue) {
+							if ((double) iter.next() > numericValue) {
 								return current;
 							}
 							return null;
 						case ">=":
-							if ((double) iter.next() >= intValue) {
+							if ((double) iter.next() >= numericValue) {
 								return current;
 							}
 							return null;
 						case "<":
-							if ((double) iter.next() < intValue) {
+							if ((double) iter.next() < numericValue) {
 								return current;
 							}
 							return null;
 						case "<=":
-							if ((double) iter.next() <= intValue) {
+							if ((double) iter.next() <= numericValue) {
 								return current;
 							}
 							return null;
@@ -251,8 +264,7 @@ public class DataObject {
 	/**
 	 * Returns a collection view of all values associated with a key.
 	 * 
-	 * @param key
-	 *            key to search for in multimap
+	 * @param key key to search for in the {@link DataObject}
 	 * @return the collection of values that the key maps to
 	 * @see com.google.common.collect.AbstractSetMultimap#get(Object)
 	 */
@@ -261,35 +273,35 @@ public class DataObject {
 	}
 	
 	/**
-	 * Returns the size of the DataObject (the number of pairs key-value)
+	 * Returns the size of the {@link DataObject} (the number of pairs key-value)
 	 */
 	public int size() {
 		return data.size();
 	}
 
 	/**
-	 * Return the value of the first entry of the DataObject
+	 * Return the value of the first entry of the {@link DataObject}
 	 * 
-	 * @return value corresponding to the first key inserted in the DataObject
+	 * @return value corresponding to the first key inserted in the {@link DataObject}
 	 */
 	public Object getFirstValue() {
 		return data.values().iterator().next();
 	}
 
 	/**
-	 * Return true if there is only a value in the DataObject
-	 * 
-	 * @return
+	 * Return <code>true</code> if there is only a value in the {@link DataObject}
 	 */
 	public boolean isSingleValue() {
+		// a single value and not a DataObject (potentially containing other values)
 		return data.values().size() == 1 && !(this.getFirstValue() instanceof DataObject);
 	}
 
 	/**
-	 * Check if the DataObject contains just a single key with a list of simple values (not of type DataObject) associated
+	 * Check if the {@link DataObject} contains just a single key with a list of simple values associated(of type {@link String}, {@link Double} or {@link Boolean})
 	 * 
-	 * @return true if it is a List, false otherwise
+	 * @return <code>true</code> if it is a List, <code>false</code> otherwise
 	 */
+	//TODO unused...
 	public boolean isList() {
 		if (data.keySet().size() != 1) {
 			return false;
@@ -302,15 +314,12 @@ public class DataObject {
 		return true;
 	}
 
-	public boolean isEmpty() {
-		return data.isEmpty();
-	}
-
 	/**
 	 * Convert a DataObject to a List (used in case of array declaration, where the defined array became a DataObject view multiple value associated a key equal to the name of the declaration variable)
 	 * 
 	 * @return
 	 */
+	//TODO unused...
 	public List<Object> getList() {
 		if (this.keySet().size() != 1) {
 			return null;
@@ -323,17 +332,22 @@ public class DataObject {
 	}
 
 	/**
-	 * Search and compare every single key-value pair
+	 * Returns <code>true</code> if the {@link Multimap} contains no key-value pairs. 
+	 */
+	public boolean isEmpty() {
+		return data.isEmpty();
+	}
+
+	/**
+	 * Search the passed target through the values of the {@link DataObject}.
+	 * The search is deep, so every nested {@link DataObject} value is inspected.
 	 * 
-	 * @param a
-	 *            the DataObject to compare
-	 * @param b
-	 *            the DataObject to compare
-	 * @return true if the DataObject are equals, false otherwise
+	 * @param target the {@link Object} to search (possible types are {@link String}, {@link Double} and {@link DataObject})
+	 * @return <code>true</code> if the target is found, <code>false</code> otherwise
 	 */
 	public boolean contains(Object target) {
 
-		// for each value contained in the target try to find it in 'data', if one of them is not in 'data' we try to search them deeper
+		// if target is a DataObject, for each value contained in the target we try to find it in the current DataObject
 		if (target instanceof DataObject) {
 			Collection<Object> values = ((DataObject) target).values();
 			boolean res = true;
@@ -343,16 +357,18 @@ public class DataObject {
 					break;
 				}
 			}
-			if (res)
+			if (res) {
 				return true;
-		} else if (data.containsValue(target)) {
+			}
+		} else if (data.containsValue(target)) { // if the target is a simple object (String or Double)
 			return true;
 		}
+		
 		Iterator<Object> iter = this.values().iterator();
 		while (iter.hasNext()) {
 			Object elem = iter.next();
 			if (elem instanceof DataObject) {
-				if (target instanceof DataObject && elem.equals(target)) {
+				if (target instanceof DataObject && elem.equals(target)) { // try a comparison between DataObjects
 					return true;
 				}
 				boolean res = ((DataObject) elem).contains(target);
@@ -367,7 +383,7 @@ public class DataObject {
 	/**
 	 * Returns a collection, which may contain duplicates, of all keys.
 	 * 
-	 * @returna multiset with keys corresponding to the distinct keys of the multimap and frequencies corresponding to the number of values that each key maps to
+	 * @return a multiset with keys corresponding to the distinct keys of the multimap and frequencies corresponding to the number of values that each key maps to
 	 * @see com.google.common.collect.AbstractSetMultimap#keys()
 	 */
 	public Multiset<String> keys() {
@@ -449,17 +465,18 @@ public class DataObject {
 	 * @return true if the multimap changed
 	 */
 	public boolean putAll(DataObject dataObject) {
-		return data.putAll(dataObject.getData());
+		return data.putAll(dataObject.data);
 	}
 
+	// ***************************
 	// *** XML PARSING METHODS ***
+	// ***************************
 
 	/**
-	 * Returns the Map corresponding to the input XML file
+	 * Returns the {@link LinkedHashMultimap} corresponding to the input XML file
 	 * 
-	 * @param xmlPath
-	 *            the path of the XML file to parse
-	 * @return the corresponding Map
+	 * @param xmlPath the path of the XML file to parse
+	 * @return the corresponding {@link LinkedHashMultimap} parsed from the XML
 	 */
 	private LinkedHashMultimap<String, Object> parseXML(String xmlPath) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -479,10 +496,10 @@ public class DataObject {
 	}
 
 	/**
-	 * TODO
+	 * Navigate recursively through the XML nodes and translate them to a {@link DataObject}
 	 * 
-	 * @param root
-	 * @return
+	 * @param root the root {@link Node} of an XML portion of file
+	 * @return a {@link DataObject} conversion of XML
 	 */
 	private DataObject stepThrow(Node root) {
 		String name = root.getNodeName();
@@ -541,11 +558,9 @@ public class DataObject {
 	/**
 	 * Search and compare every single key-value pair
 	 * 
-	 * @param a
-	 *            the DataObject to compare
-	 * @param b
-	 *            the DataObject to compare
-	 * @return true if the DataObject are equals, false otherwise
+	 * @param a the {@link DataObject} to compare
+	 * @param b the {@link DataObject} to compare
+	 * @return <code>true</code> if the {@link DataObject} are deeply equals, <code>false</code> otherwise
 	 */
 	private boolean deepEqual(DataObject a, DataObject b) {
 		Set<String> keysA = a.keySet();

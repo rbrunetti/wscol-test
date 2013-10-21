@@ -26,7 +26,7 @@ AssertionNot:
 	'!' '(' innerFormula=AssertionOr ')';
 
 AssertionForm:
-	leftAssert=Assertion op=Rop rightAssert=Assertion | leftAssert=AssertionQuantifiedBoolean;
+	leftAssert=Assertion op=Rop rightAssert=Assertion | leftAssert=AssertionQuantifiedBoolean; // 2nd option for quantified assertion w/ boolean result, and so implicit
 
 Assertion:
 	query=Query ('.' function=Function)? | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';

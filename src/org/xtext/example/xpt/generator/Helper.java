@@ -21,6 +21,12 @@ import org.xtext.example.xpt.xpt.Values;
 
 public class Helper {
 
+	/**
+	 * Generates the {@link String} representation of an {@link AssertionForm}
+	 * 
+	 * @param af the {@link AssertionForm} to represent
+	 * @return a {@link String} representing the passed {@link AssertionForm}
+	 */
 	public static String assertionFormToString(AssertionForm af) {
 		if (af.getOp() == null && af.getRightAssert() == null) {
 			return assertionToString(af.getLeftAssert());
@@ -28,10 +34,23 @@ public class Helper {
 		return assertionToString(af.getLeftAssert()) + " " + af.getOp() + " " + assertionToString(af.getRightAssert());
 	}
 
+	/**
+	 * Generates the {@link String} representation of a {@link Declaration}
+	 * 
+	 * @param d the {@link Declaration} to represent
+	 * @return a {@link String} representing the passed {@link Declaration}
+	 */
 	public static String declarationToString(Declaration d) {
 		return d.getVar() + " = " + assertionToString(d.getAssert());
 	}
 
+	/**
+	 * Generates the {@link String} representation of a {@link Assertions}
+	 * (parent of {@link AssertionOr}, {@link AssertionAnd}, {@link AssertionForm}, {@link AssertionNot} and {@link AssertionBraced})
+	 * 
+	 * @param a the {@link Assertions} to represent
+	 * @return a {@link String} representing the passed {@link Assertions}
+	 */
 	public static String assertionsToString(Assertions a) {
 		String res = "";
 		if (a instanceof AssertionOr) {
@@ -48,11 +67,23 @@ public class Helper {
 		return res;
 	}
 	
+	/**
+	 * Generates the {@link String} representation of a {@link AssertionQuantified}
+	 * 
+	 * @param aq the {@link AssertionQuantified} to represent
+	 * @return the {@link String} representing the passed {@link AssertionQuantified}
+	 */
 	public static String assertionQuantifiedToString(AssertionQuantified aq) {
 		return aq.getQuantifier() + "(" + aq.getAlias() + " in " + aq.getVar() + ", " + assertionsToString(aq.getConditions()) + ")";
 	}
 
-	public static String assertionToString(Assertion a) { // TODO sistemare!
+	/**
+	 * Generate the {@link String} representation of an {@link Assertion}
+	 * 
+	 * @param a the {@link Assertion} to represent
+	 * @return the {@link String} representing the passed {@link Assertion}
+	 */
+	public static String assertionToString(Assertion a) {
 		String res = "";
 		if (a == null) {
 			return null;
@@ -85,6 +116,12 @@ public class Helper {
 		return res;
 	}
 
+	/**
+	 * Generate the {@link String} representation of an {@link Query}
+	 * 
+	 * @param q the {@link Query} to represent
+	 * @return the {@link String} representing the passed {@link Query}
+	 */
 	public static String queryToString(Query q) {
 		String res = "";
 		for (int i = 0; i < q.getSteps().size(); i++) {
@@ -93,17 +130,27 @@ public class Helper {
 		return res;
 	}
 
+	/**
+	 * Generate the {@link String} representation of a {@link Step}
+	 * 
+	 * @param s the {@link Step} to represent
+	 * @return the {@link String} representing the passed {@link Step}
+	 */
 	public static String stepToString(Step s) {
+		// if it is a variable
 		if (s.getPlaceholder() != null) {
 			return s.getPlaceholder();
 		}
+		
 		String res = '/' + s.getName();
 		Attribute attribute = s.getAttribute();
+		
+		// check if it contains an attribute
 		if (attribute != null) {
 			String property = attribute.getProperty();
 			String operation = attribute.getOp();
 			double value = attribute.getNumber();
-			double intValue = attribute.getNumberValue();
+			double numericValue = attribute.getNumberValue();
 			res += '[';
 			if (property != null && operation != null) {
 				res += property + operation;
@@ -112,15 +159,21 @@ public class Helper {
 				} else if(attribute.getVarValue() != null) {
 					res += attribute.getVarValue() + ']';
 				} else {
-					res += String.valueOf(intValue) + ']';
+					res += String.valueOf(numericValue) + ']';
 				}
-			} else {
+			} else { // it contains a variable or it's just the i-th selection
 				res += ((attribute.getVar()!=null) ? attribute.getVar() : String.valueOf(value)) + ']';
 			}
 		}
 		return res;
 	}
 
+	/**
+	 * Generate the {@link String} representation of a {@link Values}
+	 * 
+	 * @param values the {@link Values} to represent
+	 * @return the {@link String} representing the passed {@link Values}
+	 */
 	private static List<Object> valuesToList(Values values) {
 		List<Object> result = new ArrayList<>();
 		for (Value c : values.getValue()) {
@@ -139,6 +192,11 @@ public class Helper {
 		return result;
 	}
 
+	/**
+	 * Returns the {@link String} representation of the inner value of a {@link Constant}
+	 * @param constant the {@link Constant} to represent
+	 * @return the {@link String} representing the value of the passed {@link Constant}
+	 */
 	private static String constantToString(Constant constant) {
 		if (constant.getString() != null) {
 			return constant.getString();
