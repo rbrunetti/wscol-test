@@ -322,12 +322,6 @@ public class Main {
 			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, assertionRepr);
 		} else if (laObj != null && raObj != null) {
 			String msg = "Assertion could not be evaluated due to data types conflicts [token: '" + assertionRepr + "']";
-			if (laObj instanceof DataObject && ((DataObject) laObj).isEmpty()) {
-				laObj = "EMPTY!";
-			}
-			if (raObj instanceof DataObject && ((DataObject) raObj).isEmpty()) {
-				raObj = "EMPTY!";
-			}
 			msg += "\n Left assertion [token: '" + Helper.assertionToString(af.getLeftAssert()) + "'] = " + laObj + " (Class: " + laObj.getClass().getSimpleName() + ")";
 			msg += "\n Right assertion [token: '" + Helper.assertionToString(af.getRightAssert()) + "'] = " + raObj + " (Class: " + raObj.getClass().getSimpleName() + ")";
 			throw new Exception(msg);
@@ -562,8 +556,6 @@ public class Main {
 						if (((DataObject) result).isSingleValue()) {
 							result = ((DataObject) result).getFirstValue();
 						}
-//					} else if (value instanceof String || value instanceof Double || value instanceof Boolean) {
-//						result = value;
 					} else {
 						if (((DataObject) value).isSingleValue()) {
 							result = ((DataObject) value).getFirstValue();
@@ -585,14 +577,17 @@ public class Main {
 			result = assertion.isBoolean();
 		}
 
-		// functions evaluation, according to the corresponding type 
-		if (assertion.getFunction() != null) {
-			if (result instanceof DataObject) {
-				result = applyDataObjectFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
-			} else if (result instanceof String) {
-				result = applyStringFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
-			} else if (result instanceof Double) {
-				result = applyDoubleFunctions(result, assertion.getFunction(), Helper.assertionToString(assertion));
+		// functions evaluation, according to the corresponding type
+		EList<Function> functions = assertion.getFunction();
+		if (functions != null) {
+			for (Function f : functions) {
+				if (result instanceof DataObject) {
+					result = applyDataObjectFunctions(result, f, Helper.assertionToString(assertion));
+				} else if (result instanceof String) {
+					result = applyStringFunctions(result, f, Helper.assertionToString(assertion));
+				} else if (result instanceof Double) {
+					result = applyDoubleFunctions(result, f, Helper.assertionToString(assertion));
+				}
 			}
 		}
 		return result;
@@ -865,12 +860,18 @@ public class Main {
 		List<Object> params = getFunctionParams(function, assertionRep);
 		switch (function.getName()) {
 		case "contains":
+			if(((DataObject)object).isEmpty()) {
+				throw new Exception("Function '" + function.getName() + "' could not be applied because the DataObject is empty [token: '" + assertionRep + "']"); 
+			}
 			if (params.size() == 1) {
 				return ((DataObject) object).contains(params.get(0));
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
 			}
 		case "get":
+			if(((DataObject)object).isEmpty()) {
+				throw new Exception("Function '" + function.getName() + "' could not be applied because the DataObject is empty [token: '" + assertionRep + "']"); 
+			}
 			if(params.size() == 1) {
 				if(params.get(0) instanceof String) {
 					return ((DataObject) object).get((String) params.get(0));
@@ -879,6 +880,12 @@ public class Main {
 				}
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
+			}
+		case "cardinality":
+			if(params == null) {
+				return ((DataObject) object).size();
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0) [token: '" + assertionRep + "']");
 			}
 		default:
 			break;
@@ -1003,20 +1010,23 @@ public class Main {
 					}
 					if (((DataObject) result).isSingleValue()) {
 						result = ((DataObject) result).getFirstValue();
-					} else if(((DataObject)result).isEmpty()) { // if the result is empty
-						throw new Exception("The declaration gives empty result. Please check it [token: '" + assertionRep + "']");
-						//TODO alternativamente il problema viene segnalato e la variabile non viene dichiarata, se verrà usata successivamente scatterà l'eccezione in quanto non definita
+//					} else if(((DataObject)result).isEmpty()) { // if the result is empty
+//						throw new Exception("The declaration gives empty result. Please check it [token: '" + assertionRep + "']");
+//						//TODO alternativamente il problema viene segnalato e la variabile non viene dichiarata, se verrà usata successivamente scatterà l'eccezione in quanto non definita
 					}
 				}
 
 				// *** FUNCTIONS ***
-				if (d.getAssert().getFunction() != null) {
-					if (result instanceof DataObject) {
-						result = applyDataObjectFunctions(result, d.getAssert().getFunction(), Helper.assertionToString(d.getAssert()));
-					} else if (result instanceof String) {
-						result = applyStringFunctions(result, d.getAssert().getFunction(), Helper.assertionToString(d.getAssert()));
-					} else if (result instanceof Double) {
-						result = applyDoubleFunctions(result, d.getAssert().getFunction(), Helper.assertionToString(d.getAssert()));
+				EList<Function> functions = d.getAssert().getFunction();
+				if (functions != null) {
+					for(Function f:functions){
+						if (result instanceof DataObject) {
+							result = applyDataObjectFunctions(result, f, Helper.assertionToString(d.getAssert()));
+						} else if (result instanceof String) {
+							result = applyStringFunctions(result, f, Helper.assertionToString(d.getAssert()));
+						} else if (result instanceof Double) {
+							result = applyDoubleFunctions(result, f, Helper.assertionToString(d.getAssert()));
+						}
 					}
 				}
 

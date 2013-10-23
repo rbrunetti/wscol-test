@@ -2,6 +2,8 @@
  */
 package org.xtext.example.xpt.xpt;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -53,30 +55,20 @@ public interface Assertion extends EObject
   void setQuery(Query value);
 
   /**
-   * Returns the value of the '<em><b>Function</b></em>' containment reference.
+   * Returns the value of the '<em><b>Function</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.xpt.xpt.Function}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Function</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Function</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Function</em>' containment reference.
-   * @see #setFunction(Function)
+   * @return the value of the '<em>Function</em>' containment reference list.
    * @see org.xtext.example.xpt.xpt.XptPackage#getAssertion_Function()
    * @model containment="true"
    * @generated
    */
-  Function getFunction();
-
-  /**
-   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Function</em>' containment reference.
-   * @see #getFunction()
-   * @generated
-   */
-  void setFunction(Function value);
+  EList<Function> getFunction();
 
   /**
    * Returns the value of the '<em><b>Constant</b></em>' containment reference.

@@ -29,7 +29,7 @@ AssertionForm:
 	leftAssert=Assertion op=Rop rightAssert=Assertion | leftAssert=AssertionQuantifiedBoolean; // 2nd option for quantified assertion w/ boolean result, and so implicit
 
 Assertion:
-	query=Query ('.' function=Function)? | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';
+	query=Query ('.' function+=Function)* | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';
 
 AssertionQuantifiedBoolean returns AssertionQuantified:
 	quantifier=BoolQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')';

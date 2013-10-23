@@ -2,14 +2,21 @@
  */
 package org.xtext.example.xpt.xpt.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.Constant;
@@ -48,14 +55,14 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
   protected Query query;
 
   /**
-   * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
+   * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getFunction()
    * @generated
    * @ordered
    */
-  protected Function function;
+  protected EList<Function> function;
 
   /**
    * The cached value of the '{@link #getConstant() <em>Constant</em>}' containment reference.
@@ -171,47 +178,13 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
-  public Function getFunction()
+  public EList<Function> getFunction()
   {
+    if (function == null)
+    {
+      function = new EObjectContainmentEList<Function>(Function.class, this, XptPackage.ASSERTION__FUNCTION);
+    }
     return function;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetFunction(Function newFunction, NotificationChain msgs)
-  {
-    Function oldFunction = function;
-    function = newFunction;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__FUNCTION, oldFunction, newFunction);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setFunction(Function newFunction)
-  {
-    if (newFunction != function)
-    {
-      NotificationChain msgs = null;
-      if (function != null)
-        msgs = ((InternalEObject)function).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__FUNCTION, null, msgs);
-      if (newFunction != null)
-        msgs = ((InternalEObject)newFunction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__FUNCTION, null, msgs);
-      msgs = basicSetFunction(newFunction, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__FUNCTION, newFunction, newFunction));
   }
 
   /**
@@ -346,7 +319,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
       case XptPackage.ASSERTION__QUERY:
         return basicSetQuery(null, msgs);
       case XptPackage.ASSERTION__FUNCTION:
-        return basicSetFunction(null, msgs);
+        return ((InternalEList<?>)getFunction()).basicRemove(otherEnd, msgs);
       case XptPackage.ASSERTION__CONSTANT:
         return basicSetConstant(null, msgs);
       case XptPackage.ASSERTION__VALUES:
@@ -384,6 +357,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -393,7 +367,8 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         setQuery((Query)newValue);
         return;
       case XptPackage.ASSERTION__FUNCTION:
-        setFunction((Function)newValue);
+        getFunction().clear();
+        getFunction().addAll((Collection<? extends Function>)newValue);
         return;
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)newValue);
@@ -422,7 +397,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
         setQuery((Query)null);
         return;
       case XptPackage.ASSERTION__FUNCTION:
-        setFunction((Function)null);
+        getFunction().clear();
         return;
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)null);
@@ -450,7 +425,7 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
       case XptPackage.ASSERTION__QUERY:
         return query != null;
       case XptPackage.ASSERTION__FUNCTION:
-        return function != null;
+        return function != null && !function.isEmpty();
       case XptPackage.ASSERTION__CONSTANT:
         return constant != null;
       case XptPackage.ASSERTION__BOOLEAN:

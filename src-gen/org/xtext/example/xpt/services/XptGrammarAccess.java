@@ -267,6 +267,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cLeftAssertAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cLeftAssertAssertionQuantifiedBooleanParserRuleCall_1_0 = (RuleCall)cLeftAssertAssignment_1.eContents().get(0);
 		
+		//// 2nd option for quantified assertion w/ boolean result, and so implicit
 		//AssertionForm:
 		//	leftAssert=Assertion op=Rop rightAssert=Assertion | leftAssert=AssertionQuantifiedBoolean;
 		public ParserRule getRule() { return rule; }
@@ -324,15 +325,15 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//Assertion:
-		//	query=Query ("." function=Function)? | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | "["
+		//	query=Query ("." function+=Function)* | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | "["
 		//	values=Values "]";
 		public ParserRule getRule() { return rule; }
 
-		//query=Query ("." function=Function)? | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | "["
+		//query=Query ("." function+=Function)* | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | "["
 		//values=Values "]"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//query=Query ("." function=Function)?
+		//query=Query ("." function+=Function)*
 		public Group getGroup_0() { return cGroup_0; }
 
 		//query=Query
@@ -341,13 +342,13 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//Query
 		public RuleCall getQueryQueryParserRuleCall_0_0_0() { return cQueryQueryParserRuleCall_0_0_0; }
 
-		//("." function=Function)?
+		//("." function+=Function)*
 		public Group getGroup_0_1() { return cGroup_0_1; }
 
 		//"."
 		public Keyword getFullStopKeyword_0_1_0() { return cFullStopKeyword_0_1_0; }
 
-		//function=Function
+		//function+=Function
 		public Assignment getFunctionAssignment_0_1_1() { return cFunctionAssignment_0_1_1; }
 
 		//Function
@@ -1106,6 +1107,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssertionNotAccess().getRule();
 	}
 
+	//// 2nd option for quantified assertion w/ boolean result, and so implicit
 	//AssertionForm:
 	//	leftAssert=Assertion op=Rop rightAssert=Assertion | leftAssert=AssertionQuantifiedBoolean;
 	public AssertionFormElements getAssertionFormAccess() {
@@ -1117,7 +1119,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Assertion:
-	//	query=Query ("." function=Function)? | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | "["
+	//	query=Query ("." function+=Function)* | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | "["
 	//	values=Values "]";
 	public AssertionElements getAssertionAccess() {
 		return (pAssertion != null) ? pAssertion : (pAssertion = new AssertionElements());

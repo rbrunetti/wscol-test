@@ -3,6 +3,7 @@ package org.xtext.example.xpt.generator;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionAnd;
 import org.xtext.example.xpt.xpt.AssertionBraced;
@@ -14,6 +15,7 @@ import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
+import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
@@ -103,15 +105,18 @@ public class Helper {
 		} else {
 			res = String.valueOf(a.isBoolean());
 		}
-		if (a.getFunction() != null) {
-			String params = "";
-			if (a.getFunction().getParams() != null) {
-				for (Value v : a.getFunction().getParams().getValue()) {
-					params += ((v instanceof Constant) ? constantToString((Constant) v) : v.getVar()) + ", ";
+		EList<Function> functions = a.getFunction();
+		if (functions != null) {
+			for(Function f:functions){
+				String params = "";
+				if (f.getParams() != null) {
+					for (Value v : f.getParams().getValue()) {
+						params += ((v instanceof Constant) ? constantToString((Constant) v) : v.getVar()) + ", ";
+					}
+					params = params.substring(0, params.length() - 2);
 				}
-				params = params.substring(0, params.length() - 2);
+				res += '.' + f.getName() + '(' + params + ')';
 			}
-			res += '.' + a.getFunction().getName() + '(' + params + ')';
 		}
 		return res;
 	}

@@ -271,7 +271,7 @@ public interface XptPackage extends EPackage
   int ASSERTION__QUERY = 0;
 
   /**
-   * The feature id for the '<em><b>Function</b></em>' containment reference.
+   * The feature id for the '<em><b>Function</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -335,7 +335,7 @@ public interface XptPackage extends EPackage
   int ASSERTION_QUANTIFIED__QUERY = ASSERTION__QUERY;
 
   /**
-   * The feature id for the '<em><b>Function</b></em>' containment reference.
+   * The feature id for the '<em><b>Function</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -966,10 +966,10 @@ public interface XptPackage extends EPackage
   EReference getAssertion_Query();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Function</em>'.
+   * @return the meta object for the containment reference list '<em>Function</em>'.
    * @see org.xtext.example.xpt.xpt.Assertion#getFunction()
    * @see #getAssertion()
    * @generated
@@ -1558,7 +1558,7 @@ public interface XptPackage extends EPackage
     EReference ASSERTION__QUERY = eINSTANCE.getAssertion_Query();
 
     /**
-     * The meta object literal for the '<em><b>Function</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Function</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

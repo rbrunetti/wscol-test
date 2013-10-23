@@ -1,9 +1,5 @@
-let $a = /inventory/book[title!="Snow Crash"]/price[1];
-let $aa = 1;
-let $c = "i";
-let $b = /inventory/book;
-let $d = $b.replace($a,"S");
-$b.get("title") == $b.get(0);
+let $a = /inventory;
+exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1) == true);
 
 /*
 // Test for Afun (min, max, avg, etc...)

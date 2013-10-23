@@ -41,5 +41,5 @@
 	• Added the use of variables inside all the functions, even inside the attribute of a Step
 		• BUT without the possibility to use functions: no "/step[$a.length()]", only "/step[$a]" or "/step[property==$a]"
 		• values of the passed variable must be of the correct type (ex. 1 is a Double, "1" a String...no parsing from one to another)
- 	• 
+ 	• Function 'get' for DataObject: get the element of the DataObject using a numeric index or its key
 	•  

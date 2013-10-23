@@ -264,7 +264,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((query=Query function=Function?) | constant=Constant | boolean=BOOLEAN | values=Values)
+	 *     ((query=Query function+=Function*) | constant=Constant | boolean=BOOLEAN | values=Values)
 	 */
 	protected void sequence_Assertion(EObject context, Assertion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

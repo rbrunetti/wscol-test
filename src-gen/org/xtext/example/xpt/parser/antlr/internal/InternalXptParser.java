@@ -1419,7 +1419,7 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAssertion"
-    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:582:1: ruleAssertion returns [EObject current=null] : ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )? ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) ) ;
+    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:582:1: ruleAssertion returns [EObject current=null] : ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )* ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) ) ;
     public final EObject ruleAssertion() throws RecognitionException {
         EObject current = null;
 
@@ -1441,10 +1441,10 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:585:28: ( ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )? ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) ) )
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:1: ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )? ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:585:28: ( ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )* ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) ) )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:1: ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )* ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) )
             {
-            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:1: ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )? ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) )
+            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:1: ( ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )* ) | this_AssertionQuantifiedNumeric_3= ruleAssertionQuantifiedNumeric | ( (lv_constant_4_0= ruleConstant ) ) | ( (lv_boolean_5_0= RULE_BOOLEAN ) ) | (otherlv_6= '[' ( (lv_values_7_0= ruleValues ) ) otherlv_8= ']' ) )
             int alt8=5;
             switch ( input.LA(1) ) {
             case 18:
@@ -1489,10 +1489,10 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
 
             switch (alt8) {
                 case 1 :
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:2: ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )? )
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:2: ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )* )
                     {
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:2: ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )? )
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:3: ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )?
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:2: ( ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )* )
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:3: ( (lv_query_0_0= ruleQuery ) ) (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )*
                     {
                     // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:586:3: ( (lv_query_0_0= ruleQuery ) )
                     // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:587:1: (lv_query_0_0= ruleQuery )
@@ -1525,57 +1525,64 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:604:2: (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )?
-                    int alt7=2;
-                    int LA7_0 = input.LA(1);
+                    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:604:2: (otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) ) )*
+                    loop7:
+                    do {
+                        int alt7=2;
+                        int LA7_0 = input.LA(1);
 
-                    if ( (LA7_0==21) ) {
-                        alt7=1;
-                    }
-                    switch (alt7) {
-                        case 1 :
-                            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:604:4: otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) )
-                            {
-                            otherlv_1=(Token)match(input,21,FOLLOW_21_in_ruleAssertion1271); 
-
-                                	newLeafNode(otherlv_1, grammarAccess.getAssertionAccess().getFullStopKeyword_0_1_0());
-                                
-                            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:608:1: ( (lv_function_2_0= ruleFunction ) )
-                            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:609:1: (lv_function_2_0= ruleFunction )
-                            {
-                            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:609:1: (lv_function_2_0= ruleFunction )
-                            // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:610:3: lv_function_2_0= ruleFunction
-                            {
-                             
-                            	        newCompositeNode(grammarAccess.getAssertionAccess().getFunctionFunctionParserRuleCall_0_1_1_0()); 
-                            	    
-                            pushFollow(FOLLOW_ruleFunction_in_ruleAssertion1292);
-                            lv_function_2_0=ruleFunction();
-
-                            state._fsp--;
+                        if ( (LA7_0==21) ) {
+                            alt7=1;
+                        }
 
 
-                            	        if (current==null) {
-                            	            current = createModelElementForParent(grammarAccess.getAssertionRule());
-                            	        }
-                                   		set(
-                                   			current, 
-                                   			"function",
-                                    		lv_function_2_0, 
-                                    		"Function");
-                            	        afterParserOrEnumRuleCall();
-                            	    
+                        switch (alt7) {
+                    	case 1 :
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:604:4: otherlv_1= '.' ( (lv_function_2_0= ruleFunction ) )
+                    	    {
+                    	    otherlv_1=(Token)match(input,21,FOLLOW_21_in_ruleAssertion1271); 
 
-                            }
+                    	        	newLeafNode(otherlv_1, grammarAccess.getAssertionAccess().getFullStopKeyword_0_1_0());
+                    	        
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:608:1: ( (lv_function_2_0= ruleFunction ) )
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:609:1: (lv_function_2_0= ruleFunction )
+                    	    {
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:609:1: (lv_function_2_0= ruleFunction )
+                    	    // ../org.xtext.example.xpt/src-gen/org/xtext/example/xpt/parser/antlr/internal/InternalXpt.g:610:3: lv_function_2_0= ruleFunction
+                    	    {
+                    	     
+                    	    	        newCompositeNode(grammarAccess.getAssertionAccess().getFunctionFunctionParserRuleCall_0_1_1_0()); 
+                    	    	    
+                    	    pushFollow(FOLLOW_ruleFunction_in_ruleAssertion1292);
+                    	    lv_function_2_0=ruleFunction();
+
+                    	    state._fsp--;
 
 
-                            }
+                    	    	        if (current==null) {
+                    	    	            current = createModelElementForParent(grammarAccess.getAssertionRule());
+                    	    	        }
+                    	           		add(
+                    	           			current, 
+                    	           			"function",
+                    	            		lv_function_2_0, 
+                    	            		"Function");
+                    	    	        afterParserOrEnumRuleCall();
+                    	    	    
+
+                    	    }
 
 
-                            }
-                            break;
+                    	    }
 
-                    }
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop7;
+                        }
+                    } while (true);
 
 
                     }
@@ -4430,11 +4437,11 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
     static final String DFA5_eofS =
         "\61\uffff";
     static final String DFA5_minS =
-        "\1\4\1\uffff\1\4\2\uffff\2\5\12\23\1\5\1\33\1\27\1\5\6\6\1\23\12"+
-        "\27\1\5\12\27";
+        "\1\4\1\uffff\1\4\2\uffff\2\5\12\23\1\5\1\33\1\27\1\5\6\6\1\23\13"+
+        "\27\1\5\11\27";
     static final String DFA5_maxS =
-        "\1\51\1\uffff\1\51\2\uffff\1\5\1\50\13\51\1\40\1\27\1\50\7\51\12"+
-        "\27\1\50\12\27";
+        "\1\51\1\uffff\1\51\2\uffff\1\5\1\50\13\51\1\40\1\27\1\50\7\51\13"+
+        "\27\1\50\11\27";
     static final String DFA5_acceptS =
         "\1\uffff\1\1\1\uffff\1\3\1\2\54\uffff";
     static final String DFA5_specialS =
@@ -4463,12 +4470,12 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
             "\1\25\1\26\1\27\1\30\1\31\1\32",
             "\1\33",
             "\1\34\33\uffff\1\35\1\36\1\37\1\40\1\41\1\42\1\43\1\44",
-            "\1\47\1\45\41\uffff\1\46",
-            "\1\47\1\45\41\uffff\1\46",
-            "\1\47\42\uffff\1\46",
-            "\1\47\42\uffff\1\46",
-            "\1\47\42\uffff\1\46",
-            "\1\47\42\uffff\1\46",
+            "\1\46\1\45\41\uffff\1\47",
+            "\1\46\1\45\41\uffff\1\47",
+            "\1\46\42\uffff\1\47",
+            "\1\46\42\uffff\1\47",
+            "\1\46\42\uffff\1\47",
+            "\1\46\42\uffff\1\47",
             "\1\3\1\uffff\1\4\4\uffff\1\5\6\4\10\uffff\1\6",
             "\1\33",
             "\1\33",
@@ -4480,8 +4487,8 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
             "\1\33",
             "\1\33",
             "\1\33",
-            "\1\50\33\uffff\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60",
             "\1\33",
+            "\1\50\33\uffff\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60",
             "\1\33",
             "\1\33",
             "\1\33",
@@ -4535,17 +4542,17 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
     static final String DFA14_maxS =
         "\1\40\6\51\3\uffff";
     static final String DFA14_acceptS =
-        "\7\uffff\1\2\1\3\1\1";
+        "\7\uffff\1\3\1\1\1\2";
     static final String DFA14_specialS =
         "\12\uffff}>";
     static final String[] DFA14_transitionS = {
             "\1\1\1\2\1\3\1\4\1\5\1\6",
-            "\1\11\1\7\41\uffff\1\10",
-            "\1\11\1\7\41\uffff\1\10",
-            "\1\11\42\uffff\1\10",
-            "\1\11\42\uffff\1\10",
-            "\1\11\42\uffff\1\10",
-            "\1\11\42\uffff\1\10",
+            "\1\10\1\11\41\uffff\1\7",
+            "\1\10\1\11\41\uffff\1\7",
+            "\1\10\42\uffff\1\7",
+            "\1\10\42\uffff\1\7",
+            "\1\10\42\uffff\1\7",
+            "\1\10\42\uffff\1\7",
             "",
             "",
             ""
@@ -4635,7 +4642,7 @@ public class InternalXptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleAssertion1211 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQuery_in_ruleAssertion1258 = new BitSet(new long[]{0x0000000000200002L});
     public static final BitSet FOLLOW_21_in_ruleAssertion1271 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleFunction_in_ruleAssertion1292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunction_in_ruleAssertion1292 = new BitSet(new long[]{0x0000000000200002L});
     public static final BitSet FOLLOW_ruleAssertionQuantifiedNumeric_in_ruleAssertion1323 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleConstant_in_ruleAssertion1349 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_BOOLEAN_in_ruleAssertion1372 = new BitSet(new long[]{0x0000000000000002L});

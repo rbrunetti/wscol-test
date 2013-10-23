@@ -614,7 +614,7 @@ ruleAssertion returns [EObject current=null]
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAssertionRule());
 	        }
-       		set(
+       		add(
        			$current, 
        			"function",
         		lv_function_2_0, 
@@ -623,7 +623,7 @@ ruleAssertion returns [EObject current=null]
 	    }
 
 )
-))?)
+))*)
     |
     { 
         newCompositeNode(grammarAccess.getAssertionAccess().getAssertionQuantifiedNumericParserRuleCall_1()); 

@@ -31,8 +31,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Assertion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="#//Query"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" upperBound="-1"
+        eType="#//Function" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constant" eType="#//Constant"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
