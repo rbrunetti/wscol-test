@@ -1,9 +1,9 @@
 let $a = /inventory/book[title!="Snow Crash"]/price[1];
 let $aa = 1;
 let $c = "i";
-let $b = /inventory/book[3]/isbn;
+let $b = /inventory/book;
 let $d = $b.replace($a,"S");
-$d != "io";
+$b.get("title") == $b.get(0);
 
 /*
 // Test for Afun (min, max, avg, etc...)

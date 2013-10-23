@@ -2,9 +2,10 @@
     |    |     | |     \ |     |
     |    |_____| |_____/ |_____|
 
-	• Find and implement possible functions for DataObject variables
+ 	• Find and implement possible functions for DataObject variables: cardinality()
+ 		vuoto blocca se viene usato
 	• Make some junit tests based on assertions in 'queries.xpt' file
-	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java!
+	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! (-> how to organize it smartly?)
 	• (Partially done) Make runtime errors and static errors more uniform: similar error message, similar informations printed (-> add a function?)
 	• 
 	• 
@@ -12,10 +13,15 @@
  |     \ |     | |     | |_____]    |    |______
  |_____/ |_____| |_____| |_____]    |    ______|
  
- 	• Add complex assertions even in the declarations (changing actual rules cause left recursion...) => useful?
+ 
 	• Implicit 'true' even for functions (ex. $a.startsWith("..")) (lots of changing in rules...) => necessary?
-	• Attribute could not be defined on variables: $a[1] or $a[title="titolo"] => useful?
-	•
+		exists($p in $persons, $p.get("nome").startsWith($p.get("cognome").substring(0,1)))
+	• Attribute could not be defined on variables: $a[1] or $a[title="titolo"] => useful? ------> get() con sia numeri che stringhe per le chiavi
+		* il problema è che le chiavi nel dataobject sono tutte unite (/inven/book contiene 18 elementi) ---> vai a vedere il funzionamento di xpath con xml
+	• 
+	• Thesis text?
+	• DataObject/JSON/whatever input type?
+	• 
  _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
    |   |  |  | |_____] |      |______ |  |  | |______ | \  |    |    |______ |     \
  __|__ |  |  | |       |_____ |______ |  |  | |______ |  \_|    |    |______ |_____/

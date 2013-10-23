@@ -273,6 +273,21 @@ public class DataObject {
 	}
 	
 	/**
+	 * Returns the i-th element of the {@link DataObject}
+	 *  
+	 * @param index the i-th element to extract
+	 * @return the i-th element if present
+	 * @throws Exception if the index is out of bound
+	 */
+	public Object get(int index) throws Exception {
+		Object[] valuesArray = values().toArray();
+		if(index >= valuesArray.length){
+			throw new Exception("Index out of bound (index = " + index + ", actual size = " + valuesArray.length + ")");
+		}
+		return valuesArray[index];
+	}
+	
+	/**
 	 * Returns the size of the {@link DataObject} (the number of pairs key-value)
 	 */
 	public int size() {

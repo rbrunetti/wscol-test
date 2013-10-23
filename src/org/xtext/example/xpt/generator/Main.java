@@ -870,6 +870,16 @@ public class Main {
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
 			}
+		case "get":
+			if(params.size() == 1) {
+				if(params.get(0) instanceof String) {
+					return ((DataObject) object).get((String) params.get(0));
+				} else if(params.get(0) instanceof Double) {
+					return ((DataObject) object).get((int)(double)params.get(0));
+				}
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
+			}
 		default:
 			break;
 		}
