@@ -2,25 +2,26 @@
     |    |     | |     \ |     |
     |    |_____| |_____/ |_____|
 
- 	• Find and implement possible functions for DataObject variables: cardinality()
- 		vuoto blocca se viene usato
-	• Make some junit tests based on assertions in 'queries.xpt' file
+	• Implicit 'true' even for functions (ex. $a.startsWith("..")) (lots of changing in rules...)
+	• AssertionNot printed in console ("Assertion ... verified")
+	• 
+	• 
+	• Test the grammar
 	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! (-> how to organize it smartly?)
-	• (Partially done) Make runtime errors and static errors more uniform: similar error message, similar informations printed (-> add a function?)
+	• DataObject/JSON/whatever input type 
+		-> make just a json parser
+	• Thesis text
+		-> make the tutorial site than use it for the thesis 
+	• Tutorial Site & smart use cases
+	• 
 	• 
 	• 
  ______   _____  _     _ ______  _______ _______
  |     \ |     | |     | |_____]    |    |______
  |_____/ |_____| |_____| |_____]    |    ______|
- 
- 
-	• Implicit 'true' even for functions (ex. $a.startsWith("..")) (lots of changing in rules...) => necessary?
-		exists($p in $persons, $p.get("nome").startsWith($p.get("cognome").substring(0,1)))
-	• Attribute could not be defined on variables: $a[1] or $a[title="titolo"] => useful? ------> get() con sia numeri che stringhe per le chiavi
-		* il problema è che le chiavi nel dataobject sono tutte unite (/inven/book contiene 18 elementi) ---> vai a vedere il funzionamento di xpath con xml
+  
+	• Method 'evaluate' and the aggregation of all the results with the same key together (ex. /inv./book gives 18 elements, not 3!)
 	• 
-	• Thesis text?
-	• DataObject/JSON/whatever input type?
 	• 
  _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
    |   |  |  | |_____] |      |______ |  |  | |______ | \  |    |    |______ |     \
@@ -42,4 +43,10 @@
 		• BUT without the possibility to use functions: no "/step[$a.length()]", only "/step[$a]" or "/step[property==$a]"
 		• values of the passed variable must be of the correct type (ex. 1 is a Double, "1" a String...no parsing from one to another)
  	• Function 'get' for DataObject: get the element of the DataObject using a numeric index or its key
+ 		• BUT in cases in which many values are associated to the same key the process is stopped --> it's an improper use of 'get' => use common DataObject navigation with slashes
+ 		 	(ex. /inventory.get("book") gives three DataObjects, but with /inventory/book we get the same result in the correct way)  
+	• Function 'cardinality' for DataObject: get the number of elements contained in the DataObject (0, 1 or N). It's the unique function applicable to an empty object.
+		• only for the DataObjects because we it's the unique data type that could be empty (empty String or Double it's not possible, so the function is useless for them)   
+	•  
+	•  
 	•  

@@ -2,13 +2,24 @@
  */
 package org.xtext.example.xpt.xpt.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.xtext.example.xpt.xpt.Function;
+import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.XptPackage;
 
@@ -19,7 +30,8 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.ValueImpl#getVar <em>Var</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.ValueImpl#getQuery <em>Query</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.ValueImpl#getFunction <em>Function</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,24 +40,24 @@ import org.xtext.example.xpt.xpt.XptPackage;
 public class ValueImpl extends MinimalEObjectImpl.Container implements Value
 {
   /**
-   * The default value of the '{@link #getVar() <em>Var</em>}' attribute.
+   * The cached value of the '{@link #getQuery() <em>Query</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVar()
+   * @see #getQuery()
    * @generated
    * @ordered
    */
-  protected static final String VAR_EDEFAULT = null;
+  protected Query query;
 
   /**
-   * The cached value of the '{@link #getVar() <em>Var</em>}' attribute.
+   * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVar()
+   * @see #getFunction()
    * @generated
    * @ordered
    */
-  protected String var = VAR_EDEFAULT;
+  protected EList<Function> function;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,9 +85,9 @@ public class ValueImpl extends MinimalEObjectImpl.Container implements Value
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVar()
+  public Query getQuery()
   {
-    return var;
+    return query;
   }
 
   /**
@@ -83,12 +95,69 @@ public class ValueImpl extends MinimalEObjectImpl.Container implements Value
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVar(String newVar)
+  public NotificationChain basicSetQuery(Query newQuery, NotificationChain msgs)
   {
-    String oldVar = var;
-    var = newVar;
+    Query oldQuery = query;
+    query = newQuery;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.VALUE__VAR, oldVar, var));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.VALUE__QUERY, oldQuery, newQuery);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setQuery(Query newQuery)
+  {
+    if (newQuery != query)
+    {
+      NotificationChain msgs = null;
+      if (query != null)
+        msgs = ((InternalEObject)query).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.VALUE__QUERY, null, msgs);
+      if (newQuery != null)
+        msgs = ((InternalEObject)newQuery).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.VALUE__QUERY, null, msgs);
+      msgs = basicSetQuery(newQuery, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.VALUE__QUERY, newQuery, newQuery));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Function> getFunction()
+  {
+    if (function == null)
+    {
+      function = new EObjectContainmentEList<Function>(Function.class, this, XptPackage.VALUE__FUNCTION);
+    }
+    return function;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case XptPackage.VALUE__QUERY:
+        return basicSetQuery(null, msgs);
+      case XptPackage.VALUE__FUNCTION:
+        return ((InternalEList<?>)getFunction()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -101,8 +170,10 @@ public class ValueImpl extends MinimalEObjectImpl.Container implements Value
   {
     switch (featureID)
     {
-      case XptPackage.VALUE__VAR:
-        return getVar();
+      case XptPackage.VALUE__QUERY:
+        return getQuery();
+      case XptPackage.VALUE__FUNCTION:
+        return getFunction();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -112,13 +183,18 @@ public class ValueImpl extends MinimalEObjectImpl.Container implements Value
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case XptPackage.VALUE__VAR:
-        setVar((String)newValue);
+      case XptPackage.VALUE__QUERY:
+        setQuery((Query)newValue);
+        return;
+      case XptPackage.VALUE__FUNCTION:
+        getFunction().clear();
+        getFunction().addAll((Collection<? extends Function>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -134,8 +210,11 @@ public class ValueImpl extends MinimalEObjectImpl.Container implements Value
   {
     switch (featureID)
     {
-      case XptPackage.VALUE__VAR:
-        setVar(VAR_EDEFAULT);
+      case XptPackage.VALUE__QUERY:
+        setQuery((Query)null);
+        return;
+      case XptPackage.VALUE__FUNCTION:
+        getFunction().clear();
         return;
     }
     super.eUnset(featureID);
@@ -151,27 +230,12 @@ public class ValueImpl extends MinimalEObjectImpl.Container implements Value
   {
     switch (featureID)
     {
-      case XptPackage.VALUE__VAR:
-        return VAR_EDEFAULT == null ? var != null : !VAR_EDEFAULT.equals(var);
+      case XptPackage.VALUE__QUERY:
+        return query != null;
+      case XptPackage.VALUE__FUNCTION:
+        return function != null && !function.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (var: ");
-    result.append(var);
-    result.append(')');
-    return result.toString();
   }
 
 } //ValueImpl

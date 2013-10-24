@@ -65,7 +65,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Values/value"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Value">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Value/var"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/query"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/function"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Constant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/number"/>

@@ -105,15 +105,22 @@ public class Helper {
 		} else {
 			res = String.valueOf(a.isBoolean());
 		}
-		EList<Function> functions = a.getFunction();
+		res += functionsToString(a.getFunction());
+		return res;
+	}
+	
+	private static String functionsToString(EList<Function> functions) {
+		String res = "";
 		if (functions != null) {
 			for(Function f:functions){
 				String params = "";
 				if (f.getParams() != null) {
 					for (Value v : f.getParams().getValue()) {
-						params += ((v instanceof Constant) ? constantToString((Constant) v) : v.getVar()) + ", ";
+						params += ((v instanceof Constant) 
+								? constantToString((Constant) v) 
+								: (Helper.queryToString(v.getQuery()) + Helper.functionsToString(v.getFunction()))) + ", ";
 					}
-					params = params.substring(0, params.length() - 2);
+					params = params.substring(0, params.length() - 2); //delete the last ','
 				}
 				res += '.' + f.getName() + '(' + params + ')';
 			}
@@ -182,8 +189,8 @@ public class Helper {
 	private static List<Object> valuesToList(Values values) {
 		List<Object> result = new ArrayList<>();
 		for (Value c : values.getValue()) {
-			if (c.getVar() != null) {
-				result.add(c.getVar());
+			if (c.getQuery() != null) {
+				result.add(Helper.queryToString(c.getQuery()));
 			} else if (c instanceof Constant) {
 				if (((Constant) c).getString() != null) {
 					result.add(((Constant) c).getString());

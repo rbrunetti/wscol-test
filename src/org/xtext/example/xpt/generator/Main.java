@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -172,7 +173,8 @@ public class Main {
 	/**
 	 * Syntax error checking, with information about the error (an error message, the line number of the error and wrong token)
 	 * 
-	 * @param resource the result of the parsed rules
+	 * @param resource
+	 *            the result of the parsed rules
 	 * @return <code>true</code> if there is errors, <code>false</code> otherwise
 	 */
 	private boolean syntaxErrors(Resource resource) {
@@ -238,10 +240,11 @@ public class Main {
 	/**
 	 * Syntax errors checking with the validator of the grammar
 	 * 
-	 * @param resource the result of the parsed rules
+	 * @param resource
+	 *            the result of the parsed rules
 	 * @return <code>true</code> if there is errors, <code>false</code> otherwise
 	 */
-	//TODO valuta se eliminabile
+	// TODO valuta se eliminabile
 	@SuppressWarnings("unused")
 	private boolean checkSyntaxErrorValidator(Resource resource) {
 		// validate the resource
@@ -264,9 +267,11 @@ public class Main {
 	/**
 	 * Method for the evaluation of the {@link Assertions}, considering the operation (NOT, AND, OR) and the corresponding priority (NOT>AND>OR)
 	 * 
-	 * @param assertions the list of {@link Assertions} to evaluate
+	 * @param assertions
+	 *            the list of {@link Assertions} to evaluate
 	 * @return <code>true</code> if the {@link Assertions} are respected, <code>false</code> otherwise
-	 * @throws Exception if there are exception (caused by runtime errors) from the single {@link Assertions}
+	 * @throws Exception
+	 *             if there are exception (caused by runtime errors) from the single {@link Assertions}
 	 */
 	public boolean verifyAssertions(Assertions assertions) throws Exception {
 		EList<EObject> a = assertions.eContents();
@@ -289,14 +294,19 @@ public class Main {
 	/**
 	 * Check an {@link AssertionForm}, in its various forms
 	 * 
-	 * @param af the {@link AssertionForm} to check
-	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise 
-	 * @throws Exception if there is data types conflicts, specifying the cause of the error and the erroneous values 
-	 * @throws Exception if there is a generic runtime error, specified with a proper message
+	 * @param af
+	 *            the {@link AssertionForm} to check
+	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
+	 * @throws Exception
+	 *             if there is data types conflicts, specifying the cause of the error and the erroneous values
+	 * @throws Exception
+	 *             if there is a generic runtime error, specified with a proper message
 	 */
 	private boolean verifyAssertionForm(AssertionForm af) throws Exception {
 		Object laObj, raObj;
 		String operation;
+
+		String assertionRepr = Helper.assertionFormToString(af);
 
 		laObj = doQueries(af.getLeftAssert());
 
@@ -308,8 +318,6 @@ public class Main {
 			operation = af.getOp(); // get Op for using it for the comparisons
 			raObj = doQueries(af.getRightAssert());
 		}
-
-		String assertionRepr = Helper.assertionFormToString(af);
 
 		// check the objects class and evaluate the corresponding assertion
 		if (laObj instanceof Double && raObj instanceof Double) {
@@ -333,12 +341,17 @@ public class Main {
 	/**
 	 * Method for the evaluation of numeric {@link AssertionForm}
 	 * 
-	 * @param left the result of the left part of the {@link AssertionForm}
-	 * @param right the result of the right part of the {@link AssertionForm}
-	 * @param operation a {@link String} containing the operation to evaluate
-	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @param left
+	 *            the result of the left part of the {@link AssertionForm}
+	 * @param right
+	 *            the result of the right part of the {@link AssertionForm}
+	 * @param operation
+	 *            a {@link String} containing the operation to evaluate
+	 * @param condition
+	 *            a {@link String} representation of the {@link AssertionForm}
 	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
-	 * @throws Exception if the operation is not supported
+	 * @throws Exception
+	 *             if the operation is not supported
 	 */
 	private boolean numericAssertion(double left, double right, String operation, String condition) throws Exception {
 		boolean result;
@@ -404,12 +417,17 @@ public class Main {
 	/**
 	 * Method for the evaluation of string {@link AssertionForm}
 	 * 
-	 * @param left the result of the left part of the {@link AssertionForm}
-	 * @param right the result of the right part of the {@link AssertionForm}
-	 * @param operation a {@link String} containing the operation to evaluate
-	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @param left
+	 *            the result of the left part of the {@link AssertionForm}
+	 * @param right
+	 *            the result of the right part of the {@link AssertionForm}
+	 * @param operation
+	 *            a {@link String} containing the operation to evaluate
+	 * @param condition
+	 *            a {@link String} representation of the {@link AssertionForm}
 	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
-	 * @throws Exception if the operation is not supported
+	 * @throws Exception
+	 *             if the operation is not supported
 	 */
 	private boolean stringAssertion(String left, String right, String operation, String condition) throws Exception {
 		boolean result;
@@ -447,12 +465,17 @@ public class Main {
 	/**
 	 * Method for the evaluation of boolean {@link AssertionForm}
 	 * 
-	 * @param left the result of the left part of the {@link AssertionForm}
-	 * @param right the result of the right part of the {@link AssertionForm}
-	 * @param operation a {@link String} containing the operation to evaluate
-	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @param left
+	 *            the result of the left part of the {@link AssertionForm}
+	 * @param right
+	 *            the result of the right part of the {@link AssertionForm}
+	 * @param operation
+	 *            a {@link String} containing the operation to evaluate
+	 * @param condition
+	 *            a {@link String} representation of the {@link AssertionForm}
 	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
-	 * @throws Exception if the operation is not supported
+	 * @throws Exception
+	 *             if the operation is not supported
 	 */
 	private boolean booleanAssertion(boolean left, boolean right, String operation, String condition) throws Exception {
 		boolean result;
@@ -482,12 +505,17 @@ public class Main {
 	/**
 	 * Method for the evaluation of DataObject {@link AssertionForm}
 	 * 
-	 * @param left the result of the left part of the {@link AssertionForm}
-	 * @param right the result of the right part of the {@link AssertionForm}
-	 * @param operation a {@link String} containing the operation to evaluate
-	 * @param condition a {@link String} representation of the {@link AssertionForm}
+	 * @param left
+	 *            the result of the left part of the {@link AssertionForm}
+	 * @param right
+	 *            the result of the right part of the {@link AssertionForm}
+	 * @param operation
+	 *            a {@link String} containing the operation to evaluate
+	 * @param condition
+	 *            a {@link String} representation of the {@link AssertionForm}
 	 * @return <code>true</code> if the {@link AssertionForm} is verified, <code>false</code> otherwise
-	 * @throws Exception if the operation is not supported
+	 * @throws Exception
+	 *             if the operation is not supported
 	 */
 	private boolean dataobjectAssertion(DataObject left, DataObject right, String operation, String condition) throws Exception {
 		boolean result;
@@ -525,13 +553,17 @@ public class Main {
 	/**
 	 * Returns the result of a single {@link Assertion}, considering also the applied functions
 	 * 
-	 * @param assertion the {@link Assertion} to evaluate
+	 * @param assertion
+	 *            the {@link Assertion} to evaluate
 	 * @return an {@link Object} corresponding to the result of the evaluation
-	 * @throws Exception if is used an undefined variable for the {@link Assertion} specification 
-	 * @throws Exception if the evaluation goes wrong, the cause will be specified with a message
+	 * @throws Exception
+	 *             if is used an undefined variable for the {@link Assertion} specification
+	 * @throws Exception
+	 *             if the evaluation goes wrong, the cause will be specified with a message
 	 */
 	private Object doQueries(Assertion assertion) throws Exception {
-
+		String assertionRepr = " [token: '" + Helper.assertionToString(assertion) + "']";
+		
 		if (assertion instanceof AssertionQuantified) {
 			return doAssertionQuantified(assertion);
 		}
@@ -543,50 +575,69 @@ public class Main {
 		}
 		// look if there's a placeholder, if any substitute it with its values (note: the placeholder is always on the first step!)
 		if (assertion.getQuery() != null) {
-			String placeholder = assertion.getQuery().getSteps().get(0).getPlaceholder();
-
-			if (placeholder != null) {
-				if (!variables.containsKey(placeholder)) {
-					throw new Exception("Variable '" + placeholder + "' is not defined [token: '" + Helper.assertionToString(assertion) + "']");
-				}
-				Object value = variables.get(placeholder);
-				if (value instanceof DataObject) {
-					if (assertion.getQuery().getSteps().size() > 1) { // if there query goes deeper
-						result = ((DataObject) value).evaluate(assertion.getQuery());
-						if (((DataObject) result).isSingleValue()) {
-							result = ((DataObject) result).getFirstValue();
-						}
-					} else {
-						if (((DataObject) value).isSingleValue()) {
-							result = ((DataObject) value).getFirstValue();
-						} else {
-							result = value;
-						}
-					}
-				} else {
-					result = value;
-				}
-			} else {
-				result = input.evaluate(assertion.getQuery());
-				// if the DataObject is containing a single value it will be extrapolated from the Object
-				if (((DataObject) result).isSingleValue()) {
-					result = ((DataObject) result).getFirstValue();
-				}
+			try {
+				result = resolveQuery(assertion.getQuery());
+			} catch (Exception e) {
+				throw new Exception(e.getMessage() + assertionRepr);
 			}
 		} else {
 			result = assertion.isBoolean();
 		}
 
 		// functions evaluation, according to the corresponding type
-		EList<Function> functions = assertion.getFunction();
+		try {
+			result = applyFunctions(result, assertion.getFunction());
+		} catch (Exception e) {
+			throw new Exception(e.getMessage() + assertionRepr);
+		}
+
+		return result;
+	}
+
+	private Object resolveQuery(Query q) throws Exception {
+		Object result;
+		String placeholder = q.getSteps().get(0).getPlaceholder();
+
+		if (placeholder != null) {
+			if (!variables.containsKey(placeholder)) {
+				throw new Exception("Variable '" + placeholder + "' is not defined");
+			}
+			Object value = variables.get(placeholder);
+			if (value instanceof DataObject) {
+				if (q.getSteps().size() > 1) { // if there query goes deeper
+					result = ((DataObject) value).evaluate(q);
+					if (((DataObject) result).isSingleValue()) {
+						result = ((DataObject) result).getFirstValue();
+					}
+				} else {
+					if (((DataObject) value).isSingleValue()) {
+						result = ((DataObject) value).getFirstValue();
+					} else {
+						result = value;
+					}
+				}
+			} else {
+				result = value;
+			}
+		} else {
+			result = input.evaluate(q);
+			// if the DataObject is containing a single value it will be extrapolated from the Object
+			if (((DataObject) result).isSingleValue()) {
+				result = ((DataObject) result).getFirstValue();
+			}
+		}
+		return result;
+	}
+
+	private Object applyFunctions(Object result, List<Function> functions) throws Exception {
 		if (functions != null) {
 			for (Function f : functions) {
 				if (result instanceof DataObject) {
-					result = applyDataObjectFunctions(result, f, Helper.assertionToString(assertion));
+					result = applyDataObjectFunctions(result, f);
 				} else if (result instanceof String) {
-					result = applyStringFunctions(result, f, Helper.assertionToString(assertion));
+					result = applyStringFunctions(result, f);
 				} else if (result instanceof Double) {
-					result = applyDoubleFunctions(result, f, Helper.assertionToString(assertion));
+					result = applyDoubleFunctions(result, f);
 				}
 			}
 		}
@@ -594,16 +645,19 @@ public class Main {
 	}
 
 	/**
-	 * Returns the result of an {@link AssertionQuantified}.
-	 * {@link AssertionQuantified} are of two types: {@link AssertionQuantifiedNumericElements} if the result is of type {@link Double}
-	 *  and {@link AssertionQuantifiedBooleanElements} if the result is of type {@link Boolean}
+	 * Returns the result of an {@link AssertionQuantified}. {@link AssertionQuantified} are of two types: {@link AssertionQuantifiedNumericElements} if the result is of type {@link Double} and {@link AssertionQuantifiedBooleanElements} if the result is of type {@link Boolean}
 	 * 
-	 * @param assertion the {@link AssertionQuantified} to evaluate
+	 * @param assertion
+	 *            the {@link AssertionQuantified} to evaluate
 	 * @return a boolean if the assertion is a {@link AssertionQuantifiedBooleanElements}, otherwise a double in the case of {@link AssertionQuantifiedNumericElements}
-	 * @throws Exception if the selected variable is not of {@link DataObject} type
-	 * @throws Exception if the chosen variable alias is already used
-	 * @throws Exception if the variable is not defined
-	 * @throws Exception if the variable is not of the correct type regarding to the quantifier
+	 * @throws Exception
+	 *             if the selected variable is not of {@link DataObject} type
+	 * @throws Exception
+	 *             if the chosen variable alias is already used
+	 * @throws Exception
+	 *             if the variable is not defined
+	 * @throws Exception
+	 *             if the variable is not of the correct type regarding to the quantifier
 	 */
 	private Object doAssertionQuantified(Assertion assertion) throws Exception {
 		AssertionQuantified aq = (AssertionQuantified) assertion;
@@ -742,175 +796,188 @@ public class Main {
 	/**
 	 * List of functions for the String results from an {@link Assertion} evaluation
 	 * 
-	 * @param object the String the elaborate
-	 * @param function the {@link Function} to apply
+	 * @param object
+	 *            the String the elaborate
+	 * @param function
+	 *            the {@link Function} to apply
 	 * @return the result of the function
-	 * @throws Exception if the number of parameter is wrong, according to the function, and prints out the expected number
-	 * @throws Exception if the type of parameter is wrong, according to the function, and prints out the value and the expected type
+	 * @throws Exception
+	 *             if the number of parameter is wrong, according to the function, and prints out the expected number
+	 * @throws Exception
+	 *             if the type of parameter is wrong, according to the function, and prints out the value and the expected type
 	 */
-	private Object applyStringFunctions(Object object, Function function, String assertionRep) throws Exception {
-		List<Object> params = getFunctionParams(function, assertionRep);
+	private Object applyStringFunctions(Object object, Function function) throws Exception {
+		List<Object> params = getFunctionParams(function);
 		switch (function.getName()) {
 		case "uppercase":
 			if (params == null) {
 				return ((String) object).toUpperCase();
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
 		case "length":
 			if (params == null) {
 				return (double) ((String) object).length();
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
 		case "startsWith":
 			if (params != null && params.size() == 1) {
 				if (params.get(0) instanceof String) {
 					return ((String) object).startsWith((String) params.get(0));
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string) [token: '" + assertionRep + "']");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string)");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
 			}
 		case "endsWith":
 			if (params != null && params.size() == 1) {
 				if (params.get(0) instanceof String) {
 					return ((String) object).endsWith((String) params.get(0));
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string) [token: '" + assertionRep + "']");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " instead of a string)");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
 			}
 		case "substring":
 			if (params != null && params.size() == 2) {
 				if (params.get(0) instanceof Double && params.get(1) instanceof Double) {
 					int beginIndex, endIndex;
 					if (Math.rint((double) params.get(0)) == (double) params.get(0)) {
-						beginIndex = (int) ((double)params.get(0));
+						beginIndex = (int) ((double) params.get(0));
 					} else {
-						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type Int. [token: '" + assertionRep + "']");
+						throw new Exception("The first parameter in function '" + function.getName() + "' is not of type Int.");
 					}
 					if (Math.rint((double) params.get(1)) == (double) params.get(1)) {
-						endIndex = (int) ((double)params.get(1));
+						endIndex = (int) ((double) params.get(1));
 					} else {
-						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type Int. [token: '" + assertionRep + "']");
+						throw new Exception("The second parameter in function '" + function.getName() + "' is not of type Int.");
 					}
 					return ((String) object).substring(beginIndex, endIndex);
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two numbers) [token: '" + assertionRep + "']");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two numbers)");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		case "replace":
 			if (params != null && params.size() == 2) {
 				if (params.get(0) instanceof String && params.get(1) instanceof String) {
-					return ((String) object).replace((String)params.get(0), (String)params.get(1));
+					return ((String) object).replace((String) params.get(0), (String) params.get(1));
 				} else {
-					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two String) [token: '" + assertionRep + "']");
+					throw new Exception("Wrong type of parameter (" + params.get(0).getClass().getSimpleName() + " and " + params.get(1).getClass().getSimpleName() + " instead of two String)");
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		default:
-			return null;
+			//return null;
+			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
 		}
 	}
 
 	/**
 	 * List of functions for the numeric results from an {@link Assertion} evaluation
 	 * 
-	 * @param object the number (type {@link Double}) the elaborate
-	 * @param function the {@link Function} to apply
+	 * @param object
+	 *            the number (type {@link Double}) the elaborate
+	 * @param function
+	 *            the {@link Function} to apply
 	 * @return the result of the function
-	 * @throws Exception if the number of parameter is wrong, according to the function, and prints out the expected number
+	 * @throws Exception
+	 *             if the number of parameter is wrong, according to the function, and prints out the expected number
 	 */
-	private Object applyDoubleFunctions(Object object, Function function, String assertionRep) throws Exception {
-		List<Object> params = getFunctionParams(function, assertionRep);
+	private Object applyDoubleFunctions(Object object, Function function) throws Exception {
+		List<Object> params = getFunctionParams(function);
 		switch (function.getName()) {
 		case "abs":
 			if (params == null) {
 				return Math.abs((double) object);
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		case "length":
 			if (params == null) {
 				return (double) String.valueOf((double) object).length();
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
 		default:
-			return null;
+			//return null;
+			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
 		}
 	}
 
 	/**
 	 * List of functions for the {@link DataObject} results from an {@link Assertion} evaluation
 	 * 
-	 * @param object the {@link DataObject} the elaborate
-	 * @param function the {@link Function} to apply
+	 * @param object
+	 *            the {@link DataObject} the elaborate
+	 * @param function
+	 *            the {@link Function} to apply
 	 * @return the result of the function
-	 * @throws Exception if the number of parameter is wrong, according to the function, and prints out the expected number
+	 * @throws Exception
+	 *             if the number of parameter is wrong, according to the function, and prints out the expected number
 	 */
 	// TODO add other functions
-	private Object applyDataObjectFunctions(Object object, Function function, String assertionRep) throws Exception {
-		List<Object> params = getFunctionParams(function, assertionRep);
+	private Object applyDataObjectFunctions(Object object, Function function) throws Exception {
+		List<Object> params = getFunctionParams(function);
 		switch (function.getName()) {
 		case "contains":
-			if(((DataObject)object).isEmpty()) {
-				throw new Exception("Function '" + function.getName() + "' could not be applied because the DataObject is empty [token: '" + assertionRep + "']"); 
+			if (((DataObject) object).isEmpty()) {
+				throw new Exception("Function '" + function.getName() + "' could not be applied because the DataObject is empty");
 			}
 			if (params.size() == 1) {
 				return ((DataObject) object).contains(params.get(0));
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
 			}
 		case "get":
-			if(((DataObject)object).isEmpty()) {
-				throw new Exception("Function '" + function.getName() + "' could not be applied because the DataObject is empty [token: '" + assertionRep + "']"); 
+			if (((DataObject) object).isEmpty()) {
+				throw new Exception("Function '" + function.getName() + "' could not be applied because the DataObject is empty");
 			}
-			if(params.size() == 1) {
-				if(params.get(0) instanceof String) {
-					return ((DataObject) object).get((String) params.get(0));
-				} else if(params.get(0) instanceof Double) {
-					return ((DataObject) object).get((int)(double)params.get(0));
+			if (params.size() == 1) {
+				if (params.get(0) instanceof String) {
+					Set<Object> results = ((DataObject) object).get((String) params.get(0));
+					if (results.size() != 1) { // TODO da rivedere...
+						throw new Exception("Improper use of 'get' function, you should use the slash navigation instead.");
+					}
+					return results.iterator().next();
+				} else if (params.get(0) instanceof Double) {
+					return ((DataObject) object).get((int) (double) params.get(0));
 				}
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
 			}
 		case "cardinality":
-			if(params == null) {
+			if (params == null) {
 				return ((DataObject) object).size();
 			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0) [token: '" + assertionRep + "']");
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
 		default:
-			break;
+			//return null;
+			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
 		}
-		return null;
 	}
 
 	/**
-	 * Given the function extract the parameters (resolving the ones related to a variable) and returns a 
-	 * list of value (of different type: {@link String}, {@link Double}, {@link Boolean} or {@link DataObject})
+	 * Given the function extract the parameters (resolving the ones related to a variable) and returns a list of value (of different type: {@link String}, {@link Double}, {@link Boolean} or {@link DataObject})
 	 * 
-	 * @param function the {@link Function} to elaborate
+	 * @param function
+	 *            the {@link Function} to elaborate
 	 * @return the list of value
-	 * @throws Exception if the variable (if present) it's not defined
+	 * @throws Exception
+	 *             if the variable (if present) it's not defined
 	 */
-	private List<Object> getFunctionParams(Function function, String assertionRep) throws Exception {
+	private List<Object> getFunctionParams(Function function) throws Exception {
 		if (function.getParams() != null) {
 			List<Object> params = new ArrayList<Object>();
 			for (Value v : function.getParams().getValue()) {
-				if (v.getVar() != null) {
-					if (variables.containsKey(v.getVar())) {
-						params.add(variables.get(v.getVar()));
-					} else {
-						throw new Exception("Variable '" + v.getVar() + "' is not defined [token: '" + assertionRep + "']");
-					}
+				if (v.getQuery() != null) {
+					params.add(applyFunctions(resolveQuery(v.getQuery()), v.getFunction()));
 				} else if (v instanceof Constant) {
 					if (((Constant) v).getString() != null) {
 						params.add(((Constant) v).getString());
@@ -928,15 +995,18 @@ public class Main {
 	}
 
 	/**
-	 * Set variables according to the {@link Declaration}.
-	 * Evaluates the query, resolves the variables, translate {@link Values} into {@link DataObject}, extract correct value from a {@link Constant} and assigns the values to a key with the specified name
-	 * The values are extracted and saved as simple type ({@link String}, {@link Double} and {@link Boolean}) if the results of an evaluation is a {@link DataObject} with a single value. Otherwise as a {@link DataObject}.  
+	 * Set variables according to the {@link Declaration}. Evaluates the query, resolves the variables, translate {@link Values} into {@link DataObject}, extract correct value from a {@link Constant} and assigns the values to a key with the specified name The values are extracted and saved as simple type ({@link String}, {@link Double} and {@link Boolean}) if the results of an evaluation is a {@link DataObject} with a single value. Otherwise as a {@link DataObject}.
 	 * 
-	 * @param declarations the list of {@link Declaration} rules parsed
-	 * @throws Exception if the variable is already in use
-	 * @throws Exception if a variable, used inside a declaration and on which that is based, is not defined 
-	 * @throws Exception if the evaluation goes wrong, the cause will be specified 
-	 * @throws Exception if the evaluation gives back an empty result
+	 * @param declarations
+	 *            the list of {@link Declaration} rules parsed
+	 * @throws Exception
+	 *             if the variable is already in use
+	 * @throws Exception
+	 *             if a variable, used inside a declaration and on which that is based, is not defined
+	 * @throws Exception
+	 *             if the evaluation goes wrong, the cause will be specified
+	 * @throws Exception
+	 *             if the evaluation gives back an empty result
 	 */
 	private void setVariable(EObjectContainmentEList<Declaration> declarations) throws Exception {
 		Object result = null;
@@ -955,11 +1025,11 @@ public class Main {
 			} else if (d.getAssert().getValues() != null) {
 				List<Object> values = new ArrayList<Object>();
 				for (Value v : d.getAssert().getValues().getValue()) {
-					if (v.getVar() != null) {
-						if (variables.containsKey(v.getVar())) {
-							values.add(variables.get(v.getVar()));
-						} else {
-							throw new Exception("Variable '" + v.getVar() + "' is not defined [token: '" + assertionRep + "']");
+					if (v.getQuery() != null) {
+						try {
+							values.add(applyFunctions(resolveQuery(v.getQuery()), v.getFunction()));
+						} catch (Exception e) {
+							throw new Exception(e.getMessage() + " [token: '" + assertionRep + "']");
 						}
 					} else if (v instanceof Constant) {
 						if (((Constant) v).getString() != null) {
@@ -973,61 +1043,12 @@ public class Main {
 				}
 				result = new DataObject(d.getVar(), values);
 			} else if (d.getAssert().getQuery() != null) {
-				String placeholder = d.getAssert().getQuery().getSteps().get(0).getPlaceholder();
-
-				if (placeholder != null) {
-					if (!variables.containsKey(placeholder)) {
-						throw new Exception("Variable '" + placeholder + "' is not defined [token: '" + assertionRep + "']");
-					}
-
-					Object value = variables.get(placeholder);
-					if (value instanceof DataObject) {
-						if (d.getAssert().getQuery().getSteps().size() > 1) { // if there query goes deeper
-							try {
-								result = ((DataObject) value).evaluate(d.getAssert().getQuery());
-							} catch (Exception e) {
-								throw new Exception("Unable to evaluate the declaration. Please check it [token: '" + assertionRep + "']\n" + " CAUSE: " + e.getMessage());
-							}
-							// if the DataObject is containing a single value, only that single value is stored as variable
-							if (((DataObject) result).isSingleValue()) {
-								result = ((DataObject) result).getFirstValue();
-							}
-						} else {
-							// if (((DataObject) value).isSingleValue()) {
-							// result = ((DataObject) value).getFirst();
-							// } else {
-							result = value;
-							// }
-						}
-					} else {
-						result = value;
-					}
-				} else {
-					try {
-						result = input.evaluate(d.getAssert().getQuery());
-					} catch (Exception e) {
-						throw new Exception("Unable to evaluate the declaration. Please check it [token: '" + assertionRep + "']\n" + " CAUSE: " + e.getMessage());
-					}
-					if (((DataObject) result).isSingleValue()) {
-						result = ((DataObject) result).getFirstValue();
-//					} else if(((DataObject)result).isEmpty()) { // if the result is empty
-//						throw new Exception("The declaration gives empty result. Please check it [token: '" + assertionRep + "']");
-//						//TODO alternativamente il problema viene segnalato e la variabile non viene dichiarata, se verrà usata successivamente scatterà l'eccezione in quanto non definita
-					}
-				}
-
-				// *** FUNCTIONS ***
-				EList<Function> functions = d.getAssert().getFunction();
-				if (functions != null) {
-					for(Function f:functions){
-						if (result instanceof DataObject) {
-							result = applyDataObjectFunctions(result, f, Helper.assertionToString(d.getAssert()));
-						} else if (result instanceof String) {
-							result = applyStringFunctions(result, f, Helper.assertionToString(d.getAssert()));
-						} else if (result instanceof Double) {
-							result = applyDoubleFunctions(result, f, Helper.assertionToString(d.getAssert()));
-						}
-					}
+				try {
+					result = resolveQuery(d.getAssert().getQuery());
+					// *** FUNCTIONS ***
+					result = applyFunctions(result, d.getAssert().getFunction());
+				} catch (Exception e) {
+					throw new Exception(e.getMessage() + " [token: '" + assertionRep + "']");
 				}
 
 			} else if (d.getAssert() instanceof AssertionQuantified) {
@@ -1041,48 +1062,49 @@ public class Main {
 		}
 		return;
 	}
-	
-//	private void throwError(String msg, Object element) throws Exception{
-//		String prefix = "RUNTIME ERROR: ";
-//		String location = "";
-//		
-//		if(element instanceof Assertions){
-//			location = Helper.assertionsToString((Assertions) element);
-//		} else if(element instanceof AssertionQuantified) {
-//			location = Helper.assertionQuantifiedToString((AssertionQuantified) element);
-//		} else if(element instanceof AssertionForm) {
-//			location = Helper.assertionFormToString((AssertionForm) element);
-//		} else if(element instanceof Assertion) {
-//			location = Helper.assertionToString((Assertion) element);
-//		}
-//		msg = msg.replace("#", "[" + location + "]");
-//		throw new Exception(prefix + msg);
-//	}
-//	
-//	private void throwError(String msg, Object element, Object leftResult, Object rightResult) throws Exception{
-//		String left = "\n Left assertion ['" + Helper.assertionToString(((AssertionForm) element).getLeftAssert()) + "'] = ";
-//		String right = "\n Right assertion ['" + Helper.assertionToString(((AssertionForm) element).getRightAssert()) + "'] = ";
-//		if (leftResult instanceof DataObject && ((DataObject) leftResult).isEmpty()) {
-//			left += "EMPTY!";
-//		} else {
-//			left += leftResult + " (Class: " + leftResult.getClass().getSimpleName() + ")";
-//		}
-//		if (rightResult instanceof DataObject && ((DataObject) rightResult).isEmpty()) {
-//			right += "EMPTY!";
-//		} else {
-//			right += rightResult + " (Class: " + rightResult.getClass().getSimpleName() + ")";
-//		}
-//		throwError(msg + left + right, element);
-//	}
-	
+
+	// private void throwError(String msg, Object element) throws Exception{
+	// String prefix = "RUNTIME ERROR: ";
+	// String location = "";
+	//
+	// if(element instanceof Assertions){
+	// location = Helper.assertionsToString((Assertions) element);
+	// } else if(element instanceof AssertionQuantified) {
+	// location = Helper.assertionQuantifiedToString((AssertionQuantified) element);
+	// } else if(element instanceof AssertionForm) {
+	// location = Helper.assertionFormToString((AssertionForm) element);
+	// } else if(element instanceof Assertion) {
+	// location = Helper.assertionToString((Assertion) element);
+	// }
+	// msg = msg.replace("#", "[" + location + "]");
+	// throw new Exception(prefix + msg);
+	// }
+	//
+	// private void throwError(String msg, Object element, Object leftResult, Object rightResult) throws Exception{
+	// String left = "\n Left assertion ['" + Helper.assertionToString(((AssertionForm) element).getLeftAssert()) + "'] = ";
+	// String right = "\n Right assertion ['" + Helper.assertionToString(((AssertionForm) element).getRightAssert()) + "'] = ";
+	// if (leftResult instanceof DataObject && ((DataObject) leftResult).isEmpty()) {
+	// left += "EMPTY!";
+	// } else {
+	// left += leftResult + " (Class: " + leftResult.getClass().getSimpleName() + ")";
+	// }
+	// if (rightResult instanceof DataObject && ((DataObject) rightResult).isEmpty()) {
+	// right += "EMPTY!";
+	// } else {
+	// right += rightResult + " (Class: " + rightResult.getClass().getSimpleName() + ")";
+	// }
+	// throwError(msg + left + right, element);
+	// }
+
 	/**
 	 * Returns the value corresponding to the passed key
 	 * 
-	 * @param key the name (and the key) of the variable to retrieve
+	 * @param key
+	 *            the name (and the key) of the variable to retrieve
 	 * @return the corresponding value if the key is found, null otherwise
 	 * @see Map#get(Object)
 	 */
-	//TODO da tenere?
+	// TODO da tenere?
 	public static Object getVariable(String key) {
 		return variables.get(key);
 	}

@@ -923,24 +923,44 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Value");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Assignment cVarAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final RuleCall cVarVariableParserRuleCall_1_0 = (RuleCall)cVarAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Assignment cQueryAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cQueryQueryParserRuleCall_1_0_0 = (RuleCall)cQueryAssignment_1_0.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cFunctionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cFunctionFunctionParserRuleCall_1_1_1_0 = (RuleCall)cFunctionAssignment_1_1_1.eContents().get(0);
 		
 		//Value:
-		//	Constant | var=Variable;
+		//	Constant | query=Query ("." function+=Function)*;
 		public ParserRule getRule() { return rule; }
 
-		//Constant | var=Variable
+		//Constant | query=Query ("." function+=Function)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Constant
 		public RuleCall getConstantParserRuleCall_0() { return cConstantParserRuleCall_0; }
 
-		//var=Variable
-		public Assignment getVarAssignment_1() { return cVarAssignment_1; }
+		//query=Query ("." function+=Function)*
+		public Group getGroup_1() { return cGroup_1; }
 
-		//Variable
-		public RuleCall getVarVariableParserRuleCall_1_0() { return cVarVariableParserRuleCall_1_0; }
+		//query=Query
+		public Assignment getQueryAssignment_1_0() { return cQueryAssignment_1_0; }
+
+		//Query
+		public RuleCall getQueryQueryParserRuleCall_1_0_0() { return cQueryQueryParserRuleCall_1_0_0; }
+
+		//("." function+=Function)*
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_1_1_0() { return cFullStopKeyword_1_1_0; }
+
+		//function+=Function
+		public Assignment getFunctionAssignment_1_1_1() { return cFunctionAssignment_1_1_1; }
+
+		//Function
+		public RuleCall getFunctionFunctionParserRuleCall_1_1_1_0() { return cFunctionFunctionParserRuleCall_1_1_1_0; }
 	}
 
 	public class ConstantElements extends AbstractParserRuleElementFinder {
@@ -1251,7 +1271,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Value:
-	//	Constant | var=Variable;
+	//	Constant | query=Query ("." function+=Function)*;
 	public ValueElements getValueAccess() {
 		return (pValue != null) ? pValue : (pValue = new ValueElements());
 	}
@@ -1271,7 +1291,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal BOOLEAN returns ecore::EBoolean:
-	//	"true" | "false";
+	//	"true" | "false" | "TRUE" | "FALSE";
 	public TerminalRule getBOOLEANRule() {
 		return (tBOOLEAN != null) ? tBOOLEAN : (tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOLEAN"));
 	} 

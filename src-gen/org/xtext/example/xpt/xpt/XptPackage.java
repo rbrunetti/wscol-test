@@ -647,13 +647,22 @@ public interface XptPackage extends EPackage
   int VALUE = 13;
 
   /**
-   * The feature id for the '<em><b>Var</b></em>' attribute.
+   * The feature id for the '<em><b>Query</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VALUE__VAR = 0;
+  int VALUE__QUERY = 0;
+
+  /**
+   * The feature id for the '<em><b>Function</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE__FUNCTION = 1;
 
   /**
    * The number of structural features of the '<em>Value</em>' class.
@@ -662,7 +671,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VALUE_FEATURE_COUNT = 1;
+  int VALUE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.
@@ -675,13 +684,22 @@ public interface XptPackage extends EPackage
   int CONSTANT = 14;
 
   /**
-   * The feature id for the '<em><b>Var</b></em>' attribute.
+   * The feature id for the '<em><b>Query</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONSTANT__VAR = VALUE__VAR;
+  int CONSTANT__QUERY = VALUE__QUERY;
+
+  /**
+   * The feature id for the '<em><b>Function</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTANT__FUNCTION = VALUE__FUNCTION;
 
   /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -1278,15 +1296,26 @@ public interface XptPackage extends EPackage
   EClass getValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Value#getVar <em>Var</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Value#getQuery <em>Query</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Var</em>'.
-   * @see org.xtext.example.xpt.xpt.Value#getVar()
+   * @return the meta object for the containment reference '<em>Query</em>'.
+   * @see org.xtext.example.xpt.xpt.Value#getQuery()
    * @see #getValue()
    * @generated
    */
-  EAttribute getValue_Var();
+  EReference getValue_Query();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Value#getFunction <em>Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Function</em>'.
+   * @see org.xtext.example.xpt.xpt.Value#getFunction()
+   * @see #getValue()
+   * @generated
+   */
+  EReference getValue_Function();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
@@ -1804,12 +1833,20 @@ public interface XptPackage extends EPackage
     EClass VALUE = eINSTANCE.getValue();
 
     /**
-     * The meta object literal for the '<em><b>Var</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Query</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VALUE__VAR = eINSTANCE.getValue_Var();
+    EReference VALUE__QUERY = eINSTANCE.getValue_Query();
+
+    /**
+     * The meta object literal for the '<em><b>Function</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VALUE__FUNCTION = eINSTANCE.getValue_Function();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.

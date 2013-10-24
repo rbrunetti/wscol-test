@@ -1662,25 +1662,47 @@ ruleValue returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
-    |(
+    |((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getValueAccess().getVarVariableParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getValueAccess().getQueryQueryParserRuleCall_1_0_0()); 
 	    }
-		lv_var_1_0=ruleVariable		{
+		lv_query_1_0=ruleQuery		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getValueRule());
 	        }
        		set(
        			$current, 
-       			"var",
-        		lv_var_1_0, 
-        		"Variable");
+       			"query",
+        		lv_query_1_0, 
+        		"Query");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))
+)(	otherlv_2='.' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getValueAccess().getFullStopKeyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getValueAccess().getFunctionFunctionParserRuleCall_1_1_1_0()); 
+	    }
+		lv_function_3_0=ruleFunction		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getValueRule());
+	        }
+       		add(
+       			$current, 
+       			"function",
+        		lv_function_3_0, 
+        		"Function");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*))
 ;
 
 
@@ -1745,7 +1767,7 @@ ruleConstant returns [EObject current=null]
 
 
 
-RULE_BOOLEAN : ('true'|'false');
+RULE_BOOLEAN : ('true'|'false'|'TRUE'|'FALSE');
 
 RULE_NUMBER : '-'? ('0'..'9')* ('.' ('0'..'9')+)?;
 

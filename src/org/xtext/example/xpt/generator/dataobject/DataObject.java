@@ -79,8 +79,10 @@ public class DataObject {
 	public DataObject evaluate(Query query) throws Exception {
 		DataObject current = new DataObject(data);
 		for (Step s : query.getSteps()) {
-			current = getSubmap(current, s.getName(), s.getAttribute());
-			if (current == null) {
+			if(s.getPlaceholder() == null) {
+				current = getSubmap(current, s.getName(), s.getAttribute());
+			}
+			if (current == null) {//TODO a cosa serve?
 				return null;
 			}
 		}
@@ -270,6 +272,7 @@ public class DataObject {
 	 */
 	public Set<Object> get(String property) {
 		return data.get(property);
+		
 	}
 	
 	/**

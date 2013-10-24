@@ -1,6 +1,12 @@
 let $a = /inventory;
-exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1) == true);
+let $b = $a/book;
+exists($book in $a, $book/title.startsWith($book/publisher.substring(0,1)) == true) && !($a/book[1].contains($a/book[3]/author) == TRUE) || $b == 1;
 
+/*
+// Get and functions cascade testing
+let $a = /inventory;
+exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1)) == true) && $a/book/title[1].length() >= 1;
+*/
 /*
 // Test for Afun (min, max, avg, etc...)
 

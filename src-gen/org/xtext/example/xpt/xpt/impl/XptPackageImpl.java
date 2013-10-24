@@ -684,9 +684,19 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getValue_Var()
+  public EReference getValue_Query()
   {
-    return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
+    return (EReference)valueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getValue_Function()
+  {
+    return (EReference)valueEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -868,7 +878,8 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     createEReference(valuesEClass, VALUES__VALUE);
 
     valueEClass = createEClass(VALUE);
-    createEAttribute(valueEClass, VALUE__VAR);
+    createEReference(valueEClass, VALUE__QUERY);
+    createEReference(valueEClass, VALUE__FUNCTION);
 
     constantEClass = createEClass(CONSTANT);
     createEAttribute(constantEClass, CONSTANT__NUMBER);
@@ -980,7 +991,8 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     initEReference(getValues_Value(), this.getValue(), null, "value", null, 0, -1, Values.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getValue_Var(), ecorePackage.getEString(), "var", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getValue_Query(), this.getQuery(), null, "query", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getValue_Function(), this.getFunction(), null, "function", null, 0, -1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getConstant_Number(), ecorePackage.getEDouble(), "number", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

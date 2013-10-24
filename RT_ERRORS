@@ -17,7 +17,7 @@ Check:
 	• Variable not defined when evaluating an Assertion based on it [setVariable()] 
 	• Key not found in DataObject [-> DataObject]
 	• Index out of bound in attributes evaluation [-> DataObject]    
-	• Empty DataObject stops execution (different from 'key not found' and 'out of bound') [-> DataObject]
+	• Empty DataObject stops execution when they try to use it (different from 'key not found' and 'out of bound') [-> DataObject]
 	• 
 	• 
 	• 
