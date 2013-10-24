@@ -105,6 +105,11 @@ public class XptAdapterFactory extends AdapterFactoryImpl
         return createAssertionFormAdapter();
       }
       @Override
+      public Adapter caseAssertionStdCmp(AssertionStdCmp object)
+      {
+        return createAssertionStdCmpAdapter();
+      }
+      @Override
       public Adapter caseAssertion(Assertion object)
       {
         return createAssertionAdapter();
@@ -113,11 +118,6 @@ public class XptAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAssertionQuantified(AssertionQuantified object)
       {
         return createAssertionQuantifiedAdapter();
-      }
-      @Override
-      public Adapter caseQuery(Query object)
-      {
-        return createQueryAdapter();
       }
       @Override
       public Adapter caseStep(Step object)
@@ -272,6 +272,21 @@ public class XptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.AssertionStdCmp <em>Assertion Std Cmp</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.xpt.xpt.AssertionStdCmp
+   * @generated
+   */
+  public Adapter createAssertionStdCmpAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Assertion <em>Assertion</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -297,21 +312,6 @@ public class XptAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAssertionQuantifiedAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.xpt.xpt.Query <em>Query</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.example.xpt.xpt.Query
-   * @generated
-   */
-  public Adapter createQueryAdapter()
   {
     return null;
   }

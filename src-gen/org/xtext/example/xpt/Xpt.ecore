@@ -21,34 +21,30 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="innerFormula" eType="#//Assertions"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssertionForm" eSuperTypes="#//Assertions">
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionForm" eSuperTypes="#//Assertions"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionStdCmp" eSuperTypes="#//AssertionForm">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftAssert" eType="#//Assertion"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightAssert" eType="#//Assertion"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Assertion">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="#//Query"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" upperBound="-1"
+  <eClassifiers xsi:type="ecore:EClass" name="Assertion" eSuperTypes="#//AssertionForm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//Step" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
         eType="#//Function" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constant" eType="#//Constant"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" eType="#//Values"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constant" eType="#//Constant"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssertionQuantified" eSuperTypes="#//Assertion">
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionQuantified" eSuperTypes="#//AssertionForm #//Assertion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="var" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" eType="#//Assertions"
         containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Query">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
-        eType="#//Step" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Step">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -75,9 +71,9 @@
         eType="#//Value" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Value">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="query" eType="#//Query"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//Step" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
         eType="#//Function" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Value">

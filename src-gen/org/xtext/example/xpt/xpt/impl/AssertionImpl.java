@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -21,7 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Function;
-import org.xtext.example.xpt.xpt.Query;
+import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Values;
 import org.xtext.example.xpt.xpt.XptPackage;
 
@@ -32,67 +31,36 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getQuery <em>Query</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getFunction <em>Function</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getConstant <em>Constant</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#isBoolean <em>Boolean</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getSteps <em>Steps</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getFunctions <em>Functions</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getConstant <em>Constant</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AssertionImpl extends MinimalEObjectImpl.Container implements Assertion
+public class AssertionImpl extends AssertionFormImpl implements Assertion
 {
   /**
-   * The cached value of the '{@link #getQuery() <em>Query</em>}' containment reference.
+   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getQuery()
+   * @see #getSteps()
    * @generated
    * @ordered
    */
-  protected Query query;
+  protected EList<Step> steps;
 
   /**
-   * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference list.
+   * The cached value of the '{@link #getFunctions() <em>Functions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFunction()
+   * @see #getFunctions()
    * @generated
    * @ordered
    */
-  protected EList<Function> function;
-
-  /**
-   * The cached value of the '{@link #getConstant() <em>Constant</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getConstant()
-   * @generated
-   * @ordered
-   */
-  protected Constant constant;
-
-  /**
-   * The default value of the '{@link #isBoolean() <em>Boolean</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isBoolean()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean BOOLEAN_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isBoolean() <em>Boolean</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isBoolean()
-   * @generated
-   * @ordered
-   */
-  protected boolean boolean_ = BOOLEAN_EDEFAULT;
+  protected EList<Function> functions;
 
   /**
    * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference.
@@ -103,6 +71,16 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * @ordered
    */
   protected Values values;
+
+  /**
+   * The cached value of the '{@link #getConstant() <em>Constant</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getConstant()
+   * @generated
+   * @ordered
+   */
+  protected Constant constant;
 
   /**
    * <!-- begin-user-doc -->
@@ -130,26 +108,13 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
-  public Query getQuery()
+  public EList<Step> getSteps()
   {
-    return query;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetQuery(Query newQuery, NotificationChain msgs)
-  {
-    Query oldQuery = query;
-    query = newQuery;
-    if (eNotificationRequired())
+    if (steps == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__QUERY, oldQuery, newQuery);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      steps = new EObjectContainmentEList<Step>(Step.class, this, XptPackage.ASSERTION__STEPS);
     }
-    return msgs;
+    return steps;
   }
 
   /**
@@ -157,105 +122,13 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setQuery(Query newQuery)
+  public EList<Function> getFunctions()
   {
-    if (newQuery != query)
+    if (functions == null)
     {
-      NotificationChain msgs = null;
-      if (query != null)
-        msgs = ((InternalEObject)query).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__QUERY, null, msgs);
-      if (newQuery != null)
-        msgs = ((InternalEObject)newQuery).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__QUERY, null, msgs);
-      msgs = basicSetQuery(newQuery, msgs);
-      if (msgs != null) msgs.dispatch();
+      functions = new EObjectContainmentEList<Function>(Function.class, this, XptPackage.ASSERTION__FUNCTIONS);
     }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__QUERY, newQuery, newQuery));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Function> getFunction()
-  {
-    if (function == null)
-    {
-      function = new EObjectContainmentEList<Function>(Function.class, this, XptPackage.ASSERTION__FUNCTION);
-    }
-    return function;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Constant getConstant()
-  {
-    return constant;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetConstant(Constant newConstant, NotificationChain msgs)
-  {
-    Constant oldConstant = constant;
-    constant = newConstant;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__CONSTANT, oldConstant, newConstant);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setConstant(Constant newConstant)
-  {
-    if (newConstant != constant)
-    {
-      NotificationChain msgs = null;
-      if (constant != null)
-        msgs = ((InternalEObject)constant).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__CONSTANT, null, msgs);
-      if (newConstant != null)
-        msgs = ((InternalEObject)newConstant).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__CONSTANT, null, msgs);
-      msgs = basicSetConstant(newConstant, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__CONSTANT, newConstant, newConstant));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isBoolean()
-  {
-    return boolean_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setBoolean(boolean newBoolean)
-  {
-    boolean oldBoolean = boolean_;
-    boolean_ = newBoolean;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__BOOLEAN, oldBoolean, boolean_));
+    return functions;
   }
 
   /**
@@ -311,19 +184,67 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
    * <!-- end-user-doc -->
    * @generated
    */
+  public Constant getConstant()
+  {
+    return constant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetConstant(Constant newConstant, NotificationChain msgs)
+  {
+    Constant oldConstant = constant;
+    constant = newConstant;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__CONSTANT, oldConstant, newConstant);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setConstant(Constant newConstant)
+  {
+    if (newConstant != constant)
+    {
+      NotificationChain msgs = null;
+      if (constant != null)
+        msgs = ((InternalEObject)constant).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__CONSTANT, null, msgs);
+      if (newConstant != null)
+        msgs = ((InternalEObject)newConstant).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION__CONSTANT, null, msgs);
+      msgs = basicSetConstant(newConstant, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__CONSTANT, newConstant, newConstant));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION__QUERY:
-        return basicSetQuery(null, msgs);
-      case XptPackage.ASSERTION__FUNCTION:
-        return ((InternalEList<?>)getFunction()).basicRemove(otherEnd, msgs);
-      case XptPackage.ASSERTION__CONSTANT:
-        return basicSetConstant(null, msgs);
+      case XptPackage.ASSERTION__STEPS:
+        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
+      case XptPackage.ASSERTION__FUNCTIONS:
+        return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
       case XptPackage.ASSERTION__VALUES:
         return basicSetValues(null, msgs);
+      case XptPackage.ASSERTION__CONSTANT:
+        return basicSetConstant(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -338,16 +259,14 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION__QUERY:
-        return getQuery();
-      case XptPackage.ASSERTION__FUNCTION:
-        return getFunction();
-      case XptPackage.ASSERTION__CONSTANT:
-        return getConstant();
-      case XptPackage.ASSERTION__BOOLEAN:
-        return isBoolean();
+      case XptPackage.ASSERTION__STEPS:
+        return getSteps();
+      case XptPackage.ASSERTION__FUNCTIONS:
+        return getFunctions();
       case XptPackage.ASSERTION__VALUES:
         return getValues();
+      case XptPackage.ASSERTION__CONSTANT:
+        return getConstant();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -363,21 +282,19 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION__QUERY:
-        setQuery((Query)newValue);
+      case XptPackage.ASSERTION__STEPS:
+        getSteps().clear();
+        getSteps().addAll((Collection<? extends Step>)newValue);
         return;
-      case XptPackage.ASSERTION__FUNCTION:
-        getFunction().clear();
-        getFunction().addAll((Collection<? extends Function>)newValue);
-        return;
-      case XptPackage.ASSERTION__CONSTANT:
-        setConstant((Constant)newValue);
-        return;
-      case XptPackage.ASSERTION__BOOLEAN:
-        setBoolean((Boolean)newValue);
+      case XptPackage.ASSERTION__FUNCTIONS:
+        getFunctions().clear();
+        getFunctions().addAll((Collection<? extends Function>)newValue);
         return;
       case XptPackage.ASSERTION__VALUES:
         setValues((Values)newValue);
+        return;
+      case XptPackage.ASSERTION__CONSTANT:
+        setConstant((Constant)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -393,20 +310,17 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION__QUERY:
-        setQuery((Query)null);
+      case XptPackage.ASSERTION__STEPS:
+        getSteps().clear();
         return;
-      case XptPackage.ASSERTION__FUNCTION:
-        getFunction().clear();
-        return;
-      case XptPackage.ASSERTION__CONSTANT:
-        setConstant((Constant)null);
-        return;
-      case XptPackage.ASSERTION__BOOLEAN:
-        setBoolean(BOOLEAN_EDEFAULT);
+      case XptPackage.ASSERTION__FUNCTIONS:
+        getFunctions().clear();
         return;
       case XptPackage.ASSERTION__VALUES:
         setValues((Values)null);
+        return;
+      case XptPackage.ASSERTION__CONSTANT:
+        setConstant((Constant)null);
         return;
     }
     super.eUnset(featureID);
@@ -422,35 +336,16 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
   {
     switch (featureID)
     {
-      case XptPackage.ASSERTION__QUERY:
-        return query != null;
-      case XptPackage.ASSERTION__FUNCTION:
-        return function != null && !function.isEmpty();
-      case XptPackage.ASSERTION__CONSTANT:
-        return constant != null;
-      case XptPackage.ASSERTION__BOOLEAN:
-        return boolean_ != BOOLEAN_EDEFAULT;
+      case XptPackage.ASSERTION__STEPS:
+        return steps != null && !steps.isEmpty();
+      case XptPackage.ASSERTION__FUNCTIONS:
+        return functions != null && !functions.isEmpty();
       case XptPackage.ASSERTION__VALUES:
         return values != null;
+      case XptPackage.ASSERTION__CONSTANT:
+        return constant != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (boolean: ");
-    result.append(boolean_);
-    result.append(')');
-    return result.toString();
   }
 
 } //AssertionImpl

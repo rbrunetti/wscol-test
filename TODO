@@ -2,14 +2,11 @@
     |    |     | |     \ |     |
     |    |_____| |_____/ |_____|
 
-	• Implicit 'true' even for functions (ex. $a.startsWith("..")) (lots of changing in rules...)
-	• AssertionNot printed in console ("Assertion ... verified")
-	• 
+	• DataObject/JSON/whatever input type 
+		-> make just a json parser 
 	• 
 	• Test the grammar
 	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! (-> how to organize it smartly?)
-	• DataObject/JSON/whatever input type 
-		-> make just a json parser
 	• Thesis text
 		-> make the tutorial site than use it for the thesis 
 	• Tutorial Site & smart use cases
@@ -47,6 +44,6 @@
  		 	(ex. /inventory.get("book") gives three DataObjects, but with /inventory/book we get the same result in the correct way)  
 	• Function 'cardinality' for DataObject: get the number of elements contained in the DataObject (0, 1 or N). It's the unique function applicable to an empty object.
 		• only for the DataObjects because we it's the unique data type that could be empty (empty String or Double it's not possible, so the function is useless for them)   
-	•  
+	• Implicit 'true' even for functions (startsWith, endsWith, contains)
 	•  
 	•  

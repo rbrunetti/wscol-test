@@ -1,3 +1,6 @@
+/*******************************************************************************
+ * INSERT CAPTION
+ *******************************************************************************/
 grammar org.xtext.example.xpt.Xpt with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
@@ -6,54 +9,85 @@ generate xpt "http://www.xtext.org/example/xpt/Xpt"
 Model:
 	declarations+=Declaration*
 	assertionSet=AssertionOr ';';
-
+	
+// Assign to the variable a value (a String, Double, Boolean or SDO)
 Declaration:
 	'let' var=Variable '=' assert=(Assertion | AssertionQuantifiedBoolean) ';';
 
+// Assertion results in logical operation OR
 AssertionOr returns Assertions:
 	AssertionAnd ({AssertionOr.left=current} '||' right=AssertionAnd)*;
 
+// Assertion results in logical operation AND
 AssertionAnd returns Assertions:
-	HighProrityAssertion ({AssertionAnd.left=current} '&&' right=HighProrityAssertion)*;
+	AssertionHP ({AssertionAnd.left=current} '&&' right=AssertionHP)*;
 
-HighProrityAssertion returns Assertions:
+// Assertion results in logical operation with highest priority (NOT and parentheses)
+AssertionHP returns Assertions:
 	AssertionNot | AssertionBraced | AssertionForm;
 
+// Assertion with parentheses
 AssertionBraced:
 	'(' innerFormula=AssertionOr ')';
 
+// Assertion with logical operator NOT
 AssertionNot:
 	'!' '(' innerFormula=AssertionOr ')';
 
+// Kinds of Assertion: with comparison and without (2nd and 3rd case are for boolean comparison and their result is implicitly 'true')
 AssertionForm:
-	leftAssert=Assertion op=Rop rightAssert=Assertion | leftAssert=AssertionQuantifiedBoolean; // 2nd option for quantified assertion w/ boolean result, and so implicit
+	AssertionStdCmp | AssertionQuantifiedBoolean | AssertionBoolean;
 
+// Assertions making a standard comparison between values
+AssertionStdCmp:
+	leftAssert=Assertion op=Rop rightAssert=Assertion;
+
+// Assertion
 Assertion:
-	query=Query ('.' function+=Function)* | AssertionQuantifiedNumeric | constant=Constant | boolean=BOOLEAN | '[' values=Values ']';
+	steps+=Step+ ('.' functions+=Function)* | AssertionQuantifiedNumeric | '[' values=Values ']' | constant=Constant;
 
+// Assertion with boolean result
+AssertionBoolean returns Assertion:
+	steps+=Step+ ('.' functions+=FunctionBoolean)*;
+
+// Assertion with quantifiers for boolean results
 AssertionQuantifiedBoolean returns AssertionQuantified:
 	quantifier=BoolQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')';
 
+// Assertion with quantifiers for numeric results
 AssertionQuantifiedNumeric returns AssertionQuantified:
 	quantifier=NumbQuantifier '(' alias=Variable 'in' var=Variable ',' conditions=AssertionOr ')';
 
-Query:
-	'(' steps+=Step+ ')' | steps+=Step+;
-
+// Steps describing the navigation path through an SDO
 Step:
 	'/' name=ID ('[' attribute=Attribute ']')? | placeholder=Variable;
 
+// Attribute for SDO navigation: according to the operation checks the searched value, if possible
 Attribute:
 	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER | var=Variable;
 
-StringRop:
-	'==' | "!=";
-
-Rop:
-	StringRop | '<' | '<=' | '>' | '>=';
-
+// Function
 Function:
 	name=ID '(' (params=Values)? ')';
+
+// Function that gives boolean result
+FunctionBoolean returns Function:
+	name=('contains'|'startsWith'|'endsWith') '(' (params=Values)? ')';
+
+// List of values
+Values:
+	value+=Value (',' value+=Value)*;
+
+// Value could be a constant (alphanumeric or numeric) or obtained by an SDO's property
+Value:
+	Constant | steps+=Step+ ('.' functions+=Function)*;
+
+Constant:
+	number=NUMBER | string=STRING;
+
+// Variable (NumbQuantifier is added for give the possibility to use 'max', 'min', etc. as variables name)
+Variable:
+	'$' (ID | NumbQuantifier);
 
 BoolQuantifier:
 	'forall' | 'exists';
@@ -61,17 +95,13 @@ BoolQuantifier:
 NumbQuantifier:
 	'numOf' | 'sum' | 'avg' | 'min' | 'max' | 'product';
 
-Variable:
-	'$' (ID | BoolQuantifier | NumbQuantifier);
+// Relational Operation for Strings
+StringRop:
+	'==' | "!=";
 
-Values:
-	value+=Value (',' value+=Value)*;
-
-Value:
-	Constant | query=Query ('.' function+=Function)*;
-
-Constant:
-	number=NUMBER | string=STRING;
+// Relational Operation
+Rop:
+	StringRop | '<' | '<=' | '>' | '>=';
 
 terminal BOOLEAN returns ecore::EBoolean:
 	'true' | 'false' | 'TRUE' | 'FALSE';

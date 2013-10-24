@@ -1,6 +1,7 @@
-let $a = /inventory;
-let $b = $a/book;
-exists($book in $a, $book/title.startsWith($book/publisher.substring(0,1)) == true) && !($a/book[1].contains($a/book[3]/author) == TRUE) || $b == 1;
+let $a = /inventory/book/title;
+let $c = /inventory/book;
+let $d = $c/author;
+numOf($cc in $d, $cc.length() > 0) > 1 || exists($aaa in $a, $aaa.startsWith("Z")) || forall($aa in $a, !($aa.startsWith("Z"))) || $c.contains("2005");
 
 /*
 // Get and functions cascade testing

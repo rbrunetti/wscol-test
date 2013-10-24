@@ -77,6 +77,15 @@ public interface XptFactory extends EFactory
   AssertionForm createAssertionForm();
 
   /**
+   * Returns a new object of class '<em>Assertion Std Cmp</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assertion Std Cmp</em>'.
+   * @generated
+   */
+  AssertionStdCmp createAssertionStdCmp();
+
+  /**
    * Returns a new object of class '<em>Assertion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -93,15 +102,6 @@ public interface XptFactory extends EFactory
    * @generated
    */
   AssertionQuantified createAssertionQuantified();
-
-  /**
-   * Returns a new object of class '<em>Query</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Query</em>'.
-   * @generated
-   */
-  Query createQuery();
 
   /**
    * Returns a new object of class '<em>Step</em>'.

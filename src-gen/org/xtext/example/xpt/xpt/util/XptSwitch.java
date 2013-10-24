@@ -117,10 +117,21 @@ public class XptSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XptPackage.ASSERTION_STD_CMP:
+      {
+        AssertionStdCmp assertionStdCmp = (AssertionStdCmp)theEObject;
+        T result = caseAssertionStdCmp(assertionStdCmp);
+        if (result == null) result = caseAssertionForm(assertionStdCmp);
+        if (result == null) result = caseAssertions(assertionStdCmp);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XptPackage.ASSERTION:
       {
         Assertion assertion = (Assertion)theEObject;
         T result = caseAssertion(assertion);
+        if (result == null) result = caseAssertionForm(assertion);
+        if (result == null) result = caseAssertions(assertion);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -129,13 +140,8 @@ public class XptSwitch<T> extends Switch<T>
         AssertionQuantified assertionQuantified = (AssertionQuantified)theEObject;
         T result = caseAssertionQuantified(assertionQuantified);
         if (result == null) result = caseAssertion(assertionQuantified);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case XptPackage.QUERY:
-      {
-        Query query = (Query)theEObject;
-        T result = caseQuery(query);
+        if (result == null) result = caseAssertionForm(assertionQuantified);
+        if (result == null) result = caseAssertions(assertionQuantified);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -299,6 +305,22 @@ public class XptSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Assertion Std Cmp</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assertion Std Cmp</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssertionStdCmp(AssertionStdCmp object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Assertion</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -326,22 +348,6 @@ public class XptSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAssertionQuantified(AssertionQuantified object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Query</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Query</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseQuery(Query object)
   {
     return null;
   }

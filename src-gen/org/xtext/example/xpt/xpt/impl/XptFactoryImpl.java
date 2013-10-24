@@ -70,9 +70,9 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.ASSERTION_BRACED: return createAssertionBraced();
       case XptPackage.ASSERTION_NOT: return createAssertionNot();
       case XptPackage.ASSERTION_FORM: return createAssertionForm();
+      case XptPackage.ASSERTION_STD_CMP: return createAssertionStdCmp();
       case XptPackage.ASSERTION: return createAssertion();
       case XptPackage.ASSERTION_QUANTIFIED: return createAssertionQuantified();
-      case XptPackage.QUERY: return createQuery();
       case XptPackage.STEP: return createStep();
       case XptPackage.ATTRIBUTE: return createAttribute();
       case XptPackage.FUNCTION: return createFunction();
@@ -157,6 +157,17 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public AssertionStdCmp createAssertionStdCmp()
+  {
+    AssertionStdCmpImpl assertionStdCmp = new AssertionStdCmpImpl();
+    return assertionStdCmp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Assertion createAssertion()
   {
     AssertionImpl assertion = new AssertionImpl();
@@ -172,17 +183,6 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
   {
     AssertionQuantifiedImpl assertionQuantified = new AssertionQuantifiedImpl();
     return assertionQuantified;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Query createQuery()
-  {
-    QueryImpl query = new QueryImpl();
-    return query;
   }
 
   /**

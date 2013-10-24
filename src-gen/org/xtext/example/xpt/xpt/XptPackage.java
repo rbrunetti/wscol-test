@@ -216,13 +216,32 @@ public interface XptPackage extends EPackage
   int ASSERTION_FORM = 5;
 
   /**
+   * The number of structural features of the '<em>Assertion Form</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_FORM_FEATURE_COUNT = ASSERTIONS_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionStdCmpImpl <em>Assertion Std Cmp</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.AssertionStdCmpImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionStdCmp()
+   * @generated
+   */
+  int ASSERTION_STD_CMP = 6;
+
+  /**
    * The feature id for the '<em><b>Left Assert</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM__LEFT_ASSERT = ASSERTIONS_FEATURE_COUNT + 0;
+  int ASSERTION_STD_CMP__LEFT_ASSERT = ASSERTION_FORM_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -231,7 +250,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM__OP = ASSERTIONS_FEATURE_COUNT + 1;
+  int ASSERTION_STD_CMP__OP = ASSERTION_FORM_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Right Assert</b></em>' containment reference.
@@ -240,16 +259,16 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM__RIGHT_ASSERT = ASSERTIONS_FEATURE_COUNT + 2;
+  int ASSERTION_STD_CMP__RIGHT_ASSERT = ASSERTION_FORM_FEATURE_COUNT + 2;
 
   /**
-   * The number of structural features of the '<em>Assertion Form</em>' class.
+   * The number of structural features of the '<em>Assertion Std Cmp</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_FORM_FEATURE_COUNT = ASSERTIONS_FEATURE_COUNT + 3;
+  int ASSERTION_STD_CMP_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -259,43 +278,25 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertion()
    * @generated
    */
-  int ASSERTION = 6;
+  int ASSERTION = 7;
 
   /**
-   * The feature id for the '<em><b>Query</b></em>' containment reference.
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION__QUERY = 0;
+  int ASSERTION__STEPS = ASSERTION_FORM_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Function</b></em>' containment reference list.
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION__FUNCTION = 1;
-
-  /**
-   * The feature id for the '<em><b>Constant</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__CONSTANT = 2;
-
-  /**
-   * The feature id for the '<em><b>Boolean</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__BOOLEAN = 3;
+  int ASSERTION__FUNCTIONS = ASSERTION_FORM_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Values</b></em>' containment reference.
@@ -304,7 +305,16 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION__VALUES = 4;
+  int ASSERTION__VALUES = ASSERTION_FORM_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Constant</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION__CONSTANT = ASSERTION_FORM_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Assertion</em>' class.
@@ -313,7 +323,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FEATURE_COUNT = 5;
+  int ASSERTION_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl <em>Assertion Quantified</em>}' class.
@@ -323,107 +333,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionQuantified()
    * @generated
    */
-  int ASSERTION_QUANTIFIED = 7;
-
-  /**
-   * The feature id for the '<em><b>Query</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__QUERY = ASSERTION__QUERY;
-
-  /**
-   * The feature id for the '<em><b>Function</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__FUNCTION = ASSERTION__FUNCTION;
-
-  /**
-   * The feature id for the '<em><b>Constant</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__CONSTANT = ASSERTION__CONSTANT;
-
-  /**
-   * The feature id for the '<em><b>Boolean</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__BOOLEAN = ASSERTION__BOOLEAN;
-
-  /**
-   * The feature id for the '<em><b>Values</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__VALUES = ASSERTION__VALUES;
-
-  /**
-   * The feature id for the '<em><b>Quantifier</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__QUANTIFIER = ASSERTION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Alias</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__ALIAS = ASSERTION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Var</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__VAR = ASSERTION_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Conditions</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__CONDITIONS = ASSERTION_FEATURE_COUNT + 3;
-
-  /**
-   * The number of structural features of the '<em>Assertion Quantified</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 4;
-
-  /**
-   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.QueryImpl <em>Query</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.xpt.xpt.impl.QueryImpl
-   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getQuery()
-   * @generated
-   */
-  int QUERY = 8;
+  int ASSERTION_QUANTIFIED = 8;
 
   /**
    * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -432,16 +342,79 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int QUERY__STEPS = 0;
+  int ASSERTION_QUANTIFIED__STEPS = ASSERTION_FORM_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Query</em>' class.
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int QUERY_FEATURE_COUNT = 1;
+  int ASSERTION_QUANTIFIED__FUNCTIONS = ASSERTION_FORM_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__VALUES = ASSERTION_FORM_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Constant</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__CONSTANT = ASSERTION_FORM_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Quantifier</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__QUANTIFIER = ASSERTION_FORM_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Alias</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__ALIAS = ASSERTION_FORM_FEATURE_COUNT + 5;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__VAR = ASSERTION_FORM_FEATURE_COUNT + 6;
+
+  /**
+   * The feature id for the '<em><b>Conditions</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__CONDITIONS = ASSERTION_FORM_FEATURE_COUNT + 7;
+
+  /**
+   * The number of structural features of the '<em>Assertion Quantified</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 8;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.StepImpl <em>Step</em>}' class.
@@ -647,22 +620,22 @@ public interface XptPackage extends EPackage
   int VALUE = 13;
 
   /**
-   * The feature id for the '<em><b>Query</b></em>' containment reference.
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VALUE__QUERY = 0;
+  int VALUE__STEPS = 0;
 
   /**
-   * The feature id for the '<em><b>Function</b></em>' containment reference list.
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VALUE__FUNCTION = 1;
+  int VALUE__FUNCTIONS = 1;
 
   /**
    * The number of structural features of the '<em>Value</em>' class.
@@ -684,22 +657,22 @@ public interface XptPackage extends EPackage
   int CONSTANT = 14;
 
   /**
-   * The feature id for the '<em><b>Query</b></em>' containment reference.
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONSTANT__QUERY = VALUE__QUERY;
+  int CONSTANT__STEPS = VALUE__STEPS;
 
   /**
-   * The feature id for the '<em><b>Function</b></em>' containment reference list.
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONSTANT__FUNCTION = VALUE__FUNCTION;
+  int CONSTANT__FUNCTIONS = VALUE__FUNCTIONS;
 
   /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -930,37 +903,47 @@ public interface XptPackage extends EPackage
   EClass getAssertionForm();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionForm#getLeftAssert <em>Left Assert</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionStdCmp <em>Assertion Std Cmp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Assertion Std Cmp</em>'.
+   * @see org.xtext.example.xpt.xpt.AssertionStdCmp
+   * @generated
+   */
+  EClass getAssertionStdCmp();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionStdCmp#getLeftAssert <em>Left Assert</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Left Assert</em>'.
-   * @see org.xtext.example.xpt.xpt.AssertionForm#getLeftAssert()
-   * @see #getAssertionForm()
+   * @see org.xtext.example.xpt.xpt.AssertionStdCmp#getLeftAssert()
+   * @see #getAssertionStdCmp()
    * @generated
    */
-  EReference getAssertionForm_LeftAssert();
+  EReference getAssertionStdCmp_LeftAssert();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.AssertionForm#getOp <em>Op</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.AssertionStdCmp#getOp <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Op</em>'.
-   * @see org.xtext.example.xpt.xpt.AssertionForm#getOp()
-   * @see #getAssertionForm()
+   * @see org.xtext.example.xpt.xpt.AssertionStdCmp#getOp()
+   * @see #getAssertionStdCmp()
    * @generated
    */
-  EAttribute getAssertionForm_Op();
+  EAttribute getAssertionStdCmp_Op();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionForm#getRightAssert <em>Right Assert</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.AssertionStdCmp#getRightAssert <em>Right Assert</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Right Assert</em>'.
-   * @see org.xtext.example.xpt.xpt.AssertionForm#getRightAssert()
-   * @see #getAssertionForm()
+   * @see org.xtext.example.xpt.xpt.AssertionStdCmp#getRightAssert()
+   * @see #getAssertionStdCmp()
    * @generated
    */
-  EReference getAssertionForm_RightAssert();
+  EReference getAssertionStdCmp_RightAssert();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Assertion <em>Assertion</em>}'.
@@ -973,48 +956,26 @@ public interface XptPackage extends EPackage
   EClass getAssertion();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getQuery <em>Query</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Assertion#getSteps <em>Steps</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Query</em>'.
-   * @see org.xtext.example.xpt.xpt.Assertion#getQuery()
+   * @return the meta object for the containment reference list '<em>Steps</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertion#getSteps()
    * @see #getAssertion()
    * @generated
    */
-  EReference getAssertion_Query();
+  EReference getAssertion_Steps();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Assertion#getFunction <em>Function</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Assertion#getFunctions <em>Functions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Function</em>'.
-   * @see org.xtext.example.xpt.xpt.Assertion#getFunction()
+   * @return the meta object for the containment reference list '<em>Functions</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertion#getFunctions()
    * @see #getAssertion()
    * @generated
    */
-  EReference getAssertion_Function();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getConstant <em>Constant</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Constant</em>'.
-   * @see org.xtext.example.xpt.xpt.Assertion#getConstant()
-   * @see #getAssertion()
-   * @generated
-   */
-  EReference getAssertion_Constant();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Assertion#isBoolean <em>Boolean</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Boolean</em>'.
-   * @see org.xtext.example.xpt.xpt.Assertion#isBoolean()
-   * @see #getAssertion()
-   * @generated
-   */
-  EAttribute getAssertion_Boolean();
+  EReference getAssertion_Functions();
 
   /**
    * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}'.
@@ -1026,6 +987,17 @@ public interface XptPackage extends EPackage
    * @generated
    */
   EReference getAssertion_Values();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getConstant <em>Constant</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Constant</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertion#getConstant()
+   * @see #getAssertion()
+   * @generated
+   */
+  EReference getAssertion_Constant();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionQuantified <em>Assertion Quantified</em>}'.
@@ -1080,27 +1052,6 @@ public interface XptPackage extends EPackage
    * @generated
    */
   EReference getAssertionQuantified_Conditions();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Query <em>Query</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Query</em>'.
-   * @see org.xtext.example.xpt.xpt.Query
-   * @generated
-   */
-  EClass getQuery();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Query#getSteps <em>Steps</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Steps</em>'.
-   * @see org.xtext.example.xpt.xpt.Query#getSteps()
-   * @see #getQuery()
-   * @generated
-   */
-  EReference getQuery_Steps();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Step <em>Step</em>}'.
@@ -1296,26 +1247,26 @@ public interface XptPackage extends EPackage
   EClass getValue();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Value#getQuery <em>Query</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Value#getSteps <em>Steps</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Query</em>'.
-   * @see org.xtext.example.xpt.xpt.Value#getQuery()
+   * @return the meta object for the containment reference list '<em>Steps</em>'.
+   * @see org.xtext.example.xpt.xpt.Value#getSteps()
    * @see #getValue()
    * @generated
    */
-  EReference getValue_Query();
+  EReference getValue_Steps();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Value#getFunction <em>Function</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Value#getFunctions <em>Functions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Function</em>'.
-   * @see org.xtext.example.xpt.xpt.Value#getFunction()
+   * @return the meta object for the containment reference list '<em>Functions</em>'.
+   * @see org.xtext.example.xpt.xpt.Value#getFunctions()
    * @see #getValue()
    * @generated
    */
-  EReference getValue_Function();
+  EReference getValue_Functions();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
@@ -1545,12 +1496,22 @@ public interface XptPackage extends EPackage
     EClass ASSERTION_FORM = eINSTANCE.getAssertionForm();
 
     /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionStdCmpImpl <em>Assertion Std Cmp</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.AssertionStdCmpImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionStdCmp()
+     * @generated
+     */
+    EClass ASSERTION_STD_CMP = eINSTANCE.getAssertionStdCmp();
+
+    /**
      * The meta object literal for the '<em><b>Left Assert</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION_FORM__LEFT_ASSERT = eINSTANCE.getAssertionForm_LeftAssert();
+    EReference ASSERTION_STD_CMP__LEFT_ASSERT = eINSTANCE.getAssertionStdCmp_LeftAssert();
 
     /**
      * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
@@ -1558,7 +1519,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ASSERTION_FORM__OP = eINSTANCE.getAssertionForm_Op();
+    EAttribute ASSERTION_STD_CMP__OP = eINSTANCE.getAssertionStdCmp_Op();
 
     /**
      * The meta object literal for the '<em><b>Right Assert</b></em>' containment reference feature.
@@ -1566,7 +1527,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION_FORM__RIGHT_ASSERT = eINSTANCE.getAssertionForm_RightAssert();
+    EReference ASSERTION_STD_CMP__RIGHT_ASSERT = eINSTANCE.getAssertionStdCmp_RightAssert();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -1579,36 +1540,20 @@ public interface XptPackage extends EPackage
     EClass ASSERTION = eINSTANCE.getAssertion();
 
     /**
-     * The meta object literal for the '<em><b>Query</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION__QUERY = eINSTANCE.getAssertion_Query();
+    EReference ASSERTION__STEPS = eINSTANCE.getAssertion_Steps();
 
     /**
-     * The meta object literal for the '<em><b>Function</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION__FUNCTION = eINSTANCE.getAssertion_Function();
-
-    /**
-     * The meta object literal for the '<em><b>Constant</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ASSERTION__CONSTANT = eINSTANCE.getAssertion_Constant();
-
-    /**
-     * The meta object literal for the '<em><b>Boolean</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ASSERTION__BOOLEAN = eINSTANCE.getAssertion_Boolean();
+    EReference ASSERTION__FUNCTIONS = eINSTANCE.getAssertion_Functions();
 
     /**
      * The meta object literal for the '<em><b>Values</b></em>' containment reference feature.
@@ -1617,6 +1562,14 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EReference ASSERTION__VALUES = eINSTANCE.getAssertion_Values();
+
+    /**
+     * The meta object literal for the '<em><b>Constant</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSERTION__CONSTANT = eINSTANCE.getAssertion_Constant();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl <em>Assertion Quantified</em>}' class.
@@ -1659,24 +1612,6 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EReference ASSERTION_QUANTIFIED__CONDITIONS = eINSTANCE.getAssertionQuantified_Conditions();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.QueryImpl <em>Query</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.example.xpt.xpt.impl.QueryImpl
-     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getQuery()
-     * @generated
-     */
-    EClass QUERY = eINSTANCE.getQuery();
-
-    /**
-     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference QUERY__STEPS = eINSTANCE.getQuery_Steps();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.StepImpl <em>Step</em>}' class.
@@ -1833,20 +1768,20 @@ public interface XptPackage extends EPackage
     EClass VALUE = eINSTANCE.getValue();
 
     /**
-     * The meta object literal for the '<em><b>Query</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VALUE__QUERY = eINSTANCE.getValue_Query();
+    EReference VALUE__STEPS = eINSTANCE.getValue_Steps();
 
     /**
-     * The meta object literal for the '<em><b>Function</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VALUE__FUNCTION = eINSTANCE.getValue_Function();
+    EReference VALUE__FUNCTIONS = eINSTANCE.getValue_Functions();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.

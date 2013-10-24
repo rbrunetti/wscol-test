@@ -22,26 +22,23 @@
     <genClasses ecoreClass="Xpt.ecore#//AssertionNot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionNot/innerFormula"/>
     </genClasses>
-    <genClasses ecoreClass="Xpt.ecore#//AssertionForm">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionForm/leftAssert"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//AssertionForm/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionForm/rightAssert"/>
+    <genClasses ecoreClass="Xpt.ecore#//AssertionForm"/>
+    <genClasses ecoreClass="Xpt.ecore#//AssertionStdCmp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionStdCmp/leftAssert"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//AssertionStdCmp/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionStdCmp/rightAssert"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Assertion">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/query"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/function"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/constant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Assertion/boolean"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/steps"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/functions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/values"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/constant"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//AssertionQuantified">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//AssertionQuantified/quantifier"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//AssertionQuantified/alias"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//AssertionQuantified/var"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionQuantified/conditions"/>
-    </genClasses>
-    <genClasses ecoreClass="Xpt.ecore#//Query">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Query/steps"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Step/name"/>
@@ -65,8 +62,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Values/value"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Value">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/query"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/function"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/steps"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/functions"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Constant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/number"/>

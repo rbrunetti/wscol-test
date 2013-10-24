@@ -27,6 +27,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.xtext.example.xpt.generator.dataobject.DataObject;
+import org.xtext.example.xpt.services.XptGrammarAccess.AssertionBooleanElements;
 import org.xtext.example.xpt.services.XptGrammarAccess.AssertionQuantifiedBooleanElements;
 import org.xtext.example.xpt.services.XptGrammarAccess.AssertionQuantifiedNumericElements;
 import org.xtext.example.xpt.xpt.Assertion;
@@ -36,15 +37,19 @@ import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionNot;
 import org.xtext.example.xpt.xpt.AssertionOr;
 import org.xtext.example.xpt.xpt.AssertionQuantified;
+import org.xtext.example.xpt.xpt.AssertionStdCmp;
 import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
-import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
+import org.xtext.example.xpt.xpt.impl.AssertionOrImpl;
+import org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl;
+import org.xtext.example.xpt.xpt.impl.AssertionStdCmpImpl;
+import org.xtext.example.xpt.xpt.impl.AssertionsImpl;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -122,19 +127,6 @@ public class Main {
 		EObjectContainmentEList<Declaration> declarations = (EObjectContainmentEList<Declaration>) model.getDeclarations();
 		Assertions assertionSet = model.getAssertionSet();
 
-		// number of assertions
-		int count = 0;
-		TreeIterator<EObject> a = assertionSet.eAllContents();
-		if (assertionSet instanceof AssertionForm) {
-			count = count + 1;
-		}
-		while (a.hasNext()) {
-			EObject next = a.next();
-			if (next instanceof AssertionForm) {
-				count = count + 1;
-			}
-		}
-
 		// get input: via xml parsing or passed DataObject
 		input = new DataObject(xmlFilePath);
 		// input = hashMapTest(); // load input from a DataObject
@@ -142,14 +134,9 @@ public class Main {
 		// print out the DataObject conversion of the XML file
 		System.out.println("################## INPUT ###################\n" + input + "\n");
 
-		if (count == 0) {
-			System.out.println("No assertions. Execution halted.");
-			return;
-		}
-
 		System.out.println("################## RULES ###################");
 		System.out.println(declarations.size() + " variable declarated.");
-		System.out.println(count + " assertions has been found.\n");
+		System.out.println("??? assertions has been found.\n"); //TODO conteggio eliminato
 
 		// get variables declaration and sets the hashmap
 		try {
@@ -203,8 +190,8 @@ public class Main {
 				erroneousToken = Helper.assertionToString((Assertion) semanticElement);
 			} else if (semanticElement instanceof Declaration) {
 				erroneousToken = Helper.declarationToString((Declaration) semanticElement);
-			} else if (semanticElement instanceof Query) {
-				erroneousToken = Helper.queryToString((Query) semanticElement);
+//			} else if (semanticElement instanceof Query) { TODO rimuovere
+//				erroneousToken = Helper.queryToString((Query) semanticElement);
 			} else if (semanticElement instanceof Step) {
 				erroneousToken = Helper.stepToString((Step) semanticElement);
 			} else {
@@ -216,8 +203,8 @@ public class Main {
 						erroneousToken = Helper.assertionToString((Assertion) parentSemanticElement);
 					} else if (parentSemanticElement instanceof Declaration) {
 						erroneousToken = Helper.declarationToString((Declaration) parentSemanticElement);
-					} else if (parentSemanticElement instanceof Query) {
-						erroneousToken = Helper.queryToString((Query) parentSemanticElement);
+//					} else if (parentSemanticElement instanceof Query) { TODO rimuovere
+//						erroneousToken = Helper.queryToString((Query) parentSemanticElement);
 					} else if (parentSemanticElement instanceof Step) {
 						erroneousToken = Helper.stepToString((Step) parentSemanticElement);
 					} else {
@@ -280,7 +267,9 @@ public class Main {
 		} else if (assertions instanceof AssertionOr) {
 			return (verifyAssertions((Assertions) a.get(0)) | verifyAssertions((Assertions) a.get(1)));
 		} else if (assertions instanceof AssertionNot) {
-			return !verifyAssertions(((AssertionNot) assertions).getInnerFormula());
+			boolean res = !verifyAssertions(((AssertionNot) assertions).getInnerFormula());
+			System.out.println("Assertion '" + Helper.assertionsToString(assertions) + "' is " + ((res) ? "verified." : "wrong."));
+			return res;
 		} else if (assertions instanceof AssertionBraced) {
 			return verifyAssertions(((AssertionBraced) assertions).getInnerFormula());
 		} else if (assertions instanceof AssertionQuantified) {
@@ -307,16 +296,20 @@ public class Main {
 		String operation;
 
 		String assertionRepr = Helper.assertionFormToString(af);
-
-		laObj = doQueries(af.getLeftAssert());
-
-		// check if the AssertionForm is of type AssertionQualifiedBoolean (so without the '= true' explicitly specified)
-		if (af.getOp() == null && af.getRightAssert() == null) {
+		String leftToken, rightToken;
+		
+		if(af instanceof AssertionStdCmp) {
+			laObj = doQueries(((AssertionStdCmp) af).getLeftAssert());
+			operation = ((AssertionStdCmp) af).getOp();
+			raObj = doQueries(((AssertionStdCmp) af).getRightAssert());
+			leftToken = Helper.assertionToString(((AssertionStdCmp) af).getLeftAssert());
+			rightToken = Helper.assertionToString(((AssertionStdCmp) af).getRightAssert());
+		} else {  // so: (af instanceof Assertion | af instanceof AssertionQuantified)
+			laObj = doQueries((Assertion) af); //TODO vedi se funziona anche col quantified
 			operation = "==";
 			raObj = true;
-		} else {
-			operation = af.getOp(); // get Op for using it for the comparisons
-			raObj = doQueries(af.getRightAssert());
+			leftToken = Helper.assertionToString((Assertion) af);
+			rightToken = "";
 		}
 
 		// check the objects class and evaluate the corresponding assertion
@@ -330,8 +323,8 @@ public class Main {
 			return booleanAssertion((boolean) laObj, (boolean) raObj, operation, assertionRepr);
 		} else if (laObj != null && raObj != null) {
 			String msg = "Assertion could not be evaluated due to data types conflicts [token: '" + assertionRepr + "']";
-			msg += "\n Left assertion [token: '" + Helper.assertionToString(af.getLeftAssert()) + "'] = " + laObj + " (Class: " + laObj.getClass().getSimpleName() + ")";
-			msg += "\n Right assertion [token: '" + Helper.assertionToString(af.getRightAssert()) + "'] = " + raObj + " (Class: " + raObj.getClass().getSimpleName() + ")";
+			msg += "\n Left assertion [token: '" + leftToken + "'] = " + laObj + " (Class: " + laObj.getClass().getSimpleName() + ")";
+			msg += "\n Right assertion [token: '" + rightToken + "'] = " + raObj + " (Class: " + raObj.getClass().getSimpleName() + ")";
 			throw new Exception(msg);
 		} else {
 			throw new Exception("Unable to evaluate the assertion, due to erroneous variables declaration [token: '" + assertionRepr + "']");
@@ -574,19 +567,19 @@ public class Main {
 			return ((assertion.getConstant().getString() == null) ? assertion.getConstant().getNumber() : assertion.getConstant().getString());
 		}
 		// look if there's a placeholder, if any substitute it with its values (note: the placeholder is always on the first step!)
-		if (assertion.getQuery() != null) {
+		if (!assertion.getSteps().isEmpty()) {
 			try {
-				result = resolveQuery(assertion.getQuery());
+				result = resolveQuery(assertion.getSteps());
 			} catch (Exception e) {
 				throw new Exception(e.getMessage() + assertionRepr);
 			}
-		} else {
-			result = assertion.isBoolean();
+//		} else {
+//			result = assertion.isBoolean();
 		}
 
 		// functions evaluation, according to the corresponding type
 		try {
-			result = applyFunctions(result, assertion.getFunction());
+			result = applyFunctions(result, assertion.getFunctions());
 		} catch (Exception e) {
 			throw new Exception(e.getMessage() + assertionRepr);
 		}
@@ -594,9 +587,9 @@ public class Main {
 		return result;
 	}
 
-	private Object resolveQuery(Query q) throws Exception {
+	private Object resolveQuery(EList<Step> steps) throws Exception {
 		Object result;
-		String placeholder = q.getSteps().get(0).getPlaceholder();
+		String placeholder = steps.get(0).getPlaceholder();
 
 		if (placeholder != null) {
 			if (!variables.containsKey(placeholder)) {
@@ -604,8 +597,8 @@ public class Main {
 			}
 			Object value = variables.get(placeholder);
 			if (value instanceof DataObject) {
-				if (q.getSteps().size() > 1) { // if there query goes deeper
-					result = ((DataObject) value).evaluate(q);
+				if (steps.size() > 1) { // if there query goes deeper
+					result = ((DataObject) value).evaluate(steps);
 					if (((DataObject) result).isSingleValue()) {
 						result = ((DataObject) result).getFirstValue();
 					}
@@ -620,7 +613,7 @@ public class Main {
 				result = value;
 			}
 		} else {
-			result = input.evaluate(q);
+			result = input.evaluate(steps);
 			// if the DataObject is containing a single value it will be extrapolated from the Object
 			if (((DataObject) result).isSingleValue()) {
 				result = ((DataObject) result).getFirstValue();
@@ -976,8 +969,8 @@ public class Main {
 		if (function.getParams() != null) {
 			List<Object> params = new ArrayList<Object>();
 			for (Value v : function.getParams().getValue()) {
-				if (v.getQuery() != null) {
-					params.add(applyFunctions(resolveQuery(v.getQuery()), v.getFunction()));
+				if (!v.getSteps().isEmpty()) {
+					params.add(applyFunctions(resolveQuery(v.getSteps()), v.getFunctions()));
 				} else if (v instanceof Constant) {
 					if (((Constant) v).getString() != null) {
 						params.add(((Constant) v).getString());
@@ -1025,9 +1018,9 @@ public class Main {
 			} else if (d.getAssert().getValues() != null) {
 				List<Object> values = new ArrayList<Object>();
 				for (Value v : d.getAssert().getValues().getValue()) {
-					if (v.getQuery() != null) {
+					if (!v.getSteps().isEmpty()) {
 						try {
-							values.add(applyFunctions(resolveQuery(v.getQuery()), v.getFunction()));
+							values.add(applyFunctions(resolveQuery(v.getSteps()), v.getFunctions()));
 						} catch (Exception e) {
 							throw new Exception(e.getMessage() + " [token: '" + assertionRep + "']");
 						}
@@ -1042,19 +1035,19 @@ public class Main {
 					}
 				}
 				result = new DataObject(d.getVar(), values);
-			} else if (d.getAssert().getQuery() != null) {
+			} else if (!d.getAssert().getSteps().isEmpty()) {
 				try {
-					result = resolveQuery(d.getAssert().getQuery());
+					result = resolveQuery(d.getAssert().getSteps());
 					// *** FUNCTIONS ***
-					result = applyFunctions(result, d.getAssert().getFunction());
+					result = applyFunctions(result, d.getAssert().getFunctions());
 				} catch (Exception e) {
 					throw new Exception(e.getMessage() + " [token: '" + assertionRep + "']");
 				}
 
 			} else if (d.getAssert() instanceof AssertionQuantified) {
 				result = doAssertionQuantified(d.getAssert());
-			} else {
-				result = d.getAssert().isBoolean();
+//			} else {
+//				result = d.getAssert().isBoolean();
 			}
 
 			variables.put(d.getVar(), result);

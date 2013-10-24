@@ -2,16 +2,28 @@
  */
 package org.xtext.example.xpt.xpt.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.xtext.example.xpt.xpt.Assertion;
 import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.Assertions;
+import org.xtext.example.xpt.xpt.Constant;
+import org.xtext.example.xpt.xpt.Function;
+import org.xtext.example.xpt.xpt.Step;
+import org.xtext.example.xpt.xpt.Values;
 import org.xtext.example.xpt.xpt.XptPackage;
 
 /**
@@ -21,6 +33,10 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getSteps <em>Steps</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getConstant <em>Constant</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getQuantifier <em>Quantifier</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getVar <em>Var</em>}</li>
@@ -30,8 +46,48 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *
  * @generated
  */
-public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQuantified
+public class AssertionQuantifiedImpl extends AssertionFormImpl implements AssertionQuantified
 {
+  /**
+   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSteps()
+   * @generated
+   * @ordered
+   */
+  protected EList<Step> steps;
+
+  /**
+   * The cached value of the '{@link #getFunctions() <em>Functions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFunctions()
+   * @generated
+   * @ordered
+   */
+  protected EList<Function> functions;
+
+  /**
+   * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValues()
+   * @generated
+   * @ordered
+   */
+  protected Values values;
+
+  /**
+   * The cached value of the '{@link #getConstant() <em>Constant</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getConstant()
+   * @generated
+   * @ordered
+   */
+  protected Constant constant;
+
   /**
    * The default value of the '{@link #getQuantifier() <em>Quantifier</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -121,6 +177,130 @@ public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQ
   protected EClass eStaticClass()
   {
     return XptPackage.Literals.ASSERTION_QUANTIFIED;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Step> getSteps()
+  {
+    if (steps == null)
+    {
+      steps = new EObjectContainmentEList<Step>(Step.class, this, XptPackage.ASSERTION_QUANTIFIED__STEPS);
+    }
+    return steps;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Function> getFunctions()
+  {
+    if (functions == null)
+    {
+      functions = new EObjectContainmentEList<Function>(Function.class, this, XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS);
+    }
+    return functions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Values getValues()
+  {
+    return values;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetValues(Values newValues, NotificationChain msgs)
+  {
+    Values oldValues = values;
+    values = newValues;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__VALUES, oldValues, newValues);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValues(Values newValues)
+  {
+    if (newValues != values)
+    {
+      NotificationChain msgs = null;
+      if (values != null)
+        msgs = ((InternalEObject)values).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_QUANTIFIED__VALUES, null, msgs);
+      if (newValues != null)
+        msgs = ((InternalEObject)newValues).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_QUANTIFIED__VALUES, null, msgs);
+      msgs = basicSetValues(newValues, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__VALUES, newValues, newValues));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Constant getConstant()
+  {
+    return constant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetConstant(Constant newConstant, NotificationChain msgs)
+  {
+    Constant oldConstant = constant;
+    constant = newConstant;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__CONSTANT, oldConstant, newConstant);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setConstant(Constant newConstant)
+  {
+    if (newConstant != constant)
+    {
+      NotificationChain msgs = null;
+      if (constant != null)
+        msgs = ((InternalEObject)constant).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_QUANTIFIED__CONSTANT, null, msgs);
+      if (newConstant != null)
+        msgs = ((InternalEObject)newConstant).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.ASSERTION_QUANTIFIED__CONSTANT, null, msgs);
+      msgs = basicSetConstant(newConstant, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__CONSTANT, newConstant, newConstant));
   }
 
   /**
@@ -250,6 +430,14 @@ public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQ
   {
     switch (featureID)
     {
+      case XptPackage.ASSERTION_QUANTIFIED__STEPS:
+        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
+      case XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS:
+        return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
+      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
+        return basicSetValues(null, msgs);
+      case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
+        return basicSetConstant(null, msgs);
       case XptPackage.ASSERTION_QUANTIFIED__CONDITIONS:
         return basicSetConditions(null, msgs);
     }
@@ -266,6 +454,14 @@ public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQ
   {
     switch (featureID)
     {
+      case XptPackage.ASSERTION_QUANTIFIED__STEPS:
+        return getSteps();
+      case XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS:
+        return getFunctions();
+      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
+        return getValues();
+      case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
+        return getConstant();
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         return getQuantifier();
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
@@ -283,11 +479,26 @@ public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQ
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
+      case XptPackage.ASSERTION_QUANTIFIED__STEPS:
+        getSteps().clear();
+        getSteps().addAll((Collection<? extends Step>)newValue);
+        return;
+      case XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS:
+        getFunctions().clear();
+        getFunctions().addAll((Collection<? extends Function>)newValue);
+        return;
+      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
+        setValues((Values)newValue);
+        return;
+      case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
+        setConstant((Constant)newValue);
+        return;
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         setQuantifier((String)newValue);
         return;
@@ -314,6 +525,18 @@ public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQ
   {
     switch (featureID)
     {
+      case XptPackage.ASSERTION_QUANTIFIED__STEPS:
+        getSteps().clear();
+        return;
+      case XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS:
+        getFunctions().clear();
+        return;
+      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
+        setValues((Values)null);
+        return;
+      case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
+        setConstant((Constant)null);
+        return;
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         setQuantifier(QUANTIFIER_EDEFAULT);
         return;
@@ -340,6 +563,14 @@ public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQ
   {
     switch (featureID)
     {
+      case XptPackage.ASSERTION_QUANTIFIED__STEPS:
+        return steps != null && !steps.isEmpty();
+      case XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS:
+        return functions != null && !functions.isEmpty();
+      case XptPackage.ASSERTION_QUANTIFIED__VALUES:
+        return values != null;
+      case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
+        return constant != null;
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         return QUANTIFIER_EDEFAULT == null ? quantifier != null : !QUANTIFIER_EDEFAULT.equals(quantifier);
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
@@ -350,6 +581,50 @@ public class AssertionQuantifiedImpl extends AssertionImpl implements AssertionQ
         return conditions != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == Assertion.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case XptPackage.ASSERTION_QUANTIFIED__STEPS: return XptPackage.ASSERTION__STEPS;
+        case XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS: return XptPackage.ASSERTION__FUNCTIONS;
+        case XptPackage.ASSERTION_QUANTIFIED__VALUES: return XptPackage.ASSERTION__VALUES;
+        case XptPackage.ASSERTION_QUANTIFIED__CONSTANT: return XptPackage.ASSERTION__CONSTANT;
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == Assertion.class)
+    {
+      switch (baseFeatureID)
+      {
+        case XptPackage.ASSERTION__STEPS: return XptPackage.ASSERTION_QUANTIFIED__STEPS;
+        case XptPackage.ASSERTION__FUNCTIONS: return XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS;
+        case XptPackage.ASSERTION__VALUES: return XptPackage.ASSERTION_QUANTIFIED__VALUES;
+        case XptPackage.ASSERTION__CONSTANT: return XptPackage.ASSERTION_QUANTIFIED__CONSTANT;
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
   /**

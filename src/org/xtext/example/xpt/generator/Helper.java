@@ -11,12 +11,12 @@ import org.xtext.example.xpt.xpt.AssertionForm;
 import org.xtext.example.xpt.xpt.AssertionNot;
 import org.xtext.example.xpt.xpt.AssertionOr;
 import org.xtext.example.xpt.xpt.AssertionQuantified;
+import org.xtext.example.xpt.xpt.AssertionStdCmp;
 import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Function;
-import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
@@ -30,10 +30,13 @@ public class Helper {
 	 * @return a {@link String} representing the passed {@link AssertionForm}
 	 */
 	public static String assertionFormToString(AssertionForm af) {
-		if (af.getOp() == null && af.getRightAssert() == null) {
-			return assertionToString(af.getLeftAssert());
+		if (af instanceof AssertionStdCmp) {
+			return assertionToString(((AssertionStdCmp) af).getLeftAssert()) + " " + ((AssertionStdCmp) af).getOp() + " " + assertionToString(((AssertionStdCmp) af).getRightAssert());
+		} else if(af instanceof AssertionQuantified) {
+			return assertionQuantifiedToString((AssertionQuantified) af);
+		} else {
+			return assertionToString((Assertion) af);
 		}
-		return assertionToString(af.getLeftAssert()) + " " + af.getOp() + " " + assertionToString(af.getRightAssert());
 	}
 
 	/**
@@ -87,11 +90,10 @@ public class Helper {
 	 */
 	public static String assertionToString(Assertion a) {
 		String res = "";
-		if (a == null) {
-			return null;
-		}
-		if (a.getQuery() != null) {
-			res = queryToString(a.getQuery());
+		if (a instanceof AssertionQuantified) {
+			res = assertionQuantifiedToString((AssertionQuantified) a);
+		} else if (!a.getSteps().isEmpty()) {
+			res = queryToString(a.getSteps());
 		} else if (a.getConstant() != null) {
 			if (a.getConstant().getString() == null) {
 				res = String.valueOf(a.getConstant().getNumber());
@@ -100,12 +102,11 @@ public class Helper {
 			}
 		} else if (a.getValues() != null) {
 			res = valuesToList(a.getValues()).toString();
-		} else if (a instanceof AssertionQuantified) {
-			res = assertionQuantifiedToString((AssertionQuantified) a);
 		} else {
-			res = String.valueOf(a.isBoolean());
+//			res = String.valueOf(a.isBoolean());
+			return null;
 		}
-		res += functionsToString(a.getFunction());
+		res += functionsToString(a.getFunctions());
 		return res;
 	}
 	
@@ -118,7 +119,7 @@ public class Helper {
 					for (Value v : f.getParams().getValue()) {
 						params += ((v instanceof Constant) 
 								? constantToString((Constant) v) 
-								: (Helper.queryToString(v.getQuery()) + Helper.functionsToString(v.getFunction()))) + ", ";
+								: (Helper.queryToString(v.getSteps()) + Helper.functionsToString(v.getFunctions()))) + ", ";
 					}
 					params = params.substring(0, params.length() - 2); //delete the last ','
 				}
@@ -134,10 +135,10 @@ public class Helper {
 	 * @param q the {@link Query} to represent
 	 * @return the {@link String} representing the passed {@link Query}
 	 */
-	public static String queryToString(Query q) {
+	public static String queryToString(EList<Step> steps) {
 		String res = "";
-		for (int i = 0; i < q.getSteps().size(); i++) {
-			res += stepToString(q.getSteps().get(i));
+		for (int i = 0; i < steps.size(); i++) {
+			res += stepToString(steps.get(i));
 		}
 		return res;
 	}
@@ -189,8 +190,8 @@ public class Helper {
 	private static List<Object> valuesToList(Values values) {
 		List<Object> result = new ArrayList<>();
 		for (Value c : values.getValue()) {
-			if (c.getQuery() != null) {
-				result.add(Helper.queryToString(c.getQuery()));
+			if (c.getSteps() != null) {
+				result.add(Helper.queryToString(c.getSteps()));
 			} else if (c instanceof Constant) {
 				if (((Constant) c).getString() != null) {
 					result.add(((Constant) c).getString());

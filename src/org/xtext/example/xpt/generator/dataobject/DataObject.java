@@ -12,13 +12,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.eclipse.emf.common.util.EList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 import org.xtext.example.xpt.generator.Main;
 import org.xtext.example.xpt.xpt.Attribute;
-import org.xtext.example.xpt.xpt.Query;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Values;
 
@@ -76,9 +76,9 @@ public class DataObject {
 	 * @return a {@link DataObject} containing the results of the query
 	 * @throws Exception if the evaluation goes wrong (see the called method for the specific exception)
 	 */
-	public DataObject evaluate(Query query) throws Exception {
+	public DataObject evaluate(EList<Step> steps) throws Exception {
 		DataObject current = new DataObject(data);
-		for (Step s : query.getSteps()) {
+		for (Step s : steps) {
 			if(s.getPlaceholder() == null) {
 				current = getSubmap(current, s.getName(), s.getAttribute());
 			}

@@ -22,7 +22,7 @@ package org.xtext.example.xpt.xpt;
  * @model
  * @generated
  */
-public interface AssertionQuantified extends Assertion
+public interface AssertionQuantified extends AssertionForm, Assertion
 {
   /**
    * Returns the value of the '<em><b>Quantifier</b></em>' attribute.
