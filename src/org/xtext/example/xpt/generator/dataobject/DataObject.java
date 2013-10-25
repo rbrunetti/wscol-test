@@ -6,13 +6,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.management.Query;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.emf.common.util.EList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -27,7 +33,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
 public class DataObject {
-
+	
 	private LinkedHashMultimap<String, Object> data;
 
 	/**
@@ -61,12 +67,17 @@ public class DataObject {
 	}
 
 	/**
-	 * Builds the {@link DataObject} from the parsing of an XML file
+	 * Builds the {@link DataObject} from the parsing of JSON code or an XML file
 	 * 
-	 * @param xmlPath the path of the XML file to parse
+	 * @param string the JSON code or the path of the XML file to parse
+	 * @param isJson if <code>true</code> the string param is intendes as JSON, otherwise as the path of the XML file to read
 	 */
-	public DataObject(String xmlPath) {
-		data = parseXML(xmlPath);
+	public DataObject(String string, boolean isJson) {
+		if(isJson) {
+			data = parseJSON(string);
+		} else {
+			data = parseXML(string);
+		}
 	}
 
 	/**
@@ -485,6 +496,21 @@ public class DataObject {
 	public boolean putAll(DataObject dataObject) {
 		return data.putAll(dataObject.data);
 	}
+	
+	/**
+	 * Returns <code>true</code> if the passed object is a number, <code>false</code> othewise
+	 * 
+	 * @param elem the object to check
+	 */
+	private boolean isNumeric(Object elem) {
+		if(elem instanceof Double) return true;
+		try {
+			Double.valueOf(elem.toString());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 	// ***************************
 	// *** XML PARSING METHODS ***
@@ -504,7 +530,7 @@ public class DataObject {
 			Document doc = builder.parse(new File(xmlPath));
 			doc.getDocumentElement().normalize();
 			Node root = doc.getFirstChild();
-			return stepThrow(root).getData();
+			return stepThroughXML(root).getData();
 		} catch (ParserConfigurationException e2) {
 			e2.printStackTrace();
 		} catch (SAXException | IOException e1) {
@@ -519,7 +545,7 @@ public class DataObject {
 	 * @param root the root {@link Node} of an XML portion of file
 	 * @return a {@link DataObject} conversion of XML
 	 */
-	private DataObject stepThrow(Node root) {
+	private DataObject stepThroughXML(Node root) {
 		String name = root.getNodeName();
 		DataObject father = new DataObject();
 		DataObject sons = new DataObject();
@@ -537,12 +563,102 @@ public class DataObject {
 					return father;
 				}
 			} else {
-				sons.putAll(stepThrow(son));
+				sons.putAll(stepThroughXML(son));
 			}
 		}
 		father.put(name, sons);
 		return father;
 	}
+
+	// ****************************
+	// *** JSON PARSING METHODS ***
+	// ****************************
+	
+	/**
+	 * Parse JSON to DataObject
+	 * 
+	 * @param json the json object to parse 
+	 * @return a {@link LinkedHashMultimap} corresponding to the JSON input
+	 */
+	@SuppressWarnings("rawtypes")
+	private LinkedHashMultimap<String, Object> parseJSON(String json) {
+		LinkedHashMultimap<String, Object> dataMap = LinkedHashMultimap.create();;
+		JSONParser jsonParser = new JSONParser();
+		try {
+			Map map = (Map) jsonParser.parse(json);
+			Iterator iter = map.entrySet().iterator();
+			while(iter.hasNext()){
+				Map.Entry next = (Map.Entry) iter.next();
+				Object value = next.getValue();
+				String key = (String) next.getKey();
+				if(value instanceof JSONObject){
+					dataMap.put(key, stepThroughJSON((JSONObject) value));
+				} else if(value instanceof JSONArray) {
+					for(int i=0; i<((JSONArray)value).size(); i++){
+						Object elem = ((JSONArray)value).get(i);
+						if(elem instanceof JSONObject){
+							dataMap.put(key, stepThroughJSON((JSONObject) elem));
+						} else {
+							if(isNumeric(elem)){
+								dataMap.put(key, Double.valueOf(elem.toString())); // numbers are parsed as Long, so it's converted to Double
+							} else {
+								dataMap.put(key, elem);
+							}
+						}
+					}
+				} else {
+					if(isNumeric(value)) {
+						dataMap.put(key, Double.valueOf(value.toString())); // numbers are parsed as Long, so it's converted to Double
+					} else {
+						dataMap.put(key, value);
+					}
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return dataMap;
+	}
+
+	/**
+	 * Navigate recursively through the JSON object and converts elements to DataObject
+	 * @param obj the {@link JSONObject} to convert
+	 * @return a {@link DataObject} corresponding to the passed {@link JSONObject}
+	 */
+	@SuppressWarnings("rawtypes")
+	private DataObject stepThroughJSON(JSONObject obj){
+		LinkedHashMultimap<String, Object> dataMap = LinkedHashMultimap.create();;
+		Iterator iterator = obj.entrySet().iterator();
+		while(iterator.hasNext()){
+			Map.Entry next = (Map.Entry) iterator.next();
+			Object value = next.getValue();
+			String key = (String) next.getKey();
+			if(value instanceof JSONObject){
+				dataMap.put(key, stepThroughJSON((JSONObject) value));
+			} else if(value instanceof JSONArray) {
+				for(int i=0; i<((JSONArray)value).size(); i++){
+					Object elem = ((JSONArray)value).get(i);
+					if(elem instanceof JSONObject){
+						dataMap.put(key, stepThroughJSON((JSONObject) elem));
+					} else {
+						if(isNumeric(elem)){
+							dataMap.put(key, Double.valueOf(elem.toString())); // numbers are parsed as Long, so it's converted to Double
+						} else {
+							dataMap.put(key, elem);
+						}
+					}
+				}
+			} else {
+				if(isNumeric(value)) {
+					dataMap.put(key, Double.valueOf(value.toString())); // numbers are parsed as Long, so it's converted to Double
+				} else {
+					dataMap.put(key, value);
+				}
+			}
+		}
+		return new DataObject(dataMap);
+	}
+	
 
 	@Override
 	public String toString() {

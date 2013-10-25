@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.xtext.example.xpt.generator.dataobject.DataObject;
-import org.xtext.example.xpt.services.XptGrammarAccess.AssertionBooleanElements;
 import org.xtext.example.xpt.services.XptGrammarAccess.AssertionQuantifiedBooleanElements;
 import org.xtext.example.xpt.services.XptGrammarAccess.AssertionQuantifiedNumericElements;
 import org.xtext.example.xpt.xpt.Assertion;
@@ -46,10 +44,6 @@ import org.xtext.example.xpt.xpt.Model;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
-import org.xtext.example.xpt.xpt.impl.AssertionOrImpl;
-import org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl;
-import org.xtext.example.xpt.xpt.impl.AssertionStdCmpImpl;
-import org.xtext.example.xpt.xpt.impl.AssertionsImpl;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -127,8 +121,11 @@ public class Main {
 		EObjectContainmentEList<Declaration> declarations = (EObjectContainmentEList<Declaration>) model.getDeclarations();
 		Assertions assertionSet = model.getAssertionSet();
 
-		// get input: via xml parsing or passed DataObject
-		input = new DataObject(xmlFilePath);
+		// get input: via xml/json parsing or passed DataObject
+		input = new DataObject(xmlFilePath, false);
+//		input = new DataObject("{\"inventory\":{\"book\": [{\"year\":2000, \"title\":\"Snow Crash\", \"author\":\"Neal Stephenson\", \"publisher\":\"Spectra\", \"isbn\":\"i0553380958\", \"price\":15},"
+//				+ " {\"year\":2005, \"title\":\"Burning Tower\", \"author\":[\"Larry Niven\", \"Jerry Pournelle\"], \"publisher\":\"Pocket\", \"isbn\":\"i0743416910\", \"price\":6},"
+//				+ " {\"year\":1995, \"title\":\"Zodiac\", \"author\":\"Neal Stephenson\", \"publisher\":\"Spectra\", \"isbn\":{}, \"price\":7.5}]}}", true );
 		// input = hashMapTest(); // load input from a DataObject
 
 		// print out the DataObject conversion of the XML file
