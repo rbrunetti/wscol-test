@@ -272,10 +272,10 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//	AssertionStdCmp | AssertionQuantifiedBoolean | AssertionBoolean;
 		public ParserRule getRule() { return rule; }
 
-		//AssertionStdCmp | AssertionQuantifiedBoolean | AssertionBoolean
+		//=> AssertionStdCmp | AssertionQuantifiedBoolean | AssertionBoolean
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//AssertionStdCmp
+		//=> AssertionStdCmp
 		public RuleCall getAssertionStdCmpParserRuleCall_0() { return cAssertionStdCmpParserRuleCall_0; }
 
 		//AssertionQuantifiedBoolean
@@ -403,14 +403,17 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cFunctionsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cFunctionsFunctionBooleanParserRuleCall_1_1_0 = (RuleCall)cFunctionsAssignment_1_1.eContents().get(0);
+		private final RuleCall cFunctionsFunctionParserRuleCall_1_1_0 = (RuleCall)cFunctionsAssignment_1_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cFunctionsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cFunctionsFunctionBooleanParserRuleCall_3_0 = (RuleCall)cFunctionsAssignment_3.eContents().get(0);
 		
 		//// Assertion with boolean result
 		//AssertionBoolean returns Assertion:
-		//	steps+=Step+ ("." functions+=FunctionBoolean)*;
+		//	steps+=Step+ ("." functions+=Function)* "." functions+=FunctionBoolean;
 		public ParserRule getRule() { return rule; }
 
-		//steps+=Step+ ("." functions+=FunctionBoolean)*
+		//steps+=Step+ ("." functions+=Function)* "." functions+=FunctionBoolean
 		public Group getGroup() { return cGroup; }
 
 		//steps+=Step+
@@ -419,17 +422,26 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//Step
 		public RuleCall getStepsStepParserRuleCall_0_0() { return cStepsStepParserRuleCall_0_0; }
 
-		//("." functions+=FunctionBoolean)*
+		//("." functions+=Function)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
-		//functions+=FunctionBoolean
+		//functions+=Function
 		public Assignment getFunctionsAssignment_1_1() { return cFunctionsAssignment_1_1; }
 
+		//Function
+		public RuleCall getFunctionsFunctionParserRuleCall_1_1_0() { return cFunctionsFunctionParserRuleCall_1_1_0; }
+
+		//"."
+		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
+
+		//functions+=FunctionBoolean
+		public Assignment getFunctionsAssignment_3() { return cFunctionsAssignment_3; }
+
 		//FunctionBoolean
-		public RuleCall getFunctionsFunctionBooleanParserRuleCall_1_1_0() { return cFunctionsFunctionBooleanParserRuleCall_1_1_0; }
+		public RuleCall getFunctionsFunctionBooleanParserRuleCall_3_0() { return cFunctionsFunctionBooleanParserRuleCall_3_0; }
 	}
 
 	public class AssertionQuantifiedBooleanElements extends AbstractParserRuleElementFinder {
@@ -1232,7 +1244,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// Assertion with boolean result
 	//AssertionBoolean returns Assertion:
-	//	steps+=Step+ ("." functions+=FunctionBoolean)*;
+	//	steps+=Step+ ("." functions+=Function)* "." functions+=FunctionBoolean;
 	public AssertionBooleanElements getAssertionBooleanAccess() {
 		return (pAssertionBoolean != null) ? pAssertionBoolean : (pAssertionBoolean = new AssertionBooleanElements());
 	}

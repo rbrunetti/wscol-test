@@ -200,7 +200,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (steps+=Step+ functions+=FunctionBoolean*)
+	 *     (steps+=Step+ functions+=Function* functions+=FunctionBoolean)
 	 */
 	protected void sequence_AssertionBoolean(EObject context, Assertion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

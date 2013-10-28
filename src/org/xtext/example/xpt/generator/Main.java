@@ -268,9 +268,9 @@ public class Main {
 			System.out.println("Assertion '" + Helper.assertionsToString(assertions) + "' is " + ((res) ? "verified." : "wrong."));
 			return res;
 		} else if (assertions instanceof AssertionBraced) {
-			return verifyAssertions(((AssertionBraced) assertions).getInnerFormula());
-		} else if (assertions instanceof AssertionQuantified) {
-			return false;
+			boolean res = verifyAssertions(((AssertionBraced) assertions).getInnerFormula());
+			System.out.println("Assertion '" + Helper.assertionsToString(assertions) + "' is " + ((res) ? "verified." : "wrong."));
+			return res;
 		} else if (assertions instanceof AssertionForm) {
 			return verifyAssertionForm((AssertionForm) assertions);
 		}

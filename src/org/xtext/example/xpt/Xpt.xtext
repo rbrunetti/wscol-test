@@ -1,6 +1,11 @@
-/*******************************************************************************
- * INSERT CAPTION
- *******************************************************************************/
+/************************************************************************************
+ * WSCol (Web Service Constraint Language) is a special-purpose monitoring language,
+ * by which it's possible to express directives on both functional and non-functional
+ * properties; which are essentially pre- and post-conditions on the interaction with
+ * external partner services.
+ * It's suitable to express general dependability properties as safety, integrity,
+ * availability and reliability.
+ ***********************************************************************************/
 grammar org.xtext.example.xpt.Xpt with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
@@ -36,7 +41,7 @@ AssertionNot:
 
 // Kinds of Assertion: with comparison and without (2nd and 3rd case are for boolean comparison and their result is implicitly 'true')
 AssertionForm:
-	AssertionStdCmp | AssertionQuantifiedBoolean | AssertionBoolean;
+	(=> AssertionStdCmp | AssertionQuantifiedBoolean | AssertionBoolean);
 
 // Assertions making a standard comparison between values
 AssertionStdCmp:
@@ -48,7 +53,7 @@ Assertion:
 
 // Assertion with boolean result
 AssertionBoolean returns Assertion:
-	steps+=Step+ ('.' functions+=FunctionBoolean)*;
+	steps+=Step+ ('.' functions+=Function)* '.' functions+=FunctionBoolean;
 
 // Assertion with quantifiers for boolean results
 AssertionQuantifiedBoolean returns AssertionQuantified:

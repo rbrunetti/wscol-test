@@ -5,6 +5,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="xtend-gen"/>
-	<classpathentry kind="lib" path="/home/ricky/Download/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/ricky/Documenti/Code/XText/Workspace/org.xtext.example.xpt/lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

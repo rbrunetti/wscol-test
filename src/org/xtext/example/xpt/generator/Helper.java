@@ -89,6 +89,7 @@ public class Helper {
 	 * @return the {@link String} representing the passed {@link Assertion}
 	 */
 	public static String assertionToString(Assertion a) {
+		if(a == null) return null;
 		String res = "";
 		if (a instanceof AssertionQuantified) {
 			res = assertionQuantifiedToString((AssertionQuantified) a);

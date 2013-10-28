@@ -2,10 +2,7 @@
     |    |     | |     \ |     |
     |    |_____| |_____/ |_____|
 
-	• DataObject/JSON/whatever input type 
-		-> maybe make just a json parser
-	• 
-	• Test the grammar
+	• (Review) Tests for the grammar
 	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! (-> how to organize it smartly?)
 	• Thesis text
 		-> make the tutorial site than use it for the thesis 
@@ -45,5 +42,7 @@
 	• Function 'cardinality' for DataObject: get the number of elements contained in the DataObject (0, 1 or N). It's the unique function applicable to an empty object.
 		• only for the DataObjects because we it's the unique data type that could be empty (empty String or Double it's not possible, so the function is useless for them)   
 	• Implicit 'true' even for functions (startsWith, endsWith, contains)
-	• JSON parsing to DataObject
+	• JSON parsing to DataObject (added the library 'json-simple-1.1.1')
+	• Tests for parsing (check the correct parsing and generated model) and syntax (check if syntax errors are caught) 
+	•  
 	•  

@@ -1,13 +1,13 @@
+/*
 let $a = /inventory/book/title;
 let $c = /inventory/book;
 let $d = $c/author;
 numOf($cc in $d, $cc.length() > 0) > 1 || exists($aaa in $a, $aaa.startsWith("Z")) || forall($aa in $a, !($aa.startsWith("Z"))) || $c.contains("2005");
 
-/*
 // Get and functions cascade testing
 let $a = /inventory;
-exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1)) == true) && $a/book/title[1].length() >= 1;
-*/
+exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1))) && $a/book/title[1].length() >= 1;
+
 /*
 // Test for Afun (min, max, avg, etc...)
 
@@ -29,7 +29,6 @@ numOf($cc in $d, $cc.length() > 0) > 1 || !(exists($aaa in $a, $aaa.startsWith("
 */
 
 // Test with various syntax errors 
-/*
 let $c = /inventory/book.leght(;
 let $c = treu;
 let c = true
@@ -41,7 +40,6 @@ let $c = [1, 2, sdoap];
 
 let $c = /inventory/book/price; // the only one that's correct!
 numOf($a in $c, $a.length()>0) > 0 & $c == 1; 
-*/
 
 
 /*
