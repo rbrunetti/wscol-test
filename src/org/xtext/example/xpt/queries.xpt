@@ -1,14 +1,15 @@
-/*
-let $a = /inventory/book/title;
+let $x = [1, 2, 3, 4];
+let $a = /inventory/book[publisher=="Spectra"];
 let $c = /inventory/book;
-let $d = $c/author;
-numOf($cc in $d, $cc.length() > 0) > 1 || exists($aaa in $a, $aaa.startsWith("Z")) || forall($aa in $a, !($aa.startsWith("Z"))) || $c.contains("2005");
-
-// Get and functions cascade testing
-let $a = /inventory;
-exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1))) && $a/book/title[1].length() >= 1;
+let $d = $c/authors/author;
+avg($y in $x, $y > 0) == 2.5 && numOf($cc in $a, $cc/authors/author.length() > 6) > 1 && exists($aaa in $d, $aaa.startsWith("Z")) && forall($aa in $d, !($aa.startsWith("Z"))) && $x.contains($x.get(2));
 
 /*
+// Get and functions cascade testing
+let $a = /inventory/book;
+exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1))) && $a/title[1].length() >= 1;
+
+
 // Test for Afun (min, max, avg, etc...)
 
 let $prices = /inventory/book/price;
@@ -18,15 +19,14 @@ let $avg = avg($book in $prices, $book > 0);
 let $prod = product($book in $prices, $book > 0);
 let $sum = sum($book in $prices, $book > 0);
 $min == 6.00 && $max == 15 && $avg == 9.5 && $prod == 675.0 && $sum == 28.5;
-*/
-/*
+
 // Test for QuantifiedAssertion (forall, numOf, exists)
 
 let $a = /inventory/book/title;
 let $c = /inventory/book;
 let $d = $c/author;
 numOf($cc in $d, $cc.length() > 0) > 1 || !(exists($aaa in $a, $aaa.startsWith("Z") == false)) || forall($aa in $a, $aa.startsWith("Z") == false);
-*/
+
 
 // Test with various syntax errors 
 let $c = /inventory/book.leght(;
@@ -41,8 +41,6 @@ let $c = [1, 2, sdoap];
 let $c = /inventory/book/price; // the only one that's correct!
 numOf($a in $c, $a.length()>0) > 0 & $c == 1; 
 
-
-/*
 // Test for runtime errors (note that it'll block the execution after the first error is found)
 let $a = /inventory/book/price;
 $a == 1 || $a > "Pippo" && $a.length() <= 0;

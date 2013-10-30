@@ -33,7 +33,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
 public class DataObject {
-	
+
 	private LinkedHashMultimap<String, Object> data;
 
 	/**
@@ -46,18 +46,20 @@ public class DataObject {
 	/**
 	 * Builds the {@link DataObject} starting from a passed {@link LinkedHashMultimap}
 	 * 
-	 * @param data the {@link LinkedHashMultimap} from which data are copied
+	 * @param data
+	 *            the {@link LinkedHashMultimap} from which data are copied
 	 */
 	public DataObject(LinkedHashMultimap<String, Object> data) {
 		this.data = data;
 	}
 
 	/**
-	 * Builds the {@link DataObject} as a single pair key-value, where the value is a list of {@link Object}
-	 * (used for the representation of {@link Values} elements)
+	 * Builds the {@link DataObject} as a single pair key-value, where the value is a list of {@link Object} (used for the representation of {@link Values} elements)
 	 * 
-	 * @param name the key name
-	 * @param values the list of values to associate with the key
+	 * @param name
+	 *            the key name
+	 * @param values
+	 *            the list of values to associate with the key
 	 */
 	public DataObject(String name, List<Object> values) {
 		data = LinkedHashMultimap.create();
@@ -69,11 +71,13 @@ public class DataObject {
 	/**
 	 * Builds the {@link DataObject} from the parsing of JSON code or an XML file
 	 * 
-	 * @param string the JSON code or the path of the XML file to parse
-	 * @param isJson if <code>true</code> the string param is intendes as JSON, otherwise as the path of the XML file to read
+	 * @param string
+	 *            the JSON code or the path of the XML file to parse
+	 * @param isJson
+	 *            if <code>true</code> the string param is intendes as JSON, otherwise as the path of the XML file to read
 	 */
 	public DataObject(String string, boolean isJson) {
-		if(isJson) {
+		if (isJson) {
 			data = parseJSON(string);
 		} else {
 			data = parseXML(string);
@@ -83,18 +87,31 @@ public class DataObject {
 	/**
 	 * Method for the evaluation of a Query
 	 * 
-	 * @param query the {@link Query} to evaluate
+	 * @param query
+	 *            the {@link Query} to evaluate
 	 * @return a {@link DataObject} containing the results of the query
-	 * @throws Exception if the evaluation goes wrong (see the called method for the specific exception)
+	 * @throws Exception
+	 *             if the evaluation goes wrong (see the called method for the specific exception)
 	 */
-	public DataObject evaluate(EList<Step> steps) throws Exception {
-		DataObject current = new DataObject(data);
+	public Object evaluate(EList<Step> steps) throws Exception {
+		Object current = new DataObject(data);
 		for (Step s : steps) {
-			if(s.getPlaceholder() == null) {
+			if (s.getPlaceholder() == null) {
 				current = getSubmap(current, s.getName(), s.getAttribute());
 			}
-			if (current == null) {//TODO a cosa serve?
-				return null;
+//			if (current == null) {// TODO a cosa serve?
+//				return null;
+//			}
+		}
+		
+		return current;
+	}
+	
+	public static Object evaluateArray(ArrayList<Object> arrayList, EList<Step> steps) throws Exception {
+		Object current = arrayList;
+		for(Step s : steps){
+			if(s.getPlaceholder() == null) {
+				current = getSubmap(current, s.getName(), s.getAttribute());
 			}
 		}
 		return current;
@@ -103,12 +120,15 @@ public class DataObject {
 	/**
 	 * Search the specified key in the DataObject and return the corresponding DataObject value
 	 * 
-	 * @param current the {@link DataObject} in which the search is done
-	 * @param property the searched key/property in the {@link DataObject}
+	 * @param current
+	 *            the {@link DataObject} in which the search is done
+	 * @param property
+	 *            the searched key/property in the {@link DataObject}
 	 * @return a {@link DataObject} corresponding to the searched value (if found)
-	 * @throws Exception if the searched property is not found
+	 * @throws Exception
+	 *             if the searched property is not found
 	 */
-	private DataObject getSubmap(DataObject current, String property, Attribute attribute) throws Exception {
+	private DataObject getSubmapOld(DataObject current, String property, Attribute attribute) throws Exception {
 		DataObject subMap = new DataObject();
 		if (current.keys().contains(property)) {
 			Set<Object> values = current.get(property);
@@ -139,7 +159,7 @@ public class DataObject {
 							if (number == i) {
 								subMap.putAll(nextDO);
 								return subMap;
-							} else if(number > current.size()) {
+							} else if (number > current.size()) {
 								throw new Exception("Index out of bound (index = " + number + ", actual size = " + current.size() + ")");
 							}
 						} else {
@@ -174,7 +194,7 @@ public class DataObject {
 							if (number == i) { // only the i-th would be putted in the map
 								subMap.put(property, next);
 								return subMap;
-							} else if(number > current.size()) {
+							} else if (number > current.size()) {
 								throw new Exception("Index out of bound (index = " + number + ", actual size = " + current.size() + ")");
 							}
 						}
@@ -188,13 +208,184 @@ public class DataObject {
 		throw new Exception("The property '" + property + "' is not contained in '" + current.toString() + "'");
 	}
 
+	@SuppressWarnings("unchecked")
+	public static Object getSubmap(Object current, String property, Attribute attribute) throws Exception {
+		if (current instanceof ArrayList) {
+			List<Object> list = new ArrayList<>();
+			int index = -1;
+			if(attribute != null){
+				index = evaluateNumericAttribute(attribute) - 1;
+				if(index >= 0){
+					attribute = null;
+				}
+			}
+			for(Object obj:((ArrayList<Object>)current)){
+				Object subMap = getSubmap(obj, property, attribute);
+				if(subMap instanceof ArrayList){
+					for(Object elem : (ArrayList<Object>)subMap) {
+						if(!list.contains(elem)) {
+							list.add(elem);
+						}
+					}
+				} else {
+					if(!list.contains(subMap)){
+						list.add(subMap);
+					}
+				}
+			}
+			
+			if(index >= 0){
+				if (index >= list.size()) {
+					throw new Exception("Index out of bound (index = " + index + ", actual size = " + list.size() + ")");
+				} else {
+					return list.get(index);
+				}
+			} else {
+				if(list.size() == 1){
+					return list.get(0);
+				}
+				return list;
+			}
+		} else if (current instanceof DataObject) {
+			if (((DataObject) current).keys().contains(property)) {
+				Set<Object> values = ((DataObject) current).get(property);
+//				if (values.size() > 1) {
+					List<Object> list = new ArrayList<>(values);
+					if (attribute != null) {
+						int numericAttribute = evaluateNumericAttribute(attribute);
+						if (numericAttribute > 0) {
+							if (numericAttribute > list.size()) {
+								throw new Exception("Index out of bound (index = " + numericAttribute + ", actual size = " + list.size() + ")");
+							} else {
+								return list.get(numericAttribute-1);
+							}
+						} else {
+							list.clear();
+							Iterator<Object> iter = values.iterator();
+							while (iter.hasNext()) {
+								Object next = iter.next();
+								if (next instanceof DataObject) {
+									if (checkAttribute((DataObject) next, attribute)) {
+										list.add((DataObject) next);
+									}
+								} else {
+									// TODO sistema
+									throw new Exception("Could not apply the attribute '" + attribute.toString() + "' to element '" + property + "' of type '" + next.getClass().getSimpleName() + "'");
+								}
+							}
+						}
+					}
+					
+					if(list.size() == 1){
+						return list.get(0);
+					}
+					return list;
+//				} else {
+//					return values.iterator().next();
+//				}
+			}
+			throw new Exception("The property '" + property + "' is not contained in '" + current.toString() + "'");
+		} else {
+			throw new Exception("The property '" + property + "' could not be retrieved from the element '" + current + "' of type '" + current.getClass().getSimpleName() + "'");
+		}
+	}
+
+	private static int evaluateNumericAttribute(Attribute attribute) throws Exception {
+		// check the case in which there's a variable instead of a String or a Double
+		if (attribute.getVar() != null) {
+			Object num = Main.getVariable(attribute.getVar());
+			if (num instanceof Double) {
+				return (int) (double) num;
+			} else if (num == null) {
+				throw new Exception("The variable '" + attribute.getVar() + "' is not defined.");
+			} else {
+				throw new Exception("The variable '" + attribute.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
+			}
+		} else {
+			return (int) attribute.getNumber();
+		}
+	}
+
+	private static boolean checkAttribute(DataObject current, Attribute attribute) throws Exception {
+		String key = attribute.getProperty();
+		String strValue = attribute.getStrValue();
+		String op = attribute.getOp();
+		double numericValue = attribute.getNumberValue();
+
+		if (current.containsKey(key)) {
+			// check if the comparison is done with a variable; if necessary retrieve the value
+			if (attribute.getVarValue() != null) {
+				Object value = Main.getVariable(attribute.getVarValue());
+				if (value != null) {
+					if (value instanceof String) {
+						strValue = (String) value;
+					} else if (value instanceof Double) {
+						numericValue = (double) value;
+					} else {
+						throw new Exception("The variable '" + attribute.getVarValue() + "' contains a " + value.getClass().getSimpleName() + ", unacceptable in attributes.");
+					}
+				} else {
+					throw new Exception("The variable '" + attribute.getVarValue() + "' is not defined.");
+				}
+			}
+
+			if (strValue != null) { // check if it's a string attribute
+				if (op.equals("==") && current.containsEntry(key, strValue)) {
+					return true;
+				} else if (op.equals("!=") && !current.containsEntry(key, strValue)) {
+					return true;
+				} else if (!(op.equals("!=") || op.equals("=="))) { // runtime check in the case that the strValue is obtained by a variable (so there's not static analysis of tokens)
+					throw new Exception("Unsupported operation '" + op + "' for a String.");
+				} else {
+					return false;
+				}
+			} else {
+				Set<Object> set = current.get(key);
+				Iterator<Object> iter = set.iterator();
+				while (iter.hasNext()) {
+					switch (op) {
+					case "=":
+						if ((double) iter.next() == numericValue) {
+							return true;
+						}
+					case "!=":
+						if ((double) iter.next() != numericValue) {
+							return true;
+						}
+					case ">":
+						if ((double) iter.next() > numericValue) {
+							return true;
+						}
+					case ">=":
+						if ((double) iter.next() >= numericValue) {
+							return true;
+						}
+					case "<":
+						if ((double) iter.next() < numericValue) {
+							return true;
+						}
+					case "<=":
+						if ((double) iter.next() <= numericValue) {
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+		}
+		throw new Exception("The property '" + key + "' is not contained in '" + current.toString() + "'");
+	}
+
 	/**
 	 * Evaluate the attributes on a passed {@link DataObject}
 	 * 
-	 * @param current {@link DataObject} on which the attribute is verified
-	 * @param attribute {@link Attribute} to check
+	 * @param current
+	 *            {@link DataObject} on which the attribute is verified
+	 * @param attribute
+	 *            {@link Attribute} to check
 	 * @return {@link DataObject} selected from 'current' with the corresponding attribute, <code>null</code> if the attribute is not respected
-	 * @throws Exception if the searched property is not found
+	 * @throws Exception
+	 *             if the searched property is not found
 	 */
 	private DataObject getSubMapWithAttribute(DataObject current, Attribute attribute) throws Exception {
 		String key = attribute.getProperty();
@@ -226,7 +417,7 @@ public class DataObject {
 						return current;
 					} else if (op.equals("!=") && !current.containsEntry(key, strValue)) {
 						return current;
-					} else if(!(op.equals("!=") || op.equals("=="))){ // runtime check in the case that the strValue is obtained by a variable (so there's not static analysis of tokens)
+					} else if (!(op.equals("!=") || op.equals("=="))) { // runtime check in the case that the strValue is obtained by a variable (so there's not static analysis of tokens)
 						throw new Exception("Unsupported operation '" + op + "' for a String.");
 					} else {
 						return null;
@@ -277,30 +468,33 @@ public class DataObject {
 	/**
 	 * Returns a collection view of all values associated with a key.
 	 * 
-	 * @param key key to search for in the {@link DataObject}
+	 * @param key
+	 *            key to search for in the {@link DataObject}
 	 * @return the collection of values that the key maps to
 	 * @see com.google.common.collect.AbstractSetMultimap#get(Object)
 	 */
 	public Set<Object> get(String property) {
 		return data.get(property);
-		
+
 	}
-	
+
 	/**
 	 * Returns the i-th element of the {@link DataObject}
-	 *  
-	 * @param index the i-th element to extract
+	 * 
+	 * @param index
+	 *            the i-th element to extract
 	 * @return the i-th element if present
-	 * @throws Exception if the index is out of bound
+	 * @throws Exception
+	 *             if the index is out of bound
 	 */
 	public Object get(int index) throws Exception {
 		Object[] valuesArray = values().toArray();
-		if(index >= valuesArray.length){
+		if (index >= valuesArray.length) {
 			throw new Exception("Index out of bound (index = " + index + ", actual size = " + valuesArray.length + ")");
 		}
 		return valuesArray[index];
 	}
-	
+
 	/**
 	 * Returns the size of the {@link DataObject} (the number of pairs key-value)
 	 */
@@ -330,7 +524,7 @@ public class DataObject {
 	 * 
 	 * @return <code>true</code> if it is a List, <code>false</code> otherwise
 	 */
-	//TODO unused...
+	// TODO unused...
 	public boolean isList() {
 		if (data.keySet().size() != 1) {
 			return false;
@@ -348,7 +542,7 @@ public class DataObject {
 	 * 
 	 * @return
 	 */
-	//TODO unused...
+	// TODO unused...
 	public List<Object> getList() {
 		if (this.keySet().size() != 1) {
 			return null;
@@ -361,17 +555,17 @@ public class DataObject {
 	}
 
 	/**
-	 * Returns <code>true</code> if the {@link Multimap} contains no key-value pairs. 
+	 * Returns <code>true</code> if the {@link Multimap} contains no key-value pairs.
 	 */
 	public boolean isEmpty() {
 		return data.isEmpty();
 	}
 
 	/**
-	 * Search the passed target through the values of the {@link DataObject}.
-	 * The search is deep, so every nested {@link DataObject} value is inspected.
+	 * Search the passed target through the values of the {@link DataObject}. The search is deep, so every nested {@link DataObject} value is inspected.
 	 * 
-	 * @param target the {@link Object} to search (possible types are {@link String}, {@link Double} and {@link DataObject})
+	 * @param target
+	 *            the {@link Object} to search (possible types are {@link String}, {@link Double} and {@link DataObject})
 	 * @return <code>true</code> if the target is found, <code>false</code> otherwise
 	 */
 	public boolean contains(Object target) {
@@ -392,7 +586,7 @@ public class DataObject {
 		} else if (data.containsValue(target)) { // if the target is a simple object (String or Double)
 			return true;
 		}
-		
+
 		Iterator<Object> iter = this.values().iterator();
 		while (iter.hasNext()) {
 			Object elem = iter.next();
@@ -496,14 +690,16 @@ public class DataObject {
 	public boolean putAll(DataObject dataObject) {
 		return data.putAll(dataObject.data);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the passed object is a number, <code>false</code> othewise
 	 * 
-	 * @param elem the object to check
+	 * @param elem
+	 *            the object to check
 	 */
 	private boolean isNumeric(Object elem) {
-		if(elem instanceof Double) return true;
+		if (elem instanceof Double)
+			return true;
 		try {
 			Double.valueOf(elem.toString());
 			return true;
@@ -519,7 +715,8 @@ public class DataObject {
 	/**
 	 * Returns the {@link LinkedHashMultimap} corresponding to the input XML file
 	 * 
-	 * @param xmlPath the path of the XML file to parse
+	 * @param xmlPath
+	 *            the path of the XML file to parse
 	 * @return the corresponding {@link LinkedHashMultimap} parsed from the XML
 	 */
 	private LinkedHashMultimap<String, Object> parseXML(String xmlPath) {
@@ -542,7 +739,8 @@ public class DataObject {
 	/**
 	 * Navigate recursively through the XML nodes and translate them to a {@link DataObject}
 	 * 
-	 * @param root the root {@link Node} of an XML portion of file
+	 * @param root
+	 *            the root {@link Node} of an XML portion of file
 	 * @return a {@link DataObject} conversion of XML
 	 */
 	private DataObject stepThroughXML(Node root) {
@@ -573,33 +771,35 @@ public class DataObject {
 	// ****************************
 	// *** JSON PARSING METHODS ***
 	// ****************************
-	
+
 	/**
 	 * Parse JSON to DataObject
 	 * 
-	 * @param json the json object to parse 
+	 * @param json
+	 *            the json object to parse
 	 * @return a {@link LinkedHashMultimap} corresponding to the JSON input
 	 */
 	@SuppressWarnings("rawtypes")
 	private LinkedHashMultimap<String, Object> parseJSON(String json) {
-		LinkedHashMultimap<String, Object> dataMap = LinkedHashMultimap.create();;
+		LinkedHashMultimap<String, Object> dataMap = LinkedHashMultimap.create();
+		;
 		JSONParser jsonParser = new JSONParser();
 		try {
 			Map map = (Map) jsonParser.parse(json);
 			Iterator iter = map.entrySet().iterator();
-			while(iter.hasNext()){
+			while (iter.hasNext()) {
 				Map.Entry next = (Map.Entry) iter.next();
 				Object value = next.getValue();
 				String key = (String) next.getKey();
-				if(value instanceof JSONObject){
+				if (value instanceof JSONObject) {
 					dataMap.put(key, stepThroughJSON((JSONObject) value));
-				} else if(value instanceof JSONArray) {
-					for(int i=0; i<((JSONArray)value).size(); i++){
-						Object elem = ((JSONArray)value).get(i);
-						if(elem instanceof JSONObject){
+				} else if (value instanceof JSONArray) {
+					for (int i = 0; i < ((JSONArray) value).size(); i++) {
+						Object elem = ((JSONArray) value).get(i);
+						if (elem instanceof JSONObject) {
 							dataMap.put(key, stepThroughJSON((JSONObject) elem));
 						} else {
-							if(isNumeric(elem)){
+							if (isNumeric(elem)) {
 								dataMap.put(key, Double.valueOf(elem.toString())); // numbers are parsed as Long, so it's converted to Double
 							} else {
 								dataMap.put(key, elem);
@@ -607,7 +807,7 @@ public class DataObject {
 						}
 					}
 				} else {
-					if(isNumeric(value)) {
+					if (isNumeric(value)) {
 						dataMap.put(key, Double.valueOf(value.toString())); // numbers are parsed as Long, so it's converted to Double
 					} else {
 						dataMap.put(key, value);
@@ -622,26 +822,29 @@ public class DataObject {
 
 	/**
 	 * Navigate recursively through the JSON object and converts elements to DataObject
-	 * @param obj the {@link JSONObject} to convert
+	 * 
+	 * @param obj
+	 *            the {@link JSONObject} to convert
 	 * @return a {@link DataObject} corresponding to the passed {@link JSONObject}
 	 */
 	@SuppressWarnings("rawtypes")
-	private DataObject stepThroughJSON(JSONObject obj){
-		LinkedHashMultimap<String, Object> dataMap = LinkedHashMultimap.create();;
+	private DataObject stepThroughJSON(JSONObject obj) {
+		LinkedHashMultimap<String, Object> dataMap = LinkedHashMultimap.create();
+		;
 		Iterator iterator = obj.entrySet().iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Map.Entry next = (Map.Entry) iterator.next();
 			Object value = next.getValue();
 			String key = (String) next.getKey();
-			if(value instanceof JSONObject){
+			if (value instanceof JSONObject) {
 				dataMap.put(key, stepThroughJSON((JSONObject) value));
-			} else if(value instanceof JSONArray) {
-				for(int i=0; i<((JSONArray)value).size(); i++){
-					Object elem = ((JSONArray)value).get(i);
-					if(elem instanceof JSONObject){
+			} else if (value instanceof JSONArray) {
+				for (int i = 0; i < ((JSONArray) value).size(); i++) {
+					Object elem = ((JSONArray) value).get(i);
+					if (elem instanceof JSONObject) {
 						dataMap.put(key, stepThroughJSON((JSONObject) elem));
 					} else {
-						if(isNumeric(elem)){
+						if (isNumeric(elem)) {
 							dataMap.put(key, Double.valueOf(elem.toString())); // numbers are parsed as Long, so it's converted to Double
 						} else {
 							dataMap.put(key, elem);
@@ -649,7 +852,7 @@ public class DataObject {
 					}
 				}
 			} else {
-				if(isNumeric(value)) {
+				if (isNumeric(value)) {
 					dataMap.put(key, Double.valueOf(value.toString())); // numbers are parsed as Long, so it's converted to Double
 				} else {
 					dataMap.put(key, value);
@@ -658,7 +861,6 @@ public class DataObject {
 		}
 		return new DataObject(dataMap);
 	}
-	
 
 	@Override
 	public String toString() {
@@ -692,8 +894,10 @@ public class DataObject {
 	/**
 	 * Search and compare every single key-value pair
 	 * 
-	 * @param a the {@link DataObject} to compare
-	 * @param b the {@link DataObject} to compare
+	 * @param a
+	 *            the {@link DataObject} to compare
+	 * @param b
+	 *            the {@link DataObject} to compare
 	 * @return <code>true</code> if the {@link DataObject} are deeply equals, <code>false</code> otherwise
 	 */
 	private boolean deepEqual(DataObject a, DataObject b) {

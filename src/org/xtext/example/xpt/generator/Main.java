@@ -584,6 +584,7 @@ public class Main {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Object resolveQuery(EList<Step> steps) throws Exception {
 		Object result;
 		String placeholder = steps.get(0).getPlaceholder();
@@ -596,25 +597,59 @@ public class Main {
 			if (value instanceof DataObject) {
 				if (steps.size() > 1) { // if there query goes deeper
 					result = ((DataObject) value).evaluate(steps);
-					if (((DataObject) result).isSingleValue()) {
-						result = ((DataObject) result).getFirstValue();
-					}
+					// if (result instanceof DataObject && ((DataObject) result).isSingleValue()) {
+					// result = ((DataObject) result).getFirstValue();
+					// }
 				} else {
-					if (((DataObject) value).isSingleValue()) {
-						result = ((DataObject) value).getFirstValue();
-					} else {
-						result = value;
-					}
+					// if (value instanceof DataObject && ((DataObject) value).isSingleValue()) {
+					// result = ((DataObject) value).getFirstValue();
+					// } else {
+					result = value;
+					// }
 				}
+			} else if (value instanceof ArrayList) {
+				// List<Object> list = new ArrayList<>();
+				if (steps.size() > 1) {
+					result = DataObject.evaluateArray((ArrayList<Object>) value, steps);
+					// for (Object obj : ((ArrayList<Object>) value)) {
+					// Object evalResult = ((DataObject) obj).evaluate(steps);
+					// if (evalResult instanceof ArrayList) {
+					// for (Object elem : (ArrayList<Object>) evalResult) {
+					// if (!list.contains(elem)) {
+					// list.add(elem);
+					// }
+					// }
+					// } else {
+					// if (!list.contains(evalResult)) {
+					// list.add(evalResult);
+					// }
+					// }
+					// }
+				} else {
+					// list = (ArrayList<Object>) value;
+					result = (ArrayList<Object>) value;
+				}
+
+				if (result instanceof ArrayList && ((ArrayList<Object>) result).size() == 1) {
+					result = ((ArrayList<Object>) result).get(0);
+					// if (result instanceof DataObject && ((DataObject) result).isSingleValue()) {
+					// result = ((DataObject) result).getFirstValue();
+					// }
+				}
+				// result = list;
+
 			} else {
+				if (steps.size() > 1) {
+					throw new Exception("The property '" + steps.get(1).getName() + "' could not be retrieved from the element '" + value + "' of type '" + value.getClass().getSimpleName() + "'");
+				}
 				result = value;
 			}
 		} else {
 			result = input.evaluate(steps);
 			// if the DataObject is containing a single value it will be extrapolated from the Object
-			if (((DataObject) result).isSingleValue()) {
-				result = ((DataObject) result).getFirstValue();
-			}
+			// if (result instanceof DataObject && ((DataObject) result).isSingleValue()) {
+			// result = ((DataObject) result).getFirstValue();
+			// }
 		}
 		return result;
 	}
@@ -628,6 +663,8 @@ public class Main {
 					result = applyStringFunctions(result, f);
 				} else if (result instanceof Double) {
 					result = applyDoubleFunctions(result, f);
+				} else if (result instanceof ArrayList) {
+					result = applyArrayFunctions(result, f);
 				}
 			}
 		}
@@ -658,11 +695,17 @@ public class Main {
 
 		}
 
-		if (!(variables.get(aq.getVar()) instanceof DataObject)) {
+		Object obj = variables.get(aq.getVar());
+		boolean isDataObject;
+		if (obj instanceof DataObject) {
+			isDataObject = true;
+		} else if(obj instanceof ArrayList) {
+			isDataObject = false;
+		} else {
 			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getSimpleName() + " (" + aq.getVar() + "). A DataObject type was expected " + assertionRepr);
 		}
 
-		DataObject set = (DataObject) variables.get(aq.getVar());
+		Object set = obj; //(DataObject) variables.get(aq.getVar());
 		String alias = aq.getAlias();
 		boolean result;
 		double count, sum;
@@ -671,7 +714,7 @@ public class Main {
 			throw new Exception("The variable '" + alias + "' is already used. Choose another. " + assertionRepr);
 		}
 
-		Iterator<Object> iter = set.values().iterator();
+		Iterator<Object> iter = ((isDataObject) ? ((DataObject) set).values().iterator() : ((ArrayList<Object>) set).iterator());
 
 		switch (aq.getQuantifier()) {
 		case "forall":
@@ -691,7 +734,7 @@ public class Main {
 				result = result | verifyAssertions(aq.getConditions());
 			}
 			variables.remove(alias);
-			return true;
+			return result;
 		case "numOf":
 			count = 0;
 			while (iter.hasNext()) {
@@ -943,7 +986,44 @@ public class Main {
 			}
 		case "cardinality":
 			if (params == null) {
-				return ((DataObject) object).size();
+				return (double) ((DataObject) object).size();
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
+			}
+		default:
+			//return null;
+			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
+		}
+	}
+	
+	private Object applyArrayFunctions(Object object, Function function) throws Exception {
+		List<Object> params = getFunctionParams(function);
+		switch (function.getName()) {
+		case "contains":
+			if (((ArrayList<Object>) object).isEmpty()) {
+				throw new Exception("Function '" + function.getName() + "' could not be applied because the Array is empty");
+			}
+			if (params.size() == 1) {
+				return ((ArrayList<Object>) object).contains(params.get(0));
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
+			}
+		case "get":
+			if (((ArrayList<Object>) object).isEmpty()) {
+				throw new Exception("Function '" + function.getName() + "' could not be applied because the Array is empty");
+			}
+			if (params.size() == 1) {
+				if (params.get(0) instanceof Double) {
+					return ((ArrayList<Object>) object).get((int) (double) params.get(0));
+				} else {
+					throw new Exception("Function 'get(key)' could not be applied on a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
+				}
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 1)");
+			}
+		case "cardinality":
+			if (params == null) {
+				return (double) ((ArrayList<Object>) object).size();
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
@@ -1031,7 +1111,7 @@ public class Main {
 						values.add(v);
 					}
 				}
-				result = new DataObject(d.getVar(), values);
+				result = values;
 			} else if (!d.getAssert().getSteps().isEmpty()) {
 				try {
 					result = resolveQuery(d.getAssert().getSteps());
