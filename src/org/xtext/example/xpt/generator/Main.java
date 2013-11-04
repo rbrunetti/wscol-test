@@ -698,16 +698,12 @@ public class Main {
 		}
 
 		Object obj = variables.get(aq.getVar());
-		boolean isDataObject;
-		if (obj instanceof DataObject) {
-			isDataObject = true;
-		} else if(obj instanceof ArrayList) {
-			isDataObject = false;
-		} else {
-			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getSimpleName() + " (" + aq.getVar() + "). A DataObject type was expected " + assertionRepr);
+
+		if(!(obj instanceof ArrayList)) {
+			throw new Exception("Could not iterate over a " + variables.get(aq.getVar()).getClass().getSimpleName() + " (" + aq.getVar() + ")."
+					+ " Aggregated functions accepts only elements with cardinality greater than one (Array) " + assertionRepr);
 		}
 
-		Object set = obj; //(DataObject) variables.get(aq.getVar());
 		String alias = aq.getAlias();
 		boolean result;
 		double count, sum;
@@ -716,7 +712,7 @@ public class Main {
 			throw new Exception("The variable '" + alias + "' is already used. Choose another. " + assertionRepr);
 		}
 
-		Iterator<Object> iter = ((isDataObject) ? ((DataObject) set).values().iterator() : ((ArrayList<Object>) set).iterator());
+		Iterator<Object> iter = ((ArrayList<Object>) obj).iterator();
 
 		switch (aq.getQuantifier()) {
 		case "forall":
@@ -907,14 +903,6 @@ public class Main {
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
-		case "toArray":
-			if (params == null) {
-				ArrayList<Object> list = new ArrayList<Object>();
-				list.add(object);
-				return list; 
-			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
-			}
 		default:
 			//return null;
 			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
@@ -946,14 +934,6 @@ public class Main {
 				return (double) String.valueOf((double) object).length();
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
-			}
-		case "toArray":
-			if (params == null) {
-				ArrayList<Object> list = new ArrayList<Object>();
-				list.add(object);
-				return list;
-			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
 	default:
 			//return null;
@@ -1008,14 +988,6 @@ public class Main {
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
-		case "toArray":
-			if (params == null) {
-				ArrayList<Object> list = new ArrayList<Object>();
-				list.add(object);
-				return list; 
-			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
-			}
 		default:
 			//return null;
 			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
@@ -1050,12 +1022,6 @@ public class Main {
 		case "cardinality":
 			if (params == null) {
 				return (double) ((ArrayList<Object>) object).size();
-			} else {
-				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
-			}
-		case "toArray":
-			if (params == null) {
-				return object; 
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}

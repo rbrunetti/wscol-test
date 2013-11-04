@@ -1,11 +1,13 @@
-let $books = /inventory/book/price;
-[1, 2, "pippo"] == true;
-
 /*
+let $a = /inventory/book;
+let $b = exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1)));
+$b == true;
+*/
+
 let $x = [1, 2, 3, 4];
-let $a = /inventory/book[publisher!="Spectra"].toArray();
+let $a = /inventory/book[publisher!="Spectra"];
 let $c = /inventory/book;
-let $d = $c/authors/author[1].toArray();
+let $d = $c/authors/author[1];
 avg($y in $x, $y > 0) == 2.5 && numOf($cc in $a, $cc/title.length() > 6) > 1 && exists($aaa in $d, $aaa.startsWith("Z")) && forall($aa in $d, !($aa.startsWith("Z"))) && $x.contains($x.get(2));
 
 /*
