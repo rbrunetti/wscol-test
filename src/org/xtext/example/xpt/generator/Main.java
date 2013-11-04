@@ -562,7 +562,7 @@ public class Main {
 		// if the assertion is a constant it's not going to be an xpath query
 		if (assertion.getConstant() != null) {
 			return ((assertion.getConstant().getString() == null) ? assertion.getConstant().getNumber() : assertion.getConstant().getString());
-		}
+		} else
 		// look if there's a placeholder, if any substitute it with its values (note: the placeholder is always on the first step!)
 		if (!assertion.getSteps().isEmpty()) {
 			try {
@@ -570,8 +570,10 @@ public class Main {
 			} catch (Exception e) {
 				throw new Exception(e.getMessage() + assertionRepr);
 			}
-//		} else {
-//			result = assertion.isBoolean();
+		} else if (assertion.getValues() != null) {
+			result = Helper.valuesToList(assertion.getValues());
+		} else {
+			result = assertion.isBool();
 		}
 
 		// functions evaluation, according to the corresponding type
@@ -630,12 +632,12 @@ public class Main {
 					result = (ArrayList<Object>) value;
 				}
 
-				if (result instanceof ArrayList && ((ArrayList<Object>) result).size() == 1) {
-					result = ((ArrayList<Object>) result).get(0);
-					// if (result instanceof DataObject && ((DataObject) result).isSingleValue()) {
-					// result = ((DataObject) result).getFirstValue();
-					// }
-				}
+				// if (result instanceof ArrayList && ((ArrayList<Object>) result).size() == 1) {
+				// result = ((ArrayList<Object>) result).get(0);
+				// if (result instanceof DataObject && ((DataObject) result).isSingleValue()) {
+				// result = ((DataObject) result).getFirstValue();
+				// }
+				// }
 				// result = list;
 
 			} else {
@@ -905,6 +907,14 @@ public class Main {
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
+		case "toArray":
+			if (params == null) {
+				ArrayList<Object> list = new ArrayList<Object>();
+				list.add(object);
+				return list; 
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
+			}
 		default:
 			//return null;
 			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
@@ -937,7 +947,15 @@ public class Main {
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 2)");
 			}
-		default:
+		case "toArray":
+			if (params == null) {
+				ArrayList<Object> list = new ArrayList<Object>();
+				list.add(object);
+				return list;
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
+			}
+	default:
 			//return null;
 			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
 		}
@@ -990,6 +1008,14 @@ public class Main {
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
+		case "toArray":
+			if (params == null) {
+				ArrayList<Object> list = new ArrayList<Object>();
+				list.add(object);
+				return list; 
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
+			}
 		default:
 			//return null;
 			throw new Exception("Unsupported function '" + function.getName() + "' for a " + object.getClass().getSimpleName() + " (value: \"" + object + "\")");
@@ -1024,6 +1050,12 @@ public class Main {
 		case "cardinality":
 			if (params == null) {
 				return (double) ((ArrayList<Object>) object).size();
+			} else {
+				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
+			}
+		case "toArray":
+			if (params == null) {
+				return object; 
 			} else {
 				throw new Exception("Wrong number of parameters for function '" + function.getName() + "' (" + params.size() + " instead of 0)");
 			}
@@ -1123,8 +1155,8 @@ public class Main {
 
 			} else if (d.getAssert() instanceof AssertionQuantified) {
 				result = doAssertionQuantified(d.getAssert());
-//			} else {
-//				result = d.getAssert().isBoolean();
+			} else {
+				result = d.getAssert().isBool();
 			}
 
 			variables.put(d.getVar(), result);

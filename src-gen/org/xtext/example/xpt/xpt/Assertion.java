@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getFunctions <em>Functions</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Assertion#getConstant <em>Constant</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Assertion#isBool <em>Bool</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,5 +109,31 @@ public interface Assertion extends AssertionForm
    * @generated
    */
   void setConstant(Constant value);
+
+  /**
+   * Returns the value of the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Bool</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Bool</em>' attribute.
+   * @see #setBool(boolean)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getAssertion_Bool()
+   * @model
+   * @generated
+   */
+  boolean isBool();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Assertion#isBool <em>Bool</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Bool</em>' attribute.
+   * @see #isBool()
+   * @generated
+   */
+  void setBool(boolean value);
 
 } // Assertion

@@ -49,7 +49,7 @@ AssertionStdCmp:
 
 // Assertion
 Assertion:
-	steps+=Step+ ('.' functions+=Function)* | AssertionQuantifiedNumeric | '[' values=Values ']' | constant=Constant;
+	steps+=Step+ ('.' functions+=Function)* | AssertionQuantifiedNumeric | '[' values=Values ']' | constant=Constant | bool = BOOLEAN;
 
 // Assertion with boolean result
 AssertionBoolean returns Assertion:
@@ -65,10 +65,10 @@ AssertionQuantifiedNumeric returns AssertionQuantified:
 
 // Steps describing the navigation path through an SDO
 Step:
-	'/' name=ID ('[' attribute=Attribute ']')? | placeholder=Variable;
+	'/' name=ID ('[' predicate=Predicate ']')? | placeholder=Variable;
 
-// Attribute for SDO navigation: according to the operation checks the searched value, if possible
-Attribute:
+// Predicate for SDO navigation: according to the operation checks the searched value, if possible
+Predicate:
 	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER | var=Variable;
 
 // Function

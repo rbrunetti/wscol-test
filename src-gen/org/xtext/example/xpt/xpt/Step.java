@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.xtext.example.xpt.xpt.Step#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.Step#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.Step#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.Step#getPlaceholder <em>Placeholder</em>}</li>
  * </ul>
  * </p>
@@ -51,30 +51,30 @@ public interface Step extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Attribute</b></em>' containment reference.
+   * Returns the value of the '<em><b>Predicate</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Attribute</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Predicate</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attribute</em>' containment reference.
-   * @see #setAttribute(Attribute)
-   * @see org.xtext.example.xpt.xpt.XptPackage#getStep_Attribute()
+   * @return the value of the '<em>Predicate</em>' containment reference.
+   * @see #setPredicate(Predicate)
+   * @see org.xtext.example.xpt.xpt.XptPackage#getStep_Predicate()
    * @model containment="true"
    * @generated
    */
-  Attribute getAttribute();
+  Predicate getPredicate();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Step#getAttribute <em>Attribute</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.example.xpt.xpt.Step#getPredicate <em>Predicate</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Attribute</em>' containment reference.
-   * @see #getAttribute()
+   * @param value the new value of the '<em>Predicate</em>' containment reference.
+   * @see #getPredicate()
    * @generated
    */
-  void setAttribute(Attribute value);
+  void setPredicate(Predicate value);
 
   /**
    * Returns the value of the '<em><b>Placeholder</b></em>' attribute.

@@ -317,13 +317,22 @@ public interface XptPackage extends EPackage
   int ASSERTION__CONSTANT = ASSERTION_FORM_FEATURE_COUNT + 3;
 
   /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION__BOOL = ASSERTION_FORM_FEATURE_COUNT + 4;
+
+  /**
    * The number of structural features of the '<em>Assertion</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 4;
+  int ASSERTION_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl <em>Assertion Quantified</em>}' class.
@@ -372,13 +381,22 @@ public interface XptPackage extends EPackage
   int ASSERTION_QUANTIFIED__CONSTANT = ASSERTION_FORM_FEATURE_COUNT + 3;
 
   /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__BOOL = ASSERTION_FORM_FEATURE_COUNT + 4;
+
+  /**
    * The feature id for the '<em><b>Quantifier</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__QUANTIFIER = ASSERTION_FORM_FEATURE_COUNT + 4;
+  int ASSERTION_QUANTIFIED__QUANTIFIER = ASSERTION_FORM_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Alias</b></em>' attribute.
@@ -387,7 +405,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__ALIAS = ASSERTION_FORM_FEATURE_COUNT + 5;
+  int ASSERTION_QUANTIFIED__ALIAS = ASSERTION_FORM_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Var</b></em>' attribute.
@@ -396,7 +414,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__VAR = ASSERTION_FORM_FEATURE_COUNT + 6;
+  int ASSERTION_QUANTIFIED__VAR = ASSERTION_FORM_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Conditions</b></em>' containment reference.
@@ -405,7 +423,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__CONDITIONS = ASSERTION_FORM_FEATURE_COUNT + 7;
+  int ASSERTION_QUANTIFIED__CONDITIONS = ASSERTION_FORM_FEATURE_COUNT + 8;
 
   /**
    * The number of structural features of the '<em>Assertion Quantified</em>' class.
@@ -414,7 +432,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 8;
+  int ASSERTION_QUANTIFIED_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 9;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.StepImpl <em>Step</em>}' class.
@@ -436,13 +454,13 @@ public interface XptPackage extends EPackage
   int STEP__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Attribute</b></em>' containment reference.
+   * The feature id for the '<em><b>Predicate</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP__ATTRIBUTE = 1;
+  int STEP__PREDICATE = 1;
 
   /**
    * The feature id for the '<em><b>Placeholder</b></em>' attribute.
@@ -463,14 +481,14 @@ public interface XptPackage extends EPackage
   int STEP_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AttributeImpl <em>Attribute</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.PredicateImpl <em>Predicate</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.xpt.xpt.impl.AttributeImpl
-   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAttribute()
+   * @see org.xtext.example.xpt.xpt.impl.PredicateImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getPredicate()
    * @generated
    */
-  int ATTRIBUTE = 10;
+  int PREDICATE = 10;
 
   /**
    * The feature id for the '<em><b>Property</b></em>' attribute.
@@ -479,7 +497,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__PROPERTY = 0;
+  int PREDICATE__PROPERTY = 0;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -488,7 +506,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__OP = 1;
+  int PREDICATE__OP = 1;
 
   /**
    * The feature id for the '<em><b>Number Value</b></em>' attribute.
@@ -497,7 +515,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__NUMBER_VALUE = 2;
+  int PREDICATE__NUMBER_VALUE = 2;
 
   /**
    * The feature id for the '<em><b>Str Value</b></em>' attribute.
@@ -506,7 +524,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__STR_VALUE = 3;
+  int PREDICATE__STR_VALUE = 3;
 
   /**
    * The feature id for the '<em><b>Var Value</b></em>' attribute.
@@ -515,7 +533,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__VAR_VALUE = 4;
+  int PREDICATE__VAR_VALUE = 4;
 
   /**
    * The feature id for the '<em><b>Number</b></em>' attribute.
@@ -524,7 +542,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__NUMBER = 5;
+  int PREDICATE__NUMBER = 5;
 
   /**
    * The feature id for the '<em><b>Var</b></em>' attribute.
@@ -533,16 +551,16 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__VAR = 6;
+  int PREDICATE__VAR = 6;
 
   /**
-   * The number of structural features of the '<em>Attribute</em>' class.
+   * The number of structural features of the '<em>Predicate</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FEATURE_COUNT = 7;
+  int PREDICATE_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.FunctionImpl <em>Function</em>}' class.
@@ -1000,6 +1018,17 @@ public interface XptPackage extends EPackage
   EReference getAssertion_Constant();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Assertion#isBool <em>Bool</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Bool</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertion#isBool()
+   * @see #getAssertion()
+   * @generated
+   */
+  EAttribute getAssertion_Bool();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionQuantified <em>Assertion Quantified</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1075,15 +1104,15 @@ public interface XptPackage extends EPackage
   EAttribute getStep_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Step#getAttribute <em>Attribute</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Step#getPredicate <em>Predicate</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Attribute</em>'.
-   * @see org.xtext.example.xpt.xpt.Step#getAttribute()
+   * @return the meta object for the containment reference '<em>Predicate</em>'.
+   * @see org.xtext.example.xpt.xpt.Step#getPredicate()
    * @see #getStep()
    * @generated
    */
-  EReference getStep_Attribute();
+  EReference getStep_Predicate();
 
   /**
    * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Step#getPlaceholder <em>Placeholder</em>}'.
@@ -1097,91 +1126,91 @@ public interface XptPackage extends EPackage
   EAttribute getStep_Placeholder();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Attribute <em>Attribute</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Predicate <em>Predicate</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Attribute</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute
+   * @return the meta object for class '<em>Predicate</em>'.
+   * @see org.xtext.example.xpt.xpt.Predicate
    * @generated
    */
-  EClass getAttribute();
+  EClass getPredicate();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getProperty <em>Property</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Predicate#getProperty <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Property</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getProperty()
-   * @see #getAttribute()
+   * @see org.xtext.example.xpt.xpt.Predicate#getProperty()
+   * @see #getPredicate()
    * @generated
    */
-  EAttribute getAttribute_Property();
+  EAttribute getPredicate_Property();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getOp <em>Op</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Predicate#getOp <em>Op</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Op</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getOp()
-   * @see #getAttribute()
+   * @see org.xtext.example.xpt.xpt.Predicate#getOp()
+   * @see #getPredicate()
    * @generated
    */
-  EAttribute getAttribute_Op();
+  EAttribute getPredicate_Op();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getNumberValue <em>Number Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Predicate#getNumberValue <em>Number Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Number Value</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getNumberValue()
-   * @see #getAttribute()
+   * @see org.xtext.example.xpt.xpt.Predicate#getNumberValue()
+   * @see #getPredicate()
    * @generated
    */
-  EAttribute getAttribute_NumberValue();
+  EAttribute getPredicate_NumberValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getStrValue <em>Str Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Predicate#getStrValue <em>Str Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Str Value</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getStrValue()
-   * @see #getAttribute()
+   * @see org.xtext.example.xpt.xpt.Predicate#getStrValue()
+   * @see #getPredicate()
    * @generated
    */
-  EAttribute getAttribute_StrValue();
+  EAttribute getPredicate_StrValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getVarValue <em>Var Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Predicate#getVarValue <em>Var Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Var Value</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getVarValue()
-   * @see #getAttribute()
+   * @see org.xtext.example.xpt.xpt.Predicate#getVarValue()
+   * @see #getPredicate()
    * @generated
    */
-  EAttribute getAttribute_VarValue();
+  EAttribute getPredicate_VarValue();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getNumber <em>Number</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Predicate#getNumber <em>Number</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Number</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getNumber()
-   * @see #getAttribute()
+   * @see org.xtext.example.xpt.xpt.Predicate#getNumber()
+   * @see #getPredicate()
    * @generated
    */
-  EAttribute getAttribute_Number();
+  EAttribute getPredicate_Number();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Attribute#getVar <em>Var</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Predicate#getVar <em>Var</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Var</em>'.
-   * @see org.xtext.example.xpt.xpt.Attribute#getVar()
-   * @see #getAttribute()
+   * @see org.xtext.example.xpt.xpt.Predicate#getVar()
+   * @see #getPredicate()
    * @generated
    */
-  EAttribute getAttribute_Var();
+  EAttribute getPredicate_Var();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Function <em>Function</em>}'.
@@ -1572,6 +1601,14 @@ public interface XptPackage extends EPackage
     EReference ASSERTION__CONSTANT = eINSTANCE.getAssertion_Constant();
 
     /**
+     * The meta object literal for the '<em><b>Bool</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ASSERTION__BOOL = eINSTANCE.getAssertion_Bool();
+
+    /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl <em>Assertion Quantified</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1632,12 +1669,12 @@ public interface XptPackage extends EPackage
     EAttribute STEP__NAME = eINSTANCE.getStep_Name();
 
     /**
-     * The meta object literal for the '<em><b>Attribute</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Predicate</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP__ATTRIBUTE = eINSTANCE.getStep_Attribute();
+    EReference STEP__PREDICATE = eINSTANCE.getStep_Predicate();
 
     /**
      * The meta object literal for the '<em><b>Placeholder</b></em>' attribute feature.
@@ -1648,14 +1685,14 @@ public interface XptPackage extends EPackage
     EAttribute STEP__PLACEHOLDER = eINSTANCE.getStep_Placeholder();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AttributeImpl <em>Attribute</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.PredicateImpl <em>Predicate</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.xpt.xpt.impl.AttributeImpl
-     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAttribute()
+     * @see org.xtext.example.xpt.xpt.impl.PredicateImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getPredicate()
      * @generated
      */
-    EClass ATTRIBUTE = eINSTANCE.getAttribute();
+    EClass PREDICATE = eINSTANCE.getPredicate();
 
     /**
      * The meta object literal for the '<em><b>Property</b></em>' attribute feature.
@@ -1663,7 +1700,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__PROPERTY = eINSTANCE.getAttribute_Property();
+    EAttribute PREDICATE__PROPERTY = eINSTANCE.getPredicate_Property();
 
     /**
      * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
@@ -1671,7 +1708,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__OP = eINSTANCE.getAttribute_Op();
+    EAttribute PREDICATE__OP = eINSTANCE.getPredicate_Op();
 
     /**
      * The meta object literal for the '<em><b>Number Value</b></em>' attribute feature.
@@ -1679,7 +1716,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__NUMBER_VALUE = eINSTANCE.getAttribute_NumberValue();
+    EAttribute PREDICATE__NUMBER_VALUE = eINSTANCE.getPredicate_NumberValue();
 
     /**
      * The meta object literal for the '<em><b>Str Value</b></em>' attribute feature.
@@ -1687,7 +1724,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__STR_VALUE = eINSTANCE.getAttribute_StrValue();
+    EAttribute PREDICATE__STR_VALUE = eINSTANCE.getPredicate_StrValue();
 
     /**
      * The meta object literal for the '<em><b>Var Value</b></em>' attribute feature.
@@ -1695,7 +1732,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__VAR_VALUE = eINSTANCE.getAttribute_VarValue();
+    EAttribute PREDICATE__VAR_VALUE = eINSTANCE.getPredicate_VarValue();
 
     /**
      * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
@@ -1703,7 +1740,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__NUMBER = eINSTANCE.getAttribute_Number();
+    EAttribute PREDICATE__NUMBER = eINSTANCE.getPredicate_Number();
 
     /**
      * The meta object literal for the '<em><b>Var</b></em>' attribute feature.
@@ -1711,7 +1748,7 @@ public interface XptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE__VAR = eINSTANCE.getAttribute_Var();
+    EAttribute PREDICATE__VAR = eINSTANCE.getPredicate_Var();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.FunctionImpl <em>Function</em>}' class.

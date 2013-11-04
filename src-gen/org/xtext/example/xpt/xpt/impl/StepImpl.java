@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.xtext.example.xpt.xpt.Attribute;
+import org.xtext.example.xpt.xpt.Predicate;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.XptPackage;
 
@@ -23,7 +23,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.StepImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.StepImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.StepImpl#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.StepImpl#getPlaceholder <em>Placeholder</em>}</li>
  * </ul>
  * </p>
@@ -53,14 +53,14 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference.
+   * The cached value of the '{@link #getPredicate() <em>Predicate</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttribute()
+   * @see #getPredicate()
    * @generated
    * @ordered
    */
-  protected Attribute attribute;
+  protected Predicate predicate;
 
   /**
    * The default value of the '{@link #getPlaceholder() <em>Placeholder</em>}' attribute.
@@ -131,9 +131,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute getAttribute()
+  public Predicate getPredicate()
   {
-    return attribute;
+    return predicate;
   }
 
   /**
@@ -141,13 +141,13 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAttribute(Attribute newAttribute, NotificationChain msgs)
+  public NotificationChain basicSetPredicate(Predicate newPredicate, NotificationChain msgs)
   {
-    Attribute oldAttribute = attribute;
-    attribute = newAttribute;
+    Predicate oldPredicate = predicate;
+    predicate = newPredicate;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.STEP__ATTRIBUTE, oldAttribute, newAttribute);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XptPackage.STEP__PREDICATE, oldPredicate, newPredicate);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -158,20 +158,20 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAttribute(Attribute newAttribute)
+  public void setPredicate(Predicate newPredicate)
   {
-    if (newAttribute != attribute)
+    if (newPredicate != predicate)
     {
       NotificationChain msgs = null;
-      if (attribute != null)
-        msgs = ((InternalEObject)attribute).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.STEP__ATTRIBUTE, null, msgs);
-      if (newAttribute != null)
-        msgs = ((InternalEObject)newAttribute).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.STEP__ATTRIBUTE, null, msgs);
-      msgs = basicSetAttribute(newAttribute, msgs);
+      if (predicate != null)
+        msgs = ((InternalEObject)predicate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XptPackage.STEP__PREDICATE, null, msgs);
+      if (newPredicate != null)
+        msgs = ((InternalEObject)newPredicate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XptPackage.STEP__PREDICATE, null, msgs);
+      msgs = basicSetPredicate(newPredicate, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.STEP__ATTRIBUTE, newAttribute, newAttribute));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.STEP__PREDICATE, newPredicate, newPredicate));
   }
 
   /**
@@ -207,8 +207,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case XptPackage.STEP__ATTRIBUTE:
-        return basicSetAttribute(null, msgs);
+      case XptPackage.STEP__PREDICATE:
+        return basicSetPredicate(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -225,8 +225,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case XptPackage.STEP__NAME:
         return getName();
-      case XptPackage.STEP__ATTRIBUTE:
-        return getAttribute();
+      case XptPackage.STEP__PREDICATE:
+        return getPredicate();
       case XptPackage.STEP__PLACEHOLDER:
         return getPlaceholder();
     }
@@ -246,8 +246,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case XptPackage.STEP__NAME:
         setName((String)newValue);
         return;
-      case XptPackage.STEP__ATTRIBUTE:
-        setAttribute((Attribute)newValue);
+      case XptPackage.STEP__PREDICATE:
+        setPredicate((Predicate)newValue);
         return;
       case XptPackage.STEP__PLACEHOLDER:
         setPlaceholder((String)newValue);
@@ -269,8 +269,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case XptPackage.STEP__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case XptPackage.STEP__ATTRIBUTE:
-        setAttribute((Attribute)null);
+      case XptPackage.STEP__PREDICATE:
+        setPredicate((Predicate)null);
         return;
       case XptPackage.STEP__PLACEHOLDER:
         setPlaceholder(PLACEHOLDER_EDEFAULT);
@@ -291,8 +291,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case XptPackage.STEP__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case XptPackage.STEP__ATTRIBUTE:
-        return attribute != null;
+      case XptPackage.STEP__PREDICATE:
+        return predicate != null;
       case XptPackage.STEP__PLACEHOLDER:
         return PLACEHOLDER_EDEFAULT == null ? placeholder != null : !PLACEHOLDER_EDEFAULT.equals(placeholder);
     }

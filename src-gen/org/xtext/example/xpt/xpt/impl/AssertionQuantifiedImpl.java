@@ -37,6 +37,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getFunctions <em>Functions</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getConstant <em>Constant</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#isBool <em>Bool</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getQuantifier <em>Quantifier</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl#getVar <em>Var</em>}</li>
@@ -87,6 +88,26 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
    * @ordered
    */
   protected Constant constant;
+
+  /**
+   * The default value of the '{@link #isBool() <em>Bool</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBool()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean BOOL_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isBool() <em>Bool</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBool()
+   * @generated
+   * @ordered
+   */
+  protected boolean bool = BOOL_EDEFAULT;
 
   /**
    * The default value of the '{@link #getQuantifier() <em>Quantifier</em>}' attribute.
@@ -308,6 +329,29 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isBool()
+  {
+    return bool;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBool(boolean newBool)
+  {
+    boolean oldBool = bool;
+    bool = newBool;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION_QUANTIFIED__BOOL, oldBool, bool));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public String getQuantifier()
   {
     return quantifier;
@@ -462,6 +506,8 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
         return getValues();
       case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
         return getConstant();
+      case XptPackage.ASSERTION_QUANTIFIED__BOOL:
+        return isBool();
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         return getQuantifier();
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
@@ -498,6 +544,9 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
         return;
       case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
         setConstant((Constant)newValue);
+        return;
+      case XptPackage.ASSERTION_QUANTIFIED__BOOL:
+        setBool((Boolean)newValue);
         return;
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         setQuantifier((String)newValue);
@@ -537,6 +586,9 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
       case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
         setConstant((Constant)null);
         return;
+      case XptPackage.ASSERTION_QUANTIFIED__BOOL:
+        setBool(BOOL_EDEFAULT);
+        return;
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         setQuantifier(QUANTIFIER_EDEFAULT);
         return;
@@ -571,6 +623,8 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
         return values != null;
       case XptPackage.ASSERTION_QUANTIFIED__CONSTANT:
         return constant != null;
+      case XptPackage.ASSERTION_QUANTIFIED__BOOL:
+        return bool != BOOL_EDEFAULT;
       case XptPackage.ASSERTION_QUANTIFIED__QUANTIFIER:
         return QUANTIFIER_EDEFAULT == null ? quantifier != null : !QUANTIFIER_EDEFAULT.equals(quantifier);
       case XptPackage.ASSERTION_QUANTIFIED__ALIAS:
@@ -599,6 +653,7 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
         case XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS: return XptPackage.ASSERTION__FUNCTIONS;
         case XptPackage.ASSERTION_QUANTIFIED__VALUES: return XptPackage.ASSERTION__VALUES;
         case XptPackage.ASSERTION_QUANTIFIED__CONSTANT: return XptPackage.ASSERTION__CONSTANT;
+        case XptPackage.ASSERTION_QUANTIFIED__BOOL: return XptPackage.ASSERTION__BOOL;
         default: return -1;
       }
     }
@@ -621,6 +676,7 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
         case XptPackage.ASSERTION__FUNCTIONS: return XptPackage.ASSERTION_QUANTIFIED__FUNCTIONS;
         case XptPackage.ASSERTION__VALUES: return XptPackage.ASSERTION_QUANTIFIED__VALUES;
         case XptPackage.ASSERTION__CONSTANT: return XptPackage.ASSERTION_QUANTIFIED__CONSTANT;
+        case XptPackage.ASSERTION__BOOL: return XptPackage.ASSERTION_QUANTIFIED__BOOL;
         default: return -1;
       }
     }
@@ -638,7 +694,9 @@ public class AssertionQuantifiedImpl extends AssertionFormImpl implements Assert
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (quantifier: ");
+    result.append(" (bool: ");
+    result.append(bool);
+    result.append(", quantifier: ");
     result.append(quantifier);
     result.append(", alias: ");
     result.append(alias);

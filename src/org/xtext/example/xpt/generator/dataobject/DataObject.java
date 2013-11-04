@@ -24,7 +24,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 import org.xtext.example.xpt.generator.Main;
-import org.xtext.example.xpt.xpt.Attribute;
+import org.xtext.example.xpt.xpt.Predicate;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Values;
 
@@ -93,26 +93,33 @@ public class DataObject {
 	 * @throws Exception
 	 *             if the evaluation goes wrong (see the called method for the specific exception)
 	 */
+	@SuppressWarnings("unchecked")
 	public Object evaluate(EList<Step> steps) throws Exception {
 		Object current = new DataObject(data);
 		for (Step s : steps) {
 			if (s.getPlaceholder() == null) {
-				current = getSubmap(current, s.getName(), s.getAttribute());
+				current = getSubmap(current, s.getName(), s.getPredicate());
 			}
 //			if (current == null) {// TODO a cosa serve?
 //				return null;
 //			}
 		}
-		
+		if (current instanceof ArrayList && ((ArrayList<Object>) current).size() == 1) {
+			current = ((ArrayList<Object>) current).get(0);
+		}
 		return current;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static Object evaluateArray(ArrayList<Object> arrayList, EList<Step> steps) throws Exception {
 		Object current = arrayList;
 		for(Step s : steps){
 			if(s.getPlaceholder() == null) {
-				current = getSubmap(current, s.getName(), s.getAttribute());
+				current = getSubmap(current, s.getName(), s.getPredicate());
 			}
+		}
+		if (current instanceof ArrayList && ((ArrayList<Object>) current).size() == 1) {
+			current = ((ArrayList<Object>) current).get(0);
 		}
 		return current;
 	}
@@ -128,7 +135,7 @@ public class DataObject {
 	 * @throws Exception
 	 *             if the searched property is not found
 	 */
-	private DataObject getSubmapOld(DataObject current, String property, Attribute attribute) throws Exception {
+	private DataObject getSubmapOld(DataObject current, String property, Predicate predicate) throws Exception {
 		DataObject subMap = new DataObject();
 		if (current.keys().contains(property)) {
 			Set<Object> values = current.get(property);
@@ -139,20 +146,20 @@ public class DataObject {
 				i = i + 1;
 				if (next instanceof DataObject) {
 					DataObject nextDO = (DataObject) next;
-					if (attribute != null) {
+					if (predicate != null) {
 						// check the case in which there's a variable instead of a String or a Double
 						int number = -1;
-						if (attribute.getVar() != null) { // check if the attribute is a variable to retrieve
-							Object num = Main.getVariable(attribute.getVar());
+						if (predicate.getVar() != null) { // check if the attribute is a variable to retrieve
+							Object num = Main.getVariable(predicate.getVar());
 							if (num instanceof Double) {
 								number = (int) (double) num;
 							} else if (num == null) {
-								throw new Exception("The variable '" + attribute.getVar() + "' is not defined.");
+								throw new Exception("The variable '" + predicate.getVar() + "' is not defined.");
 							} else {
-								throw new Exception("The variable '" + attribute.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
+								throw new Exception("The variable '" + predicate.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
 							}
 						} else {
-							number = (int) attribute.getNumber();
+							number = (int) predicate.getNumber();
 						}
 
 						if (number > 0) {
@@ -163,7 +170,7 @@ public class DataObject {
 								throw new Exception("Index out of bound (index = " + number + ", actual size = " + current.size() + ")");
 							}
 						} else {
-							DataObject subMapWithAttribute = getSubMapWithAttribute(nextDO, attribute);
+							DataObject subMapWithAttribute = getSubMapWithAttribute(nextDO, predicate);
 							if (subMapWithAttribute != null) {
 								subMap.putAll(subMapWithAttribute);
 							}
@@ -173,21 +180,21 @@ public class DataObject {
 					}
 				} else {
 					// if there's the selection of the n-th element
-					if (attribute != null) {
+					if (predicate != null) {
 
 						// check the case in which there's a variable instead of a String or a Double
 						int number = -1;
-						if (attribute.getVar() != null) {
-							Object num = Main.getVariable(attribute.getVar());
+						if (predicate.getVar() != null) {
+							Object num = Main.getVariable(predicate.getVar());
 							if (num instanceof Double) {
 								number = (int) (double) num;
 							} else if (num == null) {
-								throw new Exception("The variable '" + attribute.getVar() + "' is not defined.");
+								throw new Exception("The variable '" + predicate.getVar() + "' is not defined.");
 							} else {
-								throw new Exception("The variable '" + attribute.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
+								throw new Exception("The variable '" + predicate.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
 							}
 						} else {
-							number = (int) attribute.getNumber();
+							number = (int) predicate.getNumber();
 						}
 
 						if (number > 0) {
@@ -209,18 +216,18 @@ public class DataObject {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static Object getSubmap(Object current, String property, Attribute attribute) throws Exception {
+	public static Object getSubmap(Object current, String property, Predicate predicate) throws Exception {
 		if (current instanceof ArrayList) {
 			List<Object> list = new ArrayList<>();
 			int index = -1;
-			if(attribute != null){
-				index = evaluateNumericAttribute(attribute) - 1;
+			if(predicate != null){
+				index = evaluateNumericAttribute(predicate) - 1;
 				if(index >= 0){
-					attribute = null;
+					predicate = null;
 				}
 			}
 			for(Object obj:((ArrayList<Object>)current)){
-				Object subMap = getSubmap(obj, property, attribute);
+				Object subMap = getSubmap(obj, property, predicate);
 				if(subMap instanceof ArrayList){
 					for(Object elem : (ArrayList<Object>)subMap) {
 						if(!list.contains(elem)) {
@@ -251,8 +258,8 @@ public class DataObject {
 				Set<Object> values = ((DataObject) current).get(property);
 //				if (values.size() > 1) {
 					List<Object> list = new ArrayList<>(values);
-					if (attribute != null) {
-						int numericAttribute = evaluateNumericAttribute(attribute);
+					if (predicate != null) {
+						int numericAttribute = evaluateNumericAttribute(predicate);
 						if (numericAttribute > 0) {
 							if (numericAttribute > list.size()) {
 								throw new Exception("Index out of bound (index = " + numericAttribute + ", actual size = " + list.size() + ")");
@@ -265,12 +272,12 @@ public class DataObject {
 							while (iter.hasNext()) {
 								Object next = iter.next();
 								if (next instanceof DataObject) {
-									if (checkAttribute((DataObject) next, attribute)) {
+									if (checkAttribute((DataObject) next, predicate)) {
 										list.add((DataObject) next);
 									}
 								} else {
 									// TODO sistema
-									throw new Exception("Could not apply the attribute '" + attribute.toString() + "' to element '" + property + "' of type '" + next.getClass().getSimpleName() + "'");
+									throw new Exception("Could not apply the attribute '" + predicate.toString() + "' to element '" + property + "' of type '" + next.getClass().getSimpleName() + "'");
 								}
 							}
 						}
@@ -290,42 +297,42 @@ public class DataObject {
 		}
 	}
 
-	private static int evaluateNumericAttribute(Attribute attribute) throws Exception {
+	private static int evaluateNumericAttribute(Predicate predicate) throws Exception {
 		// check the case in which there's a variable instead of a String or a Double
-		if (attribute.getVar() != null) {
-			Object num = Main.getVariable(attribute.getVar());
+		if (predicate.getVar() != null) {
+			Object num = Main.getVariable(predicate.getVar());
 			if (num instanceof Double) {
 				return (int) (double) num;
 			} else if (num == null) {
-				throw new Exception("The variable '" + attribute.getVar() + "' is not defined.");
+				throw new Exception("The variable '" + predicate.getVar() + "' is not defined.");
 			} else {
-				throw new Exception("The variable '" + attribute.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
+				throw new Exception("The variable '" + predicate.getVar() + "' it's not of a numeric type (Value: " + num + ". Class: " + num.getClass().getSimpleName() + ").");
 			}
 		} else {
-			return (int) attribute.getNumber();
+			return (int) predicate.getNumber();
 		}
 	}
 
-	private static boolean checkAttribute(DataObject current, Attribute attribute) throws Exception {
-		String key = attribute.getProperty();
-		String strValue = attribute.getStrValue();
-		String op = attribute.getOp();
-		double numericValue = attribute.getNumberValue();
+	private static boolean checkAttribute(DataObject current, Predicate predicate) throws Exception {
+		String key = predicate.getProperty();
+		String strValue = predicate.getStrValue();
+		String op = predicate.getOp();
+		double numericValue = predicate.getNumberValue();
 
 		if (current.containsKey(key)) {
 			// check if the comparison is done with a variable; if necessary retrieve the value
-			if (attribute.getVarValue() != null) {
-				Object value = Main.getVariable(attribute.getVarValue());
+			if (predicate.getVarValue() != null) {
+				Object value = Main.getVariable(predicate.getVarValue());
 				if (value != null) {
 					if (value instanceof String) {
 						strValue = (String) value;
 					} else if (value instanceof Double) {
 						numericValue = (double) value;
 					} else {
-						throw new Exception("The variable '" + attribute.getVarValue() + "' contains a " + value.getClass().getSimpleName() + ", unacceptable in attributes.");
+						throw new Exception("The variable '" + predicate.getVarValue() + "' contains a " + value.getClass().getSimpleName() + ", unacceptable in attributes.");
 					}
 				} else {
-					throw new Exception("The variable '" + attribute.getVarValue() + "' is not defined.");
+					throw new Exception("The variable '" + predicate.getVarValue() + "' is not defined.");
 				}
 			}
 
@@ -381,34 +388,34 @@ public class DataObject {
 	 * 
 	 * @param current
 	 *            {@link DataObject} on which the attribute is verified
-	 * @param attribute
+	 * @param predicate
 	 *            {@link Attribute} to check
 	 * @return {@link DataObject} selected from 'current' with the corresponding attribute, <code>null</code> if the attribute is not respected
 	 * @throws Exception
 	 *             if the searched property is not found
 	 */
-	private DataObject getSubMapWithAttribute(DataObject current, Attribute attribute) throws Exception {
-		String key = attribute.getProperty();
-		String strValue = attribute.getStrValue();
-		String op = attribute.getOp();
-		double numericValue = attribute.getNumberValue();
+	private DataObject getSubMapWithAttribute(DataObject current, Predicate predicate) throws Exception {
+		String key = predicate.getProperty();
+		String strValue = predicate.getStrValue();
+		String op = predicate.getOp();
+		double numericValue = predicate.getNumberValue();
 
 		if (current.containsKey(key)) {
 			if (op != null) { // check if it's a complete attribute (eg. /book[title="..."]), other types of attribute (by i-th selection and by varible are already checked)
 
 				// check if the comparison is done with a variable; if necessary retrieve the value
-				if (attribute.getVarValue() != null) {
-					Object value = Main.getVariable(attribute.getVarValue());
+				if (predicate.getVarValue() != null) {
+					Object value = Main.getVariable(predicate.getVarValue());
 					if (value != null) {
 						if (value instanceof String) {
 							strValue = (String) value;
 						} else if (value instanceof Double) {
 							numericValue = (double) value;
 						} else {
-							throw new Exception("The variable '" + attribute.getVarValue() + "' contains a DataObject, unacceptable in attributes.");
+							throw new Exception("The variable '" + predicate.getVarValue() + "' contains a DataObject, unacceptable in attributes.");
 						}
 					} else {
-						throw new Exception("The variable '" + attribute.getVarValue() + "' is not defined.");
+						throw new Exception("The variable '" + predicate.getVarValue() + "' is not defined.");
 					}
 				}
 

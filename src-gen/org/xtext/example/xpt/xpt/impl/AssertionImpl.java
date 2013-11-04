@@ -35,6 +35,7 @@ import org.xtext.example.xpt.xpt.XptPackage;
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getFunctions <em>Functions</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#getConstant <em>Constant</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.AssertionImpl#isBool <em>Bool</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +82,26 @@ public class AssertionImpl extends AssertionFormImpl implements Assertion
    * @ordered
    */
   protected Constant constant;
+
+  /**
+   * The default value of the '{@link #isBool() <em>Bool</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBool()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean BOOL_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isBool() <em>Bool</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isBool()
+   * @generated
+   * @ordered
+   */
+  protected boolean bool = BOOL_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -232,6 +253,29 @@ public class AssertionImpl extends AssertionFormImpl implements Assertion
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isBool()
+  {
+    return bool;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBool(boolean newBool)
+  {
+    boolean oldBool = bool;
+    bool = newBool;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ASSERTION__BOOL, oldBool, bool));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -267,6 +311,8 @@ public class AssertionImpl extends AssertionFormImpl implements Assertion
         return getValues();
       case XptPackage.ASSERTION__CONSTANT:
         return getConstant();
+      case XptPackage.ASSERTION__BOOL:
+        return isBool();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -296,6 +342,9 @@ public class AssertionImpl extends AssertionFormImpl implements Assertion
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)newValue);
         return;
+      case XptPackage.ASSERTION__BOOL:
+        setBool((Boolean)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -322,6 +371,9 @@ public class AssertionImpl extends AssertionFormImpl implements Assertion
       case XptPackage.ASSERTION__CONSTANT:
         setConstant((Constant)null);
         return;
+      case XptPackage.ASSERTION__BOOL:
+        setBool(BOOL_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -344,8 +396,27 @@ public class AssertionImpl extends AssertionFormImpl implements Assertion
         return values != null;
       case XptPackage.ASSERTION__CONSTANT:
         return constant != null;
+      case XptPackage.ASSERTION__BOOL:
+        return bool != BOOL_EDEFAULT;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (bool: ");
+    result.append(bool);
+    result.append(')');
+    return result.toString();
   }
 
 } //AssertionImpl

@@ -340,13 +340,17 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		private final Assignment cConstantAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
 		private final RuleCall cConstantConstantParserRuleCall_3_0 = (RuleCall)cConstantAssignment_3.eContents().get(0);
+		private final Assignment cBoolAssignment_4 = (Assignment)cAlternatives.eContents().get(4);
+		private final RuleCall cBoolBOOLEANTerminalRuleCall_4_0 = (RuleCall)cBoolAssignment_4.eContents().get(0);
 		
 		//// Assertion
 		//Assertion:
-		//	steps+=Step+ ("." functions+=Function)* | AssertionQuantifiedNumeric | "[" values=Values "]" | constant=Constant;
+		//	steps+=Step+ ("." functions+=Function)* | AssertionQuantifiedNumeric | "[" values=Values "]" | constant=Constant |
+		//	bool=BOOLEAN;
 		public ParserRule getRule() { return rule; }
 
-		//steps+=Step+ ("." functions+=Function)* | AssertionQuantifiedNumeric | "[" values=Values "]" | constant=Constant
+		//steps+=Step+ ("." functions+=Function)* | AssertionQuantifiedNumeric | "[" values=Values "]" | constant=Constant |
+		//bool=BOOLEAN
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//steps+=Step+ ("." functions+=Function)*
@@ -393,6 +397,12 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Constant
 		public RuleCall getConstantConstantParserRuleCall_3_0() { return cConstantConstantParserRuleCall_3_0; }
+
+		//bool=BOOLEAN
+		public Assignment getBoolAssignment_4() { return cBoolAssignment_4; }
+
+		//BOOLEAN
+		public RuleCall getBoolBOOLEANTerminalRuleCall_4_0() { return cBoolBOOLEANTerminalRuleCall_4_0; }
 	}
 
 	public class AssertionBooleanElements extends AbstractParserRuleElementFinder {
@@ -575,21 +585,21 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
 		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
 		private final Keyword cLeftSquareBracketKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
-		private final Assignment cAttributeAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
-		private final RuleCall cAttributeAttributeParserRuleCall_0_2_1_0 = (RuleCall)cAttributeAssignment_0_2_1.eContents().get(0);
+		private final Assignment cPredicateAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cPredicatePredicateParserRuleCall_0_2_1_0 = (RuleCall)cPredicateAssignment_0_2_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_0_2_2 = (Keyword)cGroup_0_2.eContents().get(2);
 		private final Assignment cPlaceholderAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cPlaceholderVariableParserRuleCall_1_0 = (RuleCall)cPlaceholderAssignment_1.eContents().get(0);
 		
 		//// Steps describing the navigation path through an SDO
 		//Step:
-		//	"/" name=ID ("[" attribute=Attribute "]")? | placeholder=Variable;
+		//	"/" name=ID ("[" predicate=Predicate "]")? | placeholder=Variable;
 		public ParserRule getRule() { return rule; }
 
-		//"/" name=ID ("[" attribute=Attribute "]")? | placeholder=Variable
+		//"/" name=ID ("[" predicate=Predicate "]")? | placeholder=Variable
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"/" name=ID ("[" attribute=Attribute "]")?
+		//"/" name=ID ("[" predicate=Predicate "]")?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"/"
@@ -601,17 +611,17 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
 
-		//("[" attribute=Attribute "]")?
+		//("[" predicate=Predicate "]")?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//"["
 		public Keyword getLeftSquareBracketKeyword_0_2_0() { return cLeftSquareBracketKeyword_0_2_0; }
 
-		//attribute=Attribute
-		public Assignment getAttributeAssignment_0_2_1() { return cAttributeAssignment_0_2_1; }
+		//predicate=Predicate
+		public Assignment getPredicateAssignment_0_2_1() { return cPredicateAssignment_0_2_1; }
 
-		//Attribute
-		public RuleCall getAttributeAttributeParserRuleCall_0_2_1_0() { return cAttributeAttributeParserRuleCall_0_2_1_0; }
+		//Predicate
+		public RuleCall getPredicatePredicateParserRuleCall_0_2_1_0() { return cPredicatePredicateParserRuleCall_0_2_1_0; }
 
 		//"]"
 		public Keyword getRightSquareBracketKeyword_0_2_2() { return cRightSquareBracketKeyword_0_2_2; }
@@ -623,8 +633,8 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getPlaceholderVariableParserRuleCall_1_0() { return cPlaceholderVariableParserRuleCall_1_0; }
 	}
 
-	public class AttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
+	public class PredicateElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Predicate");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Assignment cPropertyAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -650,8 +660,8 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cVarAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
 		private final RuleCall cVarVariableParserRuleCall_2_0 = (RuleCall)cVarAssignment_2.eContents().get(0);
 		
-		//// Attribute for SDO navigation: according to the operation checks the searched value, if possible
-		//Attribute:
+		//// Predicate for SDO navigation: according to the operation checks the searched value, if possible
+		//Predicate:
 		//	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER |
 		//	var=Variable;
 		public ParserRule getRule() { return rule; }
@@ -1080,7 +1090,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 	private AssertionQuantifiedBooleanElements pAssertionQuantifiedBoolean;
 	private AssertionQuantifiedNumericElements pAssertionQuantifiedNumeric;
 	private StepElements pStep;
-	private AttributeElements pAttribute;
+	private PredicateElements pPredicate;
 	private FunctionElements pFunction;
 	private FunctionBooleanElements pFunctionBoolean;
 	private ValuesElements pValues;
@@ -1233,7 +1243,8 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// Assertion
 	//Assertion:
-	//	steps+=Step+ ("." functions+=Function)* | AssertionQuantifiedNumeric | "[" values=Values "]" | constant=Constant;
+	//	steps+=Step+ ("." functions+=Function)* | AssertionQuantifiedNumeric | "[" values=Values "]" | constant=Constant |
+	//	bool=BOOLEAN;
 	public AssertionElements getAssertionAccess() {
 		return (pAssertion != null) ? pAssertion : (pAssertion = new AssertionElements());
 	}
@@ -1277,7 +1288,7 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// Steps describing the navigation path through an SDO
 	//Step:
-	//	"/" name=ID ("[" attribute=Attribute "]")? | placeholder=Variable;
+	//	"/" name=ID ("[" predicate=Predicate "]")? | placeholder=Variable;
 	public StepElements getStepAccess() {
 		return (pStep != null) ? pStep : (pStep = new StepElements());
 	}
@@ -1286,16 +1297,16 @@ public class XptGrammarAccess extends AbstractGrammarElementFinder {
 		return getStepAccess().getRule();
 	}
 
-	//// Attribute for SDO navigation: according to the operation checks the searched value, if possible
-	//Attribute:
+	//// Predicate for SDO navigation: according to the operation checks the searched value, if possible
+	//Predicate:
 	//	property=ID (op=Rop numberValue=NUMBER | op=StringRop strValue=STRING | op=Rop varValue=Variable) | number=NUMBER |
 	//	var=Variable;
-	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+	public PredicateElements getPredicateAccess() {
+		return (pPredicate != null) ? pPredicate : (pPredicate = new PredicateElements());
 	}
 	
-	public ParserRule getAttributeRule() {
-		return getAttributeAccess().getRule();
+	public ParserRule getPredicateRule() {
+		return getPredicateAccess().getRule();
 	}
 
 	//// Function

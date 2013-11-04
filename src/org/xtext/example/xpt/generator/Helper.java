@@ -13,10 +13,10 @@ import org.xtext.example.xpt.xpt.AssertionOr;
 import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.AssertionStdCmp;
 import org.xtext.example.xpt.xpt.Assertions;
-import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Function;
+import org.xtext.example.xpt.xpt.Predicate;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
@@ -104,8 +104,8 @@ public class Helper {
 		} else if (a.getValues() != null) {
 			res = valuesToList(a.getValues()).toString();
 		} else {
-//			res = String.valueOf(a.isBoolean());
-			return null;
+			res = String.valueOf(a.isBool());
+//			return null;
 		}
 		res += functionsToString(a.getFunctions());
 		return res;
@@ -157,7 +157,7 @@ public class Helper {
 		}
 		
 		String res = '/' + s.getName();
-		Attribute attribute = s.getAttribute();
+		Predicate attribute = s.getPredicate();
 		
 		// check if it contains an attribute
 		if (attribute != null) {
@@ -188,10 +188,10 @@ public class Helper {
 	 * @param values the {@link Values} to represent
 	 * @return the {@link String} representing the passed {@link Values}
 	 */
-	private static List<Object> valuesToList(Values values) {
+	public static List<Object> valuesToList(Values values) {
 		List<Object> result = new ArrayList<>();
 		for (Value c : values.getValue()) {
-			if (c.getSteps() != null) {
+			if (!c.getSteps().isEmpty()) {
 				result.add(Helper.queryToString(c.getSteps()));
 			} else if (c instanceof Constant) {
 				if (((Constant) c).getString() != null) {

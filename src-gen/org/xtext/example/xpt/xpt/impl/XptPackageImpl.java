@@ -18,11 +18,11 @@ import org.xtext.example.xpt.xpt.AssertionOr;
 import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.AssertionStdCmp;
 import org.xtext.example.xpt.xpt.Assertions;
-import org.xtext.example.xpt.xpt.Attribute;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
 import org.xtext.example.xpt.xpt.Function;
 import org.xtext.example.xpt.xpt.Model;
+import org.xtext.example.xpt.xpt.Predicate;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
@@ -112,7 +112,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass attributeEClass = null;
+  private EClass predicateEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -434,6 +434,16 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getAssertion_Bool()
+  {
+    return (EAttribute)assertionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAssertionQuantified()
   {
     return assertionQuantifiedEClass;
@@ -504,7 +514,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getStep_Attribute()
+  public EReference getStep_Predicate()
   {
     return (EReference)stepEClass.getEStructuralFeatures().get(1);
   }
@@ -524,9 +534,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAttribute()
+  public EClass getPredicate()
   {
-    return attributeEClass;
+    return predicateEClass;
   }
 
   /**
@@ -534,9 +544,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Property()
+  public EAttribute getPredicate_Property()
   {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -544,9 +554,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Op()
+  public EAttribute getPredicate_Op()
   {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -554,9 +564,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_NumberValue()
+  public EAttribute getPredicate_NumberValue()
   {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -564,9 +574,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_StrValue()
+  public EAttribute getPredicate_StrValue()
   {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -574,9 +584,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_VarValue()
+  public EAttribute getPredicate_VarValue()
   {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(4);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -584,9 +594,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Number()
+  public EAttribute getPredicate_Number()
   {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -594,9 +604,9 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Var()
+  public EAttribute getPredicate_Var()
   {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(6);
+    return (EAttribute)predicateEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -827,6 +837,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     createEReference(assertionEClass, ASSERTION__FUNCTIONS);
     createEReference(assertionEClass, ASSERTION__VALUES);
     createEReference(assertionEClass, ASSERTION__CONSTANT);
+    createEAttribute(assertionEClass, ASSERTION__BOOL);
 
     assertionQuantifiedEClass = createEClass(ASSERTION_QUANTIFIED);
     createEAttribute(assertionQuantifiedEClass, ASSERTION_QUANTIFIED__QUANTIFIER);
@@ -836,17 +847,17 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
 
     stepEClass = createEClass(STEP);
     createEAttribute(stepEClass, STEP__NAME);
-    createEReference(stepEClass, STEP__ATTRIBUTE);
+    createEReference(stepEClass, STEP__PREDICATE);
     createEAttribute(stepEClass, STEP__PLACEHOLDER);
 
-    attributeEClass = createEClass(ATTRIBUTE);
-    createEAttribute(attributeEClass, ATTRIBUTE__PROPERTY);
-    createEAttribute(attributeEClass, ATTRIBUTE__OP);
-    createEAttribute(attributeEClass, ATTRIBUTE__NUMBER_VALUE);
-    createEAttribute(attributeEClass, ATTRIBUTE__STR_VALUE);
-    createEAttribute(attributeEClass, ATTRIBUTE__VAR_VALUE);
-    createEAttribute(attributeEClass, ATTRIBUTE__NUMBER);
-    createEAttribute(attributeEClass, ATTRIBUTE__VAR);
+    predicateEClass = createEClass(PREDICATE);
+    createEAttribute(predicateEClass, PREDICATE__PROPERTY);
+    createEAttribute(predicateEClass, PREDICATE__OP);
+    createEAttribute(predicateEClass, PREDICATE__NUMBER_VALUE);
+    createEAttribute(predicateEClass, PREDICATE__STR_VALUE);
+    createEAttribute(predicateEClass, PREDICATE__VAR_VALUE);
+    createEAttribute(predicateEClass, PREDICATE__NUMBER);
+    createEAttribute(predicateEClass, PREDICATE__VAR);
 
     functionEClass = createEClass(FUNCTION);
     createEAttribute(functionEClass, FUNCTION__NAME);
@@ -941,6 +952,7 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
     initEReference(getAssertion_Functions(), this.getFunction(), null, "functions", null, 0, -1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAssertion_Values(), this.getValues(), null, "values", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAssertion_Constant(), this.getConstant(), null, "constant", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAssertion_Bool(), ecorePackage.getEBoolean(), "bool", null, 0, 1, Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(assertionQuantifiedEClass, AssertionQuantified.class, "AssertionQuantified", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAssertionQuantified_Quantifier(), ecorePackage.getEString(), "quantifier", null, 0, 1, AssertionQuantified.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -950,17 +962,17 @@ public class XptPackageImpl extends EPackageImpl implements XptPackage
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStep_Attribute(), this.getAttribute(), null, "attribute", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStep_Predicate(), this.getPredicate(), null, "predicate", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStep_Placeholder(), ecorePackage.getEString(), "placeholder", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAttribute_Property(), ecorePackage.getEString(), "property", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_Op(), ecorePackage.getEString(), "op", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_NumberValue(), ecorePackage.getEDouble(), "numberValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_StrValue(), ecorePackage.getEString(), "strValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_VarValue(), ecorePackage.getEString(), "varValue", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_Number(), ecorePackage.getEDouble(), "number", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAttribute_Var(), ecorePackage.getEString(), "var", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(predicateEClass, Predicate.class, "Predicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPredicate_Property(), ecorePackage.getEString(), "property", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPredicate_Op(), ecorePackage.getEString(), "op", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPredicate_NumberValue(), ecorePackage.getEDouble(), "numberValue", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPredicate_StrValue(), ecorePackage.getEString(), "strValue", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPredicate_VarValue(), ecorePackage.getEString(), "varValue", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPredicate_Number(), ecorePackage.getEDouble(), "number", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPredicate_Var(), ecorePackage.getEString(), "var", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFunction_Name(), ecorePackage.getEString(), "name", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

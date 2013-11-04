@@ -9,29 +9,29 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.xtext.example.xpt.xpt.Attribute;
+import org.xtext.example.xpt.xpt.Predicate;
 import org.xtext.example.xpt.xpt.XptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Attribute</b></em>'.
+ * An implementation of the model object '<em><b>Predicate</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getProperty <em>Property</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getOp <em>Op</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getNumberValue <em>Number Value</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getStrValue <em>Str Value</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getVarValue <em>Var Value</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getNumber <em>Number</em>}</li>
- *   <li>{@link org.xtext.example.xpt.xpt.impl.AttributeImpl#getVar <em>Var</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.PredicateImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.PredicateImpl#getOp <em>Op</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.PredicateImpl#getNumberValue <em>Number Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.PredicateImpl#getStrValue <em>Str Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.PredicateImpl#getVarValue <em>Var Value</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.PredicateImpl#getNumber <em>Number</em>}</li>
+ *   <li>{@link org.xtext.example.xpt.xpt.impl.PredicateImpl#getVar <em>Var</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AttributeImpl extends MinimalEObjectImpl.Container implements Attribute
+public class PredicateImpl extends MinimalEObjectImpl.Container implements Predicate
 {
   /**
    * The default value of the '{@link #getProperty() <em>Property</em>}' attribute.
@@ -178,7 +178,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AttributeImpl()
+  protected PredicateImpl()
   {
     super();
   }
@@ -191,7 +191,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   @Override
   protected EClass eStaticClass()
   {
-    return XptPackage.Literals.ATTRIBUTE;
+    return XptPackage.Literals.PREDICATE;
   }
 
   /**
@@ -214,7 +214,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     String oldProperty = property;
     property = newProperty;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__PROPERTY, oldProperty, property));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.PREDICATE__PROPERTY, oldProperty, property));
   }
 
   /**
@@ -237,7 +237,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     String oldOp = op;
     op = newOp;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__OP, oldOp, op));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.PREDICATE__OP, oldOp, op));
   }
 
   /**
@@ -260,7 +260,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     double oldNumberValue = numberValue;
     numberValue = newNumberValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__NUMBER_VALUE, oldNumberValue, numberValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.PREDICATE__NUMBER_VALUE, oldNumberValue, numberValue));
   }
 
   /**
@@ -283,7 +283,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     String oldStrValue = strValue;
     strValue = newStrValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__STR_VALUE, oldStrValue, strValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.PREDICATE__STR_VALUE, oldStrValue, strValue));
   }
 
   /**
@@ -306,7 +306,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     String oldVarValue = varValue;
     varValue = newVarValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__VAR_VALUE, oldVarValue, varValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.PREDICATE__VAR_VALUE, oldVarValue, varValue));
   }
 
   /**
@@ -329,7 +329,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     double oldNumber = number;
     number = newNumber;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__NUMBER, oldNumber, number));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.PREDICATE__NUMBER, oldNumber, number));
   }
 
   /**
@@ -352,7 +352,7 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     String oldVar = var;
     var = newVar;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.ATTRIBUTE__VAR, oldVar, var));
+      eNotify(new ENotificationImpl(this, Notification.SET, XptPackage.PREDICATE__VAR, oldVar, var));
   }
 
   /**
@@ -365,19 +365,19 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     switch (featureID)
     {
-      case XptPackage.ATTRIBUTE__PROPERTY:
+      case XptPackage.PREDICATE__PROPERTY:
         return getProperty();
-      case XptPackage.ATTRIBUTE__OP:
+      case XptPackage.PREDICATE__OP:
         return getOp();
-      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+      case XptPackage.PREDICATE__NUMBER_VALUE:
         return getNumberValue();
-      case XptPackage.ATTRIBUTE__STR_VALUE:
+      case XptPackage.PREDICATE__STR_VALUE:
         return getStrValue();
-      case XptPackage.ATTRIBUTE__VAR_VALUE:
+      case XptPackage.PREDICATE__VAR_VALUE:
         return getVarValue();
-      case XptPackage.ATTRIBUTE__NUMBER:
+      case XptPackage.PREDICATE__NUMBER:
         return getNumber();
-      case XptPackage.ATTRIBUTE__VAR:
+      case XptPackage.PREDICATE__VAR:
         return getVar();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -393,25 +393,25 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     switch (featureID)
     {
-      case XptPackage.ATTRIBUTE__PROPERTY:
+      case XptPackage.PREDICATE__PROPERTY:
         setProperty((String)newValue);
         return;
-      case XptPackage.ATTRIBUTE__OP:
+      case XptPackage.PREDICATE__OP:
         setOp((String)newValue);
         return;
-      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+      case XptPackage.PREDICATE__NUMBER_VALUE:
         setNumberValue((Double)newValue);
         return;
-      case XptPackage.ATTRIBUTE__STR_VALUE:
+      case XptPackage.PREDICATE__STR_VALUE:
         setStrValue((String)newValue);
         return;
-      case XptPackage.ATTRIBUTE__VAR_VALUE:
+      case XptPackage.PREDICATE__VAR_VALUE:
         setVarValue((String)newValue);
         return;
-      case XptPackage.ATTRIBUTE__NUMBER:
+      case XptPackage.PREDICATE__NUMBER:
         setNumber((Double)newValue);
         return;
-      case XptPackage.ATTRIBUTE__VAR:
+      case XptPackage.PREDICATE__VAR:
         setVar((String)newValue);
         return;
     }
@@ -428,25 +428,25 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     switch (featureID)
     {
-      case XptPackage.ATTRIBUTE__PROPERTY:
+      case XptPackage.PREDICATE__PROPERTY:
         setProperty(PROPERTY_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__OP:
+      case XptPackage.PREDICATE__OP:
         setOp(OP_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+      case XptPackage.PREDICATE__NUMBER_VALUE:
         setNumberValue(NUMBER_VALUE_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__STR_VALUE:
+      case XptPackage.PREDICATE__STR_VALUE:
         setStrValue(STR_VALUE_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__VAR_VALUE:
+      case XptPackage.PREDICATE__VAR_VALUE:
         setVarValue(VAR_VALUE_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__NUMBER:
+      case XptPackage.PREDICATE__NUMBER:
         setNumber(NUMBER_EDEFAULT);
         return;
-      case XptPackage.ATTRIBUTE__VAR:
+      case XptPackage.PREDICATE__VAR:
         setVar(VAR_EDEFAULT);
         return;
     }
@@ -463,19 +463,19 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
   {
     switch (featureID)
     {
-      case XptPackage.ATTRIBUTE__PROPERTY:
+      case XptPackage.PREDICATE__PROPERTY:
         return PROPERTY_EDEFAULT == null ? property != null : !PROPERTY_EDEFAULT.equals(property);
-      case XptPackage.ATTRIBUTE__OP:
+      case XptPackage.PREDICATE__OP:
         return OP_EDEFAULT == null ? op != null : !OP_EDEFAULT.equals(op);
-      case XptPackage.ATTRIBUTE__NUMBER_VALUE:
+      case XptPackage.PREDICATE__NUMBER_VALUE:
         return numberValue != NUMBER_VALUE_EDEFAULT;
-      case XptPackage.ATTRIBUTE__STR_VALUE:
+      case XptPackage.PREDICATE__STR_VALUE:
         return STR_VALUE_EDEFAULT == null ? strValue != null : !STR_VALUE_EDEFAULT.equals(strValue);
-      case XptPackage.ATTRIBUTE__VAR_VALUE:
+      case XptPackage.PREDICATE__VAR_VALUE:
         return VAR_VALUE_EDEFAULT == null ? varValue != null : !VAR_VALUE_EDEFAULT.equals(varValue);
-      case XptPackage.ATTRIBUTE__NUMBER:
+      case XptPackage.PREDICATE__NUMBER:
         return number != NUMBER_EDEFAULT;
-      case XptPackage.ATTRIBUTE__VAR:
+      case XptPackage.PREDICATE__VAR:
         return VAR_EDEFAULT == null ? var != null : !VAR_EDEFAULT.equals(var);
     }
     return super.eIsSet(featureID);
@@ -510,4 +510,4 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
     return result.toString();
   }
 
-} //AttributeImpl
+} //PredicateImpl

@@ -74,7 +74,7 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.ASSERTION: return createAssertion();
       case XptPackage.ASSERTION_QUANTIFIED: return createAssertionQuantified();
       case XptPackage.STEP: return createStep();
-      case XptPackage.ATTRIBUTE: return createAttribute();
+      case XptPackage.PREDICATE: return createPredicate();
       case XptPackage.FUNCTION: return createFunction();
       case XptPackage.VALUES: return createValues();
       case XptPackage.VALUE: return createValue();
@@ -201,10 +201,10 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute createAttribute()
+  public Predicate createPredicate()
   {
-    AttributeImpl attribute = new AttributeImpl();
-    return attribute;
+    PredicateImpl predicate = new PredicateImpl();
+    return predicate;
   }
 
   /**

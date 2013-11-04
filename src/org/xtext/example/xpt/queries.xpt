@@ -1,8 +1,12 @@
+let $books = /inventory/book/price;
+[1, 2, "pippo"] == true;
+
+/*
 let $x = [1, 2, 3, 4];
-let $a = /inventory/book[publisher=="Spectra"];
+let $a = /inventory/book[publisher!="Spectra"].toArray();
 let $c = /inventory/book;
-let $d = $c/authors/author;
-avg($y in $x, $y > 0) == 2.5 && numOf($cc in $a, $cc/authors/author.length() > 6) > 1 && exists($aaa in $d, $aaa.startsWith("Z")) && forall($aa in $d, !($aa.startsWith("Z"))) && $x.contains($x.get(2));
+let $d = $c/authors/author[1].toArray();
+avg($y in $x, $y > 0) == 2.5 && numOf($cc in $a, $cc/title.length() > 6) > 1 && exists($aaa in $d, $aaa.startsWith("Z")) && forall($aa in $d, !($aa.startsWith("Z"))) && $x.contains($x.get(2));
 
 /*
 // Get and functions cascade testing
