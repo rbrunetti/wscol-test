@@ -2,8 +2,7 @@
     |    |     | |     \ |     |
     |    |_____| |_____/ |_____|
 
-	• (Review) Tests for the grammar
-	• Make a clean project: new project importing the grammar jar and throw methods outside Main.java! (-> how to organize it smartly?)
+	• Review main application project
 	• Thesis text
 		-> make the tutorial site than use it for the thesis 
 	• Tutorial Site & smart use cases
@@ -14,9 +13,18 @@
  |     \ |     | |     | |_____]    |    |______
  |_____/ |_____| |_____| |_____]    |    ______|
   
-	• Method 'evaluate' and the aggregation of all the results with the same key together (ex. /inv./book gives 18 elements, not 3!)
+	• Input type: for now the arguments passed to the main function are the path of the XML file or the JSON string (not the path!)
+		• Do we need to give the possibility to pass an SDO?
+	• Output: the output is showed inside the console...
+		• is it better to give the possibility to return a boolean result (better use inside other projects)?
+		• give the possibility to have an optional verbose use (like now)?  
+	• Arithmetic operations? (+, -, *, /, %)
+	• Repeted elements in ArrayList: yes, no or optional with a function?
+	• Functions for Double are few and poor
 	• 
 	• 
+	• 
+	
  _____ _______  _____         _______ _______ _______ __   _ _______ _______ ______ 
    |   |  |  | |_____] |      |______ |  |  | |______ | \  |    |    |______ |     \
  __|__ |  |  | |       |_____ |______ |  |  | |______ |  \_|    |    |______ |_____/
@@ -44,5 +52,5 @@
 	• Implicit 'true' even for functions (startsWith, endsWith, contains)
 	• JSON parsing to DataObject (added the library 'json-simple-1.1.1')
 	• Tests for parsing (check the correct parsing and generated model) and syntax (check if syntax errors are caught) 
-	•  
+	• 
 	•  
