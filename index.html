@@ -32,61 +32,195 @@
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h1>
 
 <p>WSCoL is a very flexible language and for this reason it could be used in various contexts.
-In the following sections you’ll its application.</p>
+In the following sections you’ll find out some nice application.</p>
 
 <h2>
-<a name="toy-example-book-store" class="anchor" href="#toy-example-book-store"><span class="octicon octicon-link"></span></a><em>Toy example:</em> Book store</h2>
+<a name="toy-example-book-store" class="anchor" href="#toy-example-book-store"><span class="octicon octicon-link"></span></a><em>Toy example</em>: Book store</h2>
 
-<p>Just a little case to understand better about what we’re talking about.
-The input file is the succeeding xml file, <em>book.xml</em></p>
+<p>Just a little case to understand better about what we’re talking about.</p>
 
-<pre><code>&lt;inventory&gt;
-    &lt;name&gt;InventoryABCD&lt;/name&gt;
-    &lt;book&gt;
-        &lt;year&gt;2000&lt;/year&gt;
-        &lt;title&gt;Snow Crash&lt;/title&gt;
-        &lt;authors&gt;
-            &lt;author&gt;Neal Stephenson&lt;/author&gt;
-        &lt;/authors&gt;
-        &lt;publisher&gt;Spectra&lt;/publisher&gt;
-        &lt;isbn&gt;0553380958&lt;/isbn&gt;
-        &lt;price&gt;15&lt;/price&gt;
-    &lt;/book&gt;
-    &lt;book&gt;
-        &lt;year&gt;2005&lt;/year&gt;
-        &lt;title&gt;Burning Tower&lt;/title&gt;
-        &lt;authors&gt;
-            &lt;author&gt;Larry Niven&lt;/author&gt;
-            &lt;author&gt;Jerry Pournelle&lt;/author&gt;
-        &lt;/authors&gt;
-        &lt;publisher&gt;Pocket&lt;/publisher&gt;
-        &lt;isbn&gt;0743416910&lt;/isbn&gt;
-        &lt;price&gt;6&lt;/price&gt;
-    &lt;/book&gt;
-    &lt;book&gt;
-        &lt;year&gt;1995&lt;/year&gt;
-        &lt;title&gt;Zodiac&lt;/title&gt;
-        &lt;authors&gt;
-            &lt;author&gt;Neal Stephenson&lt;/author&gt;
-        &lt;/authors&gt;
-        &lt;publisher&gt;Spectra&lt;/publisher&gt;
-        &lt;isbn&gt;&lt;/isbn&gt;
-        &lt;price&gt;7.50&lt;/price&gt;
-    &lt;/book&gt;
-&lt;/inventory&gt;
-</code></pre>
+<p>At first you need to get the application jar, download it <a href="">here</a>.</p>
 
-<p>Now we have to generate a wscol file with the assertions to verify, save <em>assertions.wscol</em> in the same folder and copy the assertion.</p>
+<p>The input file is the succeeding xml file, <strong><em>book.xml</em></strong>:</p>
+
+<div class="highlight highlight-XML"><pre><span class="nt">&lt;inventory&gt;</span>
+    <span class="nt">&lt;name&gt;</span>InventoryABCD<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;book&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2000<span class="nt">&lt;/year&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Snow Crash<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;authors&gt;</span>
+            <span class="nt">&lt;author&gt;</span>Neal Stephenson<span class="nt">&lt;/author&gt;</span>
+        <span class="nt">&lt;/authors&gt;</span>
+        <span class="nt">&lt;publisher&gt;</span>Spectra<span class="nt">&lt;/publisher&gt;</span>
+        <span class="nt">&lt;isbn&gt;</span>0553380958<span class="nt">&lt;/isbn&gt;</span>
+        <span class="nt">&lt;price&gt;</span>15<span class="nt">&lt;/price&gt;</span>
+    <span class="nt">&lt;/book&gt;</span>
+    <span class="nt">&lt;book&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2005<span class="nt">&lt;/year&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Burning Tower<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;authors&gt;</span>
+            <span class="nt">&lt;author&gt;</span>Larry Niven<span class="nt">&lt;/author&gt;</span>
+            <span class="nt">&lt;author&gt;</span>Jerry Pournelle<span class="nt">&lt;/author&gt;</span>
+        <span class="nt">&lt;/authors&gt;</span>
+        <span class="nt">&lt;publisher&gt;</span>Pocket<span class="nt">&lt;/publisher&gt;</span>
+        <span class="nt">&lt;isbn&gt;</span>0743416910<span class="nt">&lt;/isbn&gt;</span>
+        <span class="nt">&lt;price&gt;</span>6<span class="nt">&lt;/price&gt;</span>
+    <span class="nt">&lt;/book&gt;</span>
+    <span class="nt">&lt;book&gt;</span>
+        <span class="nt">&lt;year&gt;</span>1995<span class="nt">&lt;/year&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Zodiac<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;authors&gt;</span>
+            <span class="nt">&lt;author&gt;</span>Neal Stephenson<span class="nt">&lt;/author&gt;</span>
+        <span class="nt">&lt;/authors&gt;</span>
+        <span class="nt">&lt;publisher&gt;</span>Spectra<span class="nt">&lt;/publisher&gt;</span>
+        <span class="nt">&lt;isbn&gt;&lt;/isbn&gt;</span>
+        <span class="nt">&lt;price&gt;</span>7.50<span class="nt">&lt;/price&gt;</span>
+    <span class="nt">&lt;/book&gt;</span>
+<span class="nt">&lt;/inventory&gt;</span>
+</pre></div>
+
+<p>The following assertions are based on this file.</p>
+
+<h3>
+<a name="first-assertion" class="anchor" href="#first-assertion"><span class="octicon octicon-link"></span></a>First Assertion</h3>
+
+<p>Now we have to generate a wscol file with the assertions to verify.
+For convenience just save <strong><em>assertions.wscol</em></strong> in the same folder as the xml file and the application jar, then copy-and-paste the next assertion:</p>
 
 <pre><code>/inventory/book[1]/title == "Snow Crash";
 </code></pre>
 
 <p>Launch the application from cli with the command</p>
 
-<pre><code>java –jar WSCoL-App.jar assertion.wscol –xml book.xml
+<pre lang="Shell"><code>$ java –jar WSCoL-App.jar assertion.wscol –xml book.xml
 </code></pre>
 
-<p>The assertion says that the title of the first book (note the use of the predicate in square brackets) is equal to “Snow Crash” and, obviously, the result is true. The expression returns a String and correctly compare it with another string on the right side.</p>
+<p>The assertion says that the title of the first book (note the use of the predicate in square brackets) is equal to <code>“Snow Crash”</code> and, obviously, the result is true.
+The expression returns a string and correctly compare it with the string on the right side that we have written.
+Given the flexibility of WSCoL, the same assertion can be written in different manners:</p>
+
+<pre><code>/* Alternative 1 */
+let $a = /inventory/book[1]/title;
+let $b = “Snow Crash”;
+$a == $b; 
+</code></pre>
+
+<p>In this case the result of the expression is stored in the variable <code>$a</code>, while our string is in <code>$b</code>.
+Then the assertion simply test the equality of the two.</p>
+
+<pre><code>/* Alternative 2 */
+let $a = /inventory/book[1];
+$a/title == “Snow Crash”;
+</code></pre>
+
+<p>Instead, in the alternative two, the value assigned to the variable <code>$a</code> is an <a href="sdo_ref"><em>SDO</em></a>, i.e. an object containing other objects (as you can see from the xml file, a book holds nodes like <em>title</em>, <em>authors</em>, <em>publisher</em>, etc…).
+A representation of the <em>SDO</em> defined by <code>$a</code> is</p>
+
+<pre><code>$a = {
+    year = 2000,
+    title = ”Snow Crash”,
+    authors = {
+        author = ”Neal Stephenson”
+    },
+    publisher = ”Spectra”,
+    isbn = ”0553380958”,
+    price = 15
+}
+</code></pre>
+
+<p>With the expression <code>$a/title</code> we get the string contained by the property title.</p>
+
+<p>You can play as you like with variables and xpath navigation. But there’s some exceptions: for example you cannot apply a predicate to a variable (the solution is to use the function <code>get()</code>)  or use a variable in steps that is not the first.
+Note that the use of function get is possible when you apply it to an SDO or to an array, it has no sense when the cardinality of the object is one. The function is not intended to substitute the standard navigation, so use it properly.</p>
+
+<pre><code>/* Wrong use of predicate */
+let $a = /inventory/book;
+$a[1]/title == “Snow Crash”;
+</code></pre>
+
+<p>The correct way is:</p>
+
+<pre><code>/* Correct way */
+let $a = /inventory/book;
+$a.get(1).get(‘title’) == “Snow Crash”;
+</code></pre>
+
+<p>Another possible alternative to the first assertion is the next one</p>
+
+<pre><code>/* Alternative 3 – Array */
+let $a = /inventory/book/title;
+$a.get(1) == “Snow Crash”;
+</code></pre>
+
+<p>In this situation, the declaration’s result is an array with the titles of all the books found:
+<code>$a = [“Snow Crash”, “Burning Tower” “Zodiac”]</code>.</p>
+
+<p>Then, with the <code>get()</code> function, you obtain the first element of the array: <code>“Snow Crash”</code>.</p>
+
+<h3>
+<a name="second-assertion---aggregated-functions" class="anchor" href="#second-assertion---aggregated-functions"><span class="octicon octicon-link"></span></a>Second Assertion - Aggregated Functions</h3>
+
+<pre><code>let $books = /inventory/book;
+let $authors = $books/authors/author;
+exists($author in $authors, numOf($book in $books, $book/authors.contains($author)) &gt; 1);
+</code></pre>
+
+<p>In this case, we are looking for the authors that has written more than one book.
+The declarations returns, respectively, the array containing all books and the array with all the authors. 
+The assertion is the result of the nesting of two quantified assertions.
+The <code>exists</code> assertion starts iterating over the elements of the <em>authors</em> array, and, for each <em>author</em>, checks the condition. The condition is a comparison between another quantified assertion (this time a <code>numOf</code>) which returns a number that as to be greater than one to prove the condition of the <code>exists</code>.
+The <code>numOf</code> iterate over all the <em>books</em>, obtains the <em>authors</em> of each <em>book</em> and, with the <code>contains()</code> function, check if the actual <em>author</em> we are searching is into that book’s authors array.
+The external assertion has to be true; as already said, this is implicitly deducted from the grammar.</p>
+
+<h3>
+<a name="third-assertion---negated-assertion" class="anchor" href="#third-assertion---negated-assertion"><span class="octicon octicon-link"></span></a>Third Assertion - Negated Assertion</h3>
+
+<pre><code>/* Negated Assertion */
+let $books = /inventory/book;
+!( exists($book in $books, $book/title.startsWith($book/publisher.substring(0,1))) );
+</code></pre>
+
+<p>This one assert that there is no <em>books</em> which <em>title</em> starts with the same letter as its <em>publisher</em>.
+As you can see, the <code>exists</code> assertion is negated (inside brackets and preceded by the exclamation mark <code>!(...)</code>).
+The <code>startsWith()</code> bear out the prefix of the book <em>title</em> using as parameter the result of another expression: after getting the book <em>publisher</em>, it takes the first letter by the use of the <code>substring()</code> function.</p>
+
+<h3>
+<a name="fourth-assertion---numeric-aggregate-functions" class="anchor" href="#fourth-assertion---numeric-aggregate-functions"><span class="octicon octicon-link"></span></a>Fourth Assertion - Numeric Aggregate Functions</h3>
+
+<pre><code>/* Test for arithmetic expressions (min, max, avg...) */
+let $prices = /inventory/book/price;
+let $min = min($price in $prices, $price &gt; 0);
+let $max = max($price in $prices, $price &gt; 0);
+let $avg = avg($price in $prices, $price &gt; 0);
+let $prod = product($price in $prices, $price &gt; 0);
+let $sum = sum($price in $prices, $price &gt; 0);
+$min == 6.00 &amp;&amp; $max == 15 &amp;&amp; $avg == 9.5 || $prod &gt; 675.0 &amp;&amp; $sum &lt; 28.5;
+</code></pre>
+
+<p>Here we declare many variables, each of them is containing a number, related to the relative expression: for example, <code>$min</code> contains the minimum <em>price</em>, in the range of the array <code>$prices</code>, that is greater than zero (this condition is very weak, so the expression simply means ‘search the lowest price’). The same reasoning can be done for the other statements.
+The assertions section presents logical operators AND (<code>&amp;&amp;</code>) and an OR operator (<code>||</code>): according to the operators priority, the AND operators comes first, so the OR is applied as showed:</p>
+
+<pre><code>($min == 6.00 &amp;&amp; $max == 15 &amp;&amp; $avg == 9.5) || ($prod &gt; 675.0 &amp;&amp; $sum &lt; 28.5)
+</code></pre>
+
+<p>Different orders are indicated with the use of bracket, as in the next snippet:</p>
+
+<pre><code>$min == 6.00 &amp;&amp; $max == 15 &amp;&amp; ($avg == 9.5 || $prod &gt; 675.0) &amp;&amp; $sum &lt; 28.5
+</code></pre>
+
+<h3>
+<a name="fifth-assertion---expressions" class="anchor" href="#fifth-assertion---expressions"><span class="octicon octicon-link"></span></a>Fifth Assertion - Expressions</h3>
+
+<pre><code>let $exp = 1 + 2 * 4 % 5;
+exp == 4;
+</code></pre>
+
+<p>WSCoL gives also the possibility to use and evaluate expressions, using the canonic operands: sum (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>/</code>) and modulo (<code>%</code>). The priorities between these operators is exactly as they are listed before, and, as usual, precedencies could be modified with brackets.
+<em>Expressions</em> can also be calculated using navigation path and variables, as long as they return numeric values.</p>
+
+<pre><code>let $first_price = /inventory/book[1]/price;
+$first_price + /inventory/book[2]/price &gt; /inventory/book[3]/price;
+</code></pre>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/rbrunetti">rbrunetti</a></p>
