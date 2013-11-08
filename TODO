@@ -19,7 +19,7 @@
 		• is it better to give the possibility to return a boolean result (better use inside other projects)?
 		• give the possibility to have an optional verbose use (like now)?  
 	• Arithmetic operations? (+, -, *, /, %)
-	• Repeted elements in ArrayList: yes, no or optional with a function?
+	• Repeated elements in ArrayList: yes, no or optional with a function?
 	• Functions for Double are few and poor
 	• 
 	• 

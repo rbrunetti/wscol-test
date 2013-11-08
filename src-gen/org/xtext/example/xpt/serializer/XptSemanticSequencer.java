@@ -23,9 +23,14 @@ import org.xtext.example.xpt.xpt.AssertionQuantified;
 import org.xtext.example.xpt.xpt.AssertionStdCmp;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
+import org.xtext.example.xpt.xpt.Div;
 import org.xtext.example.xpt.xpt.Function;
+import org.xtext.example.xpt.xpt.Minus;
 import org.xtext.example.xpt.xpt.Model;
+import org.xtext.example.xpt.xpt.Multi;
+import org.xtext.example.xpt.xpt.Plus;
 import org.xtext.example.xpt.xpt.Predicate;
+import org.xtext.example.xpt.xpt.Rest;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
@@ -123,7 +128,17 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case XptPackage.CONSTANT:
-				if(context == grammarAccess.getConstantRule() ||
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getConstantRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getRestLeftAction_1_0_2_0() ||
+				   context == grammarAccess.getPrimaryExpressionRule() ||
 				   context == grammarAccess.getValueRule()) {
 					sequence_Constant(context, (Constant) semanticObject); 
 					return; 
@@ -132,6 +147,21 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case XptPackage.DECLARATION:
 				if(context == grammarAccess.getDeclarationRule()) {
 					sequence_Declaration(context, (Declaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.DIV:
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getRestLeftAction_1_0_2_0() ||
+				   context == grammarAccess.getPrimaryExpressionRule()) {
+					sequence_Multiplication(context, (Div) semanticObject); 
 					return; 
 				}
 				else break;
@@ -145,15 +175,75 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 					return; 
 				}
 				else break;
+			case XptPackage.MINUS:
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getRestLeftAction_1_0_2_0() ||
+				   context == grammarAccess.getPrimaryExpressionRule()) {
+					sequence_Addition(context, (Minus) semanticObject); 
+					return; 
+				}
+				else break;
 			case XptPackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
 					sequence_Model(context, (Model) semanticObject); 
 					return; 
 				}
 				else break;
+			case XptPackage.MULTI:
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getRestLeftAction_1_0_2_0() ||
+				   context == grammarAccess.getPrimaryExpressionRule()) {
+					sequence_Multiplication(context, (Multi) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.PLUS:
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getRestLeftAction_1_0_2_0() ||
+				   context == grammarAccess.getPrimaryExpressionRule()) {
+					sequence_Addition(context, (Plus) semanticObject); 
+					return; 
+				}
+				else break;
 			case XptPackage.PREDICATE:
 				if(context == grammarAccess.getPredicateRule()) {
 					sequence_Predicate(context, (Predicate) semanticObject); 
+					return; 
+				}
+				else break;
+			case XptPackage.REST:
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getRestLeftAction_1_0_2_0() ||
+				   context == grammarAccess.getPrimaryExpressionRule()) {
+					sequence_Multiplication(context, (Rest) semanticObject); 
 					return; 
 				}
 				else break;
@@ -164,7 +254,17 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				}
 				else break;
 			case XptPackage.VALUE:
-				if(context == grammarAccess.getValueRule()) {
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getMinusLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getAssertionRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getDivLeftAction_1_0_1_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0_0_0() ||
+				   context == grammarAccess.getMultiplicationAccess().getRestLeftAction_1_0_2_0() ||
+				   context == grammarAccess.getPrimaryExpressionRule() ||
+				   context == grammarAccess.getValueRule()) {
 					sequence_Value(context, (Value) semanticObject); 
 					return; 
 				}
@@ -178,6 +278,24 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Constraint:
+	 *     (left=Addition_Minus_1_0_1_0 right=Multiplication)
+	 */
+	protected void sequence_Addition(EObject context, Minus semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=Addition_Plus_1_0_0_0 right=Multiplication)
+	 */
+	protected void sequence_Addition(EObject context, Plus semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Constraint:
@@ -300,7 +418,7 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     ((steps+=Step+ functions+=Function*) | values=Values | constant=Constant | bool=BOOLEAN)
+	 *     (values=Values | bool=BOOLEAN)
 	 */
 	protected void sequence_Assertion(EObject context, Assertion semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -348,6 +466,33 @@ public class XptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (declarations+=Declaration* assertionSet=AssertionOr)
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=Multiplication_Div_1_0_1_0 right=PrimaryExpression)
+	 */
+	protected void sequence_Multiplication(EObject context, Div semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=Multiplication_Multi_1_0_0_0 right=PrimaryExpression)
+	 */
+	protected void sequence_Multiplication(EObject context, Multi semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=Multiplication_Rest_1_0_2_0 right=PrimaryExpression)
+	 */
+	protected void sequence_Multiplication(EObject context, Rest semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

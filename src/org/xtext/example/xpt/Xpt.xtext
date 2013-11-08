@@ -29,7 +29,7 @@ AssertionAnd returns Assertions:
 
 // Assertion results in logical operation with highest priority (NOT and parentheses)
 AssertionHP returns Assertions:
-	AssertionNot | AssertionBraced | AssertionForm;
+	(=> AssertionForm | AssertionNot | AssertionBraced);
 
 // Assertion with parentheses
 AssertionBraced:
@@ -49,7 +49,7 @@ AssertionStdCmp:
 
 // Assertion
 Assertion:
-	steps+=Step+ ('.' functions+=Function)* | AssertionQuantifiedNumeric | '[' values=Values ']' | constant=Constant | bool = BOOLEAN;
+	AssertionQuantifiedNumeric | '[' values=Values ']' | Expression | bool = BOOLEAN;
 
 // Assertion with boolean result
 AssertionBoolean returns Assertion:
@@ -78,6 +78,18 @@ Function:
 // Function that gives boolean result
 FunctionBoolean returns Function:
 	name=('contains'|'startsWith'|'endsWith') '(' (params=Values)? ')';
+
+Expression:
+	Addition;
+	
+Addition returns Expression:
+	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*;
+	
+Multiplication returns Expression:
+	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/' | {Rest.left=current} '%') right=PrimaryExpression)*;
+	
+PrimaryExpression returns Expression:
+	Value | '(' Addition ')';
 
 // List of values
 Values:

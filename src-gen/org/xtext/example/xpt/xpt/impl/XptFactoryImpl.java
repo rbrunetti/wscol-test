@@ -76,11 +76,17 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
       case XptPackage.STEP: return createStep();
       case XptPackage.PREDICATE: return createPredicate();
       case XptPackage.FUNCTION: return createFunction();
+      case XptPackage.EXPRESSION: return createExpression();
       case XptPackage.VALUES: return createValues();
       case XptPackage.VALUE: return createValue();
       case XptPackage.CONSTANT: return createConstant();
       case XptPackage.ASSERTION_OR: return createAssertionOr();
       case XptPackage.ASSERTION_AND: return createAssertionAnd();
+      case XptPackage.PLUS: return createPlus();
+      case XptPackage.MINUS: return createMinus();
+      case XptPackage.MULTI: return createMulti();
+      case XptPackage.DIV: return createDiv();
+      case XptPackage.REST: return createRest();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -223,6 +229,17 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public Expression createExpression()
+  {
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Values createValues()
   {
     ValuesImpl values = new ValuesImpl();
@@ -271,6 +288,61 @@ public class XptFactoryImpl extends EFactoryImpl implements XptFactory
   {
     AssertionAndImpl assertionAnd = new AssertionAndImpl();
     return assertionAnd;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Plus createPlus()
+  {
+    PlusImpl plus = new PlusImpl();
+    return plus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Minus createMinus()
+  {
+    MinusImpl minus = new MinusImpl();
+    return minus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Multi createMulti()
+  {
+    MultiImpl multi = new MultiImpl();
+    return multi;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Div createDiv()
+  {
+    DivImpl div = new DivImpl();
+    return div;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Rest createRest()
+  {
+    RestImpl rest = new RestImpl();
+    return rest;
   }
 
   /**

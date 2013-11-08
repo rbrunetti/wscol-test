@@ -29,11 +29,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionStdCmp/rightAssert"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//Assertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/values"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Assertion/bool"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/steps"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/functions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/values"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Assertion/constant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Assertion/bool"/>
     </genClasses>
     <genClasses ecoreClass="Xpt.ecore#//AssertionQuantified">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//AssertionQuantified/quantifier"/>
@@ -59,13 +58,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Function/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Function/params"/>
     </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Expression"/>
     <genClasses ecoreClass="Xpt.ecore#//Values">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Values/value"/>
     </genClasses>
-    <genClasses ecoreClass="Xpt.ecore#//Value">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/steps"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Value/functions"/>
-    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Value"/>
     <genClasses ecoreClass="Xpt.ecore#//Constant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/number"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpt.ecore#//Constant/string"/>
@@ -77,6 +74,26 @@
     <genClasses ecoreClass="Xpt.ecore#//AssertionAnd">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionAnd/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//AssertionAnd/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Plus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Plus/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Plus/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Minus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Minus/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Minus/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Multi">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Multi/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Multi/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Div">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Div/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Div/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpt.ecore#//Rest">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Rest/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpt.ecore#//Rest/right"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

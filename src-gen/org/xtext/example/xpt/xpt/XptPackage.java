@@ -281,40 +281,13 @@ public interface XptPackage extends EPackage
   int ASSERTION = 7;
 
   /**
-   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__STEPS = ASSERTION_FORM_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__FUNCTIONS = ASSERTION_FORM_FEATURE_COUNT + 1;
-
-  /**
    * The feature id for the '<em><b>Values</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION__VALUES = ASSERTION_FORM_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Constant</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION__CONSTANT = ASSERTION_FORM_FEATURE_COUNT + 3;
+  int ASSERTION__VALUES = ASSERTION_FORM_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Bool</b></em>' attribute.
@@ -323,7 +296,25 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION__BOOL = ASSERTION_FORM_FEATURE_COUNT + 4;
+  int ASSERTION__BOOL = ASSERTION_FORM_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION__STEPS = ASSERTION_FORM_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION__FUNCTIONS = ASSERTION_FORM_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Assertion</em>' class.
@@ -332,7 +323,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 5;
+  int ASSERTION_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl <em>Assertion Quantified</em>}' class.
@@ -345,40 +336,13 @@ public interface XptPackage extends EPackage
   int ASSERTION_QUANTIFIED = 8;
 
   /**
-   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__STEPS = ASSERTION_FORM_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__FUNCTIONS = ASSERTION_FORM_FEATURE_COUNT + 1;
-
-  /**
    * The feature id for the '<em><b>Values</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__VALUES = ASSERTION_FORM_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Constant</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ASSERTION_QUANTIFIED__CONSTANT = ASSERTION_FORM_FEATURE_COUNT + 3;
+  int ASSERTION_QUANTIFIED__VALUES = ASSERTION_FORM_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Bool</b></em>' attribute.
@@ -387,7 +351,25 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__BOOL = ASSERTION_FORM_FEATURE_COUNT + 4;
+  int ASSERTION_QUANTIFIED__BOOL = ASSERTION_FORM_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__STEPS = ASSERTION_FORM_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSERTION_QUANTIFIED__FUNCTIONS = ASSERTION_FORM_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Quantifier</b></em>' attribute.
@@ -396,7 +378,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__QUANTIFIER = ASSERTION_FORM_FEATURE_COUNT + 5;
+  int ASSERTION_QUANTIFIED__QUANTIFIER = ASSERTION_FORM_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Alias</b></em>' attribute.
@@ -405,7 +387,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__ALIAS = ASSERTION_FORM_FEATURE_COUNT + 6;
+  int ASSERTION_QUANTIFIED__ALIAS = ASSERTION_FORM_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Var</b></em>' attribute.
@@ -414,7 +396,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__VAR = ASSERTION_FORM_FEATURE_COUNT + 7;
+  int ASSERTION_QUANTIFIED__VAR = ASSERTION_FORM_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Conditions</b></em>' containment reference.
@@ -423,7 +405,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED__CONDITIONS = ASSERTION_FORM_FEATURE_COUNT + 8;
+  int ASSERTION_QUANTIFIED__CONDITIONS = ASSERTION_FORM_FEATURE_COUNT + 7;
 
   /**
    * The number of structural features of the '<em>Assertion Quantified</em>' class.
@@ -432,7 +414,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_QUANTIFIED_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 9;
+  int ASSERTION_QUANTIFIED_FEATURE_COUNT = ASSERTION_FORM_FEATURE_COUNT + 8;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.StepImpl <em>Step</em>}' class.
@@ -600,6 +582,61 @@ public interface XptPackage extends EPackage
   int FUNCTION_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.ExpressionImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getExpression()
+   * @generated
+   */
+  int EXPRESSION = 12;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__VALUES = ASSERTION__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__BOOL = ASSERTION__BOOL;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__STEPS = ASSERTION__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__FUNCTIONS = ASSERTION__FUNCTIONS;
+
+  /**
+   * The number of structural features of the '<em>Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ValuesImpl <em>Values</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -607,7 +644,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getValues()
    * @generated
    */
-  int VALUES = 12;
+  int VALUES = 13;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference list.
@@ -635,7 +672,25 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getValue()
    * @generated
    */
-  int VALUE = 13;
+  int VALUE = 14;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE__VALUES = EXPRESSION__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE__BOOL = EXPRESSION__BOOL;
 
   /**
    * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -644,7 +699,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VALUE__STEPS = 0;
+  int VALUE__STEPS = EXPRESSION__STEPS;
 
   /**
    * The feature id for the '<em><b>Functions</b></em>' containment reference list.
@@ -653,7 +708,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VALUE__FUNCTIONS = 1;
+  int VALUE__FUNCTIONS = EXPRESSION__FUNCTIONS;
 
   /**
    * The number of structural features of the '<em>Value</em>' class.
@@ -662,7 +717,7 @@ public interface XptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VALUE_FEATURE_COUNT = 2;
+  int VALUE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.
@@ -672,7 +727,25 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getConstant()
    * @generated
    */
-  int CONSTANT = 14;
+  int CONSTANT = 15;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTANT__VALUES = VALUE__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTANT__BOOL = VALUE__BOOL;
 
   /**
    * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -727,7 +800,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionOr()
    * @generated
    */
-  int ASSERTION_OR = 15;
+  int ASSERTION_OR = 16;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -764,7 +837,7 @@ public interface XptPackage extends EPackage
    * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getAssertionAnd()
    * @generated
    */
-  int ASSERTION_AND = 16;
+  int ASSERTION_AND = 17;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -792,6 +865,371 @@ public interface XptPackage extends EPackage
    * @ordered
    */
   int ASSERTION_AND_FEATURE_COUNT = ASSERTIONS_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.PlusImpl <em>Plus</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.PlusImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getPlus()
+   * @generated
+   */
+  int PLUS = 18;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__VALUES = EXPRESSION__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__BOOL = EXPRESSION__BOOL;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__STEPS = EXPRESSION__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__FUNCTIONS = EXPRESSION__FUNCTIONS;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Plus</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.MinusImpl <em>Minus</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.MinusImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getMinus()
+   * @generated
+   */
+  int MINUS = 19;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__VALUES = EXPRESSION__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__BOOL = EXPRESSION__BOOL;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__STEPS = EXPRESSION__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__FUNCTIONS = EXPRESSION__FUNCTIONS;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Minus</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.MultiImpl <em>Multi</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.MultiImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getMulti()
+   * @generated
+   */
+  int MULTI = 20;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__VALUES = EXPRESSION__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__BOOL = EXPRESSION__BOOL;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__STEPS = EXPRESSION__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__FUNCTIONS = EXPRESSION__FUNCTIONS;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Multi</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.DivImpl <em>Div</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.DivImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getDiv()
+   * @generated
+   */
+  int DIV = 21;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIV__VALUES = EXPRESSION__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIV__BOOL = EXPRESSION__BOOL;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIV__STEPS = EXPRESSION__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIV__FUNCTIONS = EXPRESSION__FUNCTIONS;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIV__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIV__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Div</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIV_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.xpt.xpt.impl.RestImpl <em>Rest</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.xpt.xpt.impl.RestImpl
+   * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getRest()
+   * @generated
+   */
+  int REST = 22;
+
+  /**
+   * The feature id for the '<em><b>Values</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REST__VALUES = EXPRESSION__VALUES;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REST__BOOL = EXPRESSION__BOOL;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REST__STEPS = EXPRESSION__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REST__FUNCTIONS = EXPRESSION__FUNCTIONS;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REST__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REST__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Rest</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REST_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 
   /**
@@ -974,6 +1412,28 @@ public interface XptPackage extends EPackage
   EClass getAssertion();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Values</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertion#getValues()
+   * @see #getAssertion()
+   * @generated
+   */
+  EReference getAssertion_Values();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Assertion#isBool <em>Bool</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Bool</em>'.
+   * @see org.xtext.example.xpt.xpt.Assertion#isBool()
+   * @see #getAssertion()
+   * @generated
+   */
+  EAttribute getAssertion_Bool();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Assertion#getSteps <em>Steps</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -994,39 +1454,6 @@ public interface XptPackage extends EPackage
    * @generated
    */
   EReference getAssertion_Functions();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getValues <em>Values</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Values</em>'.
-   * @see org.xtext.example.xpt.xpt.Assertion#getValues()
-   * @see #getAssertion()
-   * @generated
-   */
-  EReference getAssertion_Values();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Assertion#getConstant <em>Constant</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Constant</em>'.
-   * @see org.xtext.example.xpt.xpt.Assertion#getConstant()
-   * @see #getAssertion()
-   * @generated
-   */
-  EReference getAssertion_Constant();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.xpt.xpt.Assertion#isBool <em>Bool</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Bool</em>'.
-   * @see org.xtext.example.xpt.xpt.Assertion#isBool()
-   * @see #getAssertion()
-   * @generated
-   */
-  EAttribute getAssertion_Bool();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.AssertionQuantified <em>Assertion Quantified</em>}'.
@@ -1245,6 +1672,16 @@ public interface XptPackage extends EPackage
   EReference getFunction_Params();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Expression</em>'.
+   * @see org.xtext.example.xpt.xpt.Expression
+   * @generated
+   */
+  EClass getExpression();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Values <em>Values</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1274,28 +1711,6 @@ public interface XptPackage extends EPackage
    * @generated
    */
   EClass getValue();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Value#getSteps <em>Steps</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Steps</em>'.
-   * @see org.xtext.example.xpt.xpt.Value#getSteps()
-   * @see #getValue()
-   * @generated
-   */
-  EReference getValue_Steps();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.xpt.xpt.Value#getFunctions <em>Functions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Functions</em>'.
-   * @see org.xtext.example.xpt.xpt.Value#getFunctions()
-   * @see #getValue()
-   * @generated
-   */
-  EReference getValue_Functions();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Constant <em>Constant</em>}'.
@@ -1392,6 +1807,166 @@ public interface XptPackage extends EPackage
    * @generated
    */
   EReference getAssertionAnd_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Plus <em>Plus</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Plus</em>'.
+   * @see org.xtext.example.xpt.xpt.Plus
+   * @generated
+   */
+  EClass getPlus();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Plus#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.xpt.xpt.Plus#getLeft()
+   * @see #getPlus()
+   * @generated
+   */
+  EReference getPlus_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Plus#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.xpt.xpt.Plus#getRight()
+   * @see #getPlus()
+   * @generated
+   */
+  EReference getPlus_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Minus <em>Minus</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Minus</em>'.
+   * @see org.xtext.example.xpt.xpt.Minus
+   * @generated
+   */
+  EClass getMinus();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Minus#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.xpt.xpt.Minus#getLeft()
+   * @see #getMinus()
+   * @generated
+   */
+  EReference getMinus_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Minus#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.xpt.xpt.Minus#getRight()
+   * @see #getMinus()
+   * @generated
+   */
+  EReference getMinus_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Multi <em>Multi</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Multi</em>'.
+   * @see org.xtext.example.xpt.xpt.Multi
+   * @generated
+   */
+  EClass getMulti();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Multi#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.xpt.xpt.Multi#getLeft()
+   * @see #getMulti()
+   * @generated
+   */
+  EReference getMulti_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Multi#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.xpt.xpt.Multi#getRight()
+   * @see #getMulti()
+   * @generated
+   */
+  EReference getMulti_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Div <em>Div</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Div</em>'.
+   * @see org.xtext.example.xpt.xpt.Div
+   * @generated
+   */
+  EClass getDiv();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Div#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.xpt.xpt.Div#getLeft()
+   * @see #getDiv()
+   * @generated
+   */
+  EReference getDiv_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Div#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.xpt.xpt.Div#getRight()
+   * @see #getDiv()
+   * @generated
+   */
+  EReference getDiv_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.xpt.xpt.Rest <em>Rest</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rest</em>'.
+   * @see org.xtext.example.xpt.xpt.Rest
+   * @generated
+   */
+  EClass getRest();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Rest#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.xpt.xpt.Rest#getLeft()
+   * @see #getRest()
+   * @generated
+   */
+  EReference getRest_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.xpt.xpt.Rest#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.xpt.xpt.Rest#getRight()
+   * @see #getRest()
+   * @generated
+   */
+  EReference getRest_Right();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1569,6 +2144,22 @@ public interface XptPackage extends EPackage
     EClass ASSERTION = eINSTANCE.getAssertion();
 
     /**
+     * The meta object literal for the '<em><b>Values</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ASSERTION__VALUES = eINSTANCE.getAssertion_Values();
+
+    /**
+     * The meta object literal for the '<em><b>Bool</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ASSERTION__BOOL = eINSTANCE.getAssertion_Bool();
+
+    /**
      * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1583,30 +2174,6 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EReference ASSERTION__FUNCTIONS = eINSTANCE.getAssertion_Functions();
-
-    /**
-     * The meta object literal for the '<em><b>Values</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ASSERTION__VALUES = eINSTANCE.getAssertion_Values();
-
-    /**
-     * The meta object literal for the '<em><b>Constant</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ASSERTION__CONSTANT = eINSTANCE.getAssertion_Constant();
-
-    /**
-     * The meta object literal for the '<em><b>Bool</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ASSERTION__BOOL = eINSTANCE.getAssertion_Bool();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.AssertionQuantifiedImpl <em>Assertion Quantified</em>}' class.
@@ -1777,6 +2344,16 @@ public interface XptPackage extends EPackage
     EReference FUNCTION__PARAMS = eINSTANCE.getFunction_Params();
 
     /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ExpressionImpl <em>Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.ExpressionImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getExpression()
+     * @generated
+     */
+    EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ValuesImpl <em>Values</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1803,22 +2380,6 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EClass VALUE = eINSTANCE.getValue();
-
-    /**
-     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference VALUE__STEPS = eINSTANCE.getValue_Steps();
-
-    /**
-     * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference VALUE__FUNCTIONS = eINSTANCE.getValue_Functions();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.ConstantImpl <em>Constant</em>}' class.
@@ -1897,6 +2458,136 @@ public interface XptPackage extends EPackage
      * @generated
      */
     EReference ASSERTION_AND__RIGHT = eINSTANCE.getAssertionAnd_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.PlusImpl <em>Plus</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.PlusImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getPlus()
+     * @generated
+     */
+    EClass PLUS = eINSTANCE.getPlus();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLUS__LEFT = eINSTANCE.getPlus_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLUS__RIGHT = eINSTANCE.getPlus_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.MinusImpl <em>Minus</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.MinusImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getMinus()
+     * @generated
+     */
+    EClass MINUS = eINSTANCE.getMinus();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MINUS__LEFT = eINSTANCE.getMinus_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MINUS__RIGHT = eINSTANCE.getMinus_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.MultiImpl <em>Multi</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.MultiImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getMulti()
+     * @generated
+     */
+    EClass MULTI = eINSTANCE.getMulti();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MULTI__LEFT = eINSTANCE.getMulti_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MULTI__RIGHT = eINSTANCE.getMulti_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.DivImpl <em>Div</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.DivImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getDiv()
+     * @generated
+     */
+    EClass DIV = eINSTANCE.getDiv();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIV__LEFT = eINSTANCE.getDiv_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIV__RIGHT = eINSTANCE.getDiv_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.xpt.xpt.impl.RestImpl <em>Rest</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.xpt.xpt.impl.RestImpl
+     * @see org.xtext.example.xpt.xpt.impl.XptPackageImpl#getRest()
+     * @generated
+     */
+    EClass REST = eINSTANCE.getRest();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REST__LEFT = eINSTANCE.getRest_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REST__RIGHT = eINSTANCE.getRest_Right();
 
   }
 

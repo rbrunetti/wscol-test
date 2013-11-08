@@ -166,6 +166,16 @@ public class XptSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XptPackage.EXPRESSION:
+      {
+        Expression expression = (Expression)theEObject;
+        T result = caseExpression(expression);
+        if (result == null) result = caseAssertion(expression);
+        if (result == null) result = caseAssertionForm(expression);
+        if (result == null) result = caseAssertions(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XptPackage.VALUES:
       {
         Values values = (Values)theEObject;
@@ -177,6 +187,10 @@ public class XptSwitch<T> extends Switch<T>
       {
         Value value = (Value)theEObject;
         T result = caseValue(value);
+        if (result == null) result = caseExpression(value);
+        if (result == null) result = caseAssertion(value);
+        if (result == null) result = caseAssertionForm(value);
+        if (result == null) result = caseAssertions(value);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -185,6 +199,10 @@ public class XptSwitch<T> extends Switch<T>
         Constant constant = (Constant)theEObject;
         T result = caseConstant(constant);
         if (result == null) result = caseValue(constant);
+        if (result == null) result = caseExpression(constant);
+        if (result == null) result = caseAssertion(constant);
+        if (result == null) result = caseAssertionForm(constant);
+        if (result == null) result = caseAssertions(constant);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -201,6 +219,61 @@ public class XptSwitch<T> extends Switch<T>
         AssertionAnd assertionAnd = (AssertionAnd)theEObject;
         T result = caseAssertionAnd(assertionAnd);
         if (result == null) result = caseAssertions(assertionAnd);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.PLUS:
+      {
+        Plus plus = (Plus)theEObject;
+        T result = casePlus(plus);
+        if (result == null) result = caseExpression(plus);
+        if (result == null) result = caseAssertion(plus);
+        if (result == null) result = caseAssertionForm(plus);
+        if (result == null) result = caseAssertions(plus);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.MINUS:
+      {
+        Minus minus = (Minus)theEObject;
+        T result = caseMinus(minus);
+        if (result == null) result = caseExpression(minus);
+        if (result == null) result = caseAssertion(minus);
+        if (result == null) result = caseAssertionForm(minus);
+        if (result == null) result = caseAssertions(minus);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.MULTI:
+      {
+        Multi multi = (Multi)theEObject;
+        T result = caseMulti(multi);
+        if (result == null) result = caseExpression(multi);
+        if (result == null) result = caseAssertion(multi);
+        if (result == null) result = caseAssertionForm(multi);
+        if (result == null) result = caseAssertions(multi);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.DIV:
+      {
+        Div div = (Div)theEObject;
+        T result = caseDiv(div);
+        if (result == null) result = caseExpression(div);
+        if (result == null) result = caseAssertion(div);
+        if (result == null) result = caseAssertionForm(div);
+        if (result == null) result = caseAssertions(div);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XptPackage.REST:
+      {
+        Rest rest = (Rest)theEObject;
+        T result = caseRest(rest);
+        if (result == null) result = caseExpression(rest);
+        if (result == null) result = caseAssertion(rest);
+        if (result == null) result = caseAssertionForm(rest);
+        if (result == null) result = caseAssertions(rest);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -401,6 +474,22 @@ public class XptSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Values</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -476,6 +565,86 @@ public class XptSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAssertionAnd(AssertionAnd object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePlus(Plus object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMinus(Minus object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Multi</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Multi</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMulti(Multi object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Div</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Div</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDiv(Div object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rest</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rest</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRest(Rest object)
   {
     return null;
   }

@@ -4,26 +4,26 @@ package org.xtext.example.xpt.xpt.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.xtext.example.xpt.xpt.Value;
+import org.xtext.example.xpt.xpt.Expression;
 import org.xtext.example.xpt.xpt.XptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Value</b></em>'.
+ * An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ValueImpl extends ExpressionImpl implements Value
+public class ExpressionImpl extends AssertionImpl implements Expression
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ValueImpl()
+  protected ExpressionImpl()
   {
     super();
   }
@@ -36,7 +36,7 @@ public class ValueImpl extends ExpressionImpl implements Value
   @Override
   protected EClass eStaticClass()
   {
-    return XptPackage.Literals.VALUE;
+    return XptPackage.Literals.EXPRESSION;
   }
 
-} //ValueImpl
+} //ExpressionImpl

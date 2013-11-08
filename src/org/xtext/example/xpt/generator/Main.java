@@ -39,8 +39,14 @@ import org.xtext.example.xpt.xpt.AssertionStdCmp;
 import org.xtext.example.xpt.xpt.Assertions;
 import org.xtext.example.xpt.xpt.Constant;
 import org.xtext.example.xpt.xpt.Declaration;
+import org.xtext.example.xpt.xpt.Div;
+import org.xtext.example.xpt.xpt.Expression;
 import org.xtext.example.xpt.xpt.Function;
+import org.xtext.example.xpt.xpt.Minus;
 import org.xtext.example.xpt.xpt.Model;
+import org.xtext.example.xpt.xpt.Multi;
+import org.xtext.example.xpt.xpt.Plus;
+import org.xtext.example.xpt.xpt.Rest;
 import org.xtext.example.xpt.xpt.Step;
 import org.xtext.example.xpt.xpt.Value;
 import org.xtext.example.xpt.xpt.Values;
@@ -560,8 +566,8 @@ public class Main {
 
 		Object result = new Object();
 		// if the assertion is a constant it's not going to be an xpath query
-		if (assertion.getConstant() != null) {
-			return ((assertion.getConstant().getString() == null) ? assertion.getConstant().getNumber() : assertion.getConstant().getString());
+		if (assertion instanceof Constant) {
+			return ((((Constant) assertion).getString() == null) ? ((Constant) assertion).getNumber() : ((Constant) assertion).getString());
 		} else
 		// look if there's a placeholder, if any substitute it with its values (note: the placeholder is always on the first step!)
 		if (!assertion.getSteps().isEmpty()) {
@@ -572,6 +578,8 @@ public class Main {
 			}
 		} else if (assertion.getValues() != null) {
 			result = Helper.valuesToList(assertion.getValues());
+		} else if (assertion instanceof Expression) {
+			result = resolveExpression(assertion);
 		} else {
 			result = assertion.isBool();
 		}
@@ -1084,11 +1092,12 @@ public class Main {
 			if (variables.containsKey(d.getVar())) {
 				throw new Exception("The variable '" + d.getVar() + "' in '" + Helper.declarationToString(d) + "' is already used (" + d.getVar() + " = " + variables.get(d.getVar()) + "). Choose another [token: '" + assertionRep + "']");
 			}
-			if (d.getAssert().getConstant() != null) {
-				if (d.getAssert().getConstant().getString() != null) {
-					result = d.getAssert().getConstant().getString();
+			
+			if (d.getAssert() instanceof Constant) {
+				if (((Constant) d.getAssert()).getString() != null) {
+					result = ((Constant) d.getAssert()).getString();
 				} else {
-					result = d.getAssert().getConstant().getNumber();
+					result = ((Constant) d.getAssert()).getNumber();
 				}
 			} else if (d.getAssert().getValues() != null) {
 				List<Object> values = new ArrayList<Object>();
@@ -1118,7 +1127,12 @@ public class Main {
 				} catch (Exception e) {
 					throw new Exception(e.getMessage() + " [token: '" + assertionRep + "']");
 				}
-
+			} else if (d.getAssert() instanceof Expression) {
+				try {
+					result = resolveExpression(d.getAssert());
+				} catch (Exception e) {
+					throw new Exception(e.getMessage() + " [token: '" + assertionRep + "']");
+				}
 			} else if (d.getAssert() instanceof AssertionQuantified) {
 				result = doAssertionQuantified(d.getAssert());
 			} else {
@@ -1129,6 +1143,33 @@ public class Main {
 			System.out.println(Helper.declarationToString(d));
 		}
 		return;
+	}
+
+	private double resolveExpression(Assertion exp) throws Exception {
+		double result = 0;
+		if(exp instanceof Plus) {
+			result = resolveExpression(((Plus) exp).getLeft()) + resolveExpression(((Plus) exp).getRight());
+		} else if(exp instanceof Minus) {
+			result = resolveExpression(((Minus) exp).getLeft()) - resolveExpression(((Minus) exp).getRight());
+		} else if(exp instanceof Multi) {
+			result = resolveExpression(((Multi) exp).getLeft()) * resolveExpression(((Multi) exp).getRight());
+		} else if(exp instanceof Div) {
+			result = resolveExpression(((Div) exp).getLeft()) / resolveExpression(((Div) exp).getRight());
+		} else if(exp instanceof Rest) {
+			result = resolveExpression(((Rest) exp).getLeft()) % resolveExpression(((Rest) exp).getRight());
+		} else if(exp instanceof Constant) {
+			if(((Constant) exp).getString() != null){
+				throw new Exception("Could not use a String inside an expression '" + ((Constant) exp).getString() + "'");
+			}
+			return ((Constant) exp).getNumber();
+		} else if(!exp.getSteps().isEmpty()) {
+			Object query = resolveQuery(exp.getSteps());
+			if(!(query instanceof Double)){
+				throw new Exception("Could not use a '" + query.getClass().getSimpleName() + "' inside an expression (value: '" + query + "')");
+			}
+			return (double) query;
+		}
+		return result;
 	}
 
 	// private void throwError(String msg, Object element) throws Exception{

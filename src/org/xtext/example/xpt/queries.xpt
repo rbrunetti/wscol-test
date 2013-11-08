@@ -1,16 +1,15 @@
+1 + 3 > 3%2;
 /*
-let $a = /inventory/book;
-let $b = exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1)));
-$b == true;
-*/
-
-let $x = [1, 2, 3, 4];
+let $c = /a/b/$c;
+let $qwe = "1";
+let $x = ($qwe / (11 + 7 % 2)) + (3 * 1 + 4) % 3;
 let $a = /inventory/book[publisher!="Spectra"];
+let $b = 1;
 let $c = /inventory/book;
 let $d = $c/authors/author[1];
 avg($y in $x, $y > 0) == 2.5 && numOf($cc in $a, $cc/title.length() > 6) > 1 && exists($aaa in $d, $aaa.startsWith("Z")) && forall($aa in $d, !($aa.startsWith("Z"))) && $x.contains($x.get(2));
 
-/*
+
 // Get and functions cascade testing
 let $a = /inventory/book;
 exists($book in $a, $book.get("title").startsWith($book.get("publisher").substring(0,1))) && $a/title[1].length() >= 1;
